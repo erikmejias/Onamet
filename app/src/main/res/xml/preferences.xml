@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:title="@string/notification_prefs_title"
+        android:key="check_box_preference_1"
+        android:summary="@string/notification_prefs_summary" />
+
+    <PreferenceCategory android:title="Account">
+        <Preference
+            android:title="@string/acc_prefs_sync"/>
+
+        <Preference
+            android:title="@string/sms_auth_prefs_title"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="Other">
+
+        <Preference
+            android:title="@string/about_prefs_title"/>
+
+        <Preference
+            android:title="@string/terms_use_prefs_title"/>
+
+        <Preference
+            android:title="@string/about_dev_prefs_title"/>
+
+    </PreferenceCategory>
+</PreferenceScreen>
