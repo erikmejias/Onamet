@@ -8,4 +8,6 @@
     <string name="terms_use_prefs_title">Terms of use</string>
     <string name="sms_auth_prefs_title">Authenticate SMS</string>
     <string name="settings">Settings</string>
+
+    <!-- DEMO DATA -->
 </resources>

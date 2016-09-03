@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        tools:text="ICON"
+        android:textSize="18sp"
+        android:id="@+id/future_forecast_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        tools:text="28º"
+        android:textSize="18sp"
+        android:id="@+id/future_forecast_max_temperature"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        tools:text="18º"
+        android:textSize="18sp"
+        android:id="@+id/future_forecast_min_temperature"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        tools:text="Lun 22"
+        android:textSize="18sp"
+        android:id="@+id/future_forecast_date_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        tools:text="cielo claro"
+        android:textSize="18sp"
+        android:id="@+id/future_forecast_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
