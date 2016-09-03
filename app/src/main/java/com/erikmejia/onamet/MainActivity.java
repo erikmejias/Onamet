@@ -1,6 +1,7 @@
 package com.erikmejia.onamet;
 
 import android.content.Intent;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,18 +10,14 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
-import com.erikmejia.onamet.model.Demo;
 import com.erikmejia.onamet.model.ForecastAdapter;
 import com.erikmejia.onamet.ui.SettingsActivity;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,6 +25,9 @@ public class MainActivity extends AppCompatActivity {
     //    Firebase Database Object
     /* Firebase References to objects of the Realtime database. */
     private DatabaseReference azuaReference;
+
+    private DrawerLayout drawerLayout;
+    private ListView drawerList;
 
     public TextView cityName;
     public TextView minTemp;
@@ -46,7 +46,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        String[] demoData = {"Ysanny", "Erik", "Marcell", "Cindy", "Fausto"};
+//        DEMO DATA for future forecasts
+        String[] demoData = {"today", "tomorrow", "Marcell", "Cindy", "MacBook Pro"};
 
 //        Cache data to local disk ( OFFLINE SUPPORT ).
 //        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
