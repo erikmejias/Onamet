@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import com.erikmejia.onamet.R;
 
+import java.util.List;
+
 /**
  * Created by erik on 9/2/16.
  */
@@ -16,11 +18,12 @@ import com.erikmejia.onamet.R;
 public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.ViewHolder>{
     private String TAG = ForecastAdapter.class.getSimpleName();
 
-    private String[] dataset;
+    private List<Forecast> dataset;
 
-    public ForecastAdapter(String[] receivedData){
+    public ForecastAdapter(List<Forecast> receivedData){
         dataset = receivedData;
-        Log.d(TAG, "ForecastAdapter: " + dataset.length);
+        dataset.remove(0);
+        Log.d(TAG, "ForecastAdapter: " + dataset.size());
     }
 
     @Override
@@ -34,24 +37,23 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.max_temperature.setText("27º");
-        holder.min_temperature.setText("24º");
-        holder.date.setText("Sep 2");
-        holder.icon.setText("SUNNY");
-        holder.forecast_description.setText("dia soleado");
-        Log.d(TAG, "onBindViewHolder: " + dataset[position]);
+//        Setting up received forecast data to it's appropiate holder view.
+        holder.max_temperature.setText(dataset.get(position).getMax());
+        holder.min_temperature.setText(dataset.get(position).getMin());
+        holder.date.setText(dataset.get(position).getDate());
+        holder.forecast_description.setText(dataset.get(position).getDescription());
+        Log.d(TAG, "onBindViewHolder: " + dataset.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return dataset.length;
+        return dataset.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView max_temperature;
         public TextView min_temperature;
         public TextView date;
-        public TextView icon;
         public TextView forecast_description;
 
         public ViewHolder(View itemView) {
@@ -59,7 +61,6 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.ViewHo
             max_temperature = (TextView) itemView.findViewById(R.id.future_forecast_max_temperature);
             min_temperature = (TextView) itemView.findViewById(R.id.future_forecast_min_temperature);
             date = (TextView) itemView.findViewById(R.id.future_forecast_date_title);
-            icon = (TextView) itemView.findViewById(R.id.future_forecast_icon);
             forecast_description = (TextView) itemView.findViewById(R.id.future_forecast_description);
         }
     }

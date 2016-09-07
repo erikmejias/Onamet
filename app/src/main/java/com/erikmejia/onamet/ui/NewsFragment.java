@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 
 import com.erikmejia.onamet.R;
 import com.erikmejia.onamet.model.NewsAdapter;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.NativeExpressAdView;
 
 /**
  * Created by erik on 9/4/16.
@@ -50,6 +52,13 @@ public class NewsFragment extends Fragment {
 
         NewsAdapter newsAdapter = new NewsAdapter(demoData);
         bulletinsList.setAdapter(newsAdapter);
+
+        NativeExpressAdView adView = (NativeExpressAdView) rootView.findViewById(R.id.newsAd);
+
+        AdRequest request = new AdRequest.Builder()
+                .addTestDevice("E0451870C934704914ACFF7D2E7F7F7F")
+                .build();
+        adView.loadAd(request); // Load ad into the view
 
         return rootView;
     }

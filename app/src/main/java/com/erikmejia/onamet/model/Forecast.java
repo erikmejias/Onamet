@@ -18,6 +18,7 @@ public class Forecast {
     private String lat;         // Latitude
     private String lon;         // Longitude
     private String deg;         // Wind direction
+    private String date;        // Forecast date
 
     public Forecast() {
 //        Empty constructor
@@ -25,7 +26,8 @@ public class Forecast {
 
     public Forecast(String max, String min, String speed, String humidity, String sunrise_time,
                     String sunset_time, String name, String population,
-                    String description, String lat, String lon, String deg) {
+                    String description, String lat, String lon, String deg,
+                    String date) {
 
         this.max = max;
         this.min = min;
@@ -39,6 +41,7 @@ public class Forecast {
         this.lat = lat;
         this.lon = lon;
         this.deg = deg;
+        this.date = date;
     }
 
     public String getMax() {
@@ -135,5 +138,13 @@ public class Forecast {
 
     public void setDeg(String deg) {
         this.deg = deg;
+    }
+
+    public String getDate() {
+      return date;
+    }
+
+    public void setDate(String date) {
+      this.date = date;
     }
 }

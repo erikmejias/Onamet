@@ -64,20 +64,10 @@ public class MainActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-//        DEMO DATA for future forecasts
-        String[] demoData = {"today", "tomorrow", "Marcell", "Cindy", "MacBook Pro"};
-
 //        Cache data to local disk ( OFFLINE SUPPORT ).
 //        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
 
-        /*azuaReference= FirebaseDatabase.getInstance().getReference("/demo");
-        RecyclerView forecastList = (RecyclerView)
-                findViewById(R.id.future_forecast_recycler_list);
-        forecastList.setHasFixedSize(true);
-        forecastList.setLayoutManager(new LinearLayoutManager(this));
-
-        ForecastAdapter forecastsAdapter = new ForecastAdapter(demoData);
-        forecastList.setAdapter(forecastsAdapter);*/
+//        azuaReference= FirebaseDatabase.getInstance().getReference("/demo");
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setViewPager(viewPager);
