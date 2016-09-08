@@ -1,6 +1,7 @@
 package com.erikmejia.onamet;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -16,7 +17,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.erikmejia.onamet.model.ForecastAdapter;
@@ -29,6 +32,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -63,6 +67,13 @@ public class MainActivity extends AppCompatActivity {
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        Spinner spinner = (Spinner) findViewById(R.id.provinces_spinner);
+        ArrayAdapter<CharSequence> provincesAdapter = ArrayAdapter.createFromResource(
+                this, R.array.provinces_array, R.layout.spinner_province_item);
+        provincesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spinner.setAdapter(provincesAdapter);
 
 //        Cache data to local disk ( OFFLINE SUPPORT ).
 //        FirebaseDatabase.getInstance().setPersistenceEnabled(true);

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="provinces_array">
+        <item>Azua</item>
+        <item>Bonao</item>
+        <item>La Romana</item>
+        <item>Santo Domingo</item>
+        <item>Higuey</item>
+        <item>Punta Cana</item>
+        <item>Sabana de la Mar</item>
+        <item>Monte Plata</item>
+    </string-array>
+</resources>
