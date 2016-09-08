@@ -17,10 +17,13 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.erikmejia.onamet.model.ForecastAdapter;
 import com.erikmejia.onamet.ui.BulletinsFragment;
@@ -34,7 +37,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
     private static final String TAG = MainActivity.class.getSimpleName();
     //    Firebase Database Object
@@ -69,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         Spinner spinner = (Spinner) findViewById(R.id.provinces_spinner);
+        spinner.setOnItemSelectedListener(this);
         ArrayAdapter<CharSequence> provincesAdapter = ArrayAdapter.createFromResource(
                 this, R.array.provinces_array, R.layout.spinner_province_item);
         provincesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -131,6 +135,22 @@ public class MainActivity extends AppCompatActivity {
         adapter.addFragment(new BulletinsFragment(), "Boletines");
         adapter.addFragment(new NewsFragment(), "Noticias");
         viewPager.setAdapter(adapter);
+    }
+
+    /* onItemSelected
+    * onNothingSelected
+    * methods used by the spinner on the toolbar.
+    * */
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        String selectedProvince = parent.getItemAtPosition(position).toString();
+        Log.d(TAG, "onItemSelected: " + selectedProvince);
+        Toast.makeText(this, selectedProvince, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 
     class ViewPagerAdapter extends FragmentPagerAdapter {
