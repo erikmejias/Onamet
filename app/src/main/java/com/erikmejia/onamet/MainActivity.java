@@ -71,14 +71,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        Spinner spinner = (Spinner) findViewById(R.id.provinces_spinner);
-        spinner.setOnItemSelectedListener(this);
-        ArrayAdapter<CharSequence> provincesAdapter = ArrayAdapter.createFromResource(
-                this, R.array.provinces_array, R.layout.spinner_province_item);
-        provincesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        spinner.setAdapter(provincesAdapter);
-
 //        Cache data to local disk ( OFFLINE SUPPORT ).
 //        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
 

@@ -1,5 +1,6 @@
 package com.erikmejia.onamet.ui;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,7 +10,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.erikmejia.onamet.R;
 import com.erikmejia.onamet.model.Forecast;
@@ -27,7 +32,7 @@ import java.util.List;
  * Fragment responsible of displaying main forecast information.
  */
 
-public class ForecastFragment extends Fragment {
+public class ForecastFragment extends Fragment implements AdapterView.OnItemSelectedListener{
     private static String TAG = ForecastFragment.class.getSimpleName();
 
     private String[] demoData;
@@ -41,7 +46,7 @@ public class ForecastFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //        DEMO DATA for future forecasts
+        //        DEMO DATA for future forecastster
         demoData = new String[]{"today", "tomorrow", "Marcell", "Cindy",
                 "MacBook Pro", "Alvin", "Eduardo", "Brayan", "Jorge", "Joel",
                 "Jeissy", "David", "Daniel", "Fausto"};
@@ -56,6 +61,14 @@ public class ForecastFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.forecasts_layout, container, false);
+
+        Spinner spinner = (Spinner) rootView.findViewById(R.id.provinces_spinner);
+        spinner.setOnItemSelectedListener(this);
+        ArrayAdapter<CharSequence> provincesAdapter = ArrayAdapter.createFromResource(
+                container.getContext(), R.array.provinces_array, R.layout.spinner_province_item);
+        provincesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spinner.setAdapter(provincesAdapter);
 
 //        Cache data to local disk ( OFFLINE SUPPORT ).
 //        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
@@ -87,7 +100,7 @@ public class ForecastFragment extends Fragment {
         for (int i = 0; i < 5; i++) {
             Forecast forecast = new Forecast(
                     "25º", "23º", "23 m/s", "33%", "6:35 AM", "7:22 PM", "Azua", "234,134 habitantes",
-                    "a lot of water", "3923.454", "354.223", "34 NE", "Mie " + i
+                    "lluvias dispersas", "3923.454", "354.223", "34 NE", "Hoy"
             );
 //            Add new forecast objects to the list.
             forecastsData.add(forecast);
@@ -95,6 +108,18 @@ public class ForecastFragment extends Fragment {
     }
 
     private void loadTodayData(View rootView) {
+
+        View todayForecast_layout = rootView.findViewById(R.id.today_forecast_layout);
+//        todayForecast_layout.getBackground().setAlpha(190);
+
+//        Custom font
+        Typeface font_thin = Typeface.createFromAsset(getActivity().getAssets(),
+                "fonts/Brandon_thin.otf");
+        Typeface font_reg = Typeface.createFromAsset(getActivity().getAssets(),
+                "fonts/Brandon_reg.otf");
+        Typeface font_bold = Typeface.createFromAsset(getActivity().getAssets(),
+                "fonts/Brandon_bld.otf");
+
         Forecast todayForecast = forecastsData.get(0);
 //        Get references prior to setting text.
 
@@ -108,6 +133,15 @@ public class ForecastFragment extends Fragment {
         TextView sunrise = (TextView) rootView.findViewById(R.id.today_sunrise_text);
         TextView maxTemperature = (TextView) rootView.findViewById(R.id.today_forecast_max_text);
 
+        maxTemperature.setTypeface(font_thin);
+        description.setTypeface(font_reg);
+        cityName.setTypeface(font_reg);
+        date.setTypeface(font_bold);
+        degrees.setTypeface(font_reg);
+        windSpeed.setTypeface(font_reg);
+        sunrise.setTypeface(font_reg);
+        sunset.setTypeface(font_reg);
+
         cityName.setText(todayForecast.getName());
         date.setText(todayForecast.getDate());
         population.setText(todayForecast.getPopulation());
@@ -117,5 +151,18 @@ public class ForecastFragment extends Fragment {
         sunrise.setText(todayForecast.getSunrise_time());
         sunset.setText(todayForecast.getSunset_time());
         maxTemperature.setText(todayForecast.getMax());
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        String selectedProvince = parent.getItemAtPosition(position).toString();
+        Log.d(TAG, "onItemSelected: " + selectedProvince);
+        Toast.makeText(getContext(), selectedProvince, Toast.LENGTH_SHORT).show();
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }
