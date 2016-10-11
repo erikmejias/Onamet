@@ -1,5 +1,6 @@
 package com.erikmejia.onamet.model;
 
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,6 +20,9 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.ViewHo
     private String TAG = ForecastAdapter.class.getSimpleName();
 
     private List<Forecast> dataset;
+    private Typeface font_thin;
+    private Typeface font_reg;
+    private Typeface font_bold;
 
     public ForecastAdapter(List<Forecast> receivedData){
         dataset = receivedData;
@@ -31,6 +35,13 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.ViewHo
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.forecast_item,
                 parent, false);
 
+        font_thin = Typeface.createFromAsset(parent.getContext().getAssets(),
+                "fonts/Brandon_thin.otf");
+        font_reg = Typeface.createFromAsset(parent.getContext().getAssets(),
+                "fonts/Brandon_reg.otf");
+        font_bold = Typeface.createFromAsset(parent.getContext().getAssets(),
+                "fonts/Brandon_bld.otf");
+
         ViewHolder holder = new ViewHolder(view);
         return holder;
     }
@@ -42,6 +53,11 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.ViewHo
         holder.min_temperature.setText(dataset.get(position).getMin());
         holder.date.setText(dataset.get(position).getDate());
         holder.forecast_description.setText(dataset.get(position).getDescription());
+
+        holder.date.setTypeface(font_bold);
+        holder.max_temperature.setTypeface(font_reg);
+        holder.min_temperature.setTypeface(font_thin);
+        holder.forecast_description.setTypeface(font_reg);
         Log.d(TAG, "onBindViewHolder: " + dataset.get(position));
     }
 

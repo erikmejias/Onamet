@@ -62,13 +62,13 @@ public class ForecastFragment extends Fragment implements AdapterView.OnItemSele
 
         View rootView = inflater.inflate(R.layout.forecasts_layout, container, false);
 
-        Spinner spinner = (Spinner) rootView.findViewById(R.id.provinces_spinner);
-        spinner.setOnItemSelectedListener(this);
+        /*Spinner spinner = (Spinner) rootView.findViewById(R.id.provinces_spinner);
+        spinner.setOnItemSelectedListener(this);*/
         ArrayAdapter<CharSequence> provincesAdapter = ArrayAdapter.createFromResource(
                 container.getContext(), R.array.provinces_array, R.layout.spinner_province_item);
         provincesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        spinner.setAdapter(provincesAdapter);
+//        spinner.setAdapter(provincesAdapter);
 
 //        Cache data to local disk ( OFFLINE SUPPORT ).
 //        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
@@ -97,14 +97,56 @@ public class ForecastFragment extends Fragment implements AdapterView.OnItemSele
 //        Initialize a forecast objects holder.
         forecastsData = new ArrayList<Forecast>();
 
-        for (int i = 0; i < 5; i++) {
+        /*for (int i = 0; i < 5; i++) {
             Forecast forecast = new Forecast(
                     "25º", "23º", "23 m/s", "33%", "6:35 AM", "7:22 PM", "Azua", "234,134 habitantes",
                     "lluvias dispersas", "3923.454", "354.223", "34 NE", "Hoy"
             );
 //            Add new forecast objects to the list.
             forecastsData.add(forecast);
-        }
+        }*/
+        Forecast forecast = new Forecast(
+                "25º", "23º", "23 m/s", "33%", "6:35 AM", "7:22 PM", "Azua", "234,134 habitantes",
+                "lluvias dispersas", "3923.454", "354.223", "34 NE", "Hoy"
+        );
+
+        Forecast forecast1 = new Forecast(
+                "27º", "24º", "23 m/s", "33%", "6:35 AM", "7:22 PM", "Azua", "234,134 habitantes",
+                "cielo nublado", "3923.454", "354.223", "34 NE", "Mar 11"
+        );
+
+        Forecast forecast2 = new Forecast(
+                "34º", "32º", "23 m/s", "33%", "6:35 AM", "7:22 PM", "Azua", "234,134 habitantes",
+                "cielo despejado", "3923.454", "354.223", "34 NE", "Mie 12"
+        );
+
+        Forecast forecast3 = new Forecast(
+                "19º", "16º", "23 m/s", "33%", "6:35 AM", "7:22 PM", "Azua", "234,134 habitantes",
+                "tormenta electrica", "3923.454", "354.223", "34 NE", "Jue 13"
+        );
+
+        Forecast forecast4 = new Forecast(
+                "37º", "35º", "23 m/s", "33%", "6:35 AM", "7:22 PM", "Azua", "234,134 habitantes",
+                "cielo claro", "3923.454", "354.223", "34 NE", "Vie 14"
+        );
+
+        Forecast forecast5 = new Forecast(
+                "19º", "16º", "23 m/s", "33%", "6:35 AM", "7:22 PM", "Azua", "234,134 habitantes",
+                "cielo despejado", "3923.454", "354.223", "34 NE", "Sab 15"
+        );
+
+        Forecast forecast6 = new Forecast(
+                "25º", "23º", "23 m/s", "33%", "6:35 AM", "7:22 PM", "Azua", "234,134 habitantes",
+                "lluvias dispersas", "3923.454", "354.223", "34 NE", "Dom 16"
+        );
+
+        forecastsData.add(forecast);
+        forecastsData.add(forecast1);
+        forecastsData.add(forecast2);
+        forecastsData.add(forecast3);
+        forecastsData.add(forecast4);
+        forecastsData.add(forecast5);
+        forecastsData.add(forecast6);
     }
 
     private void loadTodayData(View rootView) {
@@ -135,8 +177,8 @@ public class ForecastFragment extends Fragment implements AdapterView.OnItemSele
 
         maxTemperature.setTypeface(font_thin);
         description.setTypeface(font_reg);
-        cityName.setTypeface(font_reg);
-        date.setTypeface(font_bold);
+        cityName.setTypeface(font_bold);
+        date.setTypeface(font_reg);
         degrees.setTypeface(font_reg);
         windSpeed.setTypeface(font_reg);
         sunrise.setTypeface(font_reg);
