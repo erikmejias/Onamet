@@ -113,7 +113,7 @@ public class ForecastFragment extends Fragment implements AdapterView.OnItemSele
 
         Forecast forecast1 = new Forecast(
                 "27º", "24º", "23 m/s", "33%", "6:35 AM", "7:22 PM", "Azua", "234,134 habitantes",
-                "cielo nublado", "3923.454", "354.223", "34 NE", "Mie"
+                "cielo nublado", "3923.454", "354.223", "34 NE", "Mar"
         );
 
         Forecast forecast2 = new Forecast(
@@ -142,12 +142,12 @@ public class ForecastFragment extends Fragment implements AdapterView.OnItemSele
         );
 
         forecastsData.add(forecast);
-        forecastsData.add(forecast1);
         forecastsData.add(forecast2);
         forecastsData.add(forecast3);
         forecastsData.add(forecast4);
         forecastsData.add(forecast5);
         forecastsData.add(forecast6);
+        forecastsData.add(forecast1);
     }
 
     private void loadTodayData(View rootView) {

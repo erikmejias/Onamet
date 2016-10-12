@@ -126,7 +126,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new ForecastFragment(), "Pronósticos");
         adapter.addFragment(new BulletinsFragment(), "Boletines");
-        adapter.addFragment(new NewsFragment(), "Noticias");
+//        adapter.addFragment(new NewsFragment(), "Noticias");
         viewPager.setAdapter(adapter);
     }
 
