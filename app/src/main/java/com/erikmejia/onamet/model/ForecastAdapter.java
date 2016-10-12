@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.erikmejia.onamet.R;
+import com.thbs.skycons.library.SkyconView;
 
 import java.util.List;
 
@@ -53,9 +54,10 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.ViewHo
         holder.min_temperature.setText(dataset.get(position).getMin());
         holder.date.setText(dataset.get(position).getDate());
         holder.forecast_description.setText(dataset.get(position).getDescription());
+        holder.icon.setStrokeColor(R.color.colorPrimary);
 
-        holder.date.setTypeface(font_bold);
-        holder.max_temperature.setTypeface(font_reg);
+        holder.date.setTypeface(font_reg);
+        holder.max_temperature.setTypeface(font_bold);
         holder.min_temperature.setTypeface(font_thin);
         holder.forecast_description.setTypeface(font_reg);
         Log.d(TAG, "onBindViewHolder: " + dataset.get(position));
@@ -71,6 +73,7 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.ViewHo
         public TextView min_temperature;
         public TextView date;
         public TextView forecast_description;
+        public SkyconView icon;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -78,6 +81,7 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.ViewHo
             min_temperature = (TextView) itemView.findViewById(R.id.future_forecast_min_temperature);
             date = (TextView) itemView.findViewById(R.id.future_forecast_date_title);
             forecast_description = (TextView) itemView.findViewById(R.id.future_forecast_description);
+            icon = (SkyconView) itemView.findViewById(R.id.forecast_item_icon);
         }
     }
 }

@@ -14,8 +14,8 @@
         android:id="@+id/today_forecast_layout"
         android:layout_width="match_parent"
         android:layout_height="370dp"
-        android:background="@mipmap/back1"
-        android:backgroundTintMode="multiply">
+        android:alpha="0.8"
+        android:background="@mipmap/back3">
 
         <LinearLayout
             android:id="@+id/today_forecast_top"
@@ -26,7 +26,7 @@
             <TextView
                 android:id="@+id/city_name_text"
                 tools:text="La Romana"
-                android:textSize="24sp"
+                android:textSize="30sp"
                 android:textColor="#fff"
                 android:layout_gravity="center_horizontal"
                 android:layout_width="wrap_content"
@@ -72,7 +72,7 @@
                 <TextView
                     android:id="@+id/today_forecast_description_text"
                     tools:text="lluvias dispersas"
-                    android:textSize="20sp"
+                    android:textSize="22sp"
                     android:textColor="#fff"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
@@ -99,8 +99,13 @@
                     android:layout_marginTop="@dimen/activity_vertical_margin"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    app:srcCompat="@mipmap/ic_launcher"
+                    app:srcCompat="@drawable/weather_clear"
                     android:id="@+id/today_weather_icon"/>
+
+                <!--<com.thbs.skycons.library.MoonView
+                    app:strokeColor="#ffffff"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>-->
 
             </LinearLayout>
 
@@ -122,9 +127,9 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:layout_width="match_parent"
+                    android:layout_width="50dp"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@mipmap/ic_launcher"
+                    app:srcCompat="@drawable/wind_pressure"
                     android:id="@+id/today_wind_icon"/>
 
                 <TextView
@@ -145,9 +150,9 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:layout_width="match_parent"
+                    android:layout_width="50dp"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@mipmap/ic_launcher"
+                    app:srcCompat="@drawable/wind_direction"
                     android:id="@+id/today_orientation_icon"/>
 
                 <TextView
@@ -168,9 +173,9 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:layout_width="match_parent"
+                    android:layout_width="50dp"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@mipmap/ic_launcher"
+                    app:srcCompat="@drawable/sunrise"
                     android:id="@+id/today_sunrise_icon"/>
 
                 <TextView
@@ -192,9 +197,9 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:layout_width="match_parent"
+                    android:layout_width="50dp"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@mipmap/ic_launcher"
+                    app:srcCompat="@drawable/sunset"
                     android:id="@+id/today_sunset_icon"/>
 
                 <TextView

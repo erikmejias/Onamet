@@ -1,6 +1,7 @@
 package com.erikmejia.onamet.ui;
 
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -106,38 +107,38 @@ public class ForecastFragment extends Fragment implements AdapterView.OnItemSele
             forecastsData.add(forecast);
         }*/
         Forecast forecast = new Forecast(
-                "25º", "23º", "23 m/s", "33%", "6:35 AM", "7:22 PM", "Azua", "234,134 habitantes",
-                "lluvias dispersas", "3923.454", "354.223", "34 NE", "Hoy"
+                "25º", "23º", "23 m/s", "33%", "6:35 AM", "7:22 PM", "La Romana", "234,134 habitantes",
+                "cielo despejado", "3923.454", "354.223", "34 NE", "Hoy"
         );
 
         Forecast forecast1 = new Forecast(
                 "27º", "24º", "23 m/s", "33%", "6:35 AM", "7:22 PM", "Azua", "234,134 habitantes",
-                "cielo nublado", "3923.454", "354.223", "34 NE", "Mar 11"
+                "cielo nublado", "3923.454", "354.223", "34 NE", "Mie"
         );
 
         Forecast forecast2 = new Forecast(
-                "34º", "32º", "23 m/s", "33%", "6:35 AM", "7:22 PM", "Azua", "234,134 habitantes",
-                "cielo despejado", "3923.454", "354.223", "34 NE", "Mie 12"
+                "34º", "32º", "23 m/s", "33%", "6:35 AM", "7:22 PM", "Monte Plata", "234,134 habitantes",
+                "cielo despejado", "3923.454", "354.223", "34 NE", "Jue"
         );
 
         Forecast forecast3 = new Forecast(
-                "19º", "16º", "23 m/s", "33%", "6:35 AM", "7:22 PM", "Azua", "234,134 habitantes",
-                "tormenta electrica", "3923.454", "354.223", "34 NE", "Jue 13"
+                "19º", "16º", "23 m/s", "33%", "6:35 AM", "7:22 PM", "Santo Domingo", "234,134 habitantes",
+                "tormenta electrica", "3923.454", "354.223", "34 NE", "Vie"
         );
 
         Forecast forecast4 = new Forecast(
-                "37º", "35º", "23 m/s", "33%", "6:35 AM", "7:22 PM", "Azua", "234,134 habitantes",
-                "cielo claro", "3923.454", "354.223", "34 NE", "Vie 14"
+                "37º", "35º", "23 m/s", "33%", "6:35 AM", "7:22 PM", "Sabana de la Mar", "234,134 habitantes",
+                "cielo claro", "3923.454", "354.223", "34 NE", "Sab"
         );
 
         Forecast forecast5 = new Forecast(
-                "19º", "16º", "23 m/s", "33%", "6:35 AM", "7:22 PM", "Azua", "234,134 habitantes",
-                "cielo despejado", "3923.454", "354.223", "34 NE", "Sab 15"
+                "19º", "16º", "23 m/s", "33%", "6:35 AM", "7:22 PM", "Hato Mayor", "234,134 habitantes",
+                "cielo despejado", "3923.454", "354.223", "34 NE", "Dom"
         );
 
         Forecast forecast6 = new Forecast(
-                "25º", "23º", "23 m/s", "33%", "6:35 AM", "7:22 PM", "Azua", "234,134 habitantes",
-                "lluvias dispersas", "3923.454", "354.223", "34 NE", "Dom 16"
+                "25º", "23º", "23 m/s", "33%", "6:35 AM", "7:22 PM", "San Francisco", "234,134 habitantes",
+                "lluvias dispersas", "3923.454", "354.223", "34 NE", "Lun"
         );
 
         forecastsData.add(forecast);
@@ -179,10 +180,10 @@ public class ForecastFragment extends Fragment implements AdapterView.OnItemSele
         description.setTypeface(font_reg);
         cityName.setTypeface(font_bold);
         date.setTypeface(font_reg);
-        degrees.setTypeface(font_reg);
-        windSpeed.setTypeface(font_reg);
-        sunrise.setTypeface(font_reg);
-        sunset.setTypeface(font_reg);
+        degrees.setTypeface(font_bold);
+        windSpeed.setTypeface(font_bold);
+        sunrise.setTypeface(font_bold);
+        sunset.setTypeface(font_bold);
 
         cityName.setText(todayForecast.getName());
         date.setText(todayForecast.getDate());
