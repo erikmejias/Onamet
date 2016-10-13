@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/Onamet.iml" filepath="$PROJECT_DIR$/Onamet.iml" />
       <module fileurl="file://$PROJECT_DIR$/SkyconsLibrary/SkyconsLibrary.iml" filepath="$PROJECT_DIR$/SkyconsLibrary/SkyconsLibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/backend/backend.iml" filepath="$PROJECT_DIR$/backend/backend.iml" />
     </modules>
   </component>
 </project>
