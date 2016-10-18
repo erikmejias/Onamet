@@ -41,7 +41,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
     private static final String TAG = MainActivity.class.getSimpleName();
-    //    Firebase Database Object
+    // Firebase Database Object
     /* Firebase References to objects of the Realtime database. */
     private DatabaseReference azuaReference;
 

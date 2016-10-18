@@ -1,11 +1,11 @@
-package com.erikmejia.onamet.model;
+package com.erikmejia.onamet.backend.model;
 
 /**
- * Created by erik on 9/2/16.
+ * Created by erik on 10/13/16.
  */
 
 public class Forecast {
-//    Forecast attributes
+    //    Forecast attributes
     private String max;         // Max temperature
     private String min;         // Min temperature
     private String speed;       // Wind Speed
@@ -19,7 +19,6 @@ public class Forecast {
     private String lon;         // Longitude
     private String deg;         // Wind direction
     private String date;        // Forecast date
-    private int iconId;
 
     public Forecast() {
 //        Empty constructor
@@ -28,7 +27,7 @@ public class Forecast {
     public Forecast(String max, String min, String speed, String humidity, String sunrise_time,
                     String sunset_time, String name, String population,
                     String description, String lat, String lon, String deg,
-                    String date, int iconId) {
+                    String date) {
 
         this.max = max;
         this.min = min;
@@ -43,7 +42,6 @@ public class Forecast {
         this.lon = lon;
         this.deg = deg;
         this.date = date;
-        this.iconId = iconId;
     }
 
     public String getMax() {
@@ -143,18 +141,11 @@ public class Forecast {
     }
 
     public String getDate() {
-      return date;
+        return date;
     }
 
     public void setDate(String date) {
-      this.date = date;
+        this.date = date;
     }
 
-    public int getIconId() {
-        return iconId;
-    }
-
-    public void setIconId(int iconId) {
-        this.iconId = iconId;
-    }
 }

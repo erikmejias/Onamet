@@ -1,5 +1,6 @@
 package com.erikmejia.onamet.ui;
 
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,6 +25,8 @@ import com.erikmejia.onamet.model.ForecastAdapter;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.NativeExpressAdView;
 import com.google.firebase.database.FirebaseDatabase;
+import com.thbs.skycons.library.CloudView;
+import com.thbs.skycons.library.SunView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -108,37 +112,37 @@ public class ForecastFragment extends Fragment implements AdapterView.OnItemSele
         }*/
         Forecast forecast = new Forecast(
                 "25º", "23º", "23 m/s", "33%", "6:35 AM", "7:22 PM", "La Romana", "234,134 habitantes",
-                "cielo despejado", "3923.454", "354.223", "34 NE", "Hoy"
+                "cielo despejado", "3923.454", "354.223", "34 NE", "Hoy", 8
         );
 
         Forecast forecast1 = new Forecast(
                 "27º", "24º", "23 m/s", "33%", "6:35 AM", "7:22 PM", "Azua", "234,134 habitantes",
-                "cielo nublado", "3923.454", "354.223", "34 NE", "Mar"
+                "cielo nublado", "3923.454", "354.223", "34 NE", "Mar", 2
         );
 
         Forecast forecast2 = new Forecast(
                 "34º", "32º", "23 m/s", "33%", "6:35 AM", "7:22 PM", "Monte Plata", "234,134 habitantes",
-                "cielo despejado", "3923.454", "354.223", "34 NE", "Jue"
+                "cielo despejado", "3923.454", "354.223", "34 NE", "Jue", 3
         );
 
         Forecast forecast3 = new Forecast(
                 "19º", "16º", "23 m/s", "33%", "6:35 AM", "7:22 PM", "Santo Domingo", "234,134 habitantes",
-                "tormenta electrica", "3923.454", "354.223", "34 NE", "Vie"
+                "tormenta electrica", "3923.454", "354.223", "34 NE", "Vie", 4
         );
 
         Forecast forecast4 = new Forecast(
                 "37º", "35º", "23 m/s", "33%", "6:35 AM", "7:22 PM", "Sabana de la Mar", "234,134 habitantes",
-                "cielo claro", "3923.454", "354.223", "34 NE", "Sab"
+                "cielo claro", "3923.454", "354.223", "34 NE", "Sab", 5
         );
 
         Forecast forecast5 = new Forecast(
                 "19º", "16º", "23 m/s", "33%", "6:35 AM", "7:22 PM", "Hato Mayor", "234,134 habitantes",
-                "cielo despejado", "3923.454", "354.223", "34 NE", "Dom"
+                "cielo despejado", "3923.454", "354.223", "34 NE", "Dom", 6
         );
 
         Forecast forecast6 = new Forecast(
                 "25º", "23º", "23 m/s", "33%", "6:35 AM", "7:22 PM", "San Francisco", "234,134 habitantes",
-                "lluvias dispersas", "3923.454", "354.223", "34 NE", "Lun"
+                "lluvias dispersas", "3923.454", "354.223", "34 NE", "Lun", 7
         );
 
         forecastsData.add(forecast);
@@ -166,9 +170,23 @@ public class ForecastFragment extends Fragment implements AdapterView.OnItemSele
         Forecast todayForecast = forecastsData.get(0);
 //        Get references prior to setting text.
 
+//        LinearLayout icon_wrapper = (LinearLayout) rootView.findViewById(R.id.today_forecast_icon);
+//
+//        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+//                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+
+//        icon_wrapper.setLayoutParams(params);
+//        params.width = 550;
+//        params.height = 550;
+//        SunView cloudView = new SunView(getContext());
+//        cloudView.setStrokeColor(Color.WHITE);
+//        icon_wrapper.addView(cloudView);
+
+        SunView sunView = (SunView) rootView.findViewById(R.id.today_forecast_icon_item);
+        sunView.setStrokeColor(Color.WHITE);
+
         TextView cityName = (TextView) rootView.findViewById(R.id.city_name_text);
         TextView date = (TextView) rootView.findViewById(R.id.today_date_text);
-        TextView population = (TextView) rootView.findViewById(R.id.today_city_population);
         TextView description = (TextView) rootView.findViewById(R.id.today_forecast_description_text);
         TextView windSpeed = (TextView) rootView.findViewById(R.id.today_wind_text);
         TextView degrees = (TextView) rootView.findViewById(R.id.today_degrees_text);
@@ -187,7 +205,6 @@ public class ForecastFragment extends Fragment implements AdapterView.OnItemSele
 
         cityName.setText(todayForecast.getName());
         date.setText(todayForecast.getDate());
-        population.setText(todayForecast.getPopulation());
         description.setText(todayForecast.getDescription());
         windSpeed.setText(todayForecast.getSpeed());
         degrees.setText(todayForecast.getDeg());

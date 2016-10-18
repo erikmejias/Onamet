@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <cronentries>
     <cron>
-        <url>sync</url>
+        <url>/sync-data</url>
         <description>Download new forecast and push it to Firebase Database.</description>
-        <schedule>every 60 minutes</schedule>
+        <schedule>every 24 hours</schedule>
     </cron>
 </cronentries>

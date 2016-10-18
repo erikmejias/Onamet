@@ -6,6 +6,7 @@
 
 package com.erikmejia.onamet.backend;
 
+import com.erikmejia.onamet.backend.model.NewsItem;
 import com.google.api.client.googleapis.auth.clientlogin.ClientLogin;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
@@ -15,19 +16,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Properties;
 import java.util.logging.Logger;
 
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 import javax.servlet.http.*;
 import javax.xml.ws.Response;
 
@@ -44,7 +39,7 @@ public class MyServlet extends HttpServlet {
 
         resp.getWriter().println(outString);
 
-        // Note: Ensure that the [PRIVATE_KEY_FILENAME].json has read
+        // Note: Ensure that the Onamet-035fa87b100b.json has read
         // permissions set.
         FirebaseOptions options = new FirebaseOptions.Builder()
                 .setServiceAccount(getServletContext().getResourceAsStream("/WEB-INF/Onamet-035fa87b100b.json"))
@@ -68,7 +63,9 @@ public class MyServlet extends HttpServlet {
         // As an admin, the app has access to read and write all data, regardless of Security Rules
         DatabaseReference ref = FirebaseDatabase
                 .getInstance()
-                .getReference("forecasts/azua");
+                .getReference("forecasts");
+
+        pushDemoData();
 
         // This fires when the servlet first runs, returning all the existing values
         // only runs once, until the servlet starts up again.
@@ -95,5 +92,30 @@ public class MyServlet extends HttpServlet {
                 System.out.println("Error: "+error);
             }
         });
+    }
+
+    /*
+    * Method to push data to the Firebase Database.
+    * */
+    public void pushDemoData () {
+        DatabaseReference ref = FirebaseDatabase
+                .getInstance()
+                .getReference("news");
+
+        Map<String, NewsItem> news = new HashMap<String, NewsItem>();
+        news.put("Test 1", new NewsItem("El Titulo de noticia", "Oct 10", "Lorem Ipsum too dolor."));
+        news.put("Test 2", new NewsItem("El Titulo de noticia", "Oct 11", "Lorem Ipsum too dolor."));
+        news.put("Test 3", new NewsItem("El Titulo de noticia", "Oct 12", "Lorem Ipsum too dolor."));
+        news.put("Test 4", new NewsItem("El Titulo de noticia", "Oct 13", "Lorem Ipsum too dolor."));
+
+        ref.setValue(news);
+    }
+
+    /*
+    * Method to retrieve forecast data from OWM.
+    * */
+
+    public void requestForecasts() {
+
     }
 }
