@@ -70,6 +70,8 @@ public class ForecastFragment extends Fragment{
         RecyclerView forecastList = (RecyclerView)
                 rootView.findViewById(R.id.future_forecast_recycler_list);
         forecastList.setHasFixedSize(true);
+//        Makes smooth scrolling inside the NestedScrollView
+        forecastList.setNestedScrollingEnabled(false);
 
         if (container != null) {
             forecastList.setLayoutManager(new LinearLayoutManager(container.getContext()));
