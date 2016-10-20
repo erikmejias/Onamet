@@ -22,6 +22,7 @@
             android:id="@+id/today_forecast_layout"
             android:layout_width="match_parent"
             android:layout_height="390dp"
+            android:foreground="?android:selectableItemBackground"
             android:background="@mipmap/back2">
 
             <LinearLayout

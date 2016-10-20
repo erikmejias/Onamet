@@ -17,23 +17,6 @@
 
         <!-- Today forecast layout -->
 
-        <!-- Future forecast layout - TODO: Change Layout height-->
-        <LinearLayout
-            android:id="@+id/future_forecast_layout"
-            android:layout_below="@id/today_forecast_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/future_forecast_recycler_list"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-            </android.support.v7.widget.RecyclerView>
-
-        </LinearLayout>
-
         <RelativeLayout
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
@@ -41,7 +24,10 @@
             android:layout_width="match_parent"
             android:layout_height="370dp"
             android:scrollY="3dp"
+            android:foreground="?android:selectableItemBackground"
             android:background="@mipmap/back2"
+            android:focusable="true"
+            android:clickable="true"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true">
@@ -239,6 +225,23 @@
             </LinearLayout>
 
         </RelativeLayout>
+
+        <!-- Future forecast layout - TODO: Change Layout height-->
+        <LinearLayout
+            android:id="@+id/future_forecast_layout"
+            android:layout_below="@id/today_forecast_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/future_forecast_recycler_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </android.support.v7.widget.RecyclerView>
+
+        </LinearLayout>
 
         <!--<com.google.android.gms.ads.NativeExpressAdView
             android:layout_below="@id/future_forecast_layout"

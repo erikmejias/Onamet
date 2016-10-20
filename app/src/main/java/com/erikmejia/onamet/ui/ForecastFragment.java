@@ -1,5 +1,6 @@
 package com.erikmejia.onamet.ui;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,10 +13,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.erikmejia.onamet.R;
 import com.erikmejia.onamet.model.Forecast;
 import com.erikmejia.onamet.model.ForecastAdapter;
+import com.erikmejia.onamet.model.OnItemClickListener;
 import com.erikmejia.onamet.util.Utils;
 
 import java.util.ArrayList;
@@ -77,7 +80,15 @@ public class ForecastFragment extends Fragment{
             forecastList.setLayoutManager(new LinearLayoutManager(container.getContext()));
         }
 
-        ForecastAdapter forecastsAdapter = new ForecastAdapter(forecastsData);
+        ForecastAdapter forecastsAdapter = new ForecastAdapter(forecastsData, new OnItemClickListener() {
+            @Override
+            public void onItemClicked(Forecast forecastItem) {
+                Toast.makeText(getContext(), "forecast clicked", Toast.LENGTH_SHORT).show();
+                Intent intent;
+                intent = new Intent(getContext(), ForecastDetails.class);
+                startActivity(intent);
+            }
+        });
         forecastList.setAdapter(forecastsAdapter);
 
         /*NativeExpressAdView adView = (NativeExpressAdView) rootView.findViewById(R.id.forecastAd);

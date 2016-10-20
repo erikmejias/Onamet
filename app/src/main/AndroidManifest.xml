@@ -47,12 +47,15 @@
 
         <activity
             android:name=".MapsActivity"
-            android:parentActivityName=".MainActivity"
-            android:label="@string/title_activity_maps">
-
+            android:label="@string/title_activity_maps"
+            android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.erikmejia.onamet.MainActivity" />
+        </activity>
+        <activity
+            android:name=".ui.ForecastDetails"
+            android:parentActivityName=".MainActivity">
 
         </activity>
     </application>

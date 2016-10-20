@@ -41,11 +41,13 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.ViewHo
     private Typeface font_reg;
     private Typeface font_bold;
     private Context context;
+    private OnItemClickListener listener;
 
     private LinearLayout.LayoutParams params;
 
-    public ForecastAdapter(List<Forecast> receivedData){
-        dataset = receivedData;
+    public ForecastAdapter(List<Forecast> receivedData, OnItemClickListener listener){
+        this.dataset = receivedData;
+        this.listener = listener;
         Log.d(TAG, "ForecastAdapter: " + dataset.size());
 
 //        Removes today forecast from future list
@@ -90,6 +92,10 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.ViewHo
         holder.max_temperature.setTypeface(font_bold);
         holder.min_temperature.setTypeface(font_thin);
         holder.forecast_description.setTypeface(font_reg);
+
+//        Calling the method that handles click selections.
+        holder.bind(dataset.get(position), listener);
+
     }
 
     @Override
@@ -113,6 +119,17 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.ViewHo
             forecast_description = (TextView) itemView.findViewById(R.id.forecast_description);
             icon = (ImageView) itemView.findViewById(R.id.future_weather_icon);
 //            icon_wrapper = (LinearLayout) itemView.findViewById(R.id.forecast_item_icon_wrapper);
+
+            itemView.setClickable(true);
+        }
+
+        public void bind(final Forecast forecastItem, final OnItemClickListener listener) {
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onItemClicked(forecastItem);
+                }
+            });
         }
     }
 }

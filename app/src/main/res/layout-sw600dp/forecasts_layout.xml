@@ -13,6 +13,9 @@
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:id="@+id/today_forecast_layout"
             android:layout_width="match_parent"
+            android:focusable="true"
+            android:clickable="true"
+            android:foreground="?android:selectableItemBackground"
             android:layout_height="445dp"
             android:translationZ="5dp"
             android:background="@mipmap/back2">
@@ -20,6 +23,8 @@
             <LinearLayout
                 android:id="@+id/today_forecast_top"
                 android:orientation="vertical"
+                android:focusable="true"
+                android:clickable="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
