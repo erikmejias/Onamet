@@ -31,6 +31,7 @@ import com.erikmejia.onamet.ui.BulletinsFragment;
 import com.erikmejia.onamet.ui.ForecastFragment;
 import com.erikmejia.onamet.ui.NewsFragment;
 import com.erikmejia.onamet.ui.SettingsActivity;
+import com.erikmejia.onamet.util.PageTransformer;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -78,6 +79,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 //        azuaReference= FirebaseDatabase.getInstance().getReference("/demo");
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
+        viewPager.setPageTransformer(true, new PageTransformer());
         setViewPager(viewPager);
 
         tabLayout = (TabLayout) findViewById(R.id.tabs);

@@ -1,4 +1,9 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:ads="http://schemas.android.com/apk/res-auto"
@@ -14,7 +19,6 @@
             android:id="@+id/today_forecast_layout"
             android:layout_width="match_parent"
             android:layout_height="370dp"
-            android:scrollY="3dp"
             android:translationZ="5dp"
             android:background="@mipmap/back1">
 
@@ -53,11 +57,14 @@
                 android:id="@+id/today_forecast_upper"
                 android:orientation="horizontal"
                 android:layout_below="@id/today_forecast_top"
+                android:layout_marginLeft="80dp"
+                android:layout_marginRight="80dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <LinearLayout
                     android:orientation="vertical"
+                    android:gravity="center_horizontal"
                     android:layout_weight="1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -65,9 +72,10 @@
                     <TextView
                         android:id="@+id/today_forecast_max_text"
                         tools:text="26º"
-                        android:textSize="115sp"
+                        android:layout_gravity="right"
+                        android:textSize="155sp"
                         android:textColor="#fff"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
                     <TextView
@@ -95,11 +103,11 @@
                         app:srcCompat="@drawable/weather_clear"
                         android:id="@+id/today_weather_icon"/>-->
 
-                    <!--<com.thbs.skycons.library.SunView-->
-                        <!--android:id="@+id/today_forecast_icon_item"-->
-                        <!--app:strokeColor = "#ffffff"-->
-                        <!--android:layout_width="350dp"-->
-                        <!--android:layout_height="350dp"/>-->
+                    <com.thbs.skycons.library.SunView
+                        android:id="@+id/today_forecast_icon_item"
+                        app:strokeColor = "#ffffff"
+                        android:layout_width="350dp"
+                        android:layout_height="350dp"/>
 
                 </LinearLayout>
 
@@ -110,6 +118,8 @@
                 android:id="@+id/today_forecast_bottom"
                 android:layout_below="@id/today_forecast_upper"
                 android:orientation="horizontal"
+                android:paddingLeft="80dp"
+                android:paddingRight="80dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -215,10 +225,12 @@
             android:id="@+id/future_forecast_layout"
             android:layout_below="@id/today_forecast_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <android.support.v7.widget.RecyclerView
+                android:clickable="true"
+                android:focusable="true"
                 android:id="@+id/future_forecast_recycler_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -240,4 +252,6 @@
 
 
 
-</RelativeLayout>
+    </RelativeLayout>
+
+</ScrollView>

@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.erikmejia.onamet.R;
 import com.erikmejia.onamet.model.Forecast;
 import com.erikmejia.onamet.model.ForecastAdapter;
+import com.erikmejia.onamet.util.Utils;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.NativeExpressAdView;
 import com.google.firebase.database.FirebaseDatabase;
@@ -112,37 +113,70 @@ public class ForecastFragment extends Fragment implements AdapterView.OnItemSele
         }*/
         Forecast forecast = new Forecast(
                 "25º", "23º", "23 m/s", "33%", "6:35 AM", "7:22 PM", "La Romana", "234,134 habitantes",
-                "cielo despejado", "3923.454", "354.223", "34 NE", "Hoy", 8
+                "lluvias dispersas", "3923.454", "354.223", "34 NE", "Hoy", 5
         );
 
         Forecast forecast1 = new Forecast(
                 "27º", "24º", "23 m/s", "33%", "6:35 AM", "7:22 PM", "Azua", "234,134 habitantes",
-                "cielo nublado", "3923.454", "354.223", "34 NE", "Mar", 2
+                "cielo nublado", "3923.454", "354.223", "34 NE", "Mar 01", 2
         );
 
         Forecast forecast2 = new Forecast(
                 "34º", "32º", "23 m/s", "33%", "6:35 AM", "7:22 PM", "Monte Plata", "234,134 habitantes",
-                "cielo despejado", "3923.454", "354.223", "34 NE", "Jue", 3
+                "cielo despejado", "3923.454", "354.223", "34 NE", "Jue 20", 3
         );
 
         Forecast forecast3 = new Forecast(
                 "19º", "16º", "23 m/s", "33%", "6:35 AM", "7:22 PM", "Santo Domingo", "234,134 habitantes",
-                "tormenta electrica", "3923.454", "354.223", "34 NE", "Vie", 4
+                "tormenta electrica", "3923.454", "354.223", "34 NE", "Vie 21", 4
         );
 
         Forecast forecast4 = new Forecast(
                 "37º", "35º", "23 m/s", "33%", "6:35 AM", "7:22 PM", "Sabana de la Mar", "234,134 habitantes",
-                "cielo claro", "3923.454", "354.223", "34 NE", "Sab", 5
+                "cielo claro", "3923.454", "354.223", "34 NE", "Sab 22", 5
         );
 
         Forecast forecast5 = new Forecast(
                 "19º", "16º", "23 m/s", "33%", "6:35 AM", "7:22 PM", "Hato Mayor", "234,134 habitantes",
-                "cielo despejado", "3923.454", "354.223", "34 NE", "Dom", 6
+                "cielo despejado", "3923.454", "354.223", "34 NE", "Dom 23", 6
         );
 
         Forecast forecast6 = new Forecast(
                 "25º", "23º", "23 m/s", "33%", "6:35 AM", "7:22 PM", "San Francisco", "234,134 habitantes",
-                "lluvias dispersas", "3923.454", "354.223", "34 NE", "Lun", 7
+                "lluvias dispersas", "3923.454", "354.223", "34 NE", "Lun 24", 7
+        );Forecast forecast7 = new Forecast(
+                "25º", "23º", "23 m/s", "33%", "6:35 AM", "7:22 PM", "La Romana", "234,134 habitantes",
+                "cielo despejado", "3923.454", "354.223", "34 NE", "Mar 25", 8
+        );
+
+        Forecast forecast8 = new Forecast(
+                "27º", "24º", "23 m/s", "33%", "6:35 AM", "7:22 PM", "Azua", "234,134 habitantes",
+                "cielo nublado", "3923.454", "354.223", "34 NE", "Mie 26", 2
+        );
+
+        Forecast forecast9 = new Forecast(
+                "34º", "32º", "23 m/s", "33%", "6:35 AM", "7:22 PM", "Monte Plata", "234,134 habitantes",
+                "cielo despejado", "3923.454", "354.223", "34 NE", "Jue 27", 3
+        );
+
+        Forecast forecast10 = new Forecast(
+                "19º", "16º", "23 m/s", "33%", "6:35 AM", "7:22 PM", "Santo Domingo", "234,134 habitantes",
+                "tormenta electrica", "3923.454", "354.223", "34 NE", "Vie 28", 4
+        );
+
+        Forecast forecast11 = new Forecast(
+                "37º", "35º", "23 m/s", "33%", "6:35 AM", "7:22 PM", "Sabana de la Mar", "234,134 habitantes",
+                "cielo claro", "3923.454", "354.223", "34 NE", "Sab 29", 5
+        );
+
+        Forecast forecast12 = new Forecast(
+                "19º", "16º", "23 m/s", "33%", "6:35 AM", "7:22 PM", "Hato Mayor", "234,134 habitantes",
+                "cielo despejado", "3923.454", "354.223", "34 NE", "Dom 30", 6
+        );
+
+        Forecast forecast13 = new Forecast(
+                "25º", "23º", "23 m/s", "33%", "6:35 AM", "7:22 PM", "San Francisco", "234,134 habitantes",
+                "lluvias dispersas", "3923.454", "354.223", "34 NE", "Lun 31", 7
         );
 
         forecastsData.add(forecast);
@@ -151,6 +185,13 @@ public class ForecastFragment extends Fragment implements AdapterView.OnItemSele
         forecastsData.add(forecast4);
         forecastsData.add(forecast5);
         forecastsData.add(forecast6);
+        forecastsData.add(forecast7);
+        forecastsData.add(forecast8);
+        forecastsData.add(forecast9);
+        forecastsData.add(forecast10);
+        forecastsData.add(forecast11);
+        forecastsData.add(forecast12);
+        forecastsData.add(forecast13);
         forecastsData.add(forecast1);
     }
 
@@ -170,20 +211,21 @@ public class ForecastFragment extends Fragment implements AdapterView.OnItemSele
         Forecast todayForecast = forecastsData.get(0);
 //        Get references prior to setting text.
 
-//        LinearLayout icon_wrapper = (LinearLayout) rootView.findViewById(R.id.today_forecast_icon);
-//
-//        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-//                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+        LinearLayout icon_wrapper = (LinearLayout) rootView.findViewById(R.id.today_forecast_icon);
 
-//        icon_wrapper.setLayoutParams(params);
+
 //        params.width = 550;
 //        params.height = 550;
 //        SunView cloudView = new SunView(getContext());
 //        cloudView.setStrokeColor(Color.WHITE);
 //        icon_wrapper.addView(cloudView);
 
-        SunView sunView = (SunView) rootView.findViewById(R.id.today_forecast_icon_item);
-        sunView.setStrokeColor(Color.WHITE);
+        icon_wrapper.setMinimumHeight(1700);
+        icon_wrapper.setMinimumWidth(1700);
+        Utils.setAnimatedIcon(icon_wrapper, todayForecast.getIconId(), getContext());
+
+//        SunView sunView = (SunView) rootView.findViewById(R.id.today_forecast_icon_item);
+//        sunView.setStrokeColor(Color.WHITE);
 
         TextView cityName = (TextView) rootView.findViewById(R.id.city_name_text);
         TextView date = (TextView) rootView.findViewById(R.id.today_date_text);

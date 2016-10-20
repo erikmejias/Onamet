@@ -39,6 +39,8 @@
                     android:id="@+id/bulletins_title_text"
                     android:text="Titulo del boletin"
                     android:textSize="20sp"
+                    android:maxLines="1"
+                    android:ellipsize="end"
                     android:paddingStart="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -48,7 +50,8 @@
                     android:id="@+id/bulletins_description_text"
                     android:text="Lorem ipsum dolor sit amet. Ip dolor ipsum lot of trouble sitting in the dinning table of Frank Abagnale Jr. The Guy that almost break all of it. Ip dolor ipsum lot of trouble sitting in the dinning table of Frank Abagnale Jr. The Guy that almost break all of it."
                     android:textSize="12sp"
-                    android:maxLines="4"
+                    android:maxLines="3"
+                    android:ellipsize="end"
                     android:paddingStart="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -79,7 +82,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:srcCompat="@drawable/weather_showers_scattered_day"
-                    android:id="@+id/today_weather_icon" />
+                    android:id="@+id/bulletin_icon" />
 
             </LinearLayout>
 

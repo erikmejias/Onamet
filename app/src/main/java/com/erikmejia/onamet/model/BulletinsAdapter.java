@@ -6,9 +6,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.erikmejia.onamet.R;
+import com.erikmejia.onamet.util.Utils;
+
+import java.util.List;
 
 /**
  * Created by erik on 9/4/16.
@@ -17,6 +21,7 @@ import com.erikmejia.onamet.R;
 public class BulletinsAdapter extends RecyclerView.Adapter<BulletinsAdapter.ViewHolder>{
     private String TAG = ForecastAdapter.class.getSimpleName();
 
+    private List<Bulletin> bulletins;
     private String[] dataset;
     private String description = "Lorem ipsum dolor sit amet. Ip dolor ipsum lot of trouble " +
             "sitting in the dinning table of Frank Abagnale Jr. The Guy that almost break " +
@@ -25,9 +30,10 @@ public class BulletinsAdapter extends RecyclerView.Adapter<BulletinsAdapter.View
     private Typeface font_reg;
     private Typeface font_bold;
 
-    public BulletinsAdapter(String[] receivedData){
-        dataset = receivedData;
-        Log.d(TAG, "NewsAdapter: " + dataset.length);
+    public BulletinsAdapter(List<Bulletin> receivedData){
+        bulletins = receivedData;
+
+        Log.d(TAG, "BulletinsAdapter: " + receivedData.size());
     }
 
     @Override
@@ -49,31 +55,33 @@ public class BulletinsAdapter extends RecyclerView.Adapter<BulletinsAdapter.View
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.date.setText("Sep 2");
-        holder.title.setText("Peligro de extensiones de agua");
-        holder.description.setText(description);
+        holder.date.setText(bulletins.get(position).getDate());
+        holder.title.setText(bulletins.get(position).getTitle());
+        holder.description.setText(bulletins.get(position).getDescription());
+        holder.icon.setImageResource(Utils.bulletinIcon(bulletins.get(position).getIconId()));
 
         holder.title.setTypeface(font_bold);
         holder.description.setTypeface(font_reg);
         holder.date.setTypeface(font_thin);
-        Log.d(TAG, "onBindViewHolder: " + dataset[position]);
     }
 
     @Override
     public int getItemCount() {
-        return dataset.length;
+        return bulletins.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView date;
         public TextView title;
         public TextView description;
+        public ImageView icon;
 
         public ViewHolder(View itemView) {
             super(itemView);
             date = (TextView) itemView.findViewById(R.id.bulletins_date_text);
             title = (TextView) itemView.findViewById(R.id.bulletins_title_text);
             description = (TextView) itemView.findViewById(R.id.bulletins_description_text);
+            icon = (ImageView) itemView.findViewById(R.id.bulletin_icon);
         }
     }
 }

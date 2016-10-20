@@ -1,12 +1,12 @@
 <resources>
     <string name="app_name">Onamet</string>
-    <string name="notification_prefs_title">Notifications</string>
-    <string name="notification_prefs_summary">Enable push notifications</string>
-    <string name="acc_prefs_sync">Set up account</string>
-    <string name="about_prefs_title">About Onamet</string>
-    <string name="about_dev_prefs_title">About the developer</string>
-    <string name="terms_use_prefs_title">Terms of use</string>
-    <string name="sms_auth_prefs_title">Authenticate SMS</string>
+    <string name="notification_prefs_title">Notificaciones</string>
+    <string name="notification_prefs_summary">Habilitar notificaciones instantáneas</string>
+    <string name="acc_prefs_sync">Configurar cuenta</string>
+    <string name="about_prefs_title">Acerca de Onamet</string>
+    <string name="about_dev_prefs_title">Acerca del desarrollador</string>
+    <string name="terms_use_prefs_title">Términos de uso</string>
+    <string name="sms_auth_prefs_title">Verificar SMS</string>
     <string name="settings">Configuración</string>
 
     <!-- DEMO DATA -->

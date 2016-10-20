@@ -7,16 +7,20 @@
         android:key="check_box_preference_1"
         android:summary="@string/notification_prefs_summary" />
 
-    <PreferenceCategory android:title="Account">
+    <PreferenceCategory android:title="Cuenta">
         <Preference
-            android:title="@string/acc_prefs_sync"/>
+            android:title="@string/acc_prefs_sync"
+            android:summary="Iniciar sesión para guardar mis preferencias"
+            />
 
         <Preference
-            android:title="@string/sms_auth_prefs_title"/>
+            android:title="@string/sms_auth_prefs_title"
+            android:summary="Verificar SMS para recibir alertas en caso que pierda acceso a internet"
+            />
 
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="Other">
+    <PreferenceCategory android:title="Otro">
 
         <Preference
             android:title="@string/about_prefs_title"/>
@@ -25,7 +29,9 @@
             android:title="@string/terms_use_prefs_title"/>
 
         <Preference
-            android:title="@string/about_dev_prefs_title"/>
+            android:title="@string/about_dev_prefs_title"
+            android:summary="Información de contacto del desarrollador"
+            />
 
     </PreferenceCategory>
 </PreferenceScreen>
