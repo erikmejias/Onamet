@@ -4,4 +4,9 @@
 
     <item android:title="@string/settings"
         android:id="@+id/settings" />
+
+    <item android:title="@string/maps"
+        android:id="@+id/map"
+        android:icon="@drawable/ic_map"
+        app:showAsAction="always" />
 </menu>

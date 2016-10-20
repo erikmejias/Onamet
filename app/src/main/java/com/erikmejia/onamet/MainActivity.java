@@ -82,6 +82,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             case R.id.settings:
                 showSettings();
                 return true;
+            case R.id.map:
+                Toast.makeText(this, "Abriendo mapa", Toast.LENGTH_SHORT).show();
+                showMap();
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -93,6 +96,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
 
+    }
+
+    private void showMap(){
+        Intent intent;
+        intent = new Intent(this, MapsActivity.class);
+        startActivity(intent);
     }
 
     private void setViewPager(ViewPager viewPager) {

@@ -8,6 +8,8 @@
     <string name="terms_use_prefs_title">Términos de uso</string>
     <string name="sms_auth_prefs_title">Verificar SMS</string>
     <string name="settings">Configuración</string>
+    <string name="maps">Maps</string>
+    <string name="title_activity_maps">Map</string>
 
     <!-- DEMO DATA -->
 </resources>
