@@ -16,7 +16,7 @@
             android:layout_height="370dp"
             android:scrollY="3dp"
             android:translationZ="5dp"
-            android:background="@mipmap/back1">
+            android:background="@mipmap/back2">
 
             <LinearLayout
                 android:id="@+id/today_forecast_top"
@@ -73,7 +73,7 @@
                     <TextView
                         android:id="@+id/today_forecast_description_text"
                         tools:text="lluvias dispersas"
-                        android:textSize="22sp"
+                        android:textSize="24sp"
                         android:textColor="#fff"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
