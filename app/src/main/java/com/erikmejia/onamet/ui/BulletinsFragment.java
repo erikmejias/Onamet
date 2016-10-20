@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import com.erikmejia.onamet.R;
 import com.erikmejia.onamet.model.Bulletin;
 import com.erikmejia.onamet.model.BulletinsAdapter;
-import com.erikmejia.onamet.model.NewsAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +24,6 @@ import java.util.List;
 
 public class BulletinsFragment extends Fragment {
 
-    private String[] demoData;
     private List<Bulletin> bulletins;
 
     public BulletinsFragment() {
@@ -36,10 +34,6 @@ public class BulletinsFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //        DEMO DATA for future forecasts
-        demoData = new String[]{"today", "tomorrow", "Marcell", "Cindy",
-                "MacBook Pro", "Alvin", "Eduardo", "Brayan", "Jorge", "Joel",
-                "Jeissy", "David", "Daniel", "Fausto"};
 
         loadDemoData();
     }
@@ -54,7 +48,10 @@ public class BulletinsFragment extends Fragment {
         RecyclerView bulletinsList = (RecyclerView)
                 rootView.findViewById(R.id.bulletins_recyler_list);
         bulletinsList.setHasFixedSize(true);
-        bulletinsList.setLayoutManager(new LinearLayoutManager(container.getContext()));
+
+        if (container != null) {
+            bulletinsList.setLayoutManager(new LinearLayoutManager(container.getContext()));
+        }
 
         BulletinsAdapter bulletinsAdapter = new BulletinsAdapter(bulletins);
         bulletinsList.setAdapter(bulletinsAdapter);
@@ -64,7 +61,7 @@ public class BulletinsFragment extends Fragment {
 
     public void loadDemoData() {
 //        Initialize a forecast objects holder.
-        bulletins = new ArrayList<Bulletin>();
+        bulletins = new ArrayList<>();
 
         Bulletin bulletin = new Bulletin("Peligro de extensiones de agua",
                 "Lorem ipsum dolor sit amet. Ip dolor ipsum lot of trouble sitting in the dinning table of Frank Abagnale Jr. " +

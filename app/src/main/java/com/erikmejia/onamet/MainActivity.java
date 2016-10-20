@@ -1,18 +1,13 @@
 package com.erikmejia.onamet;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -20,20 +15,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.erikmejia.onamet.model.ForecastAdapter;
 import com.erikmejia.onamet.ui.BulletinsFragment;
 import com.erikmejia.onamet.ui.ForecastFragment;
-import com.erikmejia.onamet.ui.NewsFragment;
 import com.erikmejia.onamet.ui.SettingsActivity;
 import com.erikmejia.onamet.util.PageTransformer;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,33 +31,17 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private static final String TAG = MainActivity.class.getSimpleName();
     // Firebase Database Object
     /* Firebase References to objects of the Realtime database. */
-    private DatabaseReference azuaReference;
+//    private DatabaseReference azuaReference;
 
-    private DrawerLayout drawerLayout;
-    private ListView drawerList;
+//    private DrawerLayout drawerLayout;
 
-    public TextView cityName;
-    public TextView minTemp;
-    public TextView maxTemp;
-    public TextView night_temp;
-    public TextView speed;
-    public TextView pressure;
-    public TextView humidity;
-    public TextView clouds;
-    public TextView rain;
-    public TextView degrees;
-    public TextView weather_description;
-
-    private Toolbar toolbar;
-    private ViewPager viewPager;
-    private TabLayout tabLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
 //        Cache data to local disk ( OFFLINE SUPPORT ).
@@ -78,11 +49,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
 //        azuaReference= FirebaseDatabase.getInstance().getReference("/demo");
 
-        viewPager = (ViewPager) findViewById(R.id.viewpager);
+        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
         viewPager.setPageTransformer(true, new PageTransformer());
         setViewPager(viewPager);
 
-        tabLayout = (TabLayout) findViewById(R.id.tabs);
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
 
     }
@@ -152,7 +123,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         private final List<Fragment> mFragmentList = new ArrayList<>();
         private final List<String> mFragmentTitleList = new ArrayList<>();
 
-        public ViewPagerAdapter(FragmentManager fm) {
+        ViewPagerAdapter(FragmentManager fm) {
             super(fm);
         }
 
@@ -166,7 +137,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             return mFragmentList.size();
         }
 
-        public void addFragment(Fragment fragment, String title) {
+        void addFragment(Fragment fragment, String title) {
             mFragmentList.add(fragment);
             mFragmentTitleList.add(title);
         }

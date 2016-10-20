@@ -1,8 +1,6 @@
 package com.erikmejia.onamet.ui;
 
-import android.graphics.Color;
 import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,22 +10,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.erikmejia.onamet.R;
 import com.erikmejia.onamet.model.Forecast;
 import com.erikmejia.onamet.model.ForecastAdapter;
 import com.erikmejia.onamet.util.Utils;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.NativeExpressAdView;
-import com.google.firebase.database.FirebaseDatabase;
-import com.thbs.skycons.library.CloudView;
-import com.thbs.skycons.library.SunView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,10 +27,9 @@ import java.util.List;
  * Fragment responsible of displaying main forecast information.
  */
 
-public class ForecastFragment extends Fragment implements AdapterView.OnItemSelectedListener{
+public class ForecastFragment extends Fragment{
     private static String TAG = ForecastFragment.class.getSimpleName();
 
-    private String[] demoData;
     private List<Forecast> forecastsData;
 
     public ForecastFragment() {
@@ -51,11 +39,6 @@ public class ForecastFragment extends Fragment implements AdapterView.OnItemSele
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        //        DEMO DATA for future forecastster
-        demoData = new String[]{"today", "tomorrow", "Marcell", "Cindy",
-                "MacBook Pro", "Alvin", "Eduardo", "Brayan", "Jorge", "Joel",
-                "Jeissy", "David", "Daniel", "Fausto"};
 
         loadDemoData();
         Log.d(TAG, "onCreate: created " + forecastsData.size() + " forecasts entries");
@@ -70,9 +53,12 @@ public class ForecastFragment extends Fragment implements AdapterView.OnItemSele
 
         /*Spinner spinner = (Spinner) rootView.findViewById(R.id.provinces_spinner);
         spinner.setOnItemSelectedListener(this);*/
-        ArrayAdapter<CharSequence> provincesAdapter = ArrayAdapter.createFromResource(
-                container.getContext(), R.array.provinces_array, R.layout.spinner_province_item);
-        provincesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        ArrayAdapter<CharSequence> provincesAdapter = null;
+//        if (container != null) {
+//            provincesAdapter = ArrayAdapter.createFromResource(
+//                    container.getContext(), R.array.provinces_array, R.layout.spinner_province_item);
+//        }
+//        provincesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
 //        spinner.setAdapter(provincesAdapter);
 
@@ -84,7 +70,10 @@ public class ForecastFragment extends Fragment implements AdapterView.OnItemSele
         RecyclerView forecastList = (RecyclerView)
                 rootView.findViewById(R.id.future_forecast_recycler_list);
         forecastList.setHasFixedSize(true);
-        forecastList.setLayoutManager(new LinearLayoutManager(container.getContext()));
+
+        if (container != null) {
+            forecastList.setLayoutManager(new LinearLayoutManager(container.getContext()));
+        }
 
         ForecastAdapter forecastsAdapter = new ForecastAdapter(forecastsData);
         forecastList.setAdapter(forecastsAdapter);
@@ -101,7 +90,7 @@ public class ForecastFragment extends Fragment implements AdapterView.OnItemSele
 
     public void loadDemoData() {
 //        Initialize a forecast objects holder.
-        forecastsData = new ArrayList<Forecast>();
+        forecastsData = new ArrayList<>();
 
         /*for (int i = 0; i < 5; i++) {
             Forecast forecast = new Forecast(
@@ -112,8 +101,8 @@ public class ForecastFragment extends Fragment implements AdapterView.OnItemSele
             forecastsData.add(forecast);
         }*/
         Forecast forecast = new Forecast(
-                "25º", "23º", "23 m/s", "33%", "6:35 AM", "7:22 PM", "La Romana", "234,134 habitantes",
-                "lluvias dispersas", "3923.454", "354.223", "34 NE", "Hoy", 5
+                "25º", "23º", "23 m/s", "33%", "6:35 AM", "7:22 PM", "Punta Cana", "234,134 habitantes",
+                "lluvias intensas", "3923.454", "354.223", "34 NE", "Hoy", 3
         );
 
         Forecast forecast1 = new Forecast(
@@ -197,9 +186,6 @@ public class ForecastFragment extends Fragment implements AdapterView.OnItemSele
 
     private void loadTodayData(View rootView) {
 
-        View todayForecast_layout = rootView.findViewById(R.id.today_forecast_layout);
-//        todayForecast_layout.getBackground().setAlpha(190);
-
 //        Custom font
         Typeface font_thin = Typeface.createFromAsset(getActivity().getAssets(),
                 "fonts/Brandon_thin.otf");
@@ -220,8 +206,6 @@ public class ForecastFragment extends Fragment implements AdapterView.OnItemSele
 //        cloudView.setStrokeColor(Color.WHITE);
 //        icon_wrapper.addView(cloudView);
 
-        icon_wrapper.setMinimumHeight(1700);
-        icon_wrapper.setMinimumWidth(1700);
         Utils.setAnimatedIcon(icon_wrapper, todayForecast.getIconId(), getContext());
 
 //        SunView sunView = (SunView) rootView.findViewById(R.id.today_forecast_icon_item);
@@ -253,18 +237,5 @@ public class ForecastFragment extends Fragment implements AdapterView.OnItemSele
         sunrise.setText(todayForecast.getSunrise_time());
         sunset.setText(todayForecast.getSunset_time());
         maxTemperature.setText(todayForecast.getMax());
-    }
-
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        String selectedProvince = parent.getItemAtPosition(position).toString();
-        Log.d(TAG, "onItemSelected: " + selectedProvince);
-        Toast.makeText(getContext(), selectedProvince, Toast.LENGTH_SHORT).show();
-
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
     }
 }
