@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Onamet</string>
     <string name="notification_prefs_title">Notificaciones</string>
-    <string name="notification_prefs_summary">Habilitar notificaciones instantáneas</string>
+    <string name="notification_prefs_summary">Habilitar notificaciones instantáneas para los boletines</string>
     <string name="acc_prefs_sync">Configurar cuenta</string>
     <string name="about_prefs_title">Acerca de Onamet</string>
     <string name="about_dev_prefs_title">Acerca del desarrollador</string>
@@ -10,6 +10,13 @@
     <string name="settings">Configuración</string>
     <string name="maps">Maps</string>
     <string name="title_activity_maps">Map</string>
+    <string name="pref_help_title">Ayuda</string>
+    <string name="pref_help_summary">Preguntas frecuentes sobre la información brindada</string>
+    <string name="pref_dev_summary">Información de contacto del desarrollador</string>
+    <string name="pref_account_summary">Iniciar sesión para guardar mis preferencias</string>
+    <string name="pref_sms_summary">Verificar SMS para recibir alertas en caso que pierda acceso a internet</string>
+    <string name="pref_other_title">Otro</string>
+    <string name="pref_account_title">Cuenta</string>
 
     <!-- DEMO DATA -->
 </resources>
