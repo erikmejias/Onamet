@@ -62,8 +62,6 @@ public class BulletinsFragment extends Fragment {
         BulletinsAdapter bulletinsAdapter = new BulletinsAdapter(bulletins, new OnBulletinItemClickListener() {
             @Override
             public void onItemClicked(Bulletin bulletinItem) {
-                Log.d(TAG, "onItemClicked: ");
-                Toast.makeText(getContext(), "opening bulletin item", Toast.LENGTH_SHORT).show();
                 Intent intent;
                 intent = new Intent(getContext(), BulletinsDetails.class);
                 startActivity(intent);

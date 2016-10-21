@@ -83,7 +83,6 @@ public class ForecastFragment extends Fragment{
         ForecastAdapter forecastsAdapter = new ForecastAdapter(forecastsData, new OnForecastItemClickListener() {
             @Override
             public void onItemClicked(Forecast forecastItem) {
-                Toast.makeText(getContext(), "forecast clicked", Toast.LENGTH_SHORT).show();
                 Intent intent;
                 intent = new Intent(getContext(), ForecastDetails.class);
                 startActivity(intent);
@@ -212,6 +211,8 @@ public class ForecastFragment extends Fragment{
 
         LinearLayout icon_wrapper = (LinearLayout) rootView.findViewById(R.id.today_forecast_icon);
 
+        View todayForecastWrapper = rootView.findViewById(R.id.today_forecast_layout);
+
 
 //        params.width = 550;
 //        params.height = 550;
@@ -250,5 +251,14 @@ public class ForecastFragment extends Fragment{
         sunrise.setText(todayForecast.getSunrise_time());
         sunset.setText(todayForecast.getSunset_time());
         maxTemperature.setText(todayForecast.getMax());
+
+        todayForecastWrapper.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent;
+                intent = new Intent(getContext(), ForecastDetails.class);
+                startActivity(intent);
+            }
+        });
     }
 }
