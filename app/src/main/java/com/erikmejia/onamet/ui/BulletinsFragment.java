@@ -1,17 +1,21 @@
 package com.erikmejia.onamet.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.erikmejia.onamet.R;
 import com.erikmejia.onamet.model.Bulletin;
 import com.erikmejia.onamet.model.BulletinsAdapter;
+import com.erikmejia.onamet.model.OnBulletinItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +27,8 @@ import java.util.List;
  */
 
 public class BulletinsFragment extends Fragment {
+
+    private static final String TAG = BulletinsFragment.class.getSimpleName();
 
     private List<Bulletin> bulletins;
 
@@ -53,7 +59,16 @@ public class BulletinsFragment extends Fragment {
             bulletinsList.setLayoutManager(new LinearLayoutManager(container.getContext()));
         }
 
-        BulletinsAdapter bulletinsAdapter = new BulletinsAdapter(bulletins);
+        BulletinsAdapter bulletinsAdapter = new BulletinsAdapter(bulletins, new OnBulletinItemClickListener() {
+            @Override
+            public void onItemClicked(Bulletin bulletinItem) {
+                Log.d(TAG, "onItemClicked: ");
+                Toast.makeText(getContext(), "opening bulletin item", Toast.LENGTH_SHORT).show();
+                Intent intent;
+                intent = new Intent(getContext(), BulletinsDetails.class);
+                startActivity(intent);
+            }
+        });
         bulletinsList.setAdapter(bulletinsAdapter);
 
         return rootView;

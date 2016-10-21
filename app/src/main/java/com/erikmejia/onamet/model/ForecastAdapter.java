@@ -1,7 +1,6 @@
 package com.erikmejia.onamet.model;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -14,18 +13,6 @@ import android.widget.TextView;
 
 import com.erikmejia.onamet.R;
 import com.erikmejia.onamet.util.Utils;
-import com.thbs.skycons.library.Cloud;
-import com.thbs.skycons.library.CloudFogView;
-import com.thbs.skycons.library.CloudHvRainView;
-import com.thbs.skycons.library.CloudMoonView;
-import com.thbs.skycons.library.CloudRainView;
-import com.thbs.skycons.library.CloudSunView;
-import com.thbs.skycons.library.CloudThunderView;
-import com.thbs.skycons.library.CloudView;
-import com.thbs.skycons.library.MoonView;
-import com.thbs.skycons.library.SkyconView;
-import com.thbs.skycons.library.SunView;
-import com.thbs.skycons.library.WindView;
 
 import java.util.List;
 
@@ -40,12 +27,10 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.ViewHo
     private Typeface font_thin;
     private Typeface font_reg;
     private Typeface font_bold;
-    private Context context;
-    private OnItemClickListener listener;
+    private OnForecastItemClickListener listener;
 
-    private LinearLayout.LayoutParams params;
 
-    public ForecastAdapter(List<Forecast> receivedData, OnItemClickListener listener){
+    public ForecastAdapter(List<Forecast> receivedData, OnForecastItemClickListener listener){
         this.dataset = receivedData;
         this.listener = listener;
         Log.d(TAG, "ForecastAdapter: " + dataset.size());
@@ -59,10 +44,6 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.ViewHo
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.forecast_item,
                 parent, false);
 
-
-        context = parent.getContext();
-        params = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
         font_thin = Typeface.createFromAsset(parent.getContext().getAssets(),
                 "fonts/Brandon_thin.otf");
@@ -123,7 +104,7 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.ViewHo
             itemView.setClickable(true);
         }
 
-        public void bind(final Forecast forecastItem, final OnItemClickListener listener) {
+        public void bind(final Forecast forecastItem, final OnForecastItemClickListener listener) {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.erikmejia.onamet.R;
 import com.erikmejia.onamet.util.Utils;
@@ -22,6 +23,7 @@ public class BulletinsAdapter extends RecyclerView.Adapter<BulletinsAdapter.View
     private String TAG = ForecastAdapter.class.getSimpleName();
 
     private List<Bulletin> bulletins;
+    private OnBulletinItemClickListener listener;
     private String[] dataset;
     private String description = "Lorem ipsum dolor sit amet. Ip dolor ipsum lot of trouble " +
             "sitting in the dinning table of Frank Abagnale Jr. The Guy that almost break " +
@@ -30,8 +32,9 @@ public class BulletinsAdapter extends RecyclerView.Adapter<BulletinsAdapter.View
     private Typeface font_reg;
     private Typeface font_bold;
 
-    public BulletinsAdapter(List<Bulletin> receivedData){
-        bulletins = receivedData;
+    public BulletinsAdapter(List<Bulletin> receivedData, OnBulletinItemClickListener listener){
+        this.bulletins = receivedData;
+        this.listener = listener;
 
         Log.d(TAG, "BulletinsAdapter: " + receivedData.size());
     }
@@ -63,6 +66,8 @@ public class BulletinsAdapter extends RecyclerView.Adapter<BulletinsAdapter.View
         holder.title.setTypeface(font_bold);
         holder.description.setTypeface(font_reg);
         holder.date.setTypeface(font_thin);
+
+        holder.bind(bulletins.get(position), listener);
     }
 
     @Override
@@ -82,6 +87,17 @@ public class BulletinsAdapter extends RecyclerView.Adapter<BulletinsAdapter.View
             title = (TextView) itemView.findViewById(R.id.bulletins_title_text);
             description = (TextView) itemView.findViewById(R.id.bulletins_description_text);
             icon = (ImageView) itemView.findViewById(R.id.bulletin_icon);
+
+            itemView.setClickable(true);
+        }
+
+        public void bind(final Bulletin bulletinItem, final OnBulletinItemClickListener listener) {
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onItemClicked(bulletinItem);
+                }
+            });
         }
     }
 }

@@ -18,7 +18,7 @@ import android.widget.Toast;
 import com.erikmejia.onamet.R;
 import com.erikmejia.onamet.model.Forecast;
 import com.erikmejia.onamet.model.ForecastAdapter;
-import com.erikmejia.onamet.model.OnItemClickListener;
+import com.erikmejia.onamet.model.OnForecastItemClickListener;
 import com.erikmejia.onamet.util.Utils;
 
 import java.util.ArrayList;
@@ -80,7 +80,7 @@ public class ForecastFragment extends Fragment{
             forecastList.setLayoutManager(new LinearLayoutManager(container.getContext()));
         }
 
-        ForecastAdapter forecastsAdapter = new ForecastAdapter(forecastsData, new OnItemClickListener() {
+        ForecastAdapter forecastsAdapter = new ForecastAdapter(forecastsData, new OnForecastItemClickListener() {
             @Override
             public void onItemClicked(Forecast forecastItem) {
                 Toast.makeText(getContext(), "forecast clicked", Toast.LENGTH_SHORT).show();
