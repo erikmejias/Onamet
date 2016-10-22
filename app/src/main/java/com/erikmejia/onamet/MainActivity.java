@@ -25,6 +25,8 @@ import com.erikmejia.onamet.util.PageTransformer;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.erikmejia.onamet.util.PageTransformer.*;
+
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
@@ -50,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 //        azuaReference= FirebaseDatabase.getInstance().getReference("/demo");
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
-        viewPager.setPageTransformer(true, new PageTransformer());
+        viewPager.setPageTransformer(true, new PageTransformer(PageTransformer.TransformType.DEPTH));
         setViewPager(viewPager);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);

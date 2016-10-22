@@ -18,4 +18,8 @@
     <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">
         AIzaSyDvXBKTVszQ6LCaMdhgl_DYJNv5A7XQs50
     </string>
+
+    <string name="facebook_app_id" templateMergeStrategy="preserve" translatable="false">
+        134196063715265
+    </string>
 </resources>

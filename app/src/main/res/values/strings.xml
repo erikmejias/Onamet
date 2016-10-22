@@ -13,10 +13,27 @@
     <string name="pref_help_title">Ayuda</string>
     <string name="pref_help_summary">Preguntas frecuentes sobre la información brindada</string>
     <string name="pref_dev_summary">Información de contacto del desarrollador</string>
-    <string name="pref_account_summary">Iniciar sesión para guardar mis preferencias</string>
+    <string name="pref_account_summary">Iniciar sesión para configurar servicio de SMS</string>
     <string name="pref_sms_summary">Verificar SMS para recibir alertas en caso que pierda acceso a internet</string>
     <string name="pref_other_title">Otro</string>
     <string name="pref_account_title">Cuenta</string>
+    <string name="pref_account_key">pref_account_key</string>
 
+
+
+    <string name="pref_about_content">La Oficina Nacional de Meteorología (ONAMET) desde su creación como ente regulador de la investigación y producción de la información meteorológica ha experimentado un cambio continuo en lo relativo a su dependencia y calidad.
+De conformidad con el Decreto número 687, de fecha 23, del mes de marzo, del año mil novecientos treinta y tres (1933); mediante el cual se otorgó por primera vez a la entonces oficina meteorológica, la facultad de determinar diariamente la hora de las 12 meridiano. Esta oficina pertenecía en esos momentos a la secretaría de estado de agricultura y comercio bajo cuya dependencia permaneció hasta el año 1956.
+El Decreto número 2298, de fecha siete (7), del mes de diciembre del año mil novecientos cincuenta y seis (1956) establece el "Reglamento Orgánico del Servicio Meteorológico Nacional", elevando dicho organismo de Oficina Meteorológica, a Dirección Nacional y colocándola bajo la dependencia de la Secretaría de Estado de las Fuerzas Armadas. Dicho Decreto señala los organismos que regirán el servicio meteorológico nacional, siendo estos: La Dirección General y las estaciones de diversas ordenes instaladas en el país; asimismo, establece por primera vez cuales son las atribuciones de dicha institución.
+En el año 1958, por medio del Decreto número 388, se creo la Secretaría de Estado de Comunicaciones y Transporte, y mediante el mismo se traspasó a dicha secretaría el Servicio Meteorológico Nacional.
+Mediante el Decreto número 5406, se traspasó el servicio Meteorológico bajo la dependencia de la Secretaría de Estado de Obras Públicas.
+Siguiendo su traslado constante, el Servicio Meteorológico, regresa bajo la dependencia de la Secretaría de Estado de Agricultura, gracias al Decreto número 49, de fecha ocho (8), del mes de Septiembre del año 1965.
+Ya para el año 1966, mediante el Decreto 1142, de fecha 28, del mes de abril; se aprobó el reglamento orgánico del Ministerio de Agricultura, colocando el mismo a meteorología, como un departamento de dicha cartera.
+Luego de varios años de permanencia bajo la dependencia de la Secretaria de Agricultura; la institución meteorológica pasó a ser una dependencia del Secretario Técnico de la Presidencia, con el grado de Oficina Nacional de Meteorología (ONAMET); dicho cambio se produjo por el Decreto número 1838, de fecha 24, del mes de febrero del año 1984.
+El ultimo cambio que ha sufrido esta Oficina fue con el Decreto número 764-03, de fecha 12 del mes de agosto del año 2003, donde la Oficina Nacional de meteorologia pasa a ser una dependencia de la Dirección Nacional de Aeronáutica Civil hasta la fecha.</string>
+
+    <string name="about_onamet_title">Acerca de Onamet</string>
+    <string name="pref_notifications_title">Notificaciones</string>
+    <string name="signout">Cerrar sesión</string>
+    <string name="pref_account_signout_key">pref_account_signout_key</string>
     <!-- DEMO DATA -->
 </resources>

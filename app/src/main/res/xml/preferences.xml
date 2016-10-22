@@ -1,28 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <CheckBoxPreference
-        android:defaultValue="false"
-        android:title="@string/notification_prefs_title"
-        android:key="check_box_preference_1"
-        android:summary="@string/notification_prefs_summary" />
     <PreferenceCategory android:title="@string/pref_account_title">
         <Preference
             android:title="@string/acc_prefs_sync"
+            android:key="@string/pref_account_key"
             android:summary="@string/pref_account_summary"
+            />
+
+        <Preference
+            android:title="@string/signout"
+            android:key="@string/pref_account_signout_key"
+            android:enabled="false"
             />
 
         <Preference
             android:title="@string/sms_auth_prefs_title"
             android:summary="@string/pref_sms_summary"
+            android:dependency="@string/pref_account_key"
+            android:enabled="false"
             />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/pref_notifications_title">
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:title="@string/notification_prefs_title"
+            android:key="check_box_preference_1"
+            android:summary="@string/notification_prefs_summary" />
+
 
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/pref_other_title">
 
         <Preference
-            android:title="@string/about_prefs_title"/>
+            android:title="@string/about_prefs_title">
+
+            <intent android:targetPackage="com.erikmejia.onamet"
+                android:targetClass="com.erikmejia.onamet.ui.AboutActivity"/>
+
+        </Preference>
 
         <Preference
             android:title="@string/terms_use_prefs_title"/>
@@ -33,8 +53,12 @@
 
         <Preference
             android:title="@string/about_dev_prefs_title"
-            android:summary="@string/pref_dev_summary"
-            />
+            android:summary="@string/pref_dev_summary">
+
+            <intent android:action="android.intent.action.VIEW"
+                android:data="https://www.erikmejia.com" />
+
+        </Preference>
 
     </PreferenceCategory>
 </PreferenceScreen>

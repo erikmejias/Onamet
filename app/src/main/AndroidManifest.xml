@@ -55,8 +55,14 @@
         </activity>
         <activity
             android:name=".ui.ForecastDetails"
-            android:parentActivityName=".MainActivity"></activity>
-        <activity android:name=".ui.BulletinsDetails"></activity>
+            android:parentActivityName=".MainActivity" />
+
+        <activity android:name=".ui.BulletinsDetails" />
+
+        <activity
+            android:name=".ui.AboutActivity"
+            android:label="@string/about_onamet_title"
+            android:parentActivityName=".ui.SettingsActivity"/>
     </application>
 
 </manifest>
