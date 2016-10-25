@@ -113,8 +113,8 @@ public class ForecastFragment extends Fragment{
             forecastsData.add(forecast);
         }*/
         Forecast forecast = new Forecast(
-                "25º", "23º", "23 m/s", "33%", "6:35 AM", "7:22 PM", "Punta Cana", "234,134 habitantes",
-                "lluvias intensas", "3923.454", "354.223", "34 NE", "Hoy", 3
+                "25º", "23º", "23 m/s", "33%", "6:35 AM", "7:22 PM", "La Romana", "234,134 habitantes",
+                "cielo nublado", "3923.454", "354.223", "34 NE", "Hoy", 4
         );
 
         Forecast forecast1 = new Forecast(
