@@ -29,6 +29,8 @@ import java.util.List;
 
 import com.erikmejia.onamet.util.PageTransformer.*;
 
+import static com.erikmejia.onamet.R.layout.activity_main;
+
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
@@ -43,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(activity_main);
 
 
         /*
