@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -54,6 +55,9 @@ public class ForecastFragment extends Fragment{
 
         View rootView = inflater.inflate(R.layout.forecasts_layout, container, false);
 
+//        TODO - Fix alpha property issue in today's forecast background image
+//        rootView.findViewById(R.id.today_forecast_frame).getBackground().setAlpha(140);
+
         /*Spinner spinner = (Spinner) rootView.findViewById(R.id.provinces_spinner);
         spinner.setOnItemSelectedListener(this);*/
 //        ArrayAdapter<CharSequence> provincesAdapter = null;
@@ -69,7 +73,9 @@ public class ForecastFragment extends Fragment{
 //        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
 
 //        azuaReference= FirebaseDatabase.getInstance().getReference("/demo");
+
         loadTodayData(rootView);
+
         RecyclerView forecastList = (RecyclerView)
                 rootView.findViewById(R.id.future_forecast_recycler_list);
         forecastList.setHasFixedSize(true);
@@ -211,7 +217,10 @@ public class ForecastFragment extends Fragment{
 
         LinearLayout icon_wrapper = (LinearLayout) rootView.findViewById(R.id.today_forecast_icon);
 
-        View todayForecastWrapper = rootView.findViewById(R.id.today_forecast_layout);
+        View todayForecastWrapper = rootView.findViewById(R.id.today_forecast_frame);
+
+//        Setting alpha transparent to today forecast background image.
+//        rootView.findViewById(R.id.activity_main).getBackground().setAlpha(140);
 
 
 //        params.width = 550;

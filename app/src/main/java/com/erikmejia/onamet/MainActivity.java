@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     SharedPreferences.Editor e = getPrefs.edit();
 
                     //  Edit preference to make it false because we don't want this to run again
-//                    e.putBoolean("firstStart", false);
+                    e.putBoolean("firstStart", false);
 
                     //  Apply changes
                     e.apply();
