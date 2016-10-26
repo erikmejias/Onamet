@@ -42,4 +42,31 @@ El ultimo cambio que ha sufrido esta Oficina fue con el Decreto número 764-03, 
     <string name="slide_3_text">Slide 3</string>
     <string name="slide_4_text">Slide 4</string>
     <!-- DEMO DATA -->
+
+    <!-- OnBoarding -->
+
+    <string name="welcome_onamet">Bienvenido a Onamet</string>
+    <string name="welcome_onamet_description">
+        Con esta aplicación podrás estar al tanto de toda la información meteorológica directamente
+        de la Oficina Nacional de Meteorología
+    </string>
+    <string name="welcome_daily_forecasts">Pronósticos Diarios</string>
+    <string name="welcome_daily_forecasts_description">
+        Recibes estado del clima para los próximos 13 días y no permitas que el clima te atrape
+        desprevenido
+    </string>
+    <string name="welcome_bulletins">
+        Boletines Oficiales
+    </string>
+    <string name="welcome_bulletins_description">
+        Los boletines oficiales al instante, para que estés al tanto de lo último y puedas estar
+        preparado ante cualquier evento meteorológico
+    </string>
+    <string name="welcome_no_internet">
+        Aunque no tengas Internet
+    </string>
+    <string name="welcome_no_internet_description">
+        Recibiras boletines de emergencia en mensajes de texto por si no tienes Internet, necesitas
+        iniciar sesión para habilitarlo
+    </string>
 </resources>

@@ -2,12 +2,44 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.erikmejia.onamet.ui.IntroFragmentFour">
+    android:background="@mipmap/welcome4">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/slide_4_text" />
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/welcome_title_text"
+            android:textColor="@color/white"
+            android:layout_marginTop="60dp"
+            android:textSize="30sp"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/welcome_no_internet" />
+
+        <ImageView
+            android:id="@+id/welcome_image"
+            android:layout_marginTop="100dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/weather_storm_night"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_marginTop="140dp"
+            android:lineSpacingExtra="-5dp"
+            android:textSize="22sp"
+            android:padding="5dp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/welcome_no_internet_description"
+            android:id="@+id/welcome_description_text" />
+
+    </LinearLayout>
 
 </FrameLayout>
