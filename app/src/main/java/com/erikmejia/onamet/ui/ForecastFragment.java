@@ -93,7 +93,7 @@ public class ForecastFragment extends Fragment{
                 intent = new Intent(getContext(), ForecastDetails.class);
                 startActivity(intent);
             }
-        });
+        }, getContext());
         forecastList.setAdapter(forecastsAdapter);
 
         /*NativeExpressAdView adView = (NativeExpressAdView) rootView.findViewById(R.id.forecastAd);

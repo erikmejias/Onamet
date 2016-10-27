@@ -563,7 +563,7 @@
             android:id="@+id/forecast_details_ad_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            ads:adUnitId="ca-app-pub-6005843157698202/8693189978"
+            ads:adUnitId="@string/ads_test"
             ads:adSize="410x132">
         </com.google.android.gms.ads.NativeExpressAdView>
 
