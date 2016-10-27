@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:ads="http://schemas.android.com/apk/res-auto">
 
     <!-- Upper Section -->
 
@@ -12,9 +13,9 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:id="@+id/forecast_details_layout"
-        android:background="@mipmap/back2"
+        android:background="@mipmap/welcome1"
         android:layout_width="match_parent"
-        android:layout_height="300dp">
+        android:layout_height="420dp">
 
         <LinearLayout
             android:id="@+id/today_forecast_top"
@@ -23,7 +24,7 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/city_name_text"
+                android:id="@+id/forecast_details_city_name"
                 android:text="La Romana"
                 android:textSize="30sp"
                 android:textColor="@color/white"
@@ -65,10 +66,11 @@
                     android:layout_height="wrap_content" />
 
                 <TextView
-                    android:id="@+id/today_forecast_description_text"
+                    android:id="@+id/forecast_details_description"
                     android:text="lluvias dispersas"
                     android:textSize="24sp"
                     android:textColor="#fff"
+                    android:layout_marginTop="20dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
@@ -92,19 +94,246 @@
 
         </LinearLayout>
 
+        <HorizontalScrollView
+            android:orientation="horizontal"
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/today_forecast_upper"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        app:srcCompat="@drawable/weather_clear"/>
+
+                    <TextView
+                        android:id="@+id/forecast_details_six_am"
+                        android:text="@string/_06_00"
+                        android:gravity="center"
+                        android:lineSpacingExtra="-8dp"
+                        android:textSize="20sp"
+                        android:textColor="@color/white"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        app:srcCompat="@drawable/weather_clear"/>
+
+                    <TextView
+                        android:id="@+id/forecast_details_eight_am"
+                        android:text="@string/_08_00"
+                        android:gravity="center"
+                        android:lineSpacingExtra="-8dp"
+                        android:textSize="20sp"
+                        android:textColor="@color/white"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        app:srcCompat="@drawable/weather_clear"/>
+
+                    <TextView
+                        android:id="@+id/forecast_details_ten_am"
+                        android:text="@string/_10_00"
+                        android:gravity="center"
+                        android:lineSpacingExtra="-8dp"
+                        android:textSize="20sp"
+                        android:textColor="@color/white"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        app:srcCompat="@drawable/weather_clouds"/>
+
+                    <TextView
+                        android:id="@+id/forecast_details_twuelve_pm"
+                        android:text="@string/_12_00"
+                        android:gravity="center"
+                        android:lineSpacingExtra="-8dp"
+                        android:textSize="20sp"
+                        android:textColor="@color/white"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        app:srcCompat="@drawable/weather_fog"/>
+
+                    <TextView
+                        android:id="@+id/forecast_details_two_pm"
+                        android:text="@string/_02_00"
+                        android:gravity="center"
+                        android:lineSpacingExtra="-8dp"
+                        android:textSize="20sp"
+                        android:textColor="@color/white"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        app:srcCompat="@drawable/weather_rain_day"/>
+
+                    <TextView
+                        android:id="@+id/forecast_details_four_pm"
+                        android:text="@string/_04_00"
+                        android:gravity="center"
+                        android:lineSpacingExtra="-8dp"
+                        android:textSize="20sp"
+                        android:textColor="@color/white"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        app:srcCompat="@drawable/weather_big_snow"/>
+
+                    <TextView
+                        android:id="@+id/forecast_details_six_pm"
+                        android:text="@string/_06_00"
+                        android:gravity="center"
+                        android:lineSpacingExtra="-8dp"
+                        android:textSize="20sp"
+                        android:textColor="@color/white"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        app:srcCompat="@drawable/weather_clear"/>
+
+                    <TextView
+                        android:id="@+id/forecast_details_eight_pm"
+                        android:text="@string/_08_00"
+                        android:gravity="center"
+                        android:lineSpacingExtra="-8dp"
+                        android:textSize="20sp"
+                        android:textColor="@color/white"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        app:srcCompat="@drawable/weather_few_clouds"/>
+
+                    <TextView
+                        android:id="@+id/forecast_details_ten_pm"
+                        android:text="@string/_10_00"
+                        android:gravity="center"
+                        android:lineSpacingExtra="-8dp"
+                        android:textSize="20sp"
+                        android:textColor="@color/white"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        app:srcCompat="@drawable/weather_clear_night"/>
+
+                    <TextView
+                        android:id="@+id/forecast_details_twuelve_am"
+                        android:text="@string/_12_00"
+                        android:gravity="center"
+                        android:lineSpacingExtra="-8dp"
+                        android:textSize="20sp"
+                        android:textColor="@color/white"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </HorizontalScrollView>
+
     </RelativeLayout>
 
     <!-- Middle Horizontal Scroll -->
 
-    <HorizontalScrollView
+    <!--<HorizontalScrollView
         android:id="@+id/forecast_details_horizontal_hourly"
         android:orientation="horizontal"
-        android:layout_below="@id/forecast_details_layout"
-        android:background="@color/colorPrimary"
         android:paddingTop="30dp"
         android:paddingBottom="30dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/forecast_details_layout"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -121,11 +350,12 @@
                     app:srcCompat="@drawable/weather_clear"/>
 
                 <TextView
-                    android:text="06:00"
+                    android:id="@+id/forecast_details_six_am"
+                    android:text="@string/_06_00"
                     android:gravity="center"
                     android:lineSpacingExtra="-8dp"
                     android:textSize="20sp"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -141,11 +371,12 @@
                     app:srcCompat="@drawable/weather_clear"/>
 
                 <TextView
-                    android:text="08:00"
+                    android:id="@+id/forecast_details_eight_am"
+                    android:text="@string/_08_00"
                     android:gravity="center"
                     android:lineSpacingExtra="-8dp"
                     android:textSize="20sp"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -161,11 +392,12 @@
                     app:srcCompat="@drawable/weather_clear"/>
 
                 <TextView
-                    android:text="10:00"
+                    android:id="@+id/forecast_details_ten_am"
+                    android:text="@string/_10_00"
                     android:gravity="center"
                     android:lineSpacingExtra="-8dp"
                     android:textSize="20sp"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -181,11 +413,12 @@
                     app:srcCompat="@drawable/weather_clouds"/>
 
                 <TextView
-                    android:text="12:00"
+                    android:id="@+id/forecast_details_twuelve_pm"
+                    android:text="@string/_12_00"
                     android:gravity="center"
                     android:lineSpacingExtra="-8dp"
                     android:textSize="20sp"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -201,11 +434,12 @@
                     app:srcCompat="@drawable/weather_fog"/>
 
                 <TextView
-                    android:text="02:00"
+                    android:id="@+id/forecast_details_two_pm"
+                    android:text="@string/_02_00"
                     android:gravity="center"
                     android:lineSpacingExtra="-8dp"
                     android:textSize="20sp"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -221,11 +455,12 @@
                     app:srcCompat="@drawable/weather_rain_day"/>
 
                 <TextView
-                    android:text="04:00"
+                    android:id="@+id/forecast_details_four_pm"
+                    android:text="@string/_04_00"
                     android:gravity="center"
                     android:lineSpacingExtra="-8dp"
                     android:textSize="20sp"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -241,11 +476,12 @@
                     app:srcCompat="@drawable/weather_big_snow"/>
 
                 <TextView
-                    android:text="06:00"
+                    android:id="@+id/forecast_details_six_pm"
+                    android:text="@string/_06_00"
                     android:gravity="center"
                     android:lineSpacingExtra="-8dp"
                     android:textSize="20sp"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -261,11 +497,12 @@
                     app:srcCompat="@drawable/weather_clear"/>
 
                 <TextView
-                    android:text="08:00"
+                    android:id="@+id/forecast_details_eight_pm"
+                    android:text="@string/_08_00"
                     android:gravity="center"
                     android:lineSpacingExtra="-8dp"
                     android:textSize="20sp"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -281,11 +518,12 @@
                     app:srcCompat="@drawable/weather_few_clouds"/>
 
                 <TextView
-                    android:text="10:00"
+                    android:id="@+id/forecast_details_ten_pm"
+                    android:text="@string/_10_00"
                     android:gravity="center"
                     android:lineSpacingExtra="-8dp"
                     android:textSize="20sp"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -301,46 +539,48 @@
                     app:srcCompat="@drawable/weather_clear_night"/>
 
                 <TextView
-                    android:text="12:00"
+                    android:id="@+id/forecast_details_twuelve_am"
+                    android:text="@string/_12_00"
                     android:gravity="center"
                     android:lineSpacingExtra="-8dp"
                     android:textSize="20sp"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
         </LinearLayout>
 
-    </HorizontalScrollView>
+    </HorizontalScrollView>-->
 
     <LinearLayout
         android:id="@+id/forecast_details_ad"
-        android:layout_below="@id/forecast_details_horizontal_hourly"
-        android:background="@color/colorAccent"
+        android:layout_below="@id/forecast_details_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:text="AD GOES HERE"
-            android:textColor="@color/white"
-            android:textSize="30sp"
-            android:gravity="center"
+        <com.google.android.gms.ads.NativeExpressAdView
+            android:id="@+id/forecast_details_ad_content"
             android:layout_width="match_parent"
-            android:layout_height="120dp" />
+            android:layout_height="match_parent"
+            ads:adUnitId="ca-app-pub-6005843157698202/8693189978"
+            ads:adSize="410x132">
+        </com.google.android.gms.ads.NativeExpressAdView>
 
     </LinearLayout>
 
     <!-- Bottom Section-->
 
     <LinearLayout
-        android:background="@color/material_lime_a700"
-        android:id="@+id/today_forecast_bottom"
+        android:background="@color/gray"
         android:layout_below="@id/forecast_details_ad"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
+        android:id="@+id/today_forecast_bottom"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
         <LinearLayout
             android:orientation="vertical"
@@ -356,7 +596,7 @@
                 android:id="@+id/today_wind_icon"/>
 
             <TextView
-                android:id="@+id/today_wind_text"
+                android:id="@+id/forecast_details_wind_text"
                 android:text="4 m/s"
                 android:textSize="17sp"
                 android:textColor="#fff"
@@ -379,7 +619,7 @@
                 android:id="@+id/today_orientation_icon"/>
 
             <TextView
-                android:id="@+id/today_degrees_text"
+                android:id="@+id/forecast_details_degrees_text"
                 android:text="NE"
                 android:textSize="17sp"
                 android:textColor="#fff"
@@ -402,7 +642,7 @@
                 android:id="@+id/today_sunrise_icon"/>
 
             <TextView
-                android:id="@+id/today_sunrise_text"
+                android:id="@+id/forecast_details_sunrise_text"
                 android:text="6:35 AM"
                 android:textSize="17sp"
                 android:textColor="#fff"
@@ -426,7 +666,7 @@
                 android:id="@+id/today_sunset_icon"/>
 
             <TextView
-                android:id="@+id/today_sunset_text"
+                android:id="@+id/forecast_details_sunset_text"
                 android:text="7:10 PM"
                 android:textSize="17sp"
                 android:textColor="#fff"

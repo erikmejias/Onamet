@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#1A237E</color>
     <color name="colorAccent">#FF5252</color>
@@ -12,5 +13,9 @@
     <color name="material_green_a200">#69F0AE</color>
     <color name="material_lime_a700">#AEEA00</color>
     <color name="material_purple_a700">#AA00FF</color>
+
     <color name="white">#fff</color>
+    <color name="black">#2a2a2b</color>
+    <color name="gray">#475566</color>
+
 </resources>
