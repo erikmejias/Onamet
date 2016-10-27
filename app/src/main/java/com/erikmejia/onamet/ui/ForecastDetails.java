@@ -27,6 +27,13 @@ public class ForecastDetails extends AppCompatActivity {
 
         adView = (NativeExpressAdView) findViewById(R.id.forecast_details_ad_content);
 
+        adView.loadAd(
+                new AdRequest.Builder()
+                        .addTestDevice(AdRequest.DEVICE_ID_EMULATOR) // All emulators
+                        .addTestDevice("E0451870C934704914ACFF7D2E7F7F7F")
+                        .build()
+        ); // Load ad into the view
+
         changeTextFonts();
     }
 
@@ -97,10 +104,5 @@ public class ForecastDetails extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        adView.loadAd(
-                new AdRequest.Builder()
-                .addTestDevice("E0451870C934704914ACFF7D2E7F7F7F")
-                .build()
-        ); // Load ad into the view
     }
 }

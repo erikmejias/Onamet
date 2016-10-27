@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.erikmejia.onamet.util.PageTransformer.*;
+import com.google.android.gms.ads.MobileAds;
 
 import static com.erikmejia.onamet.R.layout.activity_main;
 
@@ -46,6 +47,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(activity_main);
+        MobileAds.initialize(getApplicationContext(), "ca-app-pub-6005843157698202~1566560378");
+
 
 
         /*

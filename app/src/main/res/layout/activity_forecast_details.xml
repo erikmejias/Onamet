@@ -13,7 +13,7 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:id="@+id/forecast_details_layout"
-        android:background="@mipmap/welcome1"
+        android:background="@mipmap/init_background"
         android:layout_width="match_parent"
         android:layout_height="420dp">
 
@@ -555,13 +555,14 @@
     <LinearLayout
         android:id="@+id/forecast_details_ad"
         android:layout_below="@id/forecast_details_layout"
+        android:background="@color/gray"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <com.google.android.gms.ads.NativeExpressAdView
             android:id="@+id/forecast_details_ad_content"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             ads:adUnitId="ca-app-pub-6005843157698202/8693189978"
             ads:adSize="410x132">
         </com.google.android.gms.ads.NativeExpressAdView>
