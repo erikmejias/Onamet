@@ -5,8 +5,10 @@ import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.erikmejia.onamet.R;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.NativeExpressAdView;
@@ -14,6 +16,9 @@ import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.concurrent.ExecutionException;
 
 public class ForecastDetails extends AppCompatActivity {
 
@@ -35,6 +40,8 @@ public class ForecastDetails extends AppCompatActivity {
         ); // Load ad into the view
 
         changeTextFonts();
+
+
     }
 
     public void changeTextFonts() {

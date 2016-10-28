@@ -594,7 +594,7 @@
                 android:layout_width="35dp"
                 android:layout_height="wrap_content"
                 app:srcCompat="@drawable/wind_pressure"
-                android:id="@+id/today_wind_icon"/>
+                android:id="@+id/forecast_details_wind_icon"/>
 
             <TextView
                 android:id="@+id/forecast_details_wind_text"

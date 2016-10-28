@@ -2,8 +2,10 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory android:title="@string/pref_account_title">
+
         <Preference
             android:title="@string/acc_prefs_sync"
+            android:icon="@drawable/unknown"
             android:key="@string/pref_account_key"
             android:summary="@string/pref_account_summary"
             />
@@ -16,6 +18,7 @@
 
         <Preference
             android:title="@string/sms_auth_prefs_title"
+            android:key="@string/pref_account_sms_key"
             android:summary="@string/pref_sms_summary"
             android:dependency="@string/pref_account_key"
             android:enabled="false"
