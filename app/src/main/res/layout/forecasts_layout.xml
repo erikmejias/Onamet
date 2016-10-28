@@ -20,7 +20,7 @@
 
         <FrameLayout
             android:id="@+id/today_forecast_frame"
-            android:background="@mipmap/back2"
+            android:background="@mipmap/m2"
             android:foreground="?android:selectableItemBackground"
             android:focusable="true"
             android:clickable="true"
@@ -250,16 +250,6 @@
             </android.support.v7.widget.RecyclerView>
 
         </LinearLayout>
-
-        <!--<com.google.android.gms.ads.NativeExpressAdView
-            android:layout_below="@id/future_forecast_layout"
-            android:id="@+id/forecastAd"
-            android:layout_centerHorizontal="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            ads:adUnitId="ca-app-pub-6005843157698202/3043293572"
-            ads:adSize="390x132">
-        </com.google.android.gms.ads.NativeExpressAdView>-->
 
 
 

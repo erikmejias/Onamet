@@ -13,7 +13,7 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:id="@+id/forecast_details_layout"
-        android:background="@mipmap/init_background"
+        android:background="@mipmap/m4"
         android:layout_width="match_parent"
         android:layout_height="420dp">
 
@@ -591,7 +591,7 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:layout_width="50dp"
+                android:layout_width="35dp"
                 android:layout_height="wrap_content"
                 app:srcCompat="@drawable/wind_pressure"
                 android:id="@+id/today_wind_icon"/>
@@ -614,7 +614,7 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:layout_width="50dp"
+                android:layout_width="35dp"
                 android:layout_height="wrap_content"
                 app:srcCompat="@drawable/wind_direction"
                 android:id="@+id/today_orientation_icon"/>
@@ -637,7 +637,7 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:layout_width="50dp"
+                android:layout_width="35dp"
                 android:layout_height="wrap_content"
                 app:srcCompat="@drawable/sunrise"
                 android:id="@+id/today_sunrise_icon"/>
@@ -661,7 +661,7 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:layout_width="50dp"
+                android:layout_width="35dp"
                 android:layout_height="wrap_content"
                 app:srcCompat="@drawable/sunset"
                 android:id="@+id/today_sunset_icon"/>

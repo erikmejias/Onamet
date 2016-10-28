@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/welcome1"
+    android:background="@mipmap/rt3"
     android:orientation="vertical">
 
 
@@ -24,9 +24,9 @@
         <ImageView
             android:layout_marginTop="100dp"
             android:layout_gravity="center"
-            android:src="@drawable/weather_rain_day"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:src="@drawable/windy_day"
+            android:layout_width="150dp"
+            android:layout_height="100dp" />
 
         <TextView
             android:layout_marginTop="140dp"

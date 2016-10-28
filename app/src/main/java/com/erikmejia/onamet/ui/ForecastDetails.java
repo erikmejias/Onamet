@@ -77,23 +77,24 @@ public class ForecastDetails extends AppCompatActivity {
         sunset = (TextView) findViewById(R.id.forecast_details_sunset_text);
 
         Typeface regTypeface = Typeface.createFromAsset(getAssets(), "fonts/Brandon_reg.otf");
-        Typeface thinTypeface = Typeface.createFromAsset(getAssets(), "fonts/Brandon_thin.otf");
+//        Typeface thinTypeface = Typeface.createFromAsset(getAssets(), "fonts/Brandon_thin.otf");
 
         cityName.setTypeface(regTypeface);
         maxTemperature.setTypeface(regTypeface);
         minTemperature.setTypeface(regTypeface);
         weatherDescription.setTypeface(regTypeface);
 
-        sixAM.setTypeface(thinTypeface);
-        eightAM.setTypeface(thinTypeface);
-        tenAM.setTypeface(thinTypeface);
-        twuelvePM.setTypeface(thinTypeface);
-        twoPM.setTypeface(thinTypeface);
-        fourPM.setTypeface(thinTypeface);
-        sixPM.setTypeface(thinTypeface);
-        eightPM.setTypeface(thinTypeface);
-        tenPM.setTypeface(thinTypeface);
-        twuelveAM.setTypeface(thinTypeface);
+        sixAM.setTypeface(regTypeface);
+        eightAM.setTypeface(regTypeface);
+        tenAM.setTypeface(regTypeface);
+        twuelvePM.setTypeface(regTypeface);
+        twoPM.setTypeface(regTypeface);
+        fourPM.setTypeface(regTypeface);
+        sixPM.setTypeface(regTypeface);
+        eightPM.setTypeface(regTypeface);
+        tenPM.setTypeface(regTypeface);
+        twuelveAM.setTypeface(regTypeface);
+
         windDirection.setTypeface(regTypeface);
         windSpeed.setTypeface(regTypeface);
         sunrise.setTypeface(regTypeface);

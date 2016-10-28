@@ -25,27 +25,27 @@ public class Utils {
     public static int bulletinIcon(int codeId) {
         switch (codeId){
             case 1:
-                return R.drawable.weather_big_snow;
+                return R.drawable.clear_day;
             case 2:
-                return R.drawable.weather_clear;
+                return R.drawable.cloudy_weather;
             case 3:
-                return R.drawable.weather_clear_night;
+                return R.drawable.mostly_cloudy;
             case 4:
-                return R.drawable.weather_clouds;
+                return R.drawable.rainy_day;
             case 5:
-                return R.drawable.weather_clouds_night;
+                return R.drawable.rainy_night;
             case 6:
-                return R.drawable.weather_fog;
+                return R.drawable.storm_weather;
             case 7:
-                return R.drawable.weather_hail;
+                return R.drawable.haze_day;
             case 8:
-                return R.drawable.weather_few_clouds;
+                return R.drawable.partly_cloudy;
             case 9:
-                return R.drawable.weather_haze;
+                return R.drawable.thunder_day;
             case 10:
-                return R.drawable.weather_showers_day;
+                return R.drawable.mostly_cloudy;
             default:
-                return R.drawable.weather_none_available;
+                return R.drawable.clear_day;
         }
     }
 

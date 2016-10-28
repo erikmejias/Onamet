@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/welcome3">
+    android:background="@mipmap/rt5">
 
 
     <LinearLayout
@@ -23,9 +23,9 @@
         <ImageView
             android:layout_marginTop="120dp"
             android:layout_gravity="center"
-            android:src="@drawable/weather_clear"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:src="@drawable/cloudy_weather"
+            android:layout_width="150dp"
+            android:layout_height="120dp" />
 
         <TextView
             android:layout_marginTop="140dp"

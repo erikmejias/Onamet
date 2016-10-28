@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/welcome4">
+    android:background="@mipmap/rt6">
 
 
     <LinearLayout
@@ -24,9 +24,9 @@
             android:id="@+id/welcome_image"
             android:layout_marginTop="100dp"
             android:layout_gravity="center_horizontal"
-            android:src="@drawable/weather_storm_night"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:src="@drawable/thunder_day"
+            android:layout_width="150dp"
+            android:layout_height="120dp" />
 
         <TextView
             android:layout_marginTop="140dp"

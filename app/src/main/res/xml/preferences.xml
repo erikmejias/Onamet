@@ -45,11 +45,16 @@
         </Preference>
 
         <Preference
-            android:title="@string/terms_use_prefs_title"/>
+            android:title="@string/contacts_prefs_title">
 
-        <Preference
+            <intent android:action="android.intent.action.VIEW"
+                android:data="http://www.onamet.gov.do/?param=contactos" />
+
+        </Preference>
+
+        <!--<Preference
             android:title="@string/pref_help_title"
-            android:summary="@string/pref_help_summary"/>
+            android:summary="@string/pref_help_summary"/>-->
 
         <Preference
             android:title="@string/about_dev_prefs_title"

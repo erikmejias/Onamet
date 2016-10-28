@@ -56,7 +56,6 @@ public class ForecastFragment extends Fragment{
         View rootView = inflater.inflate(R.layout.forecasts_layout, container, false);
 
 //        TODO - Fix alpha property issue in today's forecast background image
-//        rootView.findViewById(R.id.today_forecast_frame).getBackground().setAlpha(140);
 
         /*Spinner spinner = (Spinner) rootView.findViewById(R.id.provinces_spinner);
         spinner.setOnItemSelectedListener(this);*/

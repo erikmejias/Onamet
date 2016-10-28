@@ -156,6 +156,7 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.ViewHo
         }
     }
 
+//    TODO: Need to change algorithm for ads placements without compromising forecast items.
     @Override
     public int getItemViewType(int position) {
         if (position == 3)
