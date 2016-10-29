@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.preference.EditTextPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.support.annotation.NonNull;
@@ -39,9 +40,8 @@ public class SettingsFragment extends PreferenceFragment {
 
     private FirebaseAuth mAuth;
     private FirebaseUser user;
-    FirebaseAuth.AuthStateListener authStateListener;
     SimpleTarget target;
-    Preference smsPreference;
+    EditTextPreference smsPreference;
     Preference signOutPreference;
     Preference signInPreference;
 
@@ -66,7 +66,7 @@ public class SettingsFragment extends PreferenceFragment {
 //        Load the preference from an XML resource.
         addPreferencesFromResource(R.xml.preferences);
 
-        smsPreference = findPreference(getString(R.string.pref_account_sms_key));
+        smsPreference = (EditTextPreference) findPreference(getString(R.string.pref_account_sms_key));
 //        smsPreference.setEnabled(true);
 
         signInPreference = findPreference(getString(R.string.pref_account_key));
@@ -88,23 +88,7 @@ public class SettingsFragment extends PreferenceFragment {
             }
         });
 
-        /*authStateListener = new FirebaseAuth.AuthStateListener(){
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-
-                if (user != null) {
-//                            Already logged in
-                    Log.d(TAG, "onAuthStateChanged: logged as" + user.getDisplayName());
-                }
-                else {
-//                            User is signed out
-                }
-            }
-        };*/
-
         mAuth = FirebaseAuth.getInstance();
-        user = null;
 
         if (mAuth.getCurrentUser() != null){
             smsPreference.setEnabled(true);
@@ -134,8 +118,8 @@ public class SettingsFragment extends PreferenceFragment {
                 user = FirebaseAuth.getInstance().getCurrentUser();
                 smsPreference.setEnabled(true);
                 signOutPreference.setEnabled(true);
-                signInPreference.setTitle(user.getDisplayName());
-                signInPreference.setSummary("Has iniciado sesión");
+                signInPreference.setTitle(user.getEmail());
+                signInPreference.setSummary("Has iniciado sesión como " + user.getDisplayName());
 
                 Glide.with(getActivity())
                         .load(user.getPhotoUrl())

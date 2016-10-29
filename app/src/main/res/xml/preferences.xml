@@ -16,8 +16,12 @@
             android:enabled="false"
             />
 
-        <Preference
+        <EditTextPreference
             android:title="@string/sms_auth_prefs_title"
+            android:dialogTitle="Escribe tu número"
+            android:inputType="phone"
+            android:maxLength="10"
+            android:phoneNumber="true"
             android:key="@string/pref_account_sms_key"
             android:summary="@string/pref_sms_summary"
             android:dependency="@string/pref_account_key"
