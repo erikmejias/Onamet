@@ -41,7 +41,7 @@ public class SettingsFragment extends PreferenceFragment {
     private FirebaseAuth mAuth;
     private FirebaseUser user;
     SimpleTarget target;
-    EditTextPreference smsPreference;
+    Preference smsPreference;
     Preference signOutPreference;
     Preference signInPreference;
 
@@ -66,7 +66,7 @@ public class SettingsFragment extends PreferenceFragment {
 //        Load the preference from an XML resource.
         addPreferencesFromResource(R.xml.preferences);
 
-        smsPreference = (EditTextPreference) findPreference(getString(R.string.pref_account_sms_key));
+        smsPreference = findPreference(getString(R.string.pref_account_sms_key));
 //        smsPreference.setEnabled(true);
 
         signInPreference = findPreference(getString(R.string.pref_account_key));
