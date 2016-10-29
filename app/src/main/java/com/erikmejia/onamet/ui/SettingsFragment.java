@@ -104,7 +104,7 @@ public class SettingsFragment extends PreferenceFragment {
         };*/
 
         mAuth = FirebaseAuth.getInstance();
-        user = mAuth.getCurrentUser();
+        user = null;
 
         if (mAuth.getCurrentUser() != null){
             smsPreference.setEnabled(true);
@@ -131,13 +131,26 @@ public class SettingsFragment extends PreferenceFragment {
             if (resultCode == RESULT_OK) {
                 // user is signed in!
 //                startActivity(new Intent(this, WelcomeBackActivity.class));
+                user = FirebaseAuth.getInstance().getCurrentUser();
                 smsPreference.setEnabled(true);
                 signOutPreference.setEnabled(true);
-                signInPreference.setSummary("Estás registrado como "
-                        + user.getDisplayName());
+                signInPreference.setTitle(user.getDisplayName());
+                signInPreference.setSummary("Has iniciado sesión");
+
+                Glide.with(getActivity())
+                        .load(user.getPhotoUrl())
+                        .asBitmap()
+                        .centerCrop()
+                        .into(new SimpleTarget<Bitmap>(150, 150) {
+                            @Override
+                            public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                                Drawable profilePicture = new BitmapDrawable(getResources(), resource);
+
+                                signInPreference.setIcon(profilePicture);
+                            }
+                        });
 
                 Log.d(TAG, "onActivityResult: welcome " + user.getDisplayName());
-//                setIcon();
 
                 Toast.makeText(getActivity(), "Bienvenido "
                         + mAuth.getCurrentUser().getDisplayName(), Toast.LENGTH_SHORT).show();
@@ -151,8 +164,7 @@ public class SettingsFragment extends PreferenceFragment {
     }
 
     public void signIn() {
-        mAuth = FirebaseAuth.getInstance();
-        if (mAuth.getCurrentUser() != null) {
+        if (user != null) {
             // Already signed in
             Log.d(TAG, "signIn: already signed in" + user.getDisplayName());
             Toast.makeText(getActivity(), "Ya estabas logueado como "
@@ -168,13 +180,13 @@ public class SettingsFragment extends PreferenceFragment {
                             .setProviders(
                                     AuthUI.GOOGLE_PROVIDER,
                                     AuthUI.FACEBOOK_PROVIDER)
+                            .setLogo(R.drawable.rain_snow) // TODO - Put real big logo
                             .build(),
                     RC_SIGN_IN);
         }
     }
 
     public void signOut() {
-        FirebaseAuth auth = FirebaseAuth.getInstance();
 
         if (user != null) {
 
@@ -190,20 +202,15 @@ public class SettingsFragment extends PreferenceFragment {
                     });
             smsPreference.setEnabled(false);
             signOutPreference.setEnabled(false);
+            signInPreference.setTitle(getString(R.string.acc_prefs_sync));
             signInPreference.setSummary(getString(R.string.pref_account_summary));
+            signInPreference.setIcon(getResources().getDrawable(R.drawable.unknown)); // TODO - replace this call
+            user = null;
 
         } else {
 
             Toast.makeText(getActivity(), "No estabas logeado", Toast.LENGTH_SHORT).show();
 
         }
-    }
-
-    public void setIcon() {
-        Glide
-                .with(getActivity())
-                .load(user.getPhotoUrl())
-                .asBitmap()
-                .into(target);
     }
 }
