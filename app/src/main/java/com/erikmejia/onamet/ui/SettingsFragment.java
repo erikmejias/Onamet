@@ -90,10 +90,7 @@ public class SettingsFragment extends PreferenceFragment {
 
         mAuth = FirebaseAuth.getInstance();
 
-        if (mAuth.getCurrentUser() != null){
-            smsPreference.setEnabled(true);
-            signOutPreference.setEnabled(true);
-        }
+        checkIfSignedIn();
     }
 
     @Override
@@ -194,6 +191,36 @@ public class SettingsFragment extends PreferenceFragment {
         } else {
 
             Toast.makeText(getActivity(), "No estabas logeado", Toast.LENGTH_SHORT).show();
+
+        }
+    }
+
+    public void checkIfSignedIn() {
+
+        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+            user = FirebaseAuth.getInstance().getCurrentUser();
+            smsPreference.setEnabled(true);
+            signOutPreference.setEnabled(true);
+            signInPreference.setTitle(user.getEmail());
+            signInPreference.setSummary("Has iniciado sesión como " + user.getDisplayName());
+
+            Glide.with(getActivity())
+                    .load(user.getPhotoUrl())
+                    .asBitmap()
+                    .centerCrop()
+                    .into(new SimpleTarget<Bitmap>(150, 150) {
+                        @Override
+                        public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                            Drawable profilePicture = new BitmapDrawable(getResources(), resource);
+
+                            signInPreference.setIcon(profilePicture);
+                        }
+                    });
+        }
+        else {
+
+            smsPreference.setEnabled(false);
+            signOutPreference.setEnabled(false);
 
         }
     }
