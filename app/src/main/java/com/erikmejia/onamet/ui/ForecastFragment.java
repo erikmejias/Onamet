@@ -119,7 +119,7 @@ public class ForecastFragment extends Fragment{
         }*/
         Forecast forecast = new Forecast(
                 "25º", "23º", "23 m/s", "33%", "6:35 AM", "7:22 PM", "La Romana", "234,134 habitantes",
-                "cielo nublado", "3923.454", "354.223", "34 NE", "Hoy", 4
+                "cielo nublado", "3923.454", "354.223", "34 NE", "Hoy", 5
         );
 
         Forecast forecast1 = new Forecast(

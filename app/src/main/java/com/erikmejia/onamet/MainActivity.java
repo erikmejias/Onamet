@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.erikmejia.onamet.ui.BulletinsFragment;
 import com.erikmejia.onamet.ui.ForecastFragment;
 import com.erikmejia.onamet.ui.SettingsActivity;
+import com.erikmejia.onamet.ui.WeatherMapActivity;
 import com.erikmejia.onamet.util.PageTransformer;
 
 import java.util.ArrayList;
@@ -132,7 +133,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 return true;
             case R.id.map:
                 Toast.makeText(this, "Abriendo mapa", Toast.LENGTH_SHORT).show();
-                showMap();
+//                showMap();
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -148,7 +149,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     private void showMap(){
         Intent intent;
-        intent = new Intent(this, MapsActivity.class);
+        intent = new Intent(this, WeatherMapActivity.class);
         startActivity(intent);
     }
 

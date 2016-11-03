@@ -84,9 +84,9 @@ public class ForecastDetails extends AppCompatActivity {
         sunset = (TextView) findViewById(R.id.forecast_details_sunset_text);
 
         Typeface regTypeface = Typeface.createFromAsset(getAssets(), "fonts/Brandon_reg.otf");
-//        Typeface thinTypeface = Typeface.createFromAsset(getAssets(), "fonts/Brandon_thin.otf");
+        Typeface boldTypeface = Typeface.createFromAsset(getAssets(), "fonts/Brandon_bld.otf");
 
-        cityName.setTypeface(regTypeface);
+        cityName.setTypeface(boldTypeface);
         maxTemperature.setTypeface(regTypeface);
         minTemperature.setTypeface(regTypeface);
         weatherDescription.setTypeface(regTypeface);
