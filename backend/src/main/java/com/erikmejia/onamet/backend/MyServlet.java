@@ -29,6 +29,10 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -128,9 +132,25 @@ public class MyServlet extends HttpServlet {
         Country country = new Country();
 
         for (int index = 0; index < Cities.cityTest.length; index++) {
+            int columnA = 0;
+            int columnB = 1;
+            int columnC = 2;
 
-            City city = new City(Cities.cityTest[index], "234,235", "13.2345", "-14.2443");
+            City city = new City(
+                    Cities.cityTest[index][columnA],    // Name of the city
+                    "234,235",                          // Population of the city
+                    Cities.cityTest[index][columnB],    // Latitude
+                    Cities.cityTest[index][columnC]);   // Longitude
             for (int i = 0; i < 13; i++) {
+                /*
+                * Getting a Calendar object to put current date and then increment one for the
+                * next forecasts
+                * */
+                DateFormat df = new SimpleDateFormat("MMM d");
+                Date dateobj = new Date();
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(dateobj);
+                calendar.add(Calendar.DATE, i);
                 Forecast forecast = new Forecast(
                         "12.3",
                         "9.23",
@@ -140,7 +160,7 @@ public class MyServlet extends HttpServlet {
                         "8:01",
                         "lluvias ligeras",
                         "34",
-                        "Nov 3"
+                        df.format(calendar.getTime())
                 );
                 city.addForecast(forecast);
             }
