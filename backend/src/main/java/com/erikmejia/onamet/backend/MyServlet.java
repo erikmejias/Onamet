@@ -6,8 +6,14 @@
 
 package com.erikmejia.onamet.backend;
 
+import com.eclipsesource.json.JsonObject;
+import com.erikmejia.onamet.backend.model.City;
+import com.erikmejia.onamet.backend.model.Country;
+import com.erikmejia.onamet.backend.model.Forecast;
 import com.erikmejia.onamet.backend.model.NewsItem;
-import com.google.api.client.googleapis.auth.clientlogin.ClientLogin;
+import com.github.dvdme.ForecastIOLib.FIOCurrently;
+import com.github.dvdme.ForecastIOLib.ForecastIO;
+import com.erikmejia.onamet.backend.util.Utils.Cities;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.database.DataSnapshot;
@@ -16,17 +22,25 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
 import java.util.logging.Logger;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import javax.xml.ws.Response;
 
 public class MyServlet extends HttpServlet {
+    String responseData = null;
     static Logger Log = Logger.getLogger("com.erikmejia.onamet.backend.MyServlet");
 
     @Override
@@ -37,7 +51,7 @@ public class MyServlet extends HttpServlet {
         String outString;
         outString = "<p>Sending message from App Engine to Firebase";
 
-        resp.getWriter().println(outString);
+        resp.getWriter().println("outstring" + outString);
 
         // Note: Ensure that the Onamet-035fa87b100b.json has read
         // permissions set.
@@ -65,7 +79,7 @@ public class MyServlet extends HttpServlet {
                 .getInstance()
                 .getReference("forecasts");
 
-        pushDemoData();
+        buildForecastData();
 
         // This fires when the servlet first runs, returning all the existing values
         // only runs once, until the servlet starts up again.
@@ -74,14 +88,11 @@ public class MyServlet extends HttpServlet {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Object document = dataSnapshot.getValue();
-                Log.info("new value: "+ document);
+//                Log.info("new value: "+ document); // TODO - checking data FROM Firebase.
 
                 String todoText = "Don't forget to...\n\n";
 
-                Iterator<DataSnapshot> children = dataSnapshot.getChildren().iterator();
-
-                while(children.hasNext()){
-                    DataSnapshot childSnapshot = (DataSnapshot) children.next();
+                for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
                     todoText = todoText + " * " + childSnapshot.getValue().toString() + "\n";
                 }
 
@@ -95,27 +106,88 @@ public class MyServlet extends HttpServlet {
     }
 
     /*
-    * Method to push data to the Firebase Database.
-    * */
-    public void pushDemoData () {
+            * Method to push data to the Firebase Database.
+            * */
+    public void pushDemoData (Country country) {
         DatabaseReference ref = FirebaseDatabase
                 .getInstance()
-                .getReference("news");
+                .getReference("test-data");
 
-        Map<String, NewsItem> news = new HashMap<String, NewsItem>();
-        news.put("Test 1", new NewsItem("El Titulo de noticia", "Oct 10", "Lorem Ipsum too dolor."));
-        news.put("Test 2", new NewsItem("El Titulo de noticia", "Oct 11", "Lorem Ipsum too dolor."));
-        news.put("Test 3", new NewsItem("El Titulo de noticia", "Oct 12", "Lorem Ipsum too dolor."));
-        news.put("Test 4", new NewsItem("El Titulo de noticia", "Oct 13", "Lorem Ipsum too dolor."));
+        Map<String, City> city_map = new HashMap<>();
+//        city_map.put(city.getName(), city);
 
-        ref.setValue(news);
+        ref.setValue(country);
     }
 
     /*
-    * Method to retrieve forecast data from OWM.
+    * Method that takes all data sources to compile city objects with their respective forecasts
+    * assigned.
+    * */
+    public void buildForecastData(){
+
+        Country country = new Country();
+
+        for (int index = 0; index < Cities.cityTest.length; index++) {
+
+            City city = new City(Cities.cityTest[index], "234,235", "13.2345", "-14.2443");
+            for (int i = 0; i < 13; i++) {
+                Forecast forecast = new Forecast(
+                        "12.3",
+                        "9.23",
+                        "34",
+                        "456",
+                        "6:37",
+                        "8:01",
+                        "lluvias ligeras",
+                        "34",
+                        "Nov 3"
+                );
+                city.addForecast(forecast);
+            }
+//            Send new formed city to firebase
+            country.addCity(city);
+        }
+        pushDemoData(country);
+    }
+
+    /*
+    * Method to retrieve forecast data from OWM &
     * */
 
-    public void requestForecasts() {
+    public void requestForecasts() throws IOException {
+//        TODO - Implement Data Fetching
+        ForecastIO forecastIO = new ForecastIO("a681f2f1c2d2a75d3f576801b14c131f");
 
+        forecastIO.setUnits(ForecastIO.UNITS_SI);
+        forecastIO.setExcludeURL("minutely");
+        forecastIO.setLang("es");
+        forecastIO.setUnits(ForecastIO.UNITS_SI);
+
+        URL url = new URL(forecastIO.getUrl("19.209111", "-70.447677"));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
+        StringBuffer json = new StringBuffer();
+        String line;
+
+        while ((line = reader.readLine()) != null) {
+            json.append(line);
+        }
+        reader.close();
+
+        forecastIO.getForecast(json.toString());
+
+        FIOCurrently currently = new FIOCurrently(forecastIO);
+        System.out.println(currently.get().temperature());
+
+        System.out.println("response data " + json);
+
+
+
+
+
+
+//        FIOCurrently currently = new FIOCurrently(forecastIO);
+//
+//        System.out.println(currently.get().summary());
     }
+
 }
