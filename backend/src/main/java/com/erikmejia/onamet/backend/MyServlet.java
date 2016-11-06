@@ -115,7 +115,7 @@ public class MyServlet extends HttpServlet {
     public void pushDemoData (Country country) {
         DatabaseReference ref = FirebaseDatabase
                 .getInstance()
-                .getReference("test-data");
+                .getReference("forecasts");
 
         Map<String, City> city_map = new HashMap<>();
 //        city_map.put(city.getName(), city);

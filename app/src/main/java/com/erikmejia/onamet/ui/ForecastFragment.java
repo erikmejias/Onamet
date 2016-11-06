@@ -17,13 +17,24 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.erikmejia.onamet.R;
+import com.erikmejia.onamet.model.City;
+import com.erikmejia.onamet.model.FirebaseAdapter;
 import com.erikmejia.onamet.model.Forecast;
 import com.erikmejia.onamet.model.ForecastAdapter;
+import com.erikmejia.onamet.model.ForecastHolder;
 import com.erikmejia.onamet.model.OnForecastItemClickListener;
 import com.erikmejia.onamet.util.Utils;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.facebook.FacebookSdk.getApplicationContext;
 
 /**
  * Created by erik on 9/4/16.
@@ -33,49 +44,90 @@ import java.util.List;
 
 public class ForecastFragment extends Fragment{
     private static String TAG = ForecastFragment.class.getSimpleName();
+    private DatabaseReference databaseReference;
+    FirebaseAdapter firebaseAdapter;
 
     private List<Forecast> forecastsData;
+    public List<City> provincesData;
 
     public ForecastFragment() {
 //        required empty constructor.
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+    }
+
+    @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        loadDemoData();
-        Log.d(TAG, "onCreate: created " + forecastsData.size() + " forecasts entries");
+//        Initializing list of City objects
+        this.provincesData = new ArrayList<>();
+        forecastsData = new ArrayList<>();
+
+//        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+
+        databaseReference = FirebaseDatabase.getInstance().getReference("/forecasts/cities/0/forecasts");
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot citySnapshot: dataSnapshot.getChildren()) {
+                    Forecast forecast = citySnapshot.getValue(Forecast.class);
+                    Log.i(TAG, "loaded: " + forecast.getDescription());
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        Log.d(TAG, "onCreate: created " + provincesData.size() + " city entries");
+//        loadDemoData();
+//        Log.d(TAG, "onCreate: created " + forecastsData.size() + " forecasts entries");
     }
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
+    public View onCreateView(LayoutInflater inflater, @Nullable final ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.forecasts_layout, container, false);
+        final View rootView = inflater.inflate(R.layout.forecasts_layout, container, false);
 
 //        TODO - Fix alpha property issue in today's forecast background image
 
-        /*Spinner spinner = (Spinner) rootView.findViewById(R.id.provinces_spinner);
-        spinner.setOnItemSelectedListener(this);*/
-//        ArrayAdapter<CharSequence> provincesAdapter = null;
-//        if (container != null) {
-//            provincesAdapter = ArrayAdapter.createFromResource(
-//                    container.getContext(), R.array.provinces_array, R.layout.spinner_province_item);
-//        }
-//        provincesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-//        spinner.setAdapter(provincesAdapter);
 
 //        Cache data to local disk ( OFFLINE SUPPORT ).
 //        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
 
 //        azuaReference= FirebaseDatabase.getInstance().getReference("/demo");
 
-        loadTodayData(rootView);
 
-        RecyclerView forecastList = (RecyclerView)
+//        loadTodayData(rootView);
+        DatabaseReference cityReference =
+                FirebaseDatabase.getInstance().getReference("/forecasts/cities/0");
+        cityReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot citySnapshot: dataSnapshot.getChildren()) {
+                    City city = citySnapshot.getValue(City.class);
+                    TextView cityName = (TextView) rootView.findViewById(R.id.city_name_text);
+                    Log.d(TAG, "loaded city: " + city.getName());
+                    cityName.setText(city.getName());
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        final RecyclerView forecastList = (RecyclerView)
                 rootView.findViewById(R.id.future_forecast_recycler_list);
         forecastList.setHasFixedSize(true);
 //        Makes smooth scrolling inside the NestedScrollView
@@ -93,21 +145,65 @@ public class ForecastFragment extends Fragment{
                 startActivity(intent);
             }
         }, getContext());
-        forecastList.setAdapter(forecastsAdapter);
 
-        /*NativeExpressAdView adView = (NativeExpressAdView) rootView.findViewById(R.id.forecastAd);
+//        Firebase Adapter V2.0
+        DatabaseReference forecastReference =
+                FirebaseDatabase.getInstance().getReference("/forecasts/cities/0/forecasts/");
+
+        final FirebaseRecyclerAdapter<Forecast, ForecastHolder> fAdapter =
+                new FirebaseRecyclerAdapter<Forecast, ForecastHolder>(
+                        Forecast.class,
+                        R.layout.forecast_item,
+                        ForecastHolder.class,
+                        forecastReference
+                ) {
+                    @Override
+                    protected void populateViewHolder(ForecastHolder viewHolder, Forecast model, int position) {
+                        viewHolder.setDate(model.getDate());
+                        viewHolder.setIcon(position);
+                        viewHolder.setMaxTemperature(model.getMax());
+                        viewHolder.setMinTemperature(model.getMin());
+                        viewHolder.setDescription(model.getDescription());
+                    }
+        };
+
+        Log.d(TAG, "onCreateView: databaseReference " + String.valueOf(databaseReference));
+
+        firebaseAdapter = new FirebaseAdapter(Forecast.class,
+                R.layout.forecast_item,
+                ForecastHolder.class,
+                databaseReference);
+
+        firebaseAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onChanged() {
+                super.onChanged();
+                Log.d(TAG, "onCreateView: adapter quantity" + firebaseAdapter.getItemCount());
+            }
+        });
+
+
+
+//        Setting adapter to recyclerview
+        forecastList.setAdapter(firebaseAdapter);
+
+        Log.d(TAG, "onCreateView: database reference" + databaseReference.getRef());
+
+        /*
+        NativeExpressAdView adView = (NativeExpressAdView) rootView.findViewById(R.id.forecastAd);
 
         AdRequest request = new AdRequest.Builder()
                 .addTestDevice("E0451870C934704914ACFF7D2E7F7F7F")
                 .build();
-        adView.loadAd(request); // Load ad into the view*/
+        adView.loadAd(request); // Load ad into the view
+        */
 
         return rootView;
     }
 
     public void loadDemoData() {
 //        Initialize a forecast objects holder.
-        forecastsData = new ArrayList<>();
+//        forecastsData = new ArrayList<>();
 
         /*for (int i = 0; i < 5; i++) {
             Forecast forecast = new Forecast(
@@ -117,7 +213,8 @@ public class ForecastFragment extends Fragment{
 //            Add new forecast objects to the list.
             forecastsData.add(forecast);
         }*/
-        Forecast forecast = new Forecast(
+
+        /*Forecast forecast = new Forecast(
                 "25º", "23º", "23 m/s", "33%", "6:35 AM", "7:22 PM", "La Romana", "234,134 habitantes",
                 "cielo nublado", "3923.454", "354.223", "34 NE", "Hoy", 5
         );
@@ -198,17 +295,22 @@ public class ForecastFragment extends Fragment{
         forecastsData.add(forecast11);
         forecastsData.add(forecast12);
         forecastsData.add(forecast13);
-        forecastsData.add(forecast1);
+        forecastsData.add(forecast1);*/
     }
 
-    private void loadTodayData(View rootView) {
+    public void addCity(City city) {
+        this.provincesData.add(city);
+        Log.d(TAG, "addCity: added " + city.getName());
+    }
+
+    private void loadTodayData(final View rootView) {
 
 //        Custom font
-        Typeface font_thin = Typeface.createFromAsset(getActivity().getAssets(),
+        final Typeface font_thin = Typeface.createFromAsset(getActivity().getAssets(),
                 "fonts/Brandon_thin.otf");
-        Typeface font_reg = Typeface.createFromAsset(getActivity().getAssets(),
+        final Typeface font_reg = Typeface.createFromAsset(getActivity().getAssets(),
                 "fonts/Brandon_reg.otf");
-        Typeface font_bold = Typeface.createFromAsset(getActivity().getAssets(),
+        final Typeface font_bold = Typeface.createFromAsset(getActivity().getAssets(),
                 "fonts/Brandon_bld.otf");
 
         Forecast todayForecast = forecastsData.get(0);
@@ -233,6 +335,8 @@ public class ForecastFragment extends Fragment{
 //        SunView sunView = (SunView) rootView.findViewById(R.id.today_forecast_icon_item);
 //        sunView.setStrokeColor(Color.WHITE);
 
+
+
         TextView cityName = (TextView) rootView.findViewById(R.id.city_name_text);
         TextView date = (TextView) rootView.findViewById(R.id.today_date_text);
         TextView description = (TextView) rootView.findViewById(R.id.today_forecast_description_text);
@@ -251,7 +355,6 @@ public class ForecastFragment extends Fragment{
         sunrise.setTypeface(font_bold);
         sunset.setTypeface(font_bold);
 
-        cityName.setText(todayForecast.getName());
         date.setText(todayForecast.getDate());
         description.setText(todayForecast.getDescription());
         windSpeed.setText(todayForecast.getSpeed());

@@ -50,7 +50,10 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.ViewHo
         Log.d(TAG, "ForecastAdapter: " + dataset.size());
 
 //        Removes today forecast from future list
-        dataset.remove(0);
+        if (dataset != null) {
+//            dataset.remove(0); // TODO - Ensure it only happens once with the right kind of data
+        }
+
     }
 
     @Override

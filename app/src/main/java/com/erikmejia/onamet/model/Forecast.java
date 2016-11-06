@@ -12,13 +12,9 @@ public class Forecast {
     private String humidity;
     private String sunrise_time;
     private String sunset_time;
-    private String name;        // City name
-    private String population;
-    private String description;
-    private String lat;         // Latitude
-    private String lon;         // Longitude
     private String deg;         // Wind direction
     private String date;        // Forecast date
+    private String description;
     private int iconId;
 
     public Forecast() {
@@ -26,9 +22,8 @@ public class Forecast {
     }
 
     public Forecast(String max, String min, String speed, String humidity, String sunrise_time,
-                    String sunset_time, String name, String population,
-                    String description, String lat, String lon, String deg,
-                    String date, int iconId) {
+                    String sunset_time, String deg,
+                    String date, String description) {
 
         this.max = max;
         this.min = min;
@@ -36,13 +31,9 @@ public class Forecast {
         this.humidity = humidity;
         this.sunrise_time = sunrise_time;
         this.sunset_time = sunset_time;
-        this.name = name;
-        this.population = population;
-        this.description = description;
-        this.lat = lat;
-        this.lon = lon;
         this.deg = deg;
         this.date = date;
+        this.description = description;
         this.iconId = iconId;
     }
 
@@ -94,46 +85,6 @@ public class Forecast {
         this.sunset_time = sunset_time;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getPopulation() {
-        return population;
-    }
-
-    public void setPopulation(String population) {
-        this.population = population;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getLat() {
-        return lat;
-    }
-
-    public void setLat(String lat) {
-        this.lat = lat;
-    }
-
-    public String getLon() {
-        return lon;
-    }
-
-    public void setLon(String lon) {
-        this.lon = lon;
-    }
-
     public String getDeg() {
         return deg;
     }
@@ -148,6 +99,14 @@ public class Forecast {
 
     public void setDate(String date) {
       this.date = date;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public int getIconId() {
