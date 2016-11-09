@@ -22,12 +22,16 @@ sourceCompatibility = JavaVersion.VERSION_1_7
 targetCompatibility = JavaVersion.VERSION_1_7
 
 dependencies {
+//    compile fileTree(include: '*.jar', dir: 'libs')
     appengineSdk 'com.google.appengine:appengine-java-sdk:1.9.34'
     compile 'javax.servlet:servlet-api:2.5'
     compile 'com.google.appengine:appengine-api-1.0-sdk:1.9.42'
     compile 'com.google.firebase:firebase-server-sdk:3.0.1'
     compile 'org.apache.httpcomponents:httpclient-osgi:4.5.2'
-    compile group: 'com.github.dvdme', name: 'ForecastIOLib', version: '1.5.1'
+    //    Library for fetching Forecast IO weather data
+//    compile 'com.github.dvdme:ForecastIOLib:1.5.1'
+    //    Library for fetching OWM data
+    compile files('libs/owm-japis-2.5.0.5.jar')
 }
 
 appengine {

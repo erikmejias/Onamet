@@ -15,6 +15,7 @@ public class City {
     private String population;
     private String lat;         // Latitude
     private String lon;         // Longitude
+    private long cityCode;
     private List<Forecast> forecasts;
 
 //    Method to add forecast to current city
@@ -22,13 +23,16 @@ public class City {
         forecasts.add(forecast);
     }
 
-    public City(String name, String population, String lat, String lon) {
+    public City(String name, String population, String lat, String lon, long cityCode) {
         this.name = name;
         this.population = population;
         this.lat = lat;
         this.lon = lon;
+        this.cityCode = cityCode;
         forecasts = new ArrayList<>();
     }
+
+//    Getters and Setters
 
     public String getName() {
         return name;
@@ -60,6 +64,14 @@ public class City {
 
     public void setLon(String lon) {
         this.lon = lon;
+    }
+
+    public long getCityCode() {
+        return cityCode;
+    }
+
+    public void setCityCode(long cityCode) {
+        this.cityCode = cityCode;
     }
 
     public List<Forecast> getForecasts() {

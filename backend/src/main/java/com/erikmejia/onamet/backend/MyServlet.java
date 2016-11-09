@@ -6,13 +6,10 @@
 
 package com.erikmejia.onamet.backend;
 
-import com.eclipsesource.json.JsonObject;
 import com.erikmejia.onamet.backend.model.City;
 import com.erikmejia.onamet.backend.model.Country;
 import com.erikmejia.onamet.backend.model.Forecast;
 import com.erikmejia.onamet.backend.model.NewsItem;
-import com.github.dvdme.ForecastIOLib.FIOCurrently;
-import com.github.dvdme.ForecastIOLib.ForecastIO;
 import com.erikmejia.onamet.backend.util.Utils.Cities;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
@@ -21,6 +18,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import net.aksingh.owmjapis.CurrentWeather;
+import net.aksingh.owmjapis.DailyForecast;
+import net.aksingh.owmjapis.OpenWeatherMap;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -31,10 +32,12 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.logging.Logger;
@@ -135,22 +138,32 @@ public class MyServlet extends HttpServlet {
             int columnA = 0;
             int columnB = 1;
             int columnC = 2;
+            int columnD = 3;
 
+//            Create a new city by fetching data from Utils.Cities.cityTest interface.
             City city = new City(
                     Cities.cityTest[index][columnA],    // Name of the city
                     "234,235",                          // Population of the city
                     Cities.cityTest[index][columnB],    // Latitude
-                    Cities.cityTest[index][columnC]);   // Longitude
-            for (int i = 0; i < 13; i++) {
-                /*
+                    Cities.cityTest[index][columnC],    // Longitude
+                    Long.valueOf(
+                            Cities.cityTest[index][columnD] // City code
+                    ));
+
+            city.setForecasts(searchWeather(city.getCityCode()));
+
+//            Add weather data to this city
+            /*for (int i = 0; i < 13; i++) {
+                *//*
                 * Getting a Calendar object to put current date and then increment one for the
                 * next forecasts
-                * */
+                * *//*
                 DateFormat df = new SimpleDateFormat("MMM d");
                 Date dateobj = new Date();
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(dateobj);
                 calendar.add(Calendar.DATE, i);
+
                 Forecast forecast = new Forecast(
                         "12.3",
                         "9.23",
@@ -163,52 +176,66 @@ public class MyServlet extends HttpServlet {
                         df.format(calendar.getTime()),
                         3
                 );
+
                 city.addForecast(forecast);
-            }
-//            Send new formed city to firebase
+            }*/
+//            Add the completed city to the Country object
             country.addCity(city);
         }
+//        Add all cities to Firebase
         pushDemoData(country);
     }
 
     /*
-    * Method to retrieve forecast data from OWM &
+    * Method to retrieve forecast data from OWM
     * */
 
-    public void requestForecasts() throws IOException {
-//        TODO - Implement Data Fetching
-        ForecastIO forecastIO = new ForecastIO("a681f2f1c2d2a75d3f576801b14c131f");
+    public List<Forecast> searchWeather(long cityCode){
+        List<Forecast> receivedForecasts = new ArrayList<>();
+        OpenWeatherMap owm = new OpenWeatherMap(
+                OpenWeatherMap.Units.IMPERIAL,
+                OpenWeatherMap.Language.SPANISH,
+                "ab935127aec33bcab3d7a12509748c88"
+                );
 
-        forecastIO.setUnits(ForecastIO.UNITS_SI);
-        forecastIO.setExcludeURL("minutely");
-        forecastIO.setLang("es");
-        forecastIO.setUnits(ForecastIO.UNITS_SI);
+        long city = 3491941;
+        byte quantity = 15;
+        DateFormat df = new SimpleDateFormat("MMM d");
 
-        URL url = new URL(forecastIO.getUrl("19.209111", "-70.447677"));
-        BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
-        StringBuffer json = new StringBuffer();
-        String line;
+        DailyForecast dailyForecast = owm.dailyForecastByCityCode(city, quantity);
+        for (int index = 0; index < 15; index++) {
+            Forecast forecast = new Forecast(
+                    String.valueOf(dailyForecast.getForecastInstance(index).getTemperatureInstance().getMaximumTemperature()),
+                    String.valueOf(dailyForecast.getForecastInstance(index).getTemperatureInstance().getMinimumTemperature()),
+                    String.valueOf(dailyForecast.getForecastInstance(index).getWindSpeed()),
+                    String.valueOf(dailyForecast.getForecastInstance(index).getHumidity()),
+                    "6:34",
+                    "7:03",
+                    dailyForecast.getForecastInstance(index).getWeatherInstance(0).getWeatherDescription(),
+                    String.valueOf(dailyForecast.getForecastInstance(index).getWindDegree()),
+                    df.format(dailyForecast.getForecastInstance(index).getDateTime()),
+                    0
+            );
 
-        while ((line = reader.readLine()) != null) {
-            json.append(line);
+            receivedForecasts.add(forecast);
+
+            System.out.println(forecast.toString());
         }
-        reader.close();
+        return receivedForecasts;
 
-        forecastIO.getForecast(json.toString());
-
-        FIOCurrently currently = new FIOCurrently(forecastIO);
-        System.out.println(currently.get().temperature());
-
-        System.out.println("response data " + json);
-
-
-
-
-
-
-//        FIOCurrently currently = new FIOCurrently(forecastIO);
+//        CurrentWeather currentWeather = owm.currentWeatherByCityCode(3491941);
 //
-//        System.out.println(currently.get().summary());
+//        System.out.println( "City: " + currentWeather.getCityName() );
+//        System.out.println( "Max T. : " + currentWeather.getMainInstance().getMaxTemperature() );
+//        System.out.println( "Min T. : " + currentWeather.getMainInstance().getMinTemperature() );
+//        System.out.println( "Speed : " + currentWeather.getWindInstance().getWindSpeed() );
+//        System.out.println( "Humidity : " + currentWeather.getMainInstance().getHumidity() );
+//        System.out.println( "Sunrise : " + currentWeather.getSysInstance().getSunriseTime() );
+//        System.out.println( "Sunset : " + currentWeather.getSysInstance().getSunsetTime() );
+//        System.out.println( "Degree : " + currentWeather.getWindInstance().getWindDegree() );
+//        System.out.println( "Latitude : " + currentWeather.getCoordInstance().getLatitude() );
+//        System.out.println( "Longitude : " + currentWeather.getCoordInstance().getLongitude() );
+//        System.out.println( "Description : " + currentWeather.getWeatherInstance(0).getWeatherDescription() );
     }
 
 }

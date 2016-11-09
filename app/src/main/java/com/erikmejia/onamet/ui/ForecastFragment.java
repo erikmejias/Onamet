@@ -76,11 +76,14 @@ public class ForecastFragment extends Fragment{
 
 //        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
 
+
         databaseReference = FirebaseDatabase.getInstance().getReference("/forecasts/cities/0/forecasts");
+        Query query = databaseReference;
+
         firebaseAdapter = new FirebaseAdapter(Forecast.class,
                 R.layout.forecast_item,
                 ForecastHolder.class,
-                databaseReference);
+                query);
 
 //        loadDemoData();
 //        Log.d(TAG, "onCreate: created " + forecastsData.size() + " forecasts entries");

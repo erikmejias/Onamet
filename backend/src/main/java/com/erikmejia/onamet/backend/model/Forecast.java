@@ -37,6 +37,13 @@ public class Forecast {
         this.iconId = iconId;
     }
 
+    @Override
+    public String toString() {
+        return "Forecast: " + this.getMax() + " " + this.getMin() + " "  + this.getDate() + " "
+                + this.getDescription() + " "  + this.getDeg() + " "  + this.getHumidity() + " "
+                + this.getSunrise_time() + " "  + this.getSunset_time();
+    }
+
     public String getMax() {
         return max;
     }

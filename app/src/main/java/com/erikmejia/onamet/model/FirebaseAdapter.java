@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Query;
 
 /**
  * Created by erik on 11/5/16.
@@ -14,10 +15,10 @@ public class FirebaseAdapter extends FirebaseRecyclerAdapter<Forecast, ForecastH
     private static final String TAG = FirebaseAdapter.class.getSimpleName();
 
     public FirebaseAdapter(Class<Forecast> modelClass, int layout,
-                           Class<ForecastHolder> viewHolderClass, DatabaseReference ref) {
+                           Class<ForecastHolder> viewHolderClass, Query ref) {
 
         super(modelClass, layout, viewHolderClass, ref);
-        Log.d(TAG, "FirebaseAdapter: CONSTRUCTOR called. Database reference is " + ref.toString());
+        Log.d(TAG, "FirebaseAdapter: CONSTRUCTOR called. DB Query is " + ref.toString());
     }
 
     @Override
