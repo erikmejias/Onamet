@@ -29,6 +29,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -49,6 +50,9 @@ public class ForecastFragment extends Fragment{
 
     private List<Forecast> forecastsData;
     public List<City> provincesData;
+    private FirebaseRecyclerAdapter<Forecast, ForecastHolder> tAdapter;
+    private RecyclerView forecastList;
+    private LinearLayoutManager linearLayoutManager;
 
     public ForecastFragment() {
 //        required empty constructor.
@@ -63,30 +67,21 @@ public class ForecastFragment extends Fragment{
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
 //        Initializing list of City objects
-        this.provincesData = new ArrayList<>();
-        forecastsData = new ArrayList<>();
+//        this.provincesData = new ArrayList<>();
+//        forecastsData = new ArrayList<>();
+
+//        loadDemoData();
 
 //        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
 
         databaseReference = FirebaseDatabase.getInstance().getReference("/forecasts/cities/0/forecasts");
+        firebaseAdapter = new FirebaseAdapter(Forecast.class,
+                R.layout.forecast_item,
+                ForecastHolder.class,
+                databaseReference);
 
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot citySnapshot: dataSnapshot.getChildren()) {
-                    Forecast forecast = citySnapshot.getValue(Forecast.class);
-                    Log.i(TAG, "loaded: " + forecast.getDescription());
-
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-        Log.d(TAG, "onCreate: created " + provincesData.size() + " city entries");
 //        loadDemoData();
 //        Log.d(TAG, "onCreate: created " + forecastsData.size() + " forecasts entries");
     }
@@ -104,90 +99,37 @@ public class ForecastFragment extends Fragment{
 //        Cache data to local disk ( OFFLINE SUPPORT ).
 //        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
 
-//        azuaReference= FirebaseDatabase.getInstance().getReference("/demo");
-
 
 //        loadTodayData(rootView);
-        DatabaseReference cityReference =
-                FirebaseDatabase.getInstance().getReference("/forecasts/cities/0");
-        cityReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot citySnapshot: dataSnapshot.getChildren()) {
-                    City city = citySnapshot.getValue(City.class);
-                    TextView cityName = (TextView) rootView.findViewById(R.id.city_name_text);
-                    Log.d(TAG, "loaded city: " + city.getName());
-                    cityName.setText(city.getName());
-                }
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-        final RecyclerView forecastList = (RecyclerView)
+        forecastList = (RecyclerView)
                 rootView.findViewById(R.id.future_forecast_recycler_list);
         forecastList.setHasFixedSize(true);
 //        Makes smooth scrolling inside the NestedScrollView
         forecastList.setNestedScrollingEnabled(false);
 
-        if (container != null) {
-            forecastList.setLayoutManager(new LinearLayoutManager(container.getContext()));
-        }
 
-        ForecastAdapter forecastsAdapter = new ForecastAdapter(forecastsData, new OnForecastItemClickListener() {
+        /*ForecastAdapter forecastsAdapter = new ForecastAdapter(forecastsData, new OnForecastItemClickListener() {
             @Override
             public void onItemClicked(Forecast forecastItem) {
                 Intent intent;
                 intent = new Intent(getContext(), ForecastDetails.class);
                 startActivity(intent);
             }
-        }, getContext());
+        }, getContext());*/
 
 //        Firebase Adapter V2.0
-        DatabaseReference forecastReference =
-                FirebaseDatabase.getInstance().getReference("/forecasts/cities/0/forecasts/");
-
-        final FirebaseRecyclerAdapter<Forecast, ForecastHolder> fAdapter =
-                new FirebaseRecyclerAdapter<Forecast, ForecastHolder>(
-                        Forecast.class,
-                        R.layout.forecast_item,
-                        ForecastHolder.class,
-                        forecastReference
-                ) {
-                    @Override
-                    protected void populateViewHolder(ForecastHolder viewHolder, Forecast model, int position) {
-                        viewHolder.setDate(model.getDate());
-                        viewHolder.setIcon(position);
-                        viewHolder.setMaxTemperature(model.getMax());
-                        viewHolder.setMinTemperature(model.getMin());
-                        viewHolder.setDescription(model.getDescription());
-                    }
-        };
+//        DatabaseReference forecastReference =
+//                FirebaseDatabase.getInstance().getReference("/forecasts/cities/0/forecasts/");
 
         Log.d(TAG, "onCreateView: databaseReference " + String.valueOf(databaseReference));
-
-        firebaseAdapter = new FirebaseAdapter(Forecast.class,
-                R.layout.forecast_item,
-                ForecastHolder.class,
-                databaseReference);
-
-        firebaseAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
-            @Override
-            public void onChanged() {
-                super.onChanged();
-                Log.d(TAG, "onCreateView: adapter quantity" + firebaseAdapter.getItemCount());
-            }
-        });
 
 
 
 //        Setting adapter to recyclerview
         forecastList.setAdapter(firebaseAdapter);
 
-        Log.d(TAG, "onCreateView: database reference" + databaseReference.getRef());
+//        Log.d(TAG, "onCreateView: database reference" + databaseReference.getRef());
 
         /*
         NativeExpressAdView adView = (NativeExpressAdView) rootView.findViewById(R.id.forecastAd);
@@ -204,6 +146,13 @@ public class ForecastFragment extends Fragment{
     public void loadDemoData() {
 //        Initialize a forecast objects holder.
 //        forecastsData = new ArrayList<>();
+        City city = new City(
+                "Santo Domingo",
+                "345,245",
+                "19.345",
+                "-23.545",
+                forecastsData
+                );
 
         /*for (int i = 0; i < 5; i++) {
             Forecast forecast = new Forecast(
@@ -214,73 +163,175 @@ public class ForecastFragment extends Fragment{
             forecastsData.add(forecast);
         }*/
 
-        /*Forecast forecast = new Forecast(
-                "25º", "23º", "23 m/s", "33%", "6:35 AM", "7:22 PM", "La Romana", "234,134 habitantes",
-                "cielo nublado", "3923.454", "354.223", "34 NE", "Hoy", 5
+        Forecast forecast = new Forecast(
+                "26º",
+                "25º",
+                "23 m/s",
+                "15",
+                "6:37",
+                "7:01",
+                "33 NE",
+                "Hoy",
+                "lluvias ligeras",
+                5
         );
-
-        Forecast forecast1 = new Forecast(
-                "27º", "24º", "23 m/s", "33%", "6:35 AM", "7:22 PM", "Azua", "234,134 habitantes",
-                "cielo nublado", "3923.454", "354.223", "34 NE", "Mar 01", 2
-        );
-
         Forecast forecast2 = new Forecast(
-                "34º", "32º", "23 m/s", "33%", "6:35 AM", "7:22 PM", "Monte Plata", "234,134 habitantes",
-                "cielo despejado", "3923.454", "354.223", "34 NE", "Jue 20", 3
+                "23º",
+                "19º",
+                "23",
+                "15",
+                "6:37",
+                "7:01",
+                "33",
+                "Nov 8",
+                "cielo claro",
+                2
         );
-
         Forecast forecast3 = new Forecast(
-                "19º", "16º", "23 m/s", "33%", "6:35 AM", "7:22 PM", "Santo Domingo", "234,134 habitantes",
-                "tormenta electrica", "3923.454", "354.223", "34 NE", "Vie 21", 4
+                "23º",
+                "19º",
+                "23",
+                "15",
+                "6:37",
+                "7:01",
+                "33",
+                "Nov 9",
+                "nubes dispersas",
+                3
         );
-
         Forecast forecast4 = new Forecast(
-                "37º", "35º", "23 m/s", "33%", "6:35 AM", "7:22 PM", "Sabana de la Mar", "234,134 habitantes",
-                "cielo claro", "3923.454", "354.223", "34 NE", "Sab 22", 5
+                "23º",
+                "19º",
+                "23",
+                "15",
+                "6:37",
+                "7:01",
+                "33",
+                "Nov 10",
+                "lluvias ligeras",
+                4
         );
-
         Forecast forecast5 = new Forecast(
-                "19º", "16º", "23 m/s", "33%", "6:35 AM", "7:22 PM", "Hato Mayor", "234,134 habitantes",
-                "cielo despejado", "3923.454", "354.223", "34 NE", "Dom 23", 6
+                "23º",
+                "19º",
+                "23",
+                "15",
+                "6:37",
+                "7:01",
+                "33",
+                "Nov 11",
+                "lluvias ligeras",
+                5
         );
-
         Forecast forecast6 = new Forecast(
-                "25º", "23º", "23 m/s", "33%", "6:35 AM", "7:22 PM", "San Francisco", "234,134 habitantes",
-                "lluvias dispersas", "3923.454", "354.223", "34 NE", "Lun 24", 7
-        );Forecast forecast7 = new Forecast(
-                "25º", "23º", "23 m/s", "33%", "6:35 AM", "7:22 PM", "La Romana", "234,134 habitantes",
-                "cielo despejado", "3923.454", "354.223", "34 NE", "Mar 25", 8
+                "23º",
+                "19º",
+                "23",
+                "15",
+                "6:37",
+                "7:01",
+                "33",
+                "Nov 12",
+                "lluvias ligeras",
+                6
         );
-
+        Forecast forecast7 = new Forecast(
+                "23º",
+                "19º",
+                "23",
+                "15",
+                "6:37",
+                "7:01",
+                "33",
+                "Nov 13",
+                "lluvias ligeras",
+                7
+        );
         Forecast forecast8 = new Forecast(
-                "27º", "24º", "23 m/s", "33%", "6:35 AM", "7:22 PM", "Azua", "234,134 habitantes",
-                "cielo nublado", "3923.454", "354.223", "34 NE", "Mie 26", 2
+                "23º",
+                "19º",
+                "23",
+                "15",
+                "6:37",
+                "7:01",
+                "33",
+                "Nov 14",
+                "lluvias ligeras",
+                3
         );
-
         Forecast forecast9 = new Forecast(
-                "34º", "32º", "23 m/s", "33%", "6:35 AM", "7:22 PM", "Monte Plata", "234,134 habitantes",
-                "cielo despejado", "3923.454", "354.223", "34 NE", "Jue 27", 3
+                "23º",
+                "19º",
+                "23",
+                "15",
+                "6:37",
+                "7:01",
+                "33",
+                "Nov 15",
+                "lluvias ligeras",
+                4
         );
-
         Forecast forecast10 = new Forecast(
-                "19º", "16º", "23 m/s", "33%", "6:35 AM", "7:22 PM", "Santo Domingo", "234,134 habitantes",
-                "tormenta electrica", "3923.454", "354.223", "34 NE", "Vie 28", 4
+                "23º",
+                "19º",
+                "23",
+                "15",
+                "6:37",
+                "7:01",
+                "33",
+                "Nov 16",
+                "lluvias ligeras",
+                5
         );
-
         Forecast forecast11 = new Forecast(
-                "37º", "35º", "23 m/s", "33%", "6:35 AM", "7:22 PM", "Sabana de la Mar", "234,134 habitantes",
-                "cielo claro", "3923.454", "354.223", "34 NE", "Sab 29", 5
+                "23º",
+                "19º",
+                "23",
+                "15",
+                "6:37",
+                "7:01",
+                "33",
+                "Nov 17",
+                "lluvias ligeras",
+                7
         );
-
         Forecast forecast12 = new Forecast(
-                "19º", "16º", "23 m/s", "33%", "6:35 AM", "7:22 PM", "Hato Mayor", "234,134 habitantes",
-                "cielo despejado", "3923.454", "354.223", "34 NE", "Dom 30", 6
+                "23º",
+                "19º",
+                "23",
+                "15",
+                "6:37",
+                "7:01",
+                "33",
+                "Nov 18",
+                "lluvias ligeras",
+                1
+        );
+        Forecast forecast13 = new Forecast(
+                "23º",
+                "19º",
+                "23",
+                "15",
+                "6:37",
+                "7:01",
+                "33",
+                "Nov 19",
+                "lluvias ligeras",
+                9
+        );
+        Forecast forecast14 = new Forecast(
+                "23º",
+                "19º",
+                "23",
+                "15",
+                "6:37",
+                "7:01",
+                "33",
+                "Nov 20",
+                "lluvias ligeras",
+                11
         );
 
-        Forecast forecast13 = new Forecast(
-                "25º", "23º", "23 m/s", "33%", "6:35 AM", "7:22 PM", "San Francisco", "234,134 habitantes",
-                "lluvias dispersas", "3923.454", "354.223", "34 NE", "Lun 31", 7
-        );
 
         forecastsData.add(forecast);
         forecastsData.add(forecast2);
@@ -295,7 +346,7 @@ public class ForecastFragment extends Fragment{
         forecastsData.add(forecast11);
         forecastsData.add(forecast12);
         forecastsData.add(forecast13);
-        forecastsData.add(forecast1);*/
+        forecastsData.add(forecast14);
     }
 
     public void addCity(City city) {
@@ -356,6 +407,7 @@ public class ForecastFragment extends Fragment{
         sunset.setTypeface(font_bold);
 
         date.setText(todayForecast.getDate());
+        cityName.setText("Santo Domingo");
         description.setText(todayForecast.getDescription());
         windSpeed.setText(todayForecast.getSpeed());
         degrees.setText(todayForecast.getDeg());
@@ -372,4 +424,5 @@ public class ForecastFragment extends Fragment{
             }
         });
     }
+
 }

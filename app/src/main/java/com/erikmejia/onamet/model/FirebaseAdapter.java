@@ -13,15 +13,17 @@ import com.google.firebase.database.DatabaseReference;
 public class FirebaseAdapter extends FirebaseRecyclerAdapter<Forecast, ForecastHolder> {
     private static final String TAG = FirebaseAdapter.class.getSimpleName();
 
-    public FirebaseAdapter(Class<Forecast> modelClass, int modelLayout,
+    public FirebaseAdapter(Class<Forecast> modelClass, int layout,
                            Class<ForecastHolder> viewHolderClass, DatabaseReference ref) {
-        super(modelClass, modelLayout, viewHolderClass, ref);
-        Log.d(TAG, "FirebaseAdapter: constructor database reference " + ref.toString());
+
+        super(modelClass, layout, viewHolderClass, ref);
+        Log.d(TAG, "FirebaseAdapter: CONSTRUCTOR called. Database reference is " + ref.toString());
     }
 
     @Override
     protected void populateViewHolder(ForecastHolder viewHolder, Forecast model, int position) {
         Log.d(TAG, "populateViewHolder EXECUTED!!!");
+
         viewHolder.setDate(model.getDate());
         viewHolder.setIcon(position);
         viewHolder.setMaxTemperature(model.getMax());

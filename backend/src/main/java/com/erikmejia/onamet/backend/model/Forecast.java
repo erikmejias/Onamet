@@ -14,16 +14,16 @@ public class Forecast {
     private String sunrise_time;
     private String sunset_time;
     private String description;
-
     private String deg;         // Wind direction
     private String date;        // Forecast date
+    private int iconId;
 
     public Forecast() {
 //        Empty constructor
     }
 
     public Forecast(String max, String min, String speed, String humidity, String sunrise_time,
-                    String sunset_time, String description, String deg, String date) {
+                    String sunset_time, String description, String deg, String date, int iconId) {
 
         this.max = max;
         this.min = min;
@@ -34,6 +34,7 @@ public class Forecast {
         this.description = description;
         this.deg = deg;
         this.date = date;
+        this.iconId = iconId;
     }
 
     public String getMax() {
@@ -108,4 +109,11 @@ public class Forecast {
         this.date = date;
     }
 
+    public int getIconId() {
+        return iconId;
+    }
+
+    public void setIconId(int iconId) {
+        this.iconId = iconId;
+    }
 }

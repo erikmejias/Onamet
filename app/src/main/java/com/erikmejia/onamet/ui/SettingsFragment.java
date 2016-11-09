@@ -27,6 +27,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.Arrays;
 import java.util.concurrent.ExecutionException;
 
 import static android.app.Activity.RESULT_OK;
@@ -131,8 +132,6 @@ public class SettingsFragment extends PreferenceFragment {
                             }
                         });
 
-                Log.d(TAG, "onActivityResult: welcome " + user.getDisplayName());
-
                 Toast.makeText(getActivity(), "Bienvenido "
                         + mAuth.getCurrentUser().getDisplayName(), Toast.LENGTH_SHORT).show();
                 Log.d(TAG, "onActivityResult: profile url " + user.getPhotoUrl());
@@ -147,8 +146,7 @@ public class SettingsFragment extends PreferenceFragment {
     public void signIn() {
         if (user != null) {
             // Already signed in
-            Log.d(TAG, "signIn: already signed in" + user.getDisplayName());
-            Toast.makeText(getActivity(), "Ya estabas logueado como "
+            Toast.makeText(getActivity(), "Has iniciado sesión como "
                     + user.getDisplayName(), Toast.LENGTH_SHORT).show();
         } else {
             // Not signed in... yet :)
@@ -158,10 +156,11 @@ public class SettingsFragment extends PreferenceFragment {
                             .createSignInIntentBuilder()
                             .setIsSmartLockEnabled(!BuildConfig.DEBUG) // TODO - Change later to true
                             .setTheme(R.style.SignInTheme)
-                            .setProviders(
-                                    AuthUI.GOOGLE_PROVIDER,
-                                    AuthUI.FACEBOOK_PROVIDER)
-                            .setLogo(R.drawable.rain_snow) // TODO - Put real big logo
+                            .setProviders(Arrays.asList(
+                                    new AuthUI.IdpConfig.Builder(AuthUI.TWITTER_PROVIDER).build(),
+                                    new AuthUI.IdpConfig.Builder(AuthUI.FACEBOOK_PROVIDER).build(),
+                                    new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build()
+                            ))
                             .build(),
                     RC_SIGN_IN);
         }

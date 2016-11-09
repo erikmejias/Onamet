@@ -12,9 +12,6 @@ import com.bumptech.glide.Glide;
 import com.erikmejia.onamet.R;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.NativeExpressAdView;
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -32,12 +29,12 @@ public class ForecastDetails extends AppCompatActivity {
 
         adView = (NativeExpressAdView) findViewById(R.id.forecast_details_ad_content);
 
-        adView.loadAd(
+        /*adView.loadAd(
                 new AdRequest.Builder()
                         .addTestDevice(AdRequest.DEVICE_ID_EMULATOR) // All emulators
                         .addTestDevice("E0451870C934704914ACFF7D2E7F7F7F")
                         .build()
-        ); // Load ad into the view
+        );*/ // Load ad into the view
 
         changeTextFonts();
 

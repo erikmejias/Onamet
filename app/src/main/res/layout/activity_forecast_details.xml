@@ -13,7 +13,7 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:id="@+id/forecast_details_layout"
-        android:background="@mipmap/m4"
+        android:background="@mipmap/back2"
         android:layout_width="match_parent"
         android:layout_height="480dp">
 
@@ -25,7 +25,7 @@
 
             <TextView
                 android:id="@+id/forecast_details_city_name"
-                android:text="Oct 16"
+                android:text="Nov 6"
                 android:textSize="30sp"
                 android:textColor="@color/white"
                 android:layout_gravity="center_horizontal"
@@ -50,7 +50,7 @@
 
                 <TextView
                     android:id="@+id/forecast_details_max_text"
-                    android:text="26º"
+                    android:text="23º"
                     android:textSize="115sp"
                     android:textColor="#fff"
                     android:layout_marginBottom="-30dp"

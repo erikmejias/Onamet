@@ -20,7 +20,7 @@
 
         <FrameLayout
             android:id="@+id/today_forecast_frame"
-            android:background="@mipmap/m2"
+            android:background="@mipmap/back3"
             android:foreground="?android:selectableItemBackground"
             android:focusable="true"
             android:clickable="true"

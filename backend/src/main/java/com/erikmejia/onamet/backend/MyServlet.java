@@ -160,7 +160,8 @@ public class MyServlet extends HttpServlet {
                         "8:01",
                         "lluvias ligeras",
                         "34",
-                        df.format(calendar.getTime())
+                        df.format(calendar.getTime()),
+                        3
                 );
                 city.addForecast(forecast);
             }

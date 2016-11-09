@@ -77,18 +77,41 @@ El ultimo cambio que ha sufrido esta Oficina fue con el Decreto número 764-03, 
     <string name="_02_00">02:00</string>
     <string name="_04_00">04:00</string>
 
+    <string name="sign_in_with_google">Iniciar con Google</string>
+    <string name="sign_in_with_facebook">Iniciar con Facebook</string>
+    <string name="sign_in_with_twitter">Iniciar con Twitter</string>
+
     <string name="facebook_application_id" translatable="false">
         134196063715265
     </string>
 
-    <string name="ads_forecast_main_list">ca-app-pub-6005843157698202/3043293572</string>
-    <string name="ads_forecast_details">ca-app-pub-6005843157698202/8693189978</string>
-    <string name="ads_bulletins_main_list">ca-app-pub-6005843157698202/2705216379</string>
-    <string name="ads_test">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="twitter_consumer_key" translatable="false">
+        k9RKbaJDBvLnb1i1aaZsVfi4m
+    </string>
+    <string name="twitter_consumer_secret" translatable="false">
+        LvO2YBn4qaTjHaMtB7sOuAhZ6Ekap7b88yZd0GD6TJn2Zb0ScP
+    </string>
+
+    <string name="ads_forecast_main_list">
+        ca-app-pub-6005843157698202/3043293572
+    </string>
+    <string name="ads_forecast_details">
+        ca-app-pub-6005843157698202/8693189978
+    </string>
+    <string name="ads_bulletins_main_list">
+        ca-app-pub-6005843157698202/2705216379
+    </string>
+    <string name="ads_test">
+        ca-app-pub-3940256099942544/6300978111
+    </string>
     <string name="pref_account_sms_key">pref_account_sms_key</string>
 
-    <string name="aeris_client_id">EtZ77Kc9co9ZvOEum69hf</string>
-    <string name="aeris_client_secret">aw6sgkgdyyA0bldL8dtW2LRawC9vjyPYhiuKfIWH</string>
+    <string name="aeris_client_id">
+        EtZ77Kc9co9ZvOEum69hf
+    </string>
+    <string name="aeris_client_secret">
+        aw6sgkgdyyA0bldL8dtW2LRawC9vjyPYhiuKfIWH
+    </string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

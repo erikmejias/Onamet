@@ -51,7 +51,7 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.ViewHo
 
 //        Removes today forecast from future list
         if (dataset != null) {
-//            dataset.remove(0); // TODO - Ensure it only happens once with the right kind of data
+            dataset.remove(0); // TODO - Ensure it only happens once with the right kind of data
         }
 
     }
@@ -102,7 +102,7 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.ViewHo
     public void onBindViewHolder(ViewHolder holder, int position) {
 
 //        Setting up received forecast data to it's appropiate holder view, avoiding when its an AD1
-        if (position != 3) {
+        if (true) { // TODO modify this according to an AD or FORECAST view
             holder.max_temperature.setText(dataset.get(position).getMax());
             holder.min_temperature.setText(dataset.get(position).getMin());
             holder.date.setText(dataset.get(position).getDate());
@@ -162,8 +162,7 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.ViewHo
 //    TODO: Need to change algorithm for ads placements without compromising forecast items.
     @Override
     public int getItemViewType(int position) {
-        if (position == 3)
-            return AD_TYPE;
+//        Return logic to place and AD goes here.
         return FORECAST_TYPE;
     }
 }

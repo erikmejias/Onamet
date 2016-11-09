@@ -23,7 +23,7 @@ public class Forecast {
 
     public Forecast(String max, String min, String speed, String humidity, String sunrise_time,
                     String sunset_time, String deg,
-                    String date, String description) {
+                    String date, String description, int iconId) {
 
         this.max = max;
         this.min = min;

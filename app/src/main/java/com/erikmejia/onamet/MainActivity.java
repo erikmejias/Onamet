@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        MobileAds.initialize(getApplicationContext(), "ca-app-pub-6005843157698202~1566560378");
+//        MobileAds.initialize(getApplicationContext(), "ca-app-pub-6005843157698202~1566560378");
 
 
 
@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     SharedPreferences.Editor e = getPrefs.edit();
 
                     //  Edit preference to make it false because we don't want this to run again
-                    e.putBoolean("firstStart", false);
+//                    e.putBoolean("firstStart", false);
 
                     //  Apply changes
                     e.apply();
