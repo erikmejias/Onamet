@@ -68,7 +68,7 @@ public class ForecastFragment extends Fragment {
 //        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
 
         databaseReference =
-                FirebaseDatabase.getInstance().getReference("forecasts/cities/7/forecasts");
+                FirebaseDatabase.getInstance().getReference("forecasts/cities/1/forecasts");
 
 //        loadDemoData();
 //        Log.d(TAG, "onCreate: created " + forecastsData.size() + " forecasts entries");
@@ -89,7 +89,8 @@ public class ForecastFragment extends Fragment {
         firebaseAdapter = new FirebaseAdapter(Forecast.class,
                 R.layout.forecast_item,
                 ForecastHolder.class,
-                databaseReference);
+                databaseReference,
+                getActivity());
 
         forecastList = (RecyclerView)
                 rootView.findViewById(R.id.future_forecast_recycler_list);
@@ -117,8 +118,14 @@ public class ForecastFragment extends Fragment {
         return rootView;
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+//        Stop listening for changes in the Firebase DB.
+        firebaseAdapter.cleanup();
+    }
 
-    /*private void loadTodayData(final View rootView) {
+/*    private void loadTodayData(final View rootView) {
 
 //        Custom font
         final Typeface font_thin = Typeface.createFromAsset(getActivity().getAssets(),

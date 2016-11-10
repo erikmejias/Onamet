@@ -22,14 +22,10 @@ import android.widget.Toast;
 import com.erikmejia.onamet.ui.BulletinsFragment;
 import com.erikmejia.onamet.ui.ForecastFragment;
 import com.erikmejia.onamet.ui.SettingsActivity;
-import com.erikmejia.onamet.ui.WeatherMapActivity;
 import com.erikmejia.onamet.util.PageTransformer;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import com.erikmejia.onamet.util.PageTransformer.*;
-import com.google.android.gms.ads.MobileAds;
 
 import static com.erikmejia.onamet.R.layout.activity_main;
 
@@ -149,7 +145,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     private void showMap(){
         Intent intent;
-        intent = new Intent(this, WeatherMapActivity.class);
+        intent = new Intent(this, MapsActivity.class);
         startActivity(intent);
     }
 

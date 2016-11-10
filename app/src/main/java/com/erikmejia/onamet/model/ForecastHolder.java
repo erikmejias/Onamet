@@ -1,8 +1,10 @@
 package com.erikmejia.onamet.model;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.erikmejia.onamet.R;
@@ -14,27 +16,43 @@ import com.erikmejia.onamet.util.Utils;
 
 public class ForecastHolder extends RecyclerView.ViewHolder {
 
+    View rootView;
+
     private TextView max_temperature;
     private TextView min_temperature;
     private TextView date;
     private TextView forecast_description;
     public ImageView icon;
 
+    private TextView city_name;
+    private LinearLayout icon_wrapper;
 
 
     public ForecastHolder(View itemView) {
         super(itemView);
+        rootView = itemView;
 
-        this.max_temperature = (TextView) itemView.findViewById(R.id.forecast_max_temperature);
-        this.min_temperature = (TextView) itemView.findViewById(R.id.future_forecast_min_temperature);
-        this.date = (TextView) itemView.findViewById(R.id.forecast_date_title);
-        this.forecast_description = (TextView) itemView.findViewById(R.id.forecast_description);
-        this.icon = (ImageView) itemView.findViewById(R.id.future_weather_icon);
-//            icon_wrapper = (LinearLayout) itemView.findViewById(R.id.forecast_item_icon_wrapper);
+        if (rootView.findViewById(R.id.city_name_text) != null) {
+            //        TODAY FORECAST ONLY
+            this.city_name = (TextView) itemView.findViewById(R.id.city_name_text);
+            this.icon_wrapper = (LinearLayout) itemView.findViewById(R.id.today_forecast_icon);
+            this.max_temperature = (TextView) itemView.findViewById(R.id.forecast_max_temperature);
+            this.date = (TextView) itemView.findViewById(R.id.forecast_date_title);
+            this.forecast_description = (TextView) itemView.findViewById(R.id.forecast_description);
+        } else {
 
-//        itemView.setClickable(true);
+            this.max_temperature = (TextView) itemView.findViewById(R.id.forecast_max_temperature);
+            this.min_temperature = (TextView) itemView.findViewById(R.id.future_forecast_min_temperature);
+            this.date = (TextView) itemView.findViewById(R.id.forecast_date_title);
+            this.forecast_description = (TextView) itemView.findViewById(R.id.forecast_description);
+            this.icon = (ImageView) itemView.findViewById(R.id.future_weather_icon);
+        }
+
     }
 
+    public View getRootView() {
+        return rootView;
+    }
 
     public void setMaxTemperature(String temperature) {
         max_temperature.setText(temperature);
@@ -56,12 +74,31 @@ public class ForecastHolder extends RecyclerView.ViewHolder {
         icon.setImageResource(Utils.bulletinIcon(iconId));
     }
 
-    public void bind(final Forecast forecastItem, final OnForecastItemClickListener listener) {
-        itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                listener.onItemClicked(forecastItem);
-            }
-        });
+    public TextView getMax_temperature() {
+        return max_temperature;
+    }
+
+    public TextView getMin_temperature() {
+        return min_temperature;
+    }
+
+    public TextView getDate() {
+        return date;
+    }
+
+    public TextView getForecast_description() {
+        return forecast_description;
+    }
+
+    public TextView getCity_name() {
+        return city_name;
+    }
+
+    void setCityName(String name) {
+        this.city_name.setText(name);
+    }
+
+    public void setAnimatedIcon(int iconId, Context context) {
+        Utils.setAnimatedIcon(this.icon_wrapper, iconId, context);
     }
 }

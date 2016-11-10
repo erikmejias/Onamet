@@ -58,52 +58,52 @@ public class Utils {
 
 
         switch (iconId){
-            case 1:
+            case 0:
                 SunView sunView = new SunView(context);
                 sunView.setLayoutParams(params);
                 layout.addView(sunView);
                 break;
-            case 2:
+            case 1:
                 CloudFogView cloud = new CloudFogView(context);
                 cloud.setLayoutParams(params);
                 layout.addView(cloud);
                 break;
-            case 3:
+            case 2:
                 CloudHvRainView cloudHvRainView = new CloudHvRainView(context);
                 cloudHvRainView.setLayoutParams(params);
                 layout.addView(cloudHvRainView);
                 break;
-            case 4:
+            case 3:
                 CloudMoonView cloudMoonView = new CloudMoonView(context);
                 cloudMoonView.setLayoutParams(params);
                 layout.addView(cloudMoonView);
                 break;
-            case 5:
+            case 4:
                 CloudRainView rainView = new CloudRainView(context);
                 rainView.setLayoutParams(params);
                 layout.addView(rainView);
                 break;
-            case 6:
+            case 5:
                 CloudSunView cloudSunView = new CloudSunView(context);
                 cloudSunView.setLayoutParams(params);
                 layout.addView(cloudSunView);
                 break;
-            case 7:
+            case 6:
                 CloudThunderView cloudThunderView = new CloudThunderView(context);
                 cloudThunderView.setLayoutParams(params);
                 layout.addView(cloudThunderView);
                 break;
-            case 8:
+            case 7:
                 CloudView cloudView = new CloudView(context);
                 cloudView.setLayoutParams(params);
                 layout.addView(cloudView);
                 break;
-            case 9:
+            case 8:
                 MoonView moonView = new MoonView(context);
                 moonView.setLayoutParams(params);
                 layout.addView(moonView);
                 break;
-            case 10:
+            case 9:
                 WindView windView = new WindView(context);
                 windView.setLayoutParams(params);
                 layout.addView(windView);
