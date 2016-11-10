@@ -16,7 +16,7 @@ import com.erikmejia.onamet.util.Utils;
 
 public class ForecastHolder extends RecyclerView.ViewHolder {
 
-    View rootView;
+    private View rootView;
 
     private TextView max_temperature;
     private TextView min_temperature;

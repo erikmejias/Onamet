@@ -58,7 +58,7 @@ public class Utils {
 
 
         switch (iconId){
-            case 1:
+            case 4:
                 if (layout.findViewById(R.id.about_toolbar) == null) {
                     SunView sunView = new SunView(context);
                     sunView.setId(R.id.about_toolbar);
@@ -66,7 +66,7 @@ public class Utils {
                     layout.addView(sunView);
                 }
                 break;
-            case 0:
+            case 1:
                 if (layout.findViewById(R.id.about_toolbar) == null) {
                     CloudFogView cloud = new CloudFogView(context);
                     cloud.setId(R.id.about_toolbar);
@@ -90,7 +90,7 @@ public class Utils {
                     layout.addView(cloudMoonView);
                 }
                 break;
-            case 4:
+            case 0:
                 if (layout.findViewById(R.id.about_toolbar) == null) {
                     CloudRainView rainView = new CloudRainView(context);
                     rainView.setId(R.id.about_toolbar);
