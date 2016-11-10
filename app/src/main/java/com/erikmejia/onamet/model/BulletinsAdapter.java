@@ -56,7 +56,7 @@ public class BulletinsAdapter extends RecyclerView.Adapter<BulletinsAdapter.View
         holder.date.setText(bulletins.get(position).getDate());
         holder.title.setText(bulletins.get(position).getTitle());
         holder.description.setText(bulletins.get(position).getDescription());
-        holder.icon.setImageResource(Utils.bulletinIcon(bulletins.get(position).getIconId()));
+//        holder.icon.setImageResource(Utils.bulletinIcon(bulletins.get(position).getIconId()));
 
         holder.title.setTypeface(font_bold);
         holder.description.setTypeface(font_reg);
@@ -81,7 +81,7 @@ public class BulletinsAdapter extends RecyclerView.Adapter<BulletinsAdapter.View
             date = (TextView) itemView.findViewById(R.id.bulletins_date_text);
             title = (TextView) itemView.findViewById(R.id.bulletins_title_text);
             description = (TextView) itemView.findViewById(R.id.bulletins_description_text);
-            icon = (ImageView) itemView.findViewById(R.id.bulletin_icon);
+//            icon = (ImageView) itemView.findViewById(R.id.bulletin_icon);
 
             itemView.setClickable(true);
         }

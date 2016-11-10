@@ -19,7 +19,9 @@
             android:text="Titulo del boletin"
             android:gravity="center"
             android:layout_marginTop="5dp"
-            android:textSize="18sp"
+            android:textSize="20sp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -47,8 +49,10 @@
                     android:textSize="14sp"
                     android:ellipsize="end"
                     android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingRight="10dp"
                     android:paddingLeft="10dp" />
 
                 <TextView
@@ -64,7 +68,7 @@
 
             </LinearLayout>
 
-            <LinearLayout
+            <!--<LinearLayout
                 android:paddingBottom="@dimen/activity_vertical_margin"
                 android:layout_marginLeft="10dp"
                 android:layout_marginStart="10dp"
@@ -74,13 +78,14 @@
                 android:weightSum="1">
 
                 <ImageView
+                    android:visibility="gone"
                     android:layout_gravity="top"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:srcCompat="@drawable/weather_showers_scattered_day"
                     android:id="@+id/bulletin_icon" />
 
-            </LinearLayout>
+            </LinearLayout>-->
 
         </LinearLayout>
 

@@ -223,19 +223,6 @@ public class MyServlet extends HttpServlet {
         }
         return receivedForecasts;
 
-//        CurrentWeather currentWeather = owm.currentWeatherByCityCode(3491941);
-//
-//        System.out.println( "City: " + currentWeather.getCityName() );
-//        System.out.println( "Max T. : " + currentWeather.getMainInstance().getMaxTemperature() );
-//        System.out.println( "Min T. : " + currentWeather.getMainInstance().getMinTemperature() );
-//        System.out.println( "Speed : " + currentWeather.getWindInstance().getWindSpeed() );
-//        System.out.println( "Humidity : " + currentWeather.getMainInstance().getHumidity() );
-//        System.out.println( "Sunrise : " + currentWeather.getSysInstance().getSunriseTime() );
-//        System.out.println( "Sunset : " + currentWeather.getSysInstance().getSunsetTime() );
-//        System.out.println( "Degree : " + currentWeather.getWindInstance().getWindDegree() );
-//        System.out.println( "Latitude : " + currentWeather.getCoordInstance().getLatitude() );
-//        System.out.println( "Longitude : " + currentWeather.getCoordInstance().getLongitude() );
-//        System.out.println( "Description : " + currentWeather.getWeatherInstance(0).getWeatherDescription() );
     }
 
 }
