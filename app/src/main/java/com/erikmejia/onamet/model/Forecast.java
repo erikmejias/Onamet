@@ -5,16 +5,17 @@ package com.erikmejia.onamet.model;
  */
 
 public class Forecast {
-//    Forecast attributes
+
+    //    Forecast attributes
     private String max;         // Max temperature
     private String min;         // Min temperature
     private String speed;       // Wind Speed
     private String humidity;
     private String sunrise_time;
     private String sunset_time;
+    private String description;
     private String deg;         // Wind direction
     private String date;        // Forecast date
-    private String description;
     private int iconId;
 
     public Forecast() {
@@ -22,8 +23,7 @@ public class Forecast {
     }
 
     public Forecast(String max, String min, String speed, String humidity, String sunrise_time,
-                    String sunset_time, String deg,
-                    String date, String description, int iconId) {
+                    String sunset_time, String description, String deg, String date, int iconId) {
 
         this.max = max;
         this.min = min;
@@ -31,10 +31,17 @@ public class Forecast {
         this.humidity = humidity;
         this.sunrise_time = sunrise_time;
         this.sunset_time = sunset_time;
+        this.description = description;
         this.deg = deg;
         this.date = date;
-        this.description = description;
         this.iconId = iconId;
+    }
+
+    @Override
+    public String toString() {
+        return "Forecast: " + this.getMax() + " " + this.getMin() + " "  + this.getDate() + " "
+                + this.getDescription() + " "  + this.getDeg() + " "  + this.getHumidity() + " "
+                + this.getSunrise_time() + " "  + this.getSunset_time();
     }
 
     public String getMax() {
@@ -85,6 +92,14 @@ public class Forecast {
         this.sunset_time = sunset_time;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public String getDeg() {
         return deg;
     }
@@ -94,19 +109,11 @@ public class Forecast {
     }
 
     public String getDate() {
-      return date;
+        return date;
     }
 
     public void setDate(String date) {
-      this.date = date;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
+        this.date = date;
     }
 
     public int getIconId() {

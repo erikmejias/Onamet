@@ -1,10 +1,8 @@
 package com.erikmejia.onamet.model;
 
-import android.content.Context;
 import android.util.Log;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
 
 /**
@@ -22,7 +20,7 @@ public class FirebaseAdapter extends FirebaseRecyclerAdapter<Forecast, ForecastH
     }
 
     @Override
-    protected void populateViewHolder(ForecastHolder viewHolder, Forecast model, int position) {
+    public void populateViewHolder(ForecastHolder viewHolder, Forecast model, int position) {
         Log.d(TAG, "populateViewHolder EXECUTED!!!");
 
         viewHolder.setDate(model.getDate());
@@ -31,5 +29,10 @@ public class FirebaseAdapter extends FirebaseRecyclerAdapter<Forecast, ForecastH
         viewHolder.setMinTemperature(model.getMin());
         viewHolder.setDescription(model.getDescription());
 
+    }
+
+    @Override
+    public int getItemCount() {
+        return super.getItemCount();
     }
 }

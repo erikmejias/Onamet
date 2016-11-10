@@ -13,19 +13,24 @@ public class City {
     private String population;
     private String lat;         // Latitude
     private String lon;         // Longitude
+    private long cityCode;
     private List<Forecast> forecasts;
 
-    public City(){
-//        Empty constructor required by Firebase.
+    //    Method to add forecast to current city
+    public void addForecast(Forecast forecast) {
+        forecasts.add(forecast);
     }
 
-    public City(String name, String population, String lat, String lon, List<Forecast> forecasts) {
+    public City(String name, String population, String lat, String lon, long cityCode) {
         this.name = name;
         this.population = population;
         this.lat = lat;
         this.lon = lon;
-        this.forecasts = forecasts;
+        this.cityCode = cityCode;
+        forecasts = new ArrayList<>();
     }
+
+//    Getters and Setters
 
     public String getName() {
         return name;
@@ -57,6 +62,14 @@ public class City {
 
     public void setLon(String lon) {
         this.lon = lon;
+    }
+
+    public long getCityCode() {
+        return cityCode;
+    }
+
+    public void setCityCode(long cityCode) {
+        this.cityCode = cityCode;
     }
 
     public List<Forecast> getForecasts() {

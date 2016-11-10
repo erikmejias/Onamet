@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.erikmejia.onamet.R;
+import com.erikmejia.onamet.util.Utils;
 
 /**
  * Created by erik on 11/5/16.
@@ -23,6 +24,7 @@ public class ForecastHolder extends RecyclerView.ViewHolder {
 
     public ForecastHolder(View itemView) {
         super(itemView);
+
         this.max_temperature = (TextView) itemView.findViewById(R.id.forecast_max_temperature);
         this.min_temperature = (TextView) itemView.findViewById(R.id.future_forecast_min_temperature);
         this.date = (TextView) itemView.findViewById(R.id.forecast_date_title);
@@ -32,6 +34,7 @@ public class ForecastHolder extends RecyclerView.ViewHolder {
 
 //        itemView.setClickable(true);
     }
+
 
     public void setMaxTemperature(String temperature) {
         max_temperature.setText(temperature);
@@ -50,7 +53,7 @@ public class ForecastHolder extends RecyclerView.ViewHolder {
     }
 
     public void setIcon(int iconId) {
-        icon.setImageResource(iconId);
+        icon.setImageResource(Utils.bulletinIcon(iconId));
     }
 
     public void bind(final Forecast forecastItem, final OnForecastItemClickListener listener) {

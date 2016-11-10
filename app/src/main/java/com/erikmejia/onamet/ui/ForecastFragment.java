@@ -43,16 +43,13 @@ import static com.facebook.FacebookSdk.getApplicationContext;
  * Fragment responsible of displaying main forecast information.
  */
 
-public class ForecastFragment extends Fragment{
+public class ForecastFragment extends Fragment {
+
     private static String TAG = ForecastFragment.class.getSimpleName();
     private DatabaseReference databaseReference;
     FirebaseAdapter firebaseAdapter;
 
-    private List<Forecast> forecastsData;
-    public List<City> provincesData;
-    private FirebaseRecyclerAdapter<Forecast, ForecastHolder> tAdapter;
     private RecyclerView forecastList;
-    private LinearLayoutManager linearLayoutManager;
 
     public ForecastFragment() {
 //        required empty constructor.
@@ -67,23 +64,11 @@ public class ForecastFragment extends Fragment{
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-//        Initializing list of City objects
-//        this.provincesData = new ArrayList<>();
-//        forecastsData = new ArrayList<>();
-
-//        loadDemoData();
-
+        //        Cache data to local disk ( OFFLINE SUPPORT ).
 //        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
 
-
-        databaseReference = FirebaseDatabase.getInstance().getReference("/forecasts/cities/0/forecasts");
-        Query query = databaseReference;
-
-        firebaseAdapter = new FirebaseAdapter(Forecast.class,
-                R.layout.forecast_item,
-                ForecastHolder.class,
-                query);
+        databaseReference =
+                FirebaseDatabase.getInstance().getReference("forecasts/cities/7/forecasts");
 
 //        loadDemoData();
 //        Log.d(TAG, "onCreate: created " + forecastsData.size() + " forecasts entries");
@@ -99,40 +84,26 @@ public class ForecastFragment extends Fragment{
 //        TODO - Fix alpha property issue in today's forecast background image
 
 
-//        Cache data to local disk ( OFFLINE SUPPORT ).
-//        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
-
 
 //        loadTodayData(rootView);
+        firebaseAdapter = new FirebaseAdapter(Forecast.class,
+                R.layout.forecast_item,
+                ForecastHolder.class,
+                databaseReference);
 
         forecastList = (RecyclerView)
                 rootView.findViewById(R.id.future_forecast_recycler_list);
         forecastList.setHasFixedSize(true);
+        forecastList.setLayoutManager(new LinearLayoutManager(getActivity()));
+
 //        Makes smooth scrolling inside the NestedScrollView
-        forecastList.setNestedScrollingEnabled(false);
-
-
-        /*ForecastAdapter forecastsAdapter = new ForecastAdapter(forecastsData, new OnForecastItemClickListener() {
-            @Override
-            public void onItemClicked(Forecast forecastItem) {
-                Intent intent;
-                intent = new Intent(getContext(), ForecastDetails.class);
-                startActivity(intent);
-            }
-        }, getContext());*/
-
-//        Firebase Adapter V2.0
-//        DatabaseReference forecastReference =
-//                FirebaseDatabase.getInstance().getReference("/forecasts/cities/0/forecasts/");
-
-        Log.d(TAG, "onCreateView: databaseReference " + String.valueOf(databaseReference));
-
+//        forecastList.setNestedScrollingEnabled(false);
 
 
 //        Setting adapter to recyclerview
         forecastList.setAdapter(firebaseAdapter);
-
-//        Log.d(TAG, "onCreateView: database reference" + databaseReference.getRef());
+        Log.d(TAG, "onCreateView: firebaseAdapterCount " +
+                firebaseAdapter.getItemCount());
 
         /*
         NativeExpressAdView adView = (NativeExpressAdView) rootView.findViewById(R.id.forecastAd);
@@ -146,218 +117,8 @@ public class ForecastFragment extends Fragment{
         return rootView;
     }
 
-    public void loadDemoData() {
-//        Initialize a forecast objects holder.
-//        forecastsData = new ArrayList<>();
-        City city = new City(
-                "Santo Domingo",
-                "345,245",
-                "19.345",
-                "-23.545",
-                forecastsData
-                );
 
-        /*for (int i = 0; i < 5; i++) {
-            Forecast forecast = new Forecast(
-                    "25º", "23º", "23 m/s", "33%", "6:35 AM", "7:22 PM", "Azua", "234,134 habitantes",
-                    "lluvias dispersas", "3923.454", "354.223", "34 NE", "Hoy"
-            );
-//            Add new forecast objects to the list.
-            forecastsData.add(forecast);
-        }*/
-
-        Forecast forecast = new Forecast(
-                "26º",
-                "25º",
-                "23 m/s",
-                "15",
-                "6:37",
-                "7:01",
-                "33 NE",
-                "Hoy",
-                "lluvias ligeras",
-                5
-        );
-        Forecast forecast2 = new Forecast(
-                "23º",
-                "19º",
-                "23",
-                "15",
-                "6:37",
-                "7:01",
-                "33",
-                "Nov 8",
-                "cielo claro",
-                2
-        );
-        Forecast forecast3 = new Forecast(
-                "23º",
-                "19º",
-                "23",
-                "15",
-                "6:37",
-                "7:01",
-                "33",
-                "Nov 9",
-                "nubes dispersas",
-                3
-        );
-        Forecast forecast4 = new Forecast(
-                "23º",
-                "19º",
-                "23",
-                "15",
-                "6:37",
-                "7:01",
-                "33",
-                "Nov 10",
-                "lluvias ligeras",
-                4
-        );
-        Forecast forecast5 = new Forecast(
-                "23º",
-                "19º",
-                "23",
-                "15",
-                "6:37",
-                "7:01",
-                "33",
-                "Nov 11",
-                "lluvias ligeras",
-                5
-        );
-        Forecast forecast6 = new Forecast(
-                "23º",
-                "19º",
-                "23",
-                "15",
-                "6:37",
-                "7:01",
-                "33",
-                "Nov 12",
-                "lluvias ligeras",
-                6
-        );
-        Forecast forecast7 = new Forecast(
-                "23º",
-                "19º",
-                "23",
-                "15",
-                "6:37",
-                "7:01",
-                "33",
-                "Nov 13",
-                "lluvias ligeras",
-                7
-        );
-        Forecast forecast8 = new Forecast(
-                "23º",
-                "19º",
-                "23",
-                "15",
-                "6:37",
-                "7:01",
-                "33",
-                "Nov 14",
-                "lluvias ligeras",
-                3
-        );
-        Forecast forecast9 = new Forecast(
-                "23º",
-                "19º",
-                "23",
-                "15",
-                "6:37",
-                "7:01",
-                "33",
-                "Nov 15",
-                "lluvias ligeras",
-                4
-        );
-        Forecast forecast10 = new Forecast(
-                "23º",
-                "19º",
-                "23",
-                "15",
-                "6:37",
-                "7:01",
-                "33",
-                "Nov 16",
-                "lluvias ligeras",
-                5
-        );
-        Forecast forecast11 = new Forecast(
-                "23º",
-                "19º",
-                "23",
-                "15",
-                "6:37",
-                "7:01",
-                "33",
-                "Nov 17",
-                "lluvias ligeras",
-                7
-        );
-        Forecast forecast12 = new Forecast(
-                "23º",
-                "19º",
-                "23",
-                "15",
-                "6:37",
-                "7:01",
-                "33",
-                "Nov 18",
-                "lluvias ligeras",
-                1
-        );
-        Forecast forecast13 = new Forecast(
-                "23º",
-                "19º",
-                "23",
-                "15",
-                "6:37",
-                "7:01",
-                "33",
-                "Nov 19",
-                "lluvias ligeras",
-                9
-        );
-        Forecast forecast14 = new Forecast(
-                "23º",
-                "19º",
-                "23",
-                "15",
-                "6:37",
-                "7:01",
-                "33",
-                "Nov 20",
-                "lluvias ligeras",
-                11
-        );
-
-
-        forecastsData.add(forecast);
-        forecastsData.add(forecast2);
-        forecastsData.add(forecast3);
-        forecastsData.add(forecast4);
-        forecastsData.add(forecast5);
-        forecastsData.add(forecast6);
-        forecastsData.add(forecast7);
-        forecastsData.add(forecast8);
-        forecastsData.add(forecast9);
-        forecastsData.add(forecast10);
-        forecastsData.add(forecast11);
-        forecastsData.add(forecast12);
-        forecastsData.add(forecast13);
-        forecastsData.add(forecast14);
-    }
-
-    public void addCity(City city) {
-        this.provincesData.add(city);
-        Log.d(TAG, "addCity: added " + city.getName());
-    }
-
-    private void loadTodayData(final View rootView) {
+    /*private void loadTodayData(final View rootView) {
 
 //        Custom font
         final Typeface font_thin = Typeface.createFromAsset(getActivity().getAssets(),
@@ -426,6 +187,6 @@ public class ForecastFragment extends Fragment{
                 startActivity(intent);
             }
         });
-    }
+    }*/
 
 }

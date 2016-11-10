@@ -72,7 +72,17 @@
             android:value="@integer/google_play_services_version" />
 
         <activity android:name=".ui.SMSValidation" />
-        <activity android:name=".ui.WeatherMapActivity"></activity>
+
+        <activity android:name=".ui.WeatherMapActivity" />
+
+        <activity android:name=".FBT">
+            <!--<intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>-->
+        </activity>
+
     </application>
 
 </manifest>

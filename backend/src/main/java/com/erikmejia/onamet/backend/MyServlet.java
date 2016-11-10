@@ -41,6 +41,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
@@ -205,14 +206,18 @@ public class MyServlet extends HttpServlet {
         DailyForecast dailyForecast = owm.dailyForecastByCityCode(city, quantity);
         for (int index = 0; index < 15; index++) {
             Forecast forecast = new Forecast(
-                    String.valueOf(dailyForecast.getForecastInstance(index).getTemperatureInstance().getMaximumTemperature()),
-                    String.valueOf(dailyForecast.getForecastInstance(index).getTemperatureInstance().getMinimumTemperature()),
-                    String.valueOf(dailyForecast.getForecastInstance(index).getWindSpeed()),
-                    String.valueOf(dailyForecast.getForecastInstance(index).getHumidity()),
+                    String.valueOf(
+                            Math.round(dailyForecast.getForecastInstance(index).getTemperatureInstance().getMaximumTemperature())
+                                    + "º"),
+                    String.valueOf(
+                            Math.round(dailyForecast.getForecastInstance(index).getTemperatureInstance().getMinimumTemperature())
+                                    + "º"),
+                    String.valueOf(Math.round(dailyForecast.getForecastInstance(index).getWindSpeed())),
+                    String.valueOf(Math.round(dailyForecast.getForecastInstance(index).getHumidity())),
                     "6:34",
                     "7:03",
                     dailyForecast.getForecastInstance(index).getWeatherInstance(0).getWeatherDescription(),
-                    String.valueOf(dailyForecast.getForecastInstance(index).getWindDegree()),
+                    String.valueOf(Math.round(dailyForecast.getForecastInstance(index).getWindDegree())),
                     df.format(dailyForecast.getForecastInstance(index).getDateTime()),
                     0
             );
