@@ -58,55 +58,85 @@ public class Utils {
 
 
         switch (iconId){
-            case 0:
-                SunView sunView = new SunView(context);
-                sunView.setLayoutParams(params);
-                layout.addView(sunView);
-                break;
             case 1:
-                CloudFogView cloud = new CloudFogView(context);
-                cloud.setLayoutParams(params);
-                layout.addView(cloud);
+                if (layout.findViewById(R.id.about_toolbar) == null) {
+                    SunView sunView = new SunView(context);
+                    sunView.setId(R.id.about_toolbar);
+                    sunView.setLayoutParams(params);
+                    layout.addView(sunView);
+                }
+                break;
+            case 0:
+                if (layout.findViewById(R.id.about_toolbar) == null) {
+                    CloudFogView cloud = new CloudFogView(context);
+                    cloud.setId(R.id.about_toolbar);
+                    cloud.setLayoutParams(params);
+                    layout.addView(cloud);
+                }
                 break;
             case 2:
-                CloudHvRainView cloudHvRainView = new CloudHvRainView(context);
-                cloudHvRainView.setLayoutParams(params);
-                layout.addView(cloudHvRainView);
+                if (layout.findViewById(R.id.about_toolbar) == null) {
+                    CloudHvRainView cloudHvRainView = new CloudHvRainView(context);
+                    cloudHvRainView.setId(R.id.about_toolbar);
+                    cloudHvRainView.setLayoutParams(params);
+                    layout.addView(cloudHvRainView);
+                }
                 break;
             case 3:
-                CloudMoonView cloudMoonView = new CloudMoonView(context);
-                cloudMoonView.setLayoutParams(params);
-                layout.addView(cloudMoonView);
+                if (layout.findViewById(R.id.about_toolbar) == null) {
+                    CloudMoonView cloudMoonView = new CloudMoonView(context);
+                    cloudMoonView.setId(R.id.about_toolbar);
+                    cloudMoonView.setLayoutParams(params);
+                    layout.addView(cloudMoonView);
+                }
                 break;
             case 4:
-                CloudRainView rainView = new CloudRainView(context);
-                rainView.setLayoutParams(params);
-                layout.addView(rainView);
+                if (layout.findViewById(R.id.about_toolbar) == null) {
+                    CloudRainView rainView = new CloudRainView(context);
+                    rainView.setId(R.id.about_toolbar);
+                    rainView.setLayoutParams(params);
+                    layout.addView(rainView);
+                }
                 break;
             case 5:
-                CloudSunView cloudSunView = new CloudSunView(context);
-                cloudSunView.setLayoutParams(params);
-                layout.addView(cloudSunView);
+                if (layout.findViewById(R.id.about_toolbar) == null) {
+                    CloudSunView cloudSunView = new CloudSunView(context);
+                    cloudSunView.setId(R.id.about_toolbar);
+                    cloudSunView.setLayoutParams(params);
+                    layout.addView(cloudSunView);
+                }
                 break;
             case 6:
-                CloudThunderView cloudThunderView = new CloudThunderView(context);
-                cloudThunderView.setLayoutParams(params);
-                layout.addView(cloudThunderView);
+                if (layout.findViewById(R.id.about_toolbar) == null) {
+                    CloudThunderView cloudThunderView = new CloudThunderView(context);
+                    cloudThunderView.setId(R.id.about_toolbar);
+                    cloudThunderView.setLayoutParams(params);
+                    layout.addView(cloudThunderView);
+                }
                 break;
             case 7:
-                CloudView cloudView = new CloudView(context);
-                cloudView.setLayoutParams(params);
-                layout.addView(cloudView);
+                if (layout.findViewById(R.id.about_toolbar) == null) {
+                    CloudView cloudView = new CloudView(context);
+                    cloudView.setId(R.id.about_toolbar);
+                    cloudView.setLayoutParams(params);
+                    layout.addView(cloudView);
+                }
                 break;
             case 8:
-                MoonView moonView = new MoonView(context);
-                moonView.setLayoutParams(params);
-                layout.addView(moonView);
+                if (layout.findViewById(R.id.about_toolbar) == null) {
+                    MoonView moonView = new MoonView(context);
+                    moonView.setId(R.id.about_toolbar);
+                    moonView.setLayoutParams(params);
+                    layout.addView(moonView);
+                }
                 break;
             case 9:
-                WindView windView = new WindView(context);
-                windView.setLayoutParams(params);
-                layout.addView(windView);
+                if (layout.findViewById(R.id.about_toolbar) == null) {
+                    WindView windView = new WindView(context);
+                    windView.setId(R.id.about_toolbar);
+                    windView.setLayoutParams(params);
+                    layout.addView(windView);
+                }
                 break;
         }
     }

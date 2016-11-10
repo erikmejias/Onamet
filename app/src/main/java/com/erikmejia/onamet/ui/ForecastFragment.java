@@ -58,17 +58,20 @@ public class ForecastFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        //        Cache data to local disk ( OFFLINE SUPPORT ).
+//        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //        Cache data to local disk ( OFFLINE SUPPORT ).
-//        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
-
-        databaseReference =
-                FirebaseDatabase.getInstance().getReference("forecasts/cities/1/forecasts");
+        if (databaseReference == null) {
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
+            database.setPersistenceEnabled(true);
+            databaseReference =
+                    database.getReference("forecasts/cities/1/forecasts");
+        }
 
 //        loadDemoData();
 //        Log.d(TAG, "onCreate: created " + forecastsData.size() + " forecasts entries");
@@ -97,8 +100,6 @@ public class ForecastFragment extends Fragment {
         forecastList.setHasFixedSize(true);
         forecastList.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-//        Makes smooth scrolling inside the NestedScrollView
-//        forecastList.setNestedScrollingEnabled(false);
 
 
 //        Setting adapter to recyclerview
