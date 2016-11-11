@@ -18,6 +18,7 @@
         android:layout_height="480dp">
 
         <LinearLayout
+            android:layout_marginTop="20dp"
             android:id="@+id/today_forecast_top"
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -180,11 +181,11 @@
             <ImageView
                 android:layout_width="35dp"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/sunrise"
+                app:srcCompat="@drawable/humidity"
                 android:id="@+id/today_sunrise_icon"/>
 
             <TextView
-                android:id="@+id/forecast_details_sunrise_text"
+                android:id="@+id/forecast_details_humidity_text"
                 android:text="6:35 AM"
                 android:textSize="17sp"
                 android:textColor="#fff"
@@ -194,7 +195,7 @@
         </LinearLayout>
 
 
-        <LinearLayout
+        <!--<LinearLayout
             android:layout_weight="1"
             android:orientation="vertical"
             android:gravity="center_horizontal"
@@ -204,18 +205,18 @@
             <ImageView
                 android:layout_width="35dp"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/sunset"
+                app:srcCompat="@drawable/rain"
                 android:id="@+id/today_sunset_icon"/>
 
             <TextView
-                android:id="@+id/forecast_details_sunset_text"
+                android:id="@+id/forecast_details_rain_percent_text"
                 android:text="7:10 PM"
                 android:textSize="17sp"
                 android:textColor="#fff"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
-        </LinearLayout>
+        </LinearLayout>-->
 
     </LinearLayout>
 

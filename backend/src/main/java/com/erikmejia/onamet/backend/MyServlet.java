@@ -194,16 +194,16 @@ public class MyServlet extends HttpServlet {
     public List<Forecast> searchWeather(long cityCode){
         List<Forecast> receivedForecasts = new ArrayList<>();
         OpenWeatherMap owm = new OpenWeatherMap(
-                OpenWeatherMap.Units.IMPERIAL,
-                OpenWeatherMap.Language.SPANISH,
+                OpenWeatherMap.Units.METRIC,
                 "ab935127aec33bcab3d7a12509748c88"
                 );
 
-        long city = 3491941;
+        owm.setLang(OpenWeatherMap.Language.SPANISH);
+
         byte quantity = 15;
         DateFormat df = new SimpleDateFormat("MMM d");
 
-        DailyForecast dailyForecast = owm.dailyForecastByCityCode(city, quantity);
+        DailyForecast dailyForecast = owm.dailyForecastByCityCode(cityCode, quantity);
         for (int index = 0; index < 15; index++) {
             Forecast forecast = new Forecast(
                     String.valueOf(
@@ -212,8 +212,11 @@ public class MyServlet extends HttpServlet {
                     String.valueOf(
                             Math.round(dailyForecast.getForecastInstance(index).getTemperatureInstance().getMinimumTemperature())
                                     + "º"),
-                    String.valueOf(Math.round(dailyForecast.getForecastInstance(index).getWindSpeed())),
-                    String.valueOf(Math.round(dailyForecast.getForecastInstance(index).getHumidity())),
+                    String.valueOf(
+                            Math.round(dailyForecast.getForecastInstance(index).getWindSpeed())
+                    + " km/h"),
+                    String.valueOf(Math.round(dailyForecast.getForecastInstance(index).getHumidity())
+                    + "%"),
                     "6:34",
                     "7:03",
                     dailyForecast.getForecastInstance(index).getWeatherInstance(0).getWeatherDescription(),
@@ -224,7 +227,6 @@ public class MyServlet extends HttpServlet {
 
             receivedForecasts.add(forecast);
 
-            System.out.println(forecast.toString());
         }
         return receivedForecasts;
 

@@ -53,29 +53,19 @@ public class ForecastDetails extends AppCompatActivity {
         TextView maxTemperature;
         TextView minTemperature;
         TextView weatherDescription;
-        TextView sixAM;
-        TextView eightAM;
-        TextView tenAM;
-        TextView twuelvePM;
-        TextView twoPM;
-        TextView fourPM;
-        TextView sixPM;
-        TextView eightPM;
-        TextView tenPM;
-        TextView twuelveAM;
         TextView windSpeed;
         TextView windDirection;
-        TextView sunrise;
-        TextView sunset;
+        TextView humidity;
+        TextView rainPercent;
 
         date = (TextView) findViewById(R.id.forecast_details_date);
         maxTemperature = (TextView) findViewById(R.id.forecast_details_max_text);
         minTemperature = (TextView) findViewById(R.id.forecast_details_min_text);
         weatherDescription = (TextView) findViewById(R.id.forecast_details_description);
-        windDirection = (TextView) findViewById(R.id.forecast_details_wind_text);
-        windSpeed = (TextView) findViewById(R.id.forecast_details_degrees_text);
-        sunrise = (TextView) findViewById(R.id.forecast_details_sunrise_text);
-        sunset = (TextView) findViewById(R.id.forecast_details_sunset_text);
+        windSpeed = (TextView) findViewById(R.id.forecast_details_wind_text);
+        windDirection = (TextView) findViewById(R.id.forecast_details_degrees_text);
+        humidity = (TextView) findViewById(R.id.forecast_details_humidity_text);
+//        rainPercent = (TextView) findViewById(R.id.forecast_details_rain_percent_text);
 
         Typeface regTypeface = Typeface.createFromAsset(getAssets(), "fonts/Brandon_reg.otf");
         Typeface boldTypeface = Typeface.createFromAsset(getAssets(), "fonts/Brandon_bld.otf");
@@ -84,6 +74,8 @@ public class ForecastDetails extends AppCompatActivity {
         maxTemperature.setText(extras.getString(Utils.ForecastConstants.MAX_TEMPERATURE));
         minTemperature.setText(extras.getString(Utils.ForecastConstants.MIN_TEMPERATURE));
         weatherDescription.setText(extras.getString(Utils.ForecastConstants.DESCRIPTION));
+
+        humidity.setText(extras.getString(Utils.ForecastConstants.HUMIDITY));
         windSpeed.setText(extras.getString(Utils.ForecastConstants.WIND_SPEED));
         windDirection.setText(extras.getString(Utils.ForecastConstants.WIND_DIRECTION));
 
@@ -100,8 +92,8 @@ public class ForecastDetails extends AppCompatActivity {
 
         windDirection.setTypeface(regTypeface);
         windSpeed.setTypeface(regTypeface);
-        sunrise.setTypeface(regTypeface);
-        sunset.setTypeface(regTypeface);
+        humidity.setTypeface(regTypeface);
+//        rainPercent.setTypeface(regTypeface);
 
     }
 
