@@ -58,8 +58,8 @@ public class FirebaseAdapter extends FirebaseRecyclerAdapter<Forecast, ForecastH
 
         if (getItemViewType(position) == TODAY) {
 
-            viewHolder.setCityName("La Romana");
-            viewHolder.setAnimatedIcon(position, context);
+            viewHolder.setCityName(model.getCity_name());
+            viewHolder.setAnimatedIcon(model.getIconId(), context);
 
             viewHolder.setDate(model.getDate());
             viewHolder.setMaxTemperature(model.getMax());
@@ -72,7 +72,7 @@ public class FirebaseAdapter extends FirebaseRecyclerAdapter<Forecast, ForecastH
 
 
         } else if (getItemViewType(position) == FORECAST_TYPE) {
-            viewHolder.setIcon(position);
+            viewHolder.setIcon(model.getIconId());
             viewHolder.setMinTemperature(model.getMin());
 
             viewHolder.setDate(model.getDate());

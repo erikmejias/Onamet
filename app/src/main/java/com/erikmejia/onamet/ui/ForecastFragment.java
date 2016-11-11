@@ -55,7 +55,7 @@ public class ForecastFragment extends Fragment {
             FirebaseDatabase database = FirebaseDatabase.getInstance();
 //            database.setPersistenceEnabled(true); // TODO: Enable it in production
             databaseReference =
-                    database.getReference("forecasts/cities/1/forecasts");
+                    database.getReference("forecasts/cities/20/forecasts");
         }
 
     }

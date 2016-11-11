@@ -9,8 +9,8 @@ package com.erikmejia.onamet.backend;
 import com.erikmejia.onamet.backend.model.City;
 import com.erikmejia.onamet.backend.model.Country;
 import com.erikmejia.onamet.backend.model.Forecast;
-import com.erikmejia.onamet.backend.model.NewsItem;
-import com.erikmejia.onamet.backend.util.Utils.Cities;
+import com.erikmejia.onamet.backend.util.Utils;
+import com.erikmejia.onamet.backend.util.Utils.Constants;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.database.DataSnapshot;
@@ -19,33 +19,19 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import net.aksingh.owmjapis.CurrentWeather;
 import net.aksingh.owmjapis.DailyForecast;
 import net.aksingh.owmjapis.OpenWeatherMap;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 import java.util.logging.Logger;
-import java.util.regex.Matcher;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.*;
-import javax.xml.ws.Response;
 
 public class MyServlet extends HttpServlet {
     String responseData = null;
@@ -135,51 +121,24 @@ public class MyServlet extends HttpServlet {
 
         Country country = new Country();
 
-        for (int index = 0; index < Cities.cityTest.length; index++) {
+        for (int index = 0; index < Utils.Constants.cityTest.length; index++) {
             int columnA = 0;
             int columnB = 1;
             int columnC = 2;
             int columnD = 3;
 
-//            Create a new city by fetching data from Utils.Cities.cityTest interface.
+//            Create a new city by fetching data from Utils.Constants.cityTest interface.
             City city = new City(
-                    Cities.cityTest[index][columnA],    // Name of the city
+                    Utils.Constants.cityTest[index][columnA],    // Name of the city
                     "234,235",                          // Population of the city
-                    Cities.cityTest[index][columnB],    // Latitude
-                    Cities.cityTest[index][columnC],    // Longitude
+                    Utils.Constants.cityTest[index][columnB],    // Latitude
+                    Constants.cityTest[index][columnC],    // Longitude
                     Long.valueOf(
-                            Cities.cityTest[index][columnD] // City code
+                            Constants.cityTest[index][columnD] // City code
                     ));
 
-            city.setForecasts(searchWeather(city.getCityCode()));
+            city.setForecasts(searchWeather(city.getName(), city.getCityCode()));
 
-//            Add weather data to this city
-            /*for (int i = 0; i < 13; i++) {
-                *//*
-                * Getting a Calendar object to put current date and then increment one for the
-                * next forecasts
-                * *//*
-                DateFormat df = new SimpleDateFormat("MMM d");
-                Date dateobj = new Date();
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(dateobj);
-                calendar.add(Calendar.DATE, i);
-
-                Forecast forecast = new Forecast(
-                        "12.3",
-                        "9.23",
-                        "34",
-                        "456",
-                        "6:37",
-                        "8:01",
-                        "lluvias ligeras",
-                        "34",
-                        df.format(calendar.getTime()),
-                        3
-                );
-
-                city.addForecast(forecast);
-            }*/
 //            Add the completed city to the Country object
             country.addCity(city);
         }
@@ -191,7 +150,7 @@ public class MyServlet extends HttpServlet {
     * Method to retrieve forecast data from OWM
     * */
 
-    public List<Forecast> searchWeather(long cityCode){
+    public List<Forecast> searchWeather(String cityName, long cityCode){
         List<Forecast> receivedForecasts = new ArrayList<>();
         OpenWeatherMap owm = new OpenWeatherMap(
                 OpenWeatherMap.Units.METRIC,
@@ -206,6 +165,7 @@ public class MyServlet extends HttpServlet {
         DailyForecast dailyForecast = owm.dailyForecastByCityCode(cityCode, quantity);
         for (int index = 0; index < 15; index++) {
             Forecast forecast = new Forecast(
+                    cityName,
                     String.valueOf(
                             Math.round(dailyForecast.getForecastInstance(index).getTemperatureInstance().getMaximumTemperature())
                                     + "º"),
@@ -222,7 +182,9 @@ public class MyServlet extends HttpServlet {
                     dailyForecast.getForecastInstance(index).getWeatherInstance(0).getWeatherDescription(),
                     String.valueOf(Math.round(dailyForecast.getForecastInstance(index).getWindDegree())),
                     df.format(dailyForecast.getForecastInstance(index).getDateTime()),
-                    0
+                    Utils.getWeatherCode(
+                            dailyForecast.getForecastInstance(index).getWeatherInstance(0)
+                                    .getWeatherCode())
             );
 
             receivedForecasts.add(forecast);

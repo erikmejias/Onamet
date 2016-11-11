@@ -7,6 +7,7 @@ package com.erikmejia.onamet.backend.model;
 public class Forecast {
 
     //    Forecast attributes
+    private String city_name;
     private String max;         // Max temperature
     private String min;         // Min temperature
     private String speed;       // Wind Speed
@@ -22,9 +23,10 @@ public class Forecast {
 //        Empty constructor
     }
 
-    public Forecast(String max, String min, String speed, String humidity, String sunrise_time,
+    public Forecast(String city_name, String max, String min, String speed, String humidity, String sunrise_time,
                     String sunset_time, String description, String deg, String date, int iconId) {
 
+        this.city_name = city_name;
         this.max = max;
         this.min = min;
         this.speed = speed;
@@ -39,9 +41,17 @@ public class Forecast {
 
     @Override
     public String toString() {
-        return "Forecast: " + this.getMax() + " " + this.getMin() + " "  + this.getDate() + " "
+        return "Forecast: " + this.getCity_name() + this.getMax() + " " + this.getMin() + " "  + this.getDate() + " "
                 + this.getDescription() + " "  + this.getDeg() + " "  + this.getHumidity() + " "
                 + this.getSunrise_time() + " "  + this.getSunset_time();
+    }
+
+    public String getCity_name() {
+        return city_name;
+    }
+
+    public void setCity_name(String city_name) {
+        this.city_name = city_name;
     }
 
     public String getMax() {

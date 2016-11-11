@@ -11,7 +11,23 @@ public class Utils {
             {"", ""}
     };
 
-    public interface Cities {
+    public interface Constants {
+        public int CLEAR_SKY = 0;
+        public int THUNDERSTORM = 1;
+        public int THUNDERSTORM_RAIN = 2;
+        public int THUNDERSTORM_HEAVY_RAIN = 3;
+        public int DRIZZLE = 4;
+        public int DRIZZLE_HEAVY = 5;
+        public int RAIN_LIGHT = 6;
+        public int RAIN_MODERATE = 7;
+        public int RAIN_HEAVY = 8;
+        public int CLOUDS_FEW = 9;
+        public int CLOUDS_SCATTERED = 10;
+        public int CLOUDS_BROKEN = 11;
+        public int TROPICAL_STORM = 12;
+        public int HURRICANE = 13;
+        public int WINDY = 14;
+        public int NO_REGISTRY = 15;
 
         String[][] cityTest = {
 
@@ -45,6 +61,90 @@ public class Utils {
                 {"Azua", "12.345", "-19.234", "3512208"},
                 {"Bani", "12.345", "-19.234", "3512064"},
         };
+    }
+
+    public static int getWeatherCode(int code) {
+
+        switch (code){
+            case 200: // Thunderstorm with light rain
+                return Constants.THUNDERSTORM_RAIN;
+            case 201: // Thunderstorm with rain
+                return Constants.THUNDERSTORM_RAIN;
+            case 202: // Thunderstorm with heavy rain
+                return Constants.THUNDERSTORM_HEAVY_RAIN;
+            case 210: // Light Thunderstorm
+                return Constants.THUNDERSTORM_RAIN;
+            case 212: // Thunderstorm
+                return Constants.THUNDERSTORM;
+            case 221: // Ragged thunderstorm
+                return Constants.THUNDERSTORM;
+            case 230: // Thunderstorm with light drizzle
+                return Constants.THUNDERSTORM_RAIN;
+            case 231: // Thunderstorm with drizzle
+                return Constants.THUNDERSTORM_RAIN;
+            case 232: // Thunderstorm with heavy drizzle
+                return Constants.THUNDERSTORM_RAIN;
+            case 300: // Light intensity drizzle
+                return Constants.DRIZZLE;
+            case 301: // Drizzle
+                return Constants.DRIZZLE;
+            case 302: // Heavy intensity drizzle
+                return Constants.DRIZZLE_HEAVY;
+            case 310: // Light intensity drizzle
+                return Constants.DRIZZLE;
+            case 311: // Drizzle rain
+                return Constants.DRIZZLE;
+            case 312: // Heavy intensity drizzle rain
+                return Constants.DRIZZLE_HEAVY;
+            case 313: // Shower rain and drizzle
+                return Constants.DRIZZLE;
+            case 314: // Heavy shower rain and drizzle
+                return Constants.DRIZZLE_HEAVY;
+            case 321: // Shower drizzle
+                return Constants.DRIZZLE;
+            case 500: // Light rain
+                return Constants.RAIN_LIGHT;
+            case 501: // Moderate rain
+                return Constants.RAIN_MODERATE;
+            case 502: // Heavy intensity rain
+                return Constants.RAIN_HEAVY;
+            case 503: // Very heavy rain
+                return Constants.RAIN_HEAVY;
+            case 504: // Extreme rain
+                return Constants.RAIN_HEAVY;
+            case 511: // Freezing rain
+                return Constants.RAIN_LIGHT;
+            case 520: // Light intensity shower rain
+                return 0;
+            case 521: // Shower rain
+                return Constants.RAIN_MODERATE;
+            case 522: // Heavy intensity shower rain
+                return Constants.RAIN_HEAVY;
+            case 531: // Ragged shower rain
+                return Constants.RAIN_MODERATE;
+            case 800: // Clear Sky
+                return Constants.CLEAR_SKY;
+            case 801: // Few clouds
+                return Constants.CLOUDS_FEW;
+            case 802: // Scattered clouds
+                return Constants.CLOUDS_SCATTERED;
+            case 803: // Broken clouds
+                return Constants.CLOUDS_BROKEN;
+            case 804: // Overcast clouds
+                return Constants.CLOUDS_FEW;
+            case 901: // Tropical storm
+                return Constants.TROPICAL_STORM;
+            case 902: // Hurricane
+                return Constants.HURRICANE;
+            case 905: // Windy
+                return Constants.WINDY;
+            case 962: // Hurricane
+                return Constants.HURRICANE;
+            default: // No idea
+                return Constants.NO_REGISTRY;
+
+        }
+
     }
 
 }
