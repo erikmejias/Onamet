@@ -4,12 +4,15 @@ import android.graphics.Typeface;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.erikmejia.onamet.R;
+import com.erikmejia.onamet.util.Utils;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.NativeExpressAdView;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -18,6 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import java.util.concurrent.ExecutionException;
 
 public class ForecastDetails extends AppCompatActivity {
+    private static final String TAG = ForecastDetails.class.getSimpleName();
 
     NativeExpressAdView adView;
 
@@ -25,7 +29,6 @@ public class ForecastDetails extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forecast_details);
-
 
         adView = (NativeExpressAdView) findViewById(R.id.forecast_details_ad_content);
 
@@ -42,7 +45,11 @@ public class ForecastDetails extends AppCompatActivity {
     }
 
     public void changeTextFonts() {
-        TextView cityName;
+
+        Bundle extras = getIntent().getExtras();
+        LinearLayout iconWrapper = (LinearLayout) findViewById(R.id.today_forecast_icon);
+
+        TextView date;
         TextView maxTemperature;
         TextView minTemperature;
         TextView weatherDescription;
@@ -61,20 +68,10 @@ public class ForecastDetails extends AppCompatActivity {
         TextView sunrise;
         TextView sunset;
 
-        cityName = (TextView) findViewById(R.id.forecast_details_city_name);
+        date = (TextView) findViewById(R.id.forecast_details_date);
         maxTemperature = (TextView) findViewById(R.id.forecast_details_max_text);
         minTemperature = (TextView) findViewById(R.id.forecast_details_min_text);
         weatherDescription = (TextView) findViewById(R.id.forecast_details_description);
-        sixAM = (TextView) findViewById(R.id.forecast_details_six_am);
-        eightAM = (TextView) findViewById(R.id.forecast_details_eight_am);
-        tenAM = (TextView) findViewById(R.id.forecast_details_ten_am);
-        twuelvePM = (TextView) findViewById(R.id.forecast_details_twuelve_pm);
-        twoPM = (TextView) findViewById(R.id.forecast_details_two_pm);
-        fourPM = (TextView) findViewById(R.id.forecast_details_four_pm);
-        sixPM = (TextView) findViewById(R.id.forecast_details_six_pm);
-        eightPM = (TextView) findViewById(R.id.forecast_details_eight_pm);
-        tenPM = (TextView) findViewById(R.id.forecast_details_ten_pm);
-        twuelveAM = (TextView) findViewById(R.id.forecast_details_twuelve_am);
         windDirection = (TextView) findViewById(R.id.forecast_details_wind_text);
         windSpeed = (TextView) findViewById(R.id.forecast_details_degrees_text);
         sunrise = (TextView) findViewById(R.id.forecast_details_sunrise_text);
@@ -83,21 +80,23 @@ public class ForecastDetails extends AppCompatActivity {
         Typeface regTypeface = Typeface.createFromAsset(getAssets(), "fonts/Brandon_reg.otf");
         Typeface boldTypeface = Typeface.createFromAsset(getAssets(), "fonts/Brandon_bld.otf");
 
-        cityName.setTypeface(boldTypeface);
+        date.setText(extras.getString(Utils.ForecastConstants.FORECAST_DATE));
+        maxTemperature.setText(extras.getString(Utils.ForecastConstants.MAX_TEMPERATURE));
+        minTemperature.setText(extras.getString(Utils.ForecastConstants.MIN_TEMPERATURE));
+        weatherDescription.setText(extras.getString(Utils.ForecastConstants.DESCRIPTION));
+        windSpeed.setText(extras.getString(Utils.ForecastConstants.WIND_SPEED));
+        windDirection.setText(extras.getString(Utils.ForecastConstants.WIND_DIRECTION));
+
+        Utils.setAnimatedIcon(
+                iconWrapper,
+                extras.getInt(Utils.ForecastConstants.ICON_ID),
+                this);
+
+        date.setTypeface(boldTypeface);
         maxTemperature.setTypeface(regTypeface);
         minTemperature.setTypeface(regTypeface);
         weatherDescription.setTypeface(regTypeface);
 
-        sixAM.setTypeface(regTypeface);
-        eightAM.setTypeface(regTypeface);
-        tenAM.setTypeface(regTypeface);
-        twuelvePM.setTypeface(regTypeface);
-        twoPM.setTypeface(regTypeface);
-        fourPM.setTypeface(regTypeface);
-        sixPM.setTypeface(regTypeface);
-        eightPM.setTypeface(regTypeface);
-        tenPM.setTypeface(regTypeface);
-        twuelveAM.setTypeface(regTypeface);
 
         windDirection.setTypeface(regTypeface);
         windSpeed.setTypeface(regTypeface);

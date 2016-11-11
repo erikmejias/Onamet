@@ -6,7 +6,7 @@
     android:foreground="?android:selectableItemBackground"
     android:layout_width="match_parent"
     android:layout_height="270dp"
-    android:background="@mipmap/back3"
+    android:background="@mipmap/back2"
     >
 
     <LinearLayout

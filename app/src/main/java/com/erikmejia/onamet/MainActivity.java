@@ -8,7 +8,10 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -17,6 +20,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.erikmejia.onamet.ui.BulletinsFragment;
@@ -30,22 +35,26 @@ import java.util.List;
 import static com.erikmejia.onamet.R.layout.activity_main;
 
 
-public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
+public class MainActivity extends AppCompatActivity{
 
     private static final String TAG = MainActivity.class.getSimpleName();
-    // Firebase Database Object
-    /* Firebase References to objects of the Realtime database. */
-//    private DatabaseReference azuaReference;
+    String[] city_list = {
+            "Azua",
+            "La Romana",
+            "Baní",
+            "Punta Cana",
+            "Santiago"
+    };
 
-//    private DrawerLayout drawerLayout;
+    private DrawerLayout drawerLayout;
+    private ActionBarDrawerToggle drawerToggle;
+    private ListView cityList;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        MobileAds.initialize(getApplicationContext(), "ca-app-pub-6005843157698202~1566560378");
-
-
 
         /*
         * Initializing the OnBoarding experience UI
@@ -73,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     SharedPreferences.Editor e = getPrefs.edit();
 
                     //  Edit preference to make it false because we don't want this to run again
-//                    e.putBoolean("firstStart", false);
+                    e.putBoolean("firstStart", false);
 
                     //  Apply changes
                     e.apply();
@@ -90,6 +99,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(false);
 
 //        Cache data to local disk ( OFFLINE SUPPORT ).
 //        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
@@ -102,6 +113,24 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
+
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        cityList = (ListView) findViewById(R.id.left_drawer);
+
+        cityList.setAdapter(new ArrayAdapter<String>(
+                this,
+                android.R.layout.simple_list_item_1,
+                city_list
+        ));
+
+        drawerToggle = new ActionBarDrawerToggle(
+                this,
+                drawerLayout,
+                R.string.welcome_daily_forecasts,
+                R.string.welcome_onamet);
+        drawerToggle.setDrawerIndicatorEnabled(false);
+        drawerToggle.setHomeAsUpIndicator(R.drawable.ic_menu);
+        drawerLayout.setDrawerListener(drawerToggle);
 
     }
 
@@ -153,24 +182,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new ForecastFragment(), "Pronósticos");
         adapter.addFragment(new BulletinsFragment(), "Boletines");
-//        adapter.addFragment(new NewsFragment(), "Noticias");
         viewPager.setAdapter(adapter);
-    }
-
-    /* onItemSelected
-    * onNothingSelected
-    * methods used by the spinner on the toolbar.
-    * */
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        String selectedProvince = parent.getItemAtPosition(position).toString();
-        Log.d(TAG, "onItemSelected: " + selectedProvince);
-        Toast.makeText(this, selectedProvince, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
     }
 
     class ViewPagerAdapter extends FragmentPagerAdapter {

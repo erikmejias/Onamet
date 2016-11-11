@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 
 import com.erikmejia.onamet.R;
 import com.erikmejia.onamet.ui.ForecastDetails;
+import com.erikmejia.onamet.util.Utils;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
@@ -52,7 +53,7 @@ public class FirebaseAdapter extends FirebaseRecyclerAdapter<Forecast, ForecastH
     }
 
     @Override
-    public void populateViewHolder(final ForecastHolder viewHolder, Forecast model, final int position) {
+    public void populateViewHolder(final ForecastHolder viewHolder, final Forecast model, final int position) {
         Log.d(TAG, "populateViewHolder EXECUTED!!!");
 
         if (getItemViewType(position) == TODAY) {
@@ -65,6 +66,7 @@ public class FirebaseAdapter extends FirebaseRecyclerAdapter<Forecast, ForecastH
             viewHolder.setDescription(model.getDescription());
 
             viewHolder.getDate().setTypeface(font_reg);
+            viewHolder.getCity_name().setTypeface(font_bold);
             viewHolder.getMax_temperature().setTypeface(font_bold);
             viewHolder.getForecast_description().setTypeface(font_reg);
 
@@ -87,7 +89,50 @@ public class FirebaseAdapter extends FirebaseRecyclerAdapter<Forecast, ForecastH
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), ForecastDetails.class);
-                intent.putExtra("DB_REF", getRef(position).toString());
+//                Organizing the data prior sending
+                String date = model.getDate();
+                String max_temperature = model.getMax();
+                String min_temperature = model.getMin();
+                String description = model.getDescription();
+                String humidity = model.getHumidity();
+                String wind_speed = model.getSpeed();
+                String wind_direction = model.getDeg();
+                int icon_id = model.getIconId();
+
+//                Attach this data to the new Activity
+                intent.putExtra(
+                        Utils.ForecastConstants.FORECAST_DATE,
+                        date
+                );
+                intent.putExtra(
+                        Utils.ForecastConstants.MAX_TEMPERATURE,
+                        max_temperature
+                );
+                intent.putExtra(
+                        Utils.ForecastConstants.MIN_TEMPERATURE,
+                        min_temperature
+                );
+                intent.putExtra(
+                        Utils.ForecastConstants.DESCRIPTION,
+                        description
+                );
+                intent.putExtra(
+                        Utils.ForecastConstants.HUMIDITY,
+                        humidity
+                );
+                intent.putExtra(
+                        Utils.ForecastConstants.WIND_SPEED,
+                        wind_speed
+                );
+                intent.putExtra(
+                        Utils.ForecastConstants.WIND_DIRECTION,
+                        wind_direction
+                );
+                intent.putExtra(
+                        Utils.ForecastConstants.ICON_ID,
+                        icon_id
+                );
+
                 v.getContext().startActivity(intent);
             }
         });

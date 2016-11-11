@@ -140,4 +140,16 @@ public class Utils {
                 break;
         }
     }
+
+    public interface ForecastConstants {
+        public static final String FORECAST_DATE = "forecast_date";
+        public static final String MAX_TEMPERATURE = "max_temperature";
+        public static final String MIN_TEMPERATURE = "min_temperature";
+        public static final String DESCRIPTION = "description";
+        public static final String HUMIDITY = "humidity";
+        public static final String WIND_SPEED = "wind_speed";
+        public static final String WIND_DIRECTION = "wind_direction";
+        public static final String CITY_NAME = "city_name";
+        public static final String ICON_ID = "icon_id";
+    }
 }
