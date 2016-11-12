@@ -33,6 +33,8 @@ public class ForecastFragment extends Fragment {
 
     private static String TAG = ForecastFragment.class.getSimpleName();
     private DatabaseReference databaseReference;
+    private DatabaseReference mainReference;
+    FirebaseDatabase database;
     FirebaseAdapter firebaseAdapter;
     private static boolean calledAlready = false;
     private int PROVINCE_ID;
@@ -63,13 +65,13 @@ public class ForecastFragment extends Fragment {
         Log.d(TAG, "onCreate: PROVINCE_ID " + PROVINCE_ID);
 
 
-        if (calledAlready) {
+        if (!calledAlready) {
             FirebaseDatabase.getInstance().setPersistenceEnabled(true);
             calledAlready = true;
         }
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference mainReference = database.getReference("forecasts/cities/");
+        database = FirebaseDatabase.getInstance();
+        mainReference = database.getReference("forecasts/cities/");
         databaseReference =
                 mainReference.child(PROVINCE_ID + "/forecasts");
 
@@ -112,6 +114,12 @@ public class ForecastFragment extends Fragment {
         });
 
         return rootView;
+    }
+
+    public void runOver() {
+        for (int i = 0; i < 23; i++) {
+            mainReference = database.getReference("forecasts/cities/" + i + "forecasts");
+        }
     }
 
     @Override
