@@ -35,6 +35,7 @@ public class ForecastFragment extends Fragment {
     private DatabaseReference databaseReference;
     FirebaseAdapter firebaseAdapter;
     private static boolean calledAlready = false;
+    private int PROVINCE_ID;
 
     public ForecastFragment() {
 //        required empty constructor.
@@ -56,14 +57,21 @@ public class ForecastFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        if (savedInstanceState != null) {
+            this.PROVINCE_ID = savedInstanceState.getInt("city");
+        }
+        Log.d(TAG, "onCreate: PROVINCE_ID " + PROVINCE_ID);
+
+
         if (calledAlready) {
-            FirebaseDatabase.getInstance().setPersistenceEnabled(true); // TODO: Enable it in production
+            FirebaseDatabase.getInstance().setPersistenceEnabled(true);
             calledAlready = true;
         }
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference mainReference = database.getReference("forecasts/cities/");
         databaseReference =
-                database.getReference("forecasts/cities/3/forecasts");
+                mainReference.child(PROVINCE_ID + "/forecasts");
 
     }
 

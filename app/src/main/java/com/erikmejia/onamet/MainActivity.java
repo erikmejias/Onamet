@@ -2,13 +2,14 @@ package com.erikmejia.onamet;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -39,16 +40,34 @@ public class MainActivity extends AppCompatActivity{
 
     private static final String TAG = MainActivity.class.getSimpleName();
     String[] city_list = {
-            "Azua",
+            "Moca",
             "La Romana",
-            "Baní",
+            "Higuey",
             "Punta Cana",
-            "Santiago"
+            "San Pedro",
+            "Hato Mayor del Rey",
+            "El Seibo",
+            "Sabana de la Mar",
+            "Miches",
+            "Monte Plata",
+            "Puerto Plata",
+            "Santiago",
+            "La Vega",
+            "San Francisco",
+            "Santo Domingo",
+            "Mao",
+            "Jarabacoa",
+            "Bonao",
+            "Nagua",
+            "Samaná",
+            "Azua",
+            "Baní"
     };
 
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle drawerToggle;
     private ListView cityList;
+    private ViewPagerAdapter viewPagerAdapter;
 
 
     @Override
@@ -100,7 +119,7 @@ public class MainActivity extends AppCompatActivity{
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setHomeButtonEnabled(true);
 
 //        Cache data to local disk ( OFFLINE SUPPORT ).
 //        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
@@ -126,11 +145,32 @@ public class MainActivity extends AppCompatActivity{
         drawerToggle = new ActionBarDrawerToggle(
                 this,
                 drawerLayout,
-                R.string.welcome_daily_forecasts,
-                R.string.welcome_onamet);
-        drawerToggle.setDrawerIndicatorEnabled(false);
-        drawerToggle.setHomeAsUpIndicator(R.drawable.ic_menu);
+                R.string.drawer_open,
+                R.string.drawer_close) {
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                getSupportActionBar().setTitle(R.string.choose_province);
+                invalidateOptionsMenu();
+            }
+
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                super.onDrawerClosed(drawerView);
+                getSupportActionBar().setTitle(R.string.app_name);
+                invalidateOptionsMenu();
+            }
+        };
+
+        drawerToggle.setDrawerIndicatorEnabled(true);
         drawerLayout.setDrawerListener(drawerToggle);
+
+        cityList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                changeCity(position);
+            }
+        });
 
     }
 
@@ -150,6 +190,10 @@ public class MainActivity extends AppCompatActivity{
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (drawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
 //        Check which selection is being made.
         switch (item.getItemId()) {
 //            Open settings ui panel.
@@ -158,7 +202,7 @@ public class MainActivity extends AppCompatActivity{
                 return true;
             case R.id.map:
                 Toast.makeText(this, "Abriendo mapa", Toast.LENGTH_SHORT).show();
-//                showMap();
+                showMap();
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -178,11 +222,30 @@ public class MainActivity extends AppCompatActivity{
         startActivity(intent);
     }
 
+    private void changeCity(int city) {
+        Bundle extras = new Bundle();
+        extras.putInt("city", city);
+        viewPagerAdapter.getItem(0).onCreate(extras);
+        viewPagerAdapter.notifyDataSetChanged();
+    }
+
     private void setViewPager(ViewPager viewPager) {
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new ForecastFragment(), "Pronósticos");
-        adapter.addFragment(new BulletinsFragment(), "Boletines");
-        viewPager.setAdapter(adapter);
+        viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+        viewPagerAdapter.addFragment(new ForecastFragment(), "Pronósticos");
+        viewPagerAdapter.addFragment(new BulletinsFragment(), "Boletines");
+        viewPager.setAdapter(viewPagerAdapter);
+    }
+
+    @Override
+    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        drawerToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        drawerToggle.onConfigurationChanged(newConfig);
     }
 
     class ViewPagerAdapter extends FragmentPagerAdapter {
@@ -196,6 +259,11 @@ public class MainActivity extends AppCompatActivity{
         @Override
         public Fragment getItem(int position) {
             return mFragmentList.get(position);
+        }
+
+        @Override
+        public int getItemPosition(Object object) {
+            return POSITION_NONE;
         }
 
         @Override
@@ -213,5 +281,6 @@ public class MainActivity extends AppCompatActivity{
             return mFragmentTitleList.get(position);
         }
     }
+
 
 }

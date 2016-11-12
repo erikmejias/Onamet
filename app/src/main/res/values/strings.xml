@@ -1,4 +1,5 @@
 <resources>
+
     <string name="app_name">Onamet</string>
     <string name="notification_prefs_title">Notificaciones</string>
     <string name="notification_prefs_summary">Habilitar notificaciones instantáneas para los boletines</string>
@@ -17,6 +18,8 @@
     <string name="pref_sms_summary">Verificar SMS para recibir alertas en caso que pierda acceso a internet</string>
     <string name="pref_other_title">Otro</string>
     <string name="pref_account_title">Cuenta</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
 
 
 
@@ -115,5 +118,6 @@ El ultimo cambio que ha sufrido esta Oficina fue con el Decreto número 764-03, 
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="choose_province">Elige una provincia</string>
 
 </resources>

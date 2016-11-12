@@ -49,12 +49,10 @@ public class FirebaseAdapter extends FirebaseRecyclerAdapter<Forecast, ForecastH
                 "fonts/Brandon_reg.otf");
         font_bold = Typeface.createFromAsset(context.getAssets(),
                 "fonts/Brandon_bld.otf");
-        Log.d(TAG, "FirebaseAdapter: CONSTRUCTOR called. DB Query is " + ref.toString());
     }
 
     @Override
     public void populateViewHolder(final ForecastHolder viewHolder, final Forecast model, final int position) {
-        Log.d(TAG, "populateViewHolder EXECUTED!!!");
 
         if (getItemViewType(position) == TODAY) {
 
@@ -141,8 +139,6 @@ public class FirebaseAdapter extends FirebaseRecyclerAdapter<Forecast, ForecastH
 
     @Override
     public ForecastHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
-        Log.d(TAG, "onCreateViewHolder: called");
 
         NativeExpressAdView adView;
         View root = LayoutInflater.from(parent.getContext()).inflate(R.layout.forecast_item,
