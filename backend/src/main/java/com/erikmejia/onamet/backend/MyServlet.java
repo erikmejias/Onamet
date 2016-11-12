@@ -157,8 +157,6 @@ public class MyServlet extends HttpServlet {
                 "ab935127aec33bcab3d7a12509748c88"
                 );
 
-        owm.setLang(OpenWeatherMap.Language.SPANISH);
-
         byte quantity = 15;
         DateFormat df = new SimpleDateFormat("MMM d");
 
@@ -187,6 +185,7 @@ public class MyServlet extends HttpServlet {
                             dailyForecast.getForecastInstance(index).getWeatherInstance(0)
                                     .getWeatherCode())
             );
+            System.out.println(forecast);
 
             receivedForecasts.add(forecast);
 
