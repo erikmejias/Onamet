@@ -44,7 +44,7 @@ public class BulletinsAdapter extends RecyclerView.Adapter<BulletinsAdapter.View
         font_thin = Typeface.createFromAsset(parent.getContext().getAssets(),
                 "fonts/Brandon_thin.otf");
         font_reg = Typeface.createFromAsset(parent.getContext().getAssets(),
-                "fonts/Brandon_light.otf");
+                "fonts/Brandon_reg.otf");
         font_bold = Typeface.createFromAsset(parent.getContext().getAssets(),
                 "fonts/Brandon_bld.otf");
 
@@ -58,9 +58,9 @@ public class BulletinsAdapter extends RecyclerView.Adapter<BulletinsAdapter.View
         holder.description.setText(bulletins.get(position).getDescription());
 //        holder.icon.setImageResource(Utils.bulletinIcon(bulletins.get(position).getIconId()));
 
-        holder.title.setTypeface(font_bold);
-        holder.description.setTypeface(font_reg);
-        holder.date.setTypeface(font_thin);
+//        holder.title.setTypeface(font_bold);
+//        holder.description.setTypeface(font_reg);
+        holder.date.setTypeface(font_reg);
 
 //        holder.bind(bulletins.get(position), listener); // Adding touch functionality
     }

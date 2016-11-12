@@ -180,7 +180,8 @@ public class MyServlet extends HttpServlet {
                     "6:34",
                     "7:03",
                     dailyForecast.getForecastInstance(index).getWeatherInstance(0).getWeatherDescription(),
-                    String.valueOf(Math.round(dailyForecast.getForecastInstance(index).getWindDegree())),
+                    String.valueOf(Math.round(dailyForecast.getForecastInstance(index).getWindDegree())
+                    + "º"),
                     df.format(dailyForecast.getForecastInstance(index).getDateTime()),
                     Utils.getWeatherCode(
                             dailyForecast.getForecastInstance(index).getWeatherInstance(0)
