@@ -1,7 +1,7 @@
-package com.erikmejia.onamet.model;
+package com.erikmejia.onamet.backend.model;
 
 /**
- * Created by erik on 10/18/16.
+ * Created by erik on 11/13/16.
  */
 
 public class Bulletin {

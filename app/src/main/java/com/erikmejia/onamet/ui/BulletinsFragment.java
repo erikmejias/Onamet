@@ -31,6 +31,7 @@ public class BulletinsFragment extends Fragment {
     private static final String TAG = BulletinsFragment.class.getSimpleName();
 
     private List<Bulletin> bulletins;
+    RecyclerView bulletinsList;
 
     public BulletinsFragment() {
 //        required empty constructor.
@@ -51,8 +52,9 @@ public class BulletinsFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.bulletins_layout, container, false);
 
-        RecyclerView bulletinsList = (RecyclerView)
+        bulletinsList = (RecyclerView)
                 rootView.findViewById(R.id.bulletins_recyler_list);
+
         bulletinsList.setHasFixedSize(true);
 
         if (container != null) {
@@ -83,7 +85,7 @@ public class BulletinsFragment extends Fragment {
                         " The Guy that almost breakall of it." +
                         " The Guy that almost breakall of it." +
                         " The Guy that almost breakall of it.",
-                "Oct 18 - 08:15 AM", 0);
+                "Oct 18 - 08:15 AM");
         Bulletin bulletin1 = new Bulletin("Vaguada afectará el país",
                 "Lorem ipsum dolor sit amet. Ip dolor ipsum lot of trouble sitting in the dinning table of Frank Abagnale Jr. " +
                         "The Guy that almost breakall of it." +
@@ -97,7 +99,7 @@ public class BulletinsFragment extends Fragment {
                         " The Guy that almost breakall of it." +
                         " The Guy that almost breakall of it." +
                         " The Guy that almost breakall of it.",
-                "Oct 17 - 08:15 AM", 1);
+                "Oct 17 - 08:15 AM");
         Bulletin bulletin2 = new Bulletin("Deslizamientos provincia Espaillat",
                 "Lorem ipsum dolor sit amet. Ip dolor ipsum lot of trouble sitting in the dinning table of Frank Abagnale Jr. " +
                         "The Guy that almost breakall of it.\n\n" +
@@ -120,27 +122,27 @@ public class BulletinsFragment extends Fragment {
                         " The Guy that almost breakall of it." +
                         " The Guy that almost breakall of it." +
                         " The Guy that almost breakall of it.",
-                "Oct 16 - 01:13 PM", 2);
+                "Oct 16 - 01:13 PM");
         Bulletin bulletin3 = new Bulletin("Prevén inicio de temporada ciclonica",
                 "Lorem ipsum dolor sit amet. Ip dolor ipsum lot of trouble sitting in the dinning table of Frank Abagnale Jr. " +
                         "The Guy that almost breakall of it.",
-                "Oct 14 - 09:12 AM", 3);
+                "Oct 14 - 09:12 AM");
         Bulletin bulletin4 = new Bulletin("Tormenta Allison se desvía",
                 "Lorem ipsum dolor sit amet. Ip dolor ipsum lot of trouble sitting in the dinning table of Frank Abagnale Jr. " +
                         "The Guy that almost breakall of it.",
-                "Oct 11 - 07:10 AM", 4);
+                "Oct 11 - 07:10 AM");
         Bulletin bulletin5 = new Bulletin("Búsqueda de sistemas de navegación",
                 "Lorem ipsum dolor sit amet. Ip dolor ipsum lot of trouble sitting in the dinning table of Frank Abagnale Jr. " +
                         "The Guy that almost breakall of it.",
-                "Oct 08 - 08:15 AM", 1);
+                "Oct 08 - 08:15 AM");
         Bulletin bulletin6 = new Bulletin("Fallece exdirector ONAMET",
                 "Lorem ipsum dolor sit amet. Ip dolor ipsum lot of trouble sitting in the dinning table of Frank Abagnale Jr." +
                         " The Guy that almost breakall of it.",
-                "Oct 08 - 11:12 AM", 3);
+                "Oct 08 - 11:12 AM");
         Bulletin bulletin7 = new Bulletin("Onamet y COE firman acuerdo para seguir promoviendo el desarrollo de nuevas tecnologias",
                 "Lorem ipsum dolor sit amet. Ip dolor ipsum lot of trouble sitting in the dinning table of Frank Abagnale Jr. " +
                         "The Guy that almost breakall of it.",
-                "Oct 08 - 03:15 PM", 2);
+                "Oct 08 - 03:15 PM");
         Bulletin bulletin8 = new Bulletin("Tipos de boletines en caso de desastre",
                 "Lorem ipsum dolor sit amet. Ip dolor ipsum lot of trouble sitting in the dinning table of Frank Abagnale Jr. " +
                         "The Guy that almost breakall of it." +
@@ -153,16 +155,16 @@ public class BulletinsFragment extends Fragment {
                         " The Guy that almost breakall of it." +
                         " The Guy that almost breakall of it." +
                         " The Guy that almost breakall of it.",
-                "Oct 05 - 08:15 AM", 0);
+                "Oct 05 - 08:15 AM");
         Bulletin bulletin9 = new Bulletin("Temporada ciclonica 2016",
                 "Lorem ipsum dolor sit amet. Ip dolor ipsum lot of trouble sitting in the dinning table of Frank Abagnale Jr. " +
                         "The Guy that almost breakall of it.Ip dolor ipsum lot of trouble sitting in the dinning table of Frank Abagnale Jr." +
                         "The Guy that almost breakall of it.",
-                "Oct 04 - 08:15 AM", 4);
+                "Oct 04 - 08:15 AM");
         Bulletin bulletin10 = new Bulletin("Onamet asiste simulacro en China",
                 "Lorem ipsum dolor sit amet. Ip dolor ipsum lot of trouble sitting in the dinning table of Frank Abagnale Jr. " +
                         "The Guy that almost breakall of it.",
-                "Oct 03 - 08:15 AM", 1);
+                "Oct 03 - 08:15 AM");
 
         bulletins.add(bulletin);
         bulletins.add(bulletin1);

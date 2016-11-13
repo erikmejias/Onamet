@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee">
     <servlet>
-        <servlet-name>MyServlet</servlet-name>
-        <servlet-class>com.erikmejia.onamet.backend.MyServlet</servlet-class>
+        <servlet-name>ForecastServlet</servlet-name>
+        <servlet-class>com.erikmejia.onamet.backend.ForecastServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BulletinsServlet</servlet-name>
+        <servlet-class>com.erikmejia.onamet.backend.BulletinsServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>MyServlet</servlet-name>
+        <servlet-name>ForecastServlet</servlet-name>
         <url-pattern>/sync-data</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BulletinsServlet</servlet-name>
+        <url-pattern>/add-bulletin</url-pattern>
+    </servlet-mapping>
+
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>

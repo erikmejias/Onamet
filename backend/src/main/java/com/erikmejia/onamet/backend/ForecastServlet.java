@@ -34,9 +34,9 @@ import java.util.logging.Logger;
 
 import javax.servlet.http.*;
 
-public class MyServlet extends HttpServlet {
+public class ForecastServlet extends HttpServlet {
     String responseData = null;
-    static Logger Log = Logger.getLogger("com.erikmejia.onamet.backend.MyServlet");
+    static Logger Log = Logger.getLogger("com.erikmejia.onamet.backend.ForecastServlet");
 
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp)
