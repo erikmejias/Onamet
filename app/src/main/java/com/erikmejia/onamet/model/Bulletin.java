@@ -10,6 +10,9 @@ public class Bulletin {
     private String description;
     private String date;
 
+    public Bulletin() {
+    }
+
     public Bulletin(String title, String description, String date) {
         this.title = title;
         this.description = description;
