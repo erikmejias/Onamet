@@ -1,17 +1,28 @@
 package com.erikmejia.onamet.ui;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.preference.EditTextPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
+import android.support.v4.view.GravityCompat;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -26,6 +37,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.orhanobut.dialogplus.DialogPlus;
+import com.orhanobut.dialogplus.ViewHolder;
 
 import java.util.Arrays;
 import java.util.concurrent.ExecutionException;
@@ -68,7 +81,39 @@ public class SettingsFragment extends PreferenceFragment {
         addPreferencesFromResource(R.xml.preferences);
 
         smsPreference = findPreference(getString(R.string.pref_account_sms_key));
-//        smsPreference.setEnabled(true);
+        smsPreference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            public boolean onPreferenceClick(Preference preference) {
+                final DialogPlus dialogPlus =
+                        DialogPlus.newDialog(getActivity())
+                        .setContentHolder(new ViewHolder(R.layout.activity_smsvalidation))
+                        .setGravity(Gravity.BOTTOM)
+                        .setCancelable(true)
+                        .setExpanded(true, 900)
+                        .create();
+                dialogPlus.show();
+
+                TextView title = (TextView) getActivity().findViewById(R.id.sms_verification_title);
+                Typeface typeface = Typeface.createFromAsset(getActivity().getAssets(),
+                        "fonts/Brandon_light.otf");
+                title.setTypeface(typeface);
+
+                final EditText editText = (EditText) getActivity().findViewById(R.id.sms_phone_number);
+                editText.requestFocus();
+
+                Button save = (Button) getActivity().findViewById(R.id.submit_button);
+                save.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialogPlus.dismiss();
+                        Toast.makeText(getActivity(), editText.getText() + " guardado", Toast.LENGTH_SHORT).show();
+                        smsPreference.setSummary("En emergencias recibirás los boletines" +
+                                " al " + editText.getText() + " por si no tienes Internet");
+                    }
+                });
+
+                return false;
+            }
+        });
 
         signInPreference = findPreference(getString(R.string.pref_account_key));
         signInPreference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
@@ -222,5 +267,9 @@ public class SettingsFragment extends PreferenceFragment {
             signOutPreference.setEnabled(false);
 
         }
+    }
+
+    public void addToFirebase(String phone_number) {
+
     }
 }

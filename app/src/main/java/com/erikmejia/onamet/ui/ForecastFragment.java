@@ -3,6 +3,7 @@ package com.erikmejia.onamet.ui;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -22,6 +23,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import dmax.dialog.SpotsDialog;
 
 
 /**
@@ -92,6 +95,11 @@ public class ForecastFragment extends Fragment {
                 databaseReference,
                 getActivity());
         final ProgressBar progressBar = (ProgressBar) rootView.findViewById(R.id.feed_loading);
+        progressBar.setVisibility(View.GONE);
+        final SpotsDialog progressDialog = new SpotsDialog(getActivity());
+        progressDialog.show();
+        progressDialog.setMessage("cargando...");
+
 
         final RecyclerView forecastList = (RecyclerView)
                 rootView.findViewById(R.id.future_forecast_recycler_list);
@@ -105,6 +113,7 @@ public class ForecastFragment extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 progressBar.setVisibility(View.GONE);
+                progressDialog.dismiss();
                 forecastList.setVisibility(View.VISIBLE);
             }
 

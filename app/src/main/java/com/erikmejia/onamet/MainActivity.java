@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity{
                     SharedPreferences.Editor e = getPrefs.edit();
 
                     //  Edit preference to make it false because we don't want this to run again
-                    e.putBoolean("firstStart", true);
+                    e.putBoolean("firstStart", false);
 
                     //  Apply changes
                     e.apply();

@@ -29,4 +29,10 @@
         <item name="android:windowBackground">@mipmap/rt1</item>
     </style>
 
+    <style name="ProgressDialog" parent="android:Theme.DeviceDefault.Dialog">
+        <item name="DialogTitleText">cargando</item>
+        <item name="DialogSpotColor">@color/colorPrimaryDark</item>
+        <item name="DialogSpotCount">5</item>
+    </style>
+
 </resources>

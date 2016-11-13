@@ -9,6 +9,12 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.TileOverlayOptions;
+import com.google.android.gms.maps.model.TileProvider;
+import com.google.android.gms.maps.model.UrlTileProvider;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -40,8 +46,32 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         // Add a marker in Sydney and move the camera
         LatLng dominicanrepublic = new LatLng(19, -70);
-        mMap.addMarker(new MarkerOptions().position(dominicanrepublic).title("Marker in DR"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(dominicanrepublic));
-        mMap.setMinZoomPreference(7);
+        mMap.setMinZoomPreference(9);
+        mMap.setMaxZoomPreference(9);
+        setUpMapIfNeeded();
+    }
+
+    private void setUpMapIfNeeded() {
+        mMap.addTileOverlay(new TileOverlayOptions().tileProvider(createTileProvider()));
+    }
+
+    private TileProvider createTileProvider() {
+        final String OWM_TILE_URL = "http://tile.openweathermap.org/map/%s/%d/%d/%d.png\n";
+        TileProvider tileProvider = new UrlTileProvider(512, 512) {
+            @Override
+            public URL getTileUrl(int x, int y, int zoom) {
+                String fUrl = String.format(OWM_TILE_URL, "rain_cls", 9, x, y);
+                URL url = null;
+                try {
+                    url = new URL(fUrl);
+                }
+                catch(MalformedURLException mfe) {
+                    mfe.printStackTrace();
+                }
+                return url;
+            }
+        };
+        return tileProvider;
     }
 }

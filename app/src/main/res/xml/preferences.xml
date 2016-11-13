@@ -21,10 +21,10 @@
             android:key="@string/pref_account_sms_key"
             android:summary="@string/pref_sms_summary"
             android:dependency="@string/pref_account_key"
-            android:enabled="false">
+            android:enabled="true">
 
-            <intent android:targetPackage="com.erikmejia.onamet"
-                android:targetClass="com.erikmejia.onamet.ui.SMSValidation"/>
+            <!--<intent android:targetPackage="com.erikmejia.onamet"
+                android:targetClass="com.erikmejia.onamet.ui.SMSValidation"/>-->
 
         </Preference>
 
