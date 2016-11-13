@@ -14,6 +14,8 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v4.view.GravityCompat;
 import android.util.Log;
 import android.view.Gravity;
@@ -192,9 +194,11 @@ public class SettingsFragment extends PreferenceFragment {
                         .into(new SimpleTarget<Bitmap>(150, 150) {
                             @Override
                             public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
-                                Drawable profilePicture = new BitmapDrawable(getResources(), resource);
+                                RoundedBitmapDrawable circularIcon =
+                                        RoundedBitmapDrawableFactory.create(getResources(), resource);
+                                circularIcon.setCircular(true);
 
-                                signInPreference.setIcon(profilePicture);
+                                signInPreference.setIcon(circularIcon);
                             }
                         });
 
@@ -247,6 +251,7 @@ public class SettingsFragment extends PreferenceFragment {
                         }
                     });
             smsPreference.setEnabled(false);
+            smsPreference.setSummary(R.string.pref_sms_summary);
             signOutPreference.setEnabled(false);
             signInPreference.setTitle(getString(R.string.acc_prefs_sync));
             signInPreference.setSummary(getString(R.string.pref_account_summary));
@@ -276,9 +281,11 @@ public class SettingsFragment extends PreferenceFragment {
                     .into(new SimpleTarget<Bitmap>(150, 150) {
                         @Override
                         public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
-                            Drawable profilePicture = new BitmapDrawable(getResources(), resource);
+                            RoundedBitmapDrawable circularIcon =
+                                    RoundedBitmapDrawableFactory.create(getResources(), resource);
+                            circularIcon.setCircular(true);
 
-                            signInPreference.setIcon(profilePicture);
+                            signInPreference.setIcon(circularIcon);
                         }
                     });
         }
@@ -312,25 +319,27 @@ public class SettingsFragment extends PreferenceFragment {
     public boolean isVerified() {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
 
-        if (reference.child(this.user.getUid()) != null){
-            reference.child(this.user.getUid()).addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    User user = dataSnapshot.getValue(User.class);
-                    if (user != null) {
-                        if (user.isVerified()) {
-                            smsPreference.setSummary("En emergencias recibirás los boletines " +
-                                    "al " + user.getPhone_number() + " por si no tienes Internet");
-                            number = user.getPhone_number();
+        if (this.user != null) {
+            if (reference.child(this.user.getUid()) != null){
+                reference.child(this.user.getUid()).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        User user = dataSnapshot.getValue(User.class);
+                        if (user != null) {
+                            if (user.isVerified()) {
+                                smsPreference.setSummary("En emergencias recibirás los boletines " +
+                                        "al " + user.getPhone_number() + " por si no tienes Internet");
+                                number = user.getPhone_number();
+                            }
                         }
                     }
-                }
 
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
 
-                }
-            });
+                    }
+                });
+            }
         }
         return true;
     }

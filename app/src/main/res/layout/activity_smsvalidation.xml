@@ -5,12 +5,11 @@
     android:id="@+id/activity_smsvalidation"
     android:layout_width="match_parent"
     android:background="@color/colorPrimary"
-    android:layout_height="300dp"
-    tools:context="com.erikmejia.onamet.ui.SMSValidation">
+    android:layout_height="300dp">
 
     <TextView
         android:id="@+id/sms_verification_title"
-        android:text="Escribe tu número"
+        android:text="@string/write_your_number"
         android:gravity="center"
         android:layout_marginTop="20dp"
         android:textColor="@color/white"
