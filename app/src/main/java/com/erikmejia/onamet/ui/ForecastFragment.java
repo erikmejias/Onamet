@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.erikmejia.onamet.R;
 import com.erikmejia.onamet.model.City;
@@ -61,8 +62,8 @@ public class ForecastFragment extends Fragment {
 
         if (savedInstanceState != null) {
             this.PROVINCE_ID = savedInstanceState.getInt("city");
+            Toast.makeText(getActivity(), "picked " + PROVINCE_ID, Toast.LENGTH_SHORT).show();
         }
-        Log.d(TAG, "onCreate: PROVINCE_ID " + PROVINCE_ID);
 
 
         if (!calledAlready) {
