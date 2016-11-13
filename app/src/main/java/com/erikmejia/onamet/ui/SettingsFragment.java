@@ -30,6 +30,7 @@ import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.erikmejia.onamet.R;
+import com.erikmejia.onamet.model.User;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.BuildConfig;
 import com.firebase.ui.auth.ui.email.SignInActivity;
@@ -37,6 +38,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.orhanobut.dialogplus.DialogPlus;
 import com.orhanobut.dialogplus.ViewHolder;
 
@@ -58,6 +64,7 @@ public class SettingsFragment extends PreferenceFragment {
     Preference smsPreference;
     Preference signOutPreference;
     Preference signInPreference;
+    private String number;
 
     private static final String TAG = SettingsFragment.class.getSimpleName();
 
@@ -98,7 +105,13 @@ public class SettingsFragment extends PreferenceFragment {
                 title.setTypeface(typeface);
 
                 final EditText editText = (EditText) getActivity().findViewById(R.id.sms_phone_number);
-                editText.requestFocus();
+
+                if (number == null) {
+                    editText.requestFocus();
+                } else {
+                    editText.setText(number);
+                    title.setText("Es este tu número?");
+                }
 
                 Button save = (Button) getActivity().findViewById(R.id.submit_button);
                 save.setOnClickListener(new View.OnClickListener() {
@@ -108,6 +121,7 @@ public class SettingsFragment extends PreferenceFragment {
                         Toast.makeText(getActivity(), editText.getText() + " guardado", Toast.LENGTH_SHORT).show();
                         smsPreference.setSummary("En emergencias recibirás los boletines" +
                                 " al " + editText.getText() + " por si no tienes Internet");
+                        addToFirebase(editText.getText().toString());
                     }
                 });
 
@@ -163,6 +177,7 @@ public class SettingsFragment extends PreferenceFragment {
                 signOutPreference.setEnabled(true);
                 signInPreference.setTitle(user.getEmail());
                 signInPreference.setSummary("Has iniciado sesión como " + user.getDisplayName());
+                isVerified();
 
                 Glide.with(getActivity())
                         .load(user.getPhotoUrl())
@@ -270,6 +285,47 @@ public class SettingsFragment extends PreferenceFragment {
     }
 
     public void addToFirebase(String phone_number) {
+        number = phone_number;
+        boolean state = false;
+        if (!phone_number.isEmpty()) {
+            state = true;
+        }
 
+        User user = new User(
+                this.user.getUid(),
+                this.user.getDisplayName(),
+                state,
+                phone_number
+        );
+        Log.d(TAG, "addToFirebase: user " + user.toString());
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+        reference.child("users").child(user.getId()).setValue(user);
+    }
+
+    public boolean isVerified() {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
+
+        if (reference.child(this.user.getUid()) != null){
+            reference.child(this.user.getUid()).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    User user = dataSnapshot.getValue(User.class);
+                    if (user != null) {
+                        if (user.isVerified()) {
+                            smsPreference.setSummary("En emergencias recibirás los boletines " +
+                                    "al " + user.getPhone_number() + " por si no tienes Internet");
+                            number = user.getPhone_number();
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+        }
+        return true;
     }
 }
