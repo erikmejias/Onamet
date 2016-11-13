@@ -118,6 +118,11 @@ public class SettingsFragment extends PreferenceFragment {
                     @Override
                     public void onClick(View v) {
                         dialogPlus.dismiss();
+
+                        InputMethodManager imm = (InputMethodManager)getActivity()
+                                .getSystemService(Context.INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+
                         Toast.makeText(getActivity(), editText.getText() + " guardado", Toast.LENGTH_SHORT).show();
                         smsPreference.setSummary("En emergencias recibirás los boletines" +
                                 " al " + editText.getText() + " por si no tienes Internet");
@@ -151,6 +156,7 @@ public class SettingsFragment extends PreferenceFragment {
         mAuth = FirebaseAuth.getInstance();
 
         checkIfSignedIn();
+        isVerified();
     }
 
     @Override

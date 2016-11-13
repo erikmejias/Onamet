@@ -65,7 +65,7 @@ public class ForecastFragment extends Fragment {
 
         if (savedInstanceState != null) {
             this.PROVINCE_ID = savedInstanceState.getInt("city");
-            Toast.makeText(getActivity(), "picked " + PROVINCE_ID, Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getActivity(), "picked " + PROVINCE_ID, Toast.LENGTH_SHORT).show();
         }
 
 
