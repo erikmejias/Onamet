@@ -5,8 +5,8 @@
     android:id="@+id/today_forecast_frame"
     android:foreground="?android:selectableItemBackground"
     android:layout_width="match_parent"
-    android:layout_height="270dp"
-    android:background="@color/gray"
+    android:layout_height="280dp"
+    android:background="@mipmap/today_item_background"
     >
 
     <LinearLayout

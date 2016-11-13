@@ -28,6 +28,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.logging.Logger;
 
@@ -158,10 +159,31 @@ public class MyServlet extends HttpServlet {
                 );
 
         byte quantity = 15;
-        DateFormat df = new SimpleDateFormat("MMM d");
+        DateFormat df = new SimpleDateFormat("EEE d", new Locale("es", "DO"));
 
         DailyForecast dailyForecast = owm.dailyForecastByCityCode(cityCode, quantity);
         for (int index = 0; index < 15; index++) {
+
+            String date;
+
+            switch (index) {
+                case 0:
+                    date = "hoy";
+                    break;
+                case 1:
+                    date = "mañana";
+                    break;
+                default:
+                    date = df.format(dailyForecast.getForecastInstance(index).getDateTime());
+            }
+
+            String description = dailyForecast.getForecastInstance(index).
+                    getWeatherInstance(0).getWeatherDescription();
+            if (dailyForecast.getForecastInstance(index).getWeatherInstance(0)
+                    .getWeatherDescription().equalsIgnoreCase("lluvia de gran intensidad")) {
+                description = "muchísima lluvia";
+            }
+
             Forecast forecast = new Forecast(
                     cityName,
                     String.valueOf(
@@ -177,10 +199,10 @@ public class MyServlet extends HttpServlet {
                     + "%"),
                     "6:34",
                     "7:03",
-                    dailyForecast.getForecastInstance(index).getWeatherInstance(0).getWeatherDescription(),
+                    description,
                     String.valueOf(Math.round(dailyForecast.getForecastInstance(index).getWindDegree())
                     + "º"),
-                    df.format(dailyForecast.getForecastInstance(index).getDateTime()),
+                    date,
                     Utils.getWeatherCode(
                             dailyForecast.getForecastInstance(index).getWeatherInstance(0)
                                     .getWeatherCode())

@@ -2,6 +2,7 @@
 <RelativeLayout android:id="@+id/today_forecast_frame"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@mipmap/rt5"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -13,7 +14,6 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:id="@+id/forecast_details_layout"
-        android:background="@color/gray"
         android:layout_width="match_parent"
         android:layout_height="480dp">
 
@@ -97,7 +97,6 @@
     <LinearLayout
         android:id="@+id/forecast_details_ad"
         android:layout_below="@id/forecast_details_layout"
-        android:background="@color/gray"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -114,7 +113,6 @@
     <!-- Bottom Section-->
 
     <LinearLayout
-        android:background="@color/gray"
         android:layout_below="@id/forecast_details_ad"
         android:id="@+id/today_forecast_bottom"
         android:orientation="horizontal"

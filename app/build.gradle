@@ -77,6 +77,10 @@ dependencies {
     compile 'com.github.bumptech.glide:glide:3.7.0'
 
     /*
+    * Swipe to dismiss functionality
+    * */
+
+    /*
     * Aeris weather maps SDK. TODO - Implement later without using this library.
     * */
     compile 'com.hamweather:aeris-maps-library:1.2@aar'

@@ -41,28 +41,38 @@ public class MainActivity extends AppCompatActivity{
 
     private static final String TAG = MainActivity.class.getSimpleName();
     String[] city_list = {
+            "Santo Domingo",
+            "Santiago",
             "Moca",
             "La Romana",
             "Higuey",
             "Punta Cana",
-            "San Pedro",
+            "San Pedro de Macorís",
             "Hato Mayor del Rey",
             "El Seibo",
             "Sabana de la Mar",
             "Miches",
             "Monte Plata",
             "Puerto Plata",
-            "Santiago",
             "La Vega",
             "San Francisco",
-            "Santo Domingo",
             "Mao",
             "Jarabacoa",
             "Bonao",
             "Nagua",
             "Samaná",
             "Azua",
-            "Baní"
+            "Baní",
+            "Dajabón",
+            "Duarte",
+            "Hermanas Mirabal",
+            "Independencia",
+            "Monte Cristi",
+            "Pedernales",
+            "Sánchez Ramírez",
+            "San Cristobal",
+            "San José de Ocoa",
+            "San Juan"
     };
 
     private DrawerLayout drawerLayout;
@@ -102,7 +112,7 @@ public class MainActivity extends AppCompatActivity{
                     SharedPreferences.Editor e = getPrefs.edit();
 
                     //  Edit preference to make it false because we don't want this to run again
-                    e.putBoolean("firstStart", false);
+                    e.putBoolean("firstStart", true);
 
                     //  Apply changes
                     e.apply();

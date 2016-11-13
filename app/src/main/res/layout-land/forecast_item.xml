@@ -80,7 +80,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="center_horizontal"
-            app:srcCompat="@drawable/weather_clear"
+            app:srcCompat="@drawable/clear_day"
             android:id="@+id/future_weather_icon"/>
 
         <!--<com.thbs.skycons.library.SkyconView

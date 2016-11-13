@@ -64,8 +64,8 @@ public class Utils {
 
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        params.width = 750;
-        params.height = 750;
+        params.width = 800;
+        params.height = 800;
 
 
         switch (iconId){
