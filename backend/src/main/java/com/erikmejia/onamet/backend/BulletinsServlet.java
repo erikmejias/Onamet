@@ -137,15 +137,13 @@ public class BulletinsServlet extends HttpServlet {
                 " The Guy that almost breakall of it." +
                 " The Guy that almost breakall of it.";
 
-        for (int i = 0; i < 7; i++) {
-            Bulletin bulletin = new Bulletin(
-                    "Título de Prueba #" + i,
-                    description,
-                    df.format(new Date().getTime())
-            );
+        Bulletin bulletin = new Bulletin(
+                "Boletín de Prueba",
+                description,
+                df.format(new Date().getTime())
+        );
 
-            pushDemoData(bulletin);
-        }
+        pushDemoData(bulletin);
     }
 
 

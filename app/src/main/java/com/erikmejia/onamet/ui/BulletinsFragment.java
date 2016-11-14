@@ -1,8 +1,11 @@
 package com.erikmejia.onamet.ui;
 
+import android.app.NotificationManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -67,6 +70,7 @@ public class BulletinsFragment extends Fragment {
                 viewHolder.setTitle(model.getTitle());
                 viewHolder.setContent(model.getDescription());
                 viewHolder.setDate(model.getDate());
+                notifyNewBulletin(model.getTitle());
             }
         };
 
@@ -77,6 +81,22 @@ public class BulletinsFragment extends Fragment {
         bulletinsList.setAdapter(firebaseAdapter);
 
         return rootView;
+    }
+
+    public void notifyNewBulletin(String title){
+
+        NotificationCompat.Builder mBuilder =
+                new NotificationCompat.Builder(getActivity())
+                        .setSmallIcon(R.drawable.ic_launcher)
+                        .setContentTitle("Nuevo boletín informativo")
+                        .setContentText(title);
+
+        NotificationManager manager = (NotificationManager)
+                getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
+
+        manager.notify(0, mBuilder.build());
+
+
     }
 
 }
