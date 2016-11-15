@@ -148,12 +148,10 @@ public class FirebaseAdapter extends FirebaseRecyclerAdapter<Forecast, ForecastH
             case TODAY:
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.today_forecast_item,
                         parent, false);
-                Log.d(TAG, "onCreateViewHolder: returned TODAY");
                 return new ForecastHolder(view);
             case FORECAST_TYPE:
                 View future = LayoutInflater.from(parent.getContext()).inflate(R.layout.forecast_item,
                         parent, false);
-                Log.d(TAG, "onCreateViewHolder: returned FUTURE");
                 return new ForecastHolder(future);
             case AD_TYPE:
                 float density = parent.getContext().getResources().getDisplayMetrics().density;
@@ -167,13 +165,12 @@ public class FirebaseAdapter extends FirebaseRecyclerAdapter<Forecast, ForecastH
                         .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
                         .addTestDevice("E0451870C934704914ACFF7D2E7F7F7F")
                         .build();
-//            adView.setAdSize(AdSize.BANNER);
-                adView.setLayoutParams(params);
+//                adView.setLayoutParams(params);
 
                 adView.loadAd(request);
 
                 Log.d(TAG, "onCreateViewHolder: returned AD");
-                return new ForecastHolder(adView); // TODO: Add an adViewHolder
+                return new ForecastHolder(adView);
             default:
                 return new ForecastHolder(root);
         }
@@ -184,7 +181,10 @@ public class FirebaseAdapter extends FirebaseRecyclerAdapter<Forecast, ForecastH
 
         if (position == 0)
             return TODAY;
+        else if (position == 48) // TODO - Improve logic
+            return AD_TYPE;
         else
             return FORECAST_TYPE;
     }
+
 }

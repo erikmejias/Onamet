@@ -1,6 +1,8 @@
 package com.erikmejia.onamet.ui;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -10,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.OvershootInterpolator;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -25,6 +28,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import dmax.dialog.SpotsDialog;
+import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter;
+import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
+import jp.wasabeef.recyclerview.adapters.SlideInBottomAnimationAdapter;
+import jp.wasabeef.recyclerview.adapters.SlideInRightAnimationAdapter;
+import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator;
 
 
 /**
@@ -64,8 +72,12 @@ public class ForecastFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         if (savedInstanceState != null) {
-            this.PROVINCE_ID = savedInstanceState.getInt("city");
+//            this.PROVINCE_ID = savedInstanceState.getInt("city");
 //            Toast.makeText(getActivity(), "picked " + PROVINCE_ID, Toast.LENGTH_SHORT).show();
+
+            SharedPreferences getPrefs = PreferenceManager
+                    .getDefaultSharedPreferences(getActivity());
+            this.PROVINCE_ID = getPrefs.getInt("city", 0);
         }
 
 
@@ -106,8 +118,14 @@ public class ForecastFragment extends Fragment {
         forecastList.setHasFixedSize(true);
         forecastList.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+        ScaleInAnimationAdapter animationAdapter =
+                new ScaleInAnimationAdapter(firebaseAdapter);
+        animationAdapter.setInterpolator(new OvershootInterpolator());
+        animationAdapter.setDuration(500);
+
 //        Setting adapter to RecyclerView
-        forecastList.setAdapter(firebaseAdapter);
+        forecastList.setAdapter(animationAdapter);
+        forecastList.getLayoutManager().scrollToPosition(0);
 
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

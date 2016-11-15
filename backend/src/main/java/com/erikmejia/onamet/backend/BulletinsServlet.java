@@ -109,33 +109,20 @@ public class BulletinsServlet extends HttpServlet {
         DatabaseReference ref = FirebaseDatabase
                 .getInstance()
                 .getReference("bulletins");
+        System.out.println("Enviado " + bulletin.toString());
 
         ref.push().setValue(bulletin);
     }
 
     public void buildDemoData() {
         DateFormat df = new SimpleDateFormat("d MMM - h:mm aaa", new Locale("es", "DO"));
-        String description = "Lorem ipsum dolor sit amet. Ip dolor ipsum lot of trouble sitting in the dinning table of Frank Abagnale Jr. " +
-                "The Guy that almost breakall of it.\n\n" +
-                " The Guy that almost breakall of it." +
-                " The Guy that almost breakall of it." +
-                " The Guy that almost breakall of it." +
-                " The Guy that almost breakall of it." +
-                " The Guy that almost breakall of it." +
-                " The Guy that almost breakall of it." +
-                " The Guy that almost breakall of it." +
-                " The Guy that almost breakall of it." +
-                " The Guy that almost breakall of it." +
-                " The Guy that almost breakall of it." +
-                " The Guy that almost breakall of it." +
-                " The Guy that almost breakall of it.\n" +
-                " The Guy that almost breakall of it." +
-                " The Guy that almost breakall of it." +
-                " The Guy that almost breakall of it." +
-                " The Guy that almost breakall of it." +
-                " The Guy that almost breakall of it." +
-                " The Guy that almost breakall of it." +
-                " The Guy that almost breakall of it.";
+        String description = "Este monton de texto no significada nada importante, sólo estoy" +
+                " probando que todo funcione bien con el sistema que envía boletines de emergencia" +
+                " a la app." +
+                "\n\n" +
+                "Si me quieres ayudar, me gustaria saber a que hora te llego esta notificacion" +
+                " para afinar cualquier problema que pueda ocurrir con al momento de enviar estos " +
+                "mensajes. Gracias por participar en este programa de prueba :)";
 
         Bulletin bulletin = new Bulletin(
                 "Boletín de Prueba",

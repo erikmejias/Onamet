@@ -3,8 +3,8 @@
     android:id="@+id/forecast_details_ad_content"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    ads:adUnitId="@string/ads_test"
-    ads:adSize="360x60"
+    ads:adUnitId="@string/ads_forecast_main_list"
+    ads:adSize="360x70"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:ads="http://schemas.android.com/apk/res-auto">
 </com.google.android.gms.ads.NativeExpressAdView>

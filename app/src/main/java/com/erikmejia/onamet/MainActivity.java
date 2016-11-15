@@ -184,6 +184,10 @@ public class MainActivity extends AppCompatActivity{
             }
         });
 
+        if (getIntent().getBooleanExtra("bulletin", false)) {
+            incomingBulletin();
+        }
+
     }
 
     @Override
@@ -236,8 +240,13 @@ public class MainActivity extends AppCompatActivity{
 
     private void changeCity(int city) {
         Bundle extras = new Bundle();
-        extras.putInt("city", city);
-        viewPagerAdapter.getItem(0).onCreate(extras);
+//        extras.putInt("city", city);
+        SharedPreferences sharedPreferences = PreferenceManager
+                .getDefaultSharedPreferences(getBaseContext());
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("city", city);
+        editor.apply();
+        viewPagerAdapter.getItem(0).onCreate(new Bundle());
         viewPagerAdapter.notifyDataSetChanged();
     }
 
@@ -246,6 +255,10 @@ public class MainActivity extends AppCompatActivity{
         viewPagerAdapter.addFragment(new ForecastFragment(), "Pronosticos");
         viewPagerAdapter.addFragment(new BulletinsFragment(), "Boletines");
         viewPager.setAdapter(viewPagerAdapter);
+    }
+
+    private void incomingBulletin() {
+        viewPagerAdapter.getItem(0);
     }
 
     @Override

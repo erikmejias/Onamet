@@ -8,7 +8,7 @@ android {
         applicationId "com.erikmejia.onamet"
         minSdkVersion 16
         targetSdkVersion 24
-        versionCode 1
+        versionCode 10
         versionName "1.0"
     }
     buildTypes {
@@ -81,6 +81,12 @@ dependencies {
     * */
 
     compile 'com.orhanobut:dialogplus:1.11@aar'
+
+    /*
+    * RecyclerView animations
+    * */
+    compile 'jp.wasabeef:recyclerview-animators:2.2.4'
+
 
     /*
     * Progress Alert Dialog
