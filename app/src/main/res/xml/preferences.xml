@@ -43,8 +43,8 @@
         <Preference
             android:title="@string/about_prefs_title">
 
-            <intent android:targetPackage="com.erikmejia.onamet"
-                android:targetClass="com.erikmejia.onamet.ui.AboutActivity"/>
+            <intent android:action="android.intent.action.VIEW"
+                android:data="http://www.onamet.gov.do/?param=historia" />
 
         </Preference>
 
@@ -61,11 +61,10 @@
             android:summary="@string/pref_help_summary"/>-->
 
         <Preference
-            android:title="@string/about_dev_prefs_title"
-            android:summary="@string/pref_dev_summary">
+            android:title="@string/about_dev_prefs_title">
 
             <intent android:action="android.intent.action.VIEW"
-                android:data="https://www.erikmejia.com" />
+                android:data="https://xlinfe.com" />
 
         </Preference>
 

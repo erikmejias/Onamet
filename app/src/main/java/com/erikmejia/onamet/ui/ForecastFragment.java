@@ -74,10 +74,6 @@ public class ForecastFragment extends Fragment {
         if (savedInstanceState != null) {
 //            this.PROVINCE_ID = savedInstanceState.getInt("city");
 //            Toast.makeText(getActivity(), "picked " + PROVINCE_ID, Toast.LENGTH_SHORT).show();
-
-            SharedPreferences getPrefs = PreferenceManager
-                    .getDefaultSharedPreferences(getActivity());
-            this.PROVINCE_ID = getPrefs.getInt("city", 0);
         }
 
 
@@ -85,6 +81,10 @@ public class ForecastFragment extends Fragment {
             FirebaseDatabase.getInstance().setPersistenceEnabled(true);
             calledAlready = true;
         }
+
+        SharedPreferences getPrefs = PreferenceManager
+                .getDefaultSharedPreferences(getActivity());
+        this.PROVINCE_ID = getPrefs.getInt("city", 0);
 
         database = FirebaseDatabase.getInstance();
         mainReference = database.getReference("forecasts/cities/");
@@ -116,16 +116,19 @@ public class ForecastFragment extends Fragment {
         final RecyclerView forecastList = (RecyclerView)
                 rootView.findViewById(R.id.future_forecast_recycler_list);
         forecastList.setHasFixedSize(true);
-        forecastList.setLayoutManager(new LinearLayoutManager(getActivity()));
+        LinearLayoutManager layoutManager =
+                new LinearLayoutManager(getActivity());
+        forecastList.setLayoutManager(layoutManager);
 
         ScaleInAnimationAdapter animationAdapter =
                 new ScaleInAnimationAdapter(firebaseAdapter);
         animationAdapter.setInterpolator(new OvershootInterpolator());
-        animationAdapter.setDuration(500);
+        animationAdapter.setDuration(1000);
 
 //        Setting adapter to RecyclerView
         forecastList.setAdapter(animationAdapter);
-        forecastList.getLayoutManager().scrollToPosition(0);
+
+        layoutManager.scrollToPositionWithOffset(0, 20);
 
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

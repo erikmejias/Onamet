@@ -51,12 +51,13 @@ dependencies {
     /*
     * Firebase SDK Libraries
     * --------------
-    * Core, Analytics, Ads, Database and Auth. (the last two provided by Firebase UI)
+    * Core, Analytics, Ads, Messaging Database and Auth. (the last two provided by Firebase UI)
     * */
     compile 'com.google.firebase:firebase-core:9.8.0'
     compile 'com.google.firebase:firebase-crash:9.8.0'
     compile 'com.google.firebase:firebase-ads:9.8.0'
     compile 'com.google.firebase:firebase-database:9.8.0'
+    compile 'com.google.firebase:firebase-messaging:9.8.0'
 
     /*
     * Firebase UI required libraries (each one call the required Firebase SDK
@@ -86,6 +87,11 @@ dependencies {
     * RecyclerView animations
     * */
     compile 'jp.wasabeef:recyclerview-animators:2.2.4'
+
+    /*
+    * Tooltips
+    * */
+    compile 'com.tomergoldst.android:tooltips:1.0.3'
 
 
     /*

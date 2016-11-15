@@ -246,7 +246,7 @@ public class MainActivity extends AppCompatActivity{
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt("city", city);
         editor.apply();
-        viewPagerAdapter.getItem(0).onCreate(new Bundle());
+        viewPagerAdapter.getItem(0).onCreate(extras);
         viewPagerAdapter.notifyDataSetChanged();
     }
 

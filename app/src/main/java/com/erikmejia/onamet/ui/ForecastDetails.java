@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -17,11 +18,15 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.NativeExpressAdView;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.auth.FirebaseAuth;
+import com.tomergoldst.tooltips.ToolTip;
+import com.tomergoldst.tooltips.ToolTipsManager;
 
 import java.util.concurrent.ExecutionException;
 
 public class ForecastDetails extends AppCompatActivity {
     private static final String TAG = ForecastDetails.class.getSimpleName();
+    ToolTipsManager toolTipsManager;
+    RelativeLayout frame;
 
     NativeExpressAdView adView;
 
@@ -31,6 +36,7 @@ public class ForecastDetails extends AppCompatActivity {
         setContentView(R.layout.activity_forecast_details);
 
         adView = (NativeExpressAdView) findViewById(R.id.forecast_details_ad_content);
+        frame = (RelativeLayout) findViewById(R.id.today_forecast_frame);
 
         adView.loadAd(
                 new AdRequest.Builder()
@@ -41,6 +47,7 @@ public class ForecastDetails extends AppCompatActivity {
 
         changeTextFonts();
 
+        toolTipsManager = new ToolTipsManager();
 
     }
 
@@ -100,5 +107,38 @@ public class ForecastDetails extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+    }
+
+    public void showTip(View view) {
+        String msg;
+
+        switch (view.getId()) {
+            case R.id.forecast_details_max_text:
+                msg = "Temperatura máxima";
+                break;
+            case R.id.forecast_details_min_text:
+                msg = "Temperatura mínima";
+                break;
+            case R.id.wind_pressure_wrapper:
+                msg = "Presión del viento";
+                break;
+            case R.id.wind_direction_wrapper:
+                msg = "Dirección del viento en grados";
+                break;
+            default:
+                msg = "Nivel de humedad";
+        }
+
+        ToolTip.Builder builder = new ToolTip.Builder(
+                this,
+                view,
+                frame,
+                msg,
+                ToolTip.POSITION_ABOVE
+        );
+
+        builder.setBackgroundColor(R.color.colorPrimaryDark);
+
+        toolTipsManager.show(builder.build());
     }
 }

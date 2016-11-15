@@ -51,7 +51,9 @@
 
                 <TextView
                     android:id="@+id/forecast_details_max_text"
-                    android:text="23º"
+                    tools:text="23º"
+                    android:clickable="true"
+                    android:onClick="showTip"
                     android:textSize="115sp"
                     android:textColor="#fff"
                     android:layout_marginBottom="-30dp"
@@ -60,7 +62,9 @@
 
                 <TextView
                     android:id="@+id/forecast_details_min_text"
-                    android:text="22º"
+                    tools:text="22º"
+                    android:clickable="true"
+                    android:onClick="showTip"
                     android:textSize="50sp"
                     android:textColor="#fff"
                     android:layout_width="match_parent"
@@ -68,7 +72,7 @@
 
                 <TextView
                     android:id="@+id/forecast_details_description"
-                    android:text="lluvias dispersas"
+                    tools:text="lluvias dispersas"
                     android:textSize="28sp"
                     android:textColor="#fff"
                     android:layout_marginTop="20dp"
@@ -124,6 +128,9 @@
         android:layout_alignParentStart="true">
 
         <LinearLayout
+            android:id="@+id/wind_pressure_wrapper"
+            android:clickable="true"
+            android:onClick="showTip"
             android:orientation="vertical"
             android:layout_weight="1"
             android:gravity="center_horizontal"
@@ -138,7 +145,7 @@
 
             <TextView
                 android:id="@+id/forecast_details_wind_text"
-                android:text="4 M/S"
+                tools:text="4 M/S"
                 android:textSize="17sp"
                 android:textColor="#fff"
                 android:layout_width="wrap_content"
@@ -147,6 +154,9 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/wind_direction_wrapper"
+            android:clickable="true"
+            android:onClick="showTip"
             android:layout_weight="1"
             android:orientation="vertical"
             android:gravity="center_horizontal"
@@ -161,7 +171,7 @@
 
             <TextView
                 android:id="@+id/forecast_details_degrees_text"
-                android:text="NE"
+                tools:text="NE"
                 android:textSize="17sp"
                 android:textColor="#fff"
                 android:layout_width="wrap_content"
@@ -170,7 +180,10 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/humidity_wrapper"
             android:layout_weight="1"
+            android:clickable="true"
+            android:onClick="showTip"
             android:orientation="vertical"
             android:gravity="center_horizontal"
             android:layout_width="match_parent"
@@ -184,7 +197,7 @@
 
             <TextView
                 android:id="@+id/forecast_details_humidity_text"
-                android:text="6:35 AM"
+                tools:text="6:35 AM"
                 android:textSize="17sp"
                 android:textColor="#fff"
                 android:layout_width="wrap_content"
