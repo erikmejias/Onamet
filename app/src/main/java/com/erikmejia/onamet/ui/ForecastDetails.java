@@ -41,12 +41,12 @@ public class ForecastDetails extends AppCompatActivity {
         adView = (NativeExpressAdView) findViewById(R.id.forecast_details_ad_content);
         frame = (RelativeLayout) findViewById(R.id.today_forecast_frame);
 
-        /*adView.loadAd(
+        adView.loadAd(
                 new AdRequest.Builder()
                         .addTestDevice(AdRequest.DEVICE_ID_EMULATOR) // All emulators
                         .addTestDevice("E0451870C934704914ACFF7D2E7F7F7F")
                         .build()
-        );*/ // Load ad into the view
+        ); // Load ad into the view
 
         changeTextFonts();
 

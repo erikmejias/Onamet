@@ -98,7 +98,7 @@ public class ForecastHolder extends RecyclerView.ViewHolder {
         this.city_name.setText(name);
     }
 
-    public void setAnimatedIcon(int iconId, Context context) {
+    void setAnimatedIcon(int iconId, Context context) {
         Utils.setAnimatedIcon(this.icon_wrapper, iconId, context);
     }
 }

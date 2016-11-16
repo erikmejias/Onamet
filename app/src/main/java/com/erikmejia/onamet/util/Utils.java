@@ -2,6 +2,10 @@ package com.erikmejia.onamet.util;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 
 import com.erikmejia.onamet.R;
@@ -17,11 +21,14 @@ import com.thbs.skycons.library.MoonView;
 import com.thbs.skycons.library.SunView;
 import com.thbs.skycons.library.WindView;
 
+import java.util.Calendar;
+
 /**
  * Created by erik on 10/18/16.
  */
 
 public class Utils {
+    private static final String TAG = Utils.class.getSimpleName();
 
     public static int bulletinIcon(int codeId) {
         switch (codeId){
@@ -64,17 +71,46 @@ public class Utils {
 
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        params.width = 800;
-        params.height = 800;
+
+//        Default animated icon size values
+        params.width = 200;
+        params.height = 200;
+
+        String density = whichDensity(context);
+
+        if (density.equalsIgnoreCase("low")) {
+            params.width = 200;
+            params.height = 200;
+        } else if (density.equalsIgnoreCase("medium")) {
+            params.width = 400;
+            params.height = 400;
+        } else if (density.equalsIgnoreCase("high")) {
+            params.width = 600;
+            params.height = 600;
+        } else if (density.equalsIgnoreCase("xhigh")) {
+            params.width = 800;
+            params.height = 800;
+        } else if (density.equalsIgnoreCase("xxxhigh")) {
+            params.width = 1000;
+            params.height = 1000;
+        }
 
 
         switch (iconId){
             case WeatherCodes.CLEAR_SKY:
                 if (layout.findViewById(R.id.about_toolbar) == null) {
-                    SunView sunView = new SunView(context);
-                    sunView.setId(R.id.about_toolbar);
-                    sunView.setLayoutParams(params);
-                    layout.addView(sunView);
+
+                    if (isByDay()) {    // Check if day or night
+                        SunView sunView = new SunView(context);
+                        sunView.setId(R.id.about_toolbar);
+                        sunView.setLayoutParams(params);
+                        layout.addView(sunView);
+                    } else {
+                        MoonView moonView = new MoonView(context);
+                        moonView.setId(R.id.about_toolbar);
+                        moonView.setLayoutParams(params);
+                        layout.addView(moonView);
+                    }
                 }
                 break;
             case WeatherCodes.THUNDERSTORM:
@@ -151,10 +187,18 @@ public class Utils {
                 break;
             case WeatherCodes.CLOUDS_BROKEN:
                 if (layout.findViewById(R.id.about_toolbar) == null) {
-                    CloudSunView windView = new CloudSunView(context);
-                    windView.setId(R.id.about_toolbar);
-                    windView.setLayoutParams(params);
-                    layout.addView(windView);
+
+                    if (isByDay()) {
+                        CloudSunView windView = new CloudSunView(context);
+                        windView.setId(R.id.about_toolbar);
+                        windView.setLayoutParams(params);
+                        layout.addView(windView);
+                    } else {
+                        CloudMoonView cloudMoonView = new CloudMoonView(context);
+                        cloudMoonView.setId(R.id.about_toolbar);
+                        cloudMoonView.setLayoutParams(params);
+                        layout.addView(cloudMoonView);
+                    }
                 }
                 break;
             case WeatherCodes.TROPICAL_STORM:
@@ -228,5 +272,52 @@ public class Utils {
         public static final int HURRICANE = 13;
         public static final int WINDY = 14;
         public static final int NO_REGISTRY = 15;
+    }
+
+    public static boolean isByDay() {
+        boolean isDay;
+        Calendar c = Calendar.getInstance();
+        int timeOfDay = c.get(Calendar.HOUR_OF_DAY);
+
+//        Check if its by day.
+        isDay = timeOfDay >= 7 && timeOfDay <= 18;
+
+        return isDay;
+    }
+
+    private static String whichDensity(Context context) {
+
+        DisplayMetrics metrics = new DisplayMetrics();
+        WindowManager windowManager = (WindowManager)
+                context.getSystemService(Context.WINDOW_SERVICE);
+        windowManager.getDefaultDisplay().getMetrics(metrics);
+        int density = metrics.densityDpi;
+
+        Log.d(TAG, "setAnimatedIcon: density value " + density);
+
+        if (density < DisplayMetrics.DENSITY_MEDIUM) {
+            Log.d(TAG, "whichDensity: low");
+            return "low";
+        } else if (density >= DisplayMetrics.DENSITY_MEDIUM && density <
+                DisplayMetrics.DENSITY_HIGH) {
+            Log.d(TAG, "whichDensity: medium");
+            return "medium";
+        } else if (density >= DisplayMetrics.DENSITY_HIGH && density <
+                DisplayMetrics.DENSITY_XHIGH) {
+            Log.d(TAG, "whichDensity: high");
+            return "high";
+        } else if (density >= DisplayMetrics.DENSITY_XHIGH && density <
+                DisplayMetrics.DENSITY_XXHIGH) {
+            Log.d(TAG, "whichDensity: xhigh");
+            return "xhigh";
+        } else if (density >= DisplayMetrics.DENSITY_XXHIGH && density <
+                DisplayMetrics.DENSITY_XXXHIGH) {
+            Log.d(TAG, "whichDensity: xxhigh");
+            return "xxhigh";
+        } else {
+            Log.d(TAG, "whichDensity: xxxhigh");
+            return "xxxhigh";
+        }
+
     }
 }
