@@ -1,7 +1,9 @@
 package com.erikmejia.onamet.ui;
 
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,6 +23,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.tomergoldst.tooltips.ToolTip;
 import com.tomergoldst.tooltips.ToolTipsManager;
 
+import java.util.Calendar;
 import java.util.concurrent.ExecutionException;
 
 public class ForecastDetails extends AppCompatActivity {
@@ -38,16 +41,18 @@ public class ForecastDetails extends AppCompatActivity {
         adView = (NativeExpressAdView) findViewById(R.id.forecast_details_ad_content);
         frame = (RelativeLayout) findViewById(R.id.today_forecast_frame);
 
-        adView.loadAd(
+        /*adView.loadAd(
                 new AdRequest.Builder()
                         .addTestDevice(AdRequest.DEVICE_ID_EMULATOR) // All emulators
                         .addTestDevice("E0451870C934704914ACFF7D2E7F7F7F")
                         .build()
-        ); // Load ad into the view
+        );*/ // Load ad into the view
 
         changeTextFonts();
 
         toolTipsManager = new ToolTipsManager();
+
+        dynamicBackground();
 
     }
 
@@ -140,5 +145,16 @@ public class ForecastDetails extends AppCompatActivity {
         builder.setBackgroundColor(R.color.colorPrimaryDark);
 
         toolTipsManager.show(builder.build());
+    }
+
+    public void dynamicBackground() {
+        Calendar c = Calendar.getInstance();
+        int timeOfDay = c.get(Calendar.HOUR_OF_DAY);
+        Log.d(TAG, "dynamicBackground: " + timeOfDay);
+
+        if (timeOfDay >= 7 && timeOfDay <=18)
+            frame.setBackground(ResourcesCompat.getDrawable(getResources(), R.mipmap.rt5, null));
+        else
+            frame.setBackground(ResourcesCompat.getDrawable(getResources(), R.mipmap.rt1, null));
     }
 }

@@ -148,6 +148,7 @@ public class FirebaseAdapter extends FirebaseRecyclerAdapter<Forecast, ForecastH
             case TODAY:
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.today_forecast_item,
                         parent, false);
+//                view.getBackground().setAlpha(140); // TODO Set alpha
                 return new ForecastHolder(view);
             case FORECAST_TYPE:
                 View future = LayoutInflater.from(parent.getContext()).inflate(R.layout.forecast_item,
