@@ -73,8 +73,8 @@ public class Utils {
                 LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
 //        Default animated icon size values
-        params.width = 200;
-        params.height = 200;
+        params.width = 400;
+        params.height = 400;
 
         String density = whichDensity(context);
 
@@ -90,9 +90,12 @@ public class Utils {
         } else if (density.equalsIgnoreCase("xhigh")) {
             params.width = 800;
             params.height = 800;
-        } else if (density.equalsIgnoreCase("xxxhigh")) {
+        } else if (density.equalsIgnoreCase("xxhigh")) {
             params.width = 1000;
             params.height = 1000;
+        } else if (density.equalsIgnoreCase("xxxhigh")) {
+            params.width = 1200;
+            params.height = 1200;
         }
 
 
