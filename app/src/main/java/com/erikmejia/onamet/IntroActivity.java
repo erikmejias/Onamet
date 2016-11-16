@@ -6,7 +6,7 @@ import com.erikmejia.onamet.ui.SampleSlide;
 import com.github.paolorotolo.appintro.AppIntro;
 import com.github.paolorotolo.appintro.AppIntro2;
 
-public class IntroActivity extends AppIntro {
+public class IntroActivity extends AppIntro2 {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -98,6 +98,8 @@ public class Utils {
             params.height = 1200;
         }
 
+        layout.setClickable(true);
+
 
         switch (iconId){
             case WeatherCodes.CLEAR_SKY:
