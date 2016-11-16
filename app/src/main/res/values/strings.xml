@@ -88,12 +88,15 @@ El ultimo cambio que ha sufrido esta Oficina fue con el Decreto número 764-03, 
     <string name="facebook_application_id" translatable="false">
         134196063715265
     </string>
+    <string name="facebook_login_protocol_scheme" translatable="false">
+        fb134196063715265
+    </string>
 
     <string name="twitter_consumer_key" translatable="false">
-        k9RKbaJDBvLnb1i1aaZsVfi4m
+        HjnWrYpNAN7N1qRTWtinowNcE
     </string>
     <string name="twitter_consumer_secret" translatable="false">
-        LvO2YBn4qaTjHaMtB7sOuAhZ6Ekap7b88yZd0GD6TJn2Zb0ScP
+        anHK0oImncPzjeMf4W5RBFXNTPNzYuFKCtIxpP57XTQNTaEDR6
     </string>
 
     <string name="ads_forecast_main_list">

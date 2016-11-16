@@ -12,8 +12,10 @@ import android.os.IBinder;
 import android.preference.EditTextPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
+import android.preference.PreferenceScreen;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
+import android.support.design.widget.Snackbar;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v4.view.GravityCompat;
@@ -35,6 +37,7 @@ import com.erikmejia.onamet.R;
 import com.erikmejia.onamet.model.User;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.BuildConfig;
+import com.firebase.ui.auth.ui.ResultCodes;
 import com.firebase.ui.auth.ui.email.SignInActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -51,6 +54,7 @@ import com.orhanobut.dialogplus.ViewHolder;
 import java.util.Arrays;
 import java.util.concurrent.ExecutionException;
 
+import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
 import static com.firebase.ui.auth.ui.AcquireEmailHelper.RC_SIGN_IN;
 
@@ -183,8 +187,13 @@ public class SettingsFragment extends PreferenceFragment {
                 user = FirebaseAuth.getInstance().getCurrentUser();
                 smsPreference.setEnabled(true);
                 signOutPreference.setEnabled(true);
-                signInPreference.setTitle(user.getEmail());
-                signInPreference.setSummary("Has iniciado sesión como " + user.getDisplayName());
+                if (user.getEmail() != null) {
+                    signInPreference.setTitle(user.getEmail());
+                    signInPreference.setSummary("Has iniciado sesión como " + user.getDisplayName());
+                } else {
+                    signInPreference.setTitle(user.getDisplayName());
+                    signInPreference.setSummary("Has iniciado sesión correctamente");
+                }
                 isVerified();
 
                 Glide.with(getActivity())
@@ -204,11 +213,23 @@ public class SettingsFragment extends PreferenceFragment {
 
                 Toast.makeText(getActivity(), "Bienvenido "
                         + mAuth.getCurrentUser().getDisplayName(), Toast.LENGTH_SHORT).show();
-                Log.d(TAG, "onActivityResult: profile url " + user.getPhotoUrl());
 //                getActivity().finish();
-            } else {
+            }
+            if (resultCode == RESULT_CANCELED){
                 // user is not signed in. Maybe just wait for the user to press
                 // "sign in" again, or show a message
+                Snackbar snackbar = Snackbar.make(
+                        null,
+                        "Se ha cancelado el iniciar sesión",
+                        Snackbar.LENGTH_LONG);
+                snackbar.show();
+            }
+            if(resultCode == ResultCodes.RESULT_NO_NETWORK) {
+                Snackbar snackbar = Snackbar.make(
+                        null,
+                        "Necesitas Internet",
+                        Snackbar.LENGTH_LONG);
+                snackbar.show();
             }
         }
     }
@@ -224,10 +245,9 @@ public class SettingsFragment extends PreferenceFragment {
             startActivityForResult(
                     AuthUI.getInstance()
                             .createSignInIntentBuilder()
-                            .setIsSmartLockEnabled(!BuildConfig.DEBUG) // TODO - Change later to true
+                            .setIsSmartLockEnabled(true)
                             .setTheme(R.style.SignInTheme)
                             .setProviders(Arrays.asList(
-                                    new AuthUI.IdpConfig.Builder(AuthUI.TWITTER_PROVIDER).build(),
                                     new AuthUI.IdpConfig.Builder(AuthUI.FACEBOOK_PROVIDER).build(),
                                     new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build()
                             ))
