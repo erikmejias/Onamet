@@ -3,9 +3,10 @@ package com.erikmejia.onamet;
 import android.os.Bundle;
 
 import com.erikmejia.onamet.ui.SampleSlide;
+import com.github.paolorotolo.appintro.AppIntro;
 import com.github.paolorotolo.appintro.AppIntro2;
 
-public class IntroActivity extends AppIntro2 {
+public class IntroActivity extends AppIntro {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

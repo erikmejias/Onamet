@@ -42,9 +42,9 @@ public class SampleSlide extends Fragment {
         }
 
         titleFont = Typeface.createFromAsset(getActivity().getAssets(),
-                "fonts/Brandon_reg.otf");
+                "fonts/Brandon_bld.otf");
         descriptionFont = Typeface.createFromAsset(getActivity().getAssets(),
-                "fonts/Brandon_light.otf");
+                "fonts/Brandon_reg.otf");
 
     }
 
@@ -57,7 +57,7 @@ public class SampleSlide extends Fragment {
         TextView title = (TextView) rootView.findViewById(R.id.welcome_title_text);
         TextView description = (TextView) rootView.findViewById(R.id.welcome_description_text);
 
-        rootView.getBackground().setAlpha(140);
+        rootView.getBackground().setAlpha(120);
 
 
         title.setTypeface(titleFont);
