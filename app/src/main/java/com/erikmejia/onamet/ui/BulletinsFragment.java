@@ -1,35 +1,25 @@
 package com.erikmejia.onamet.ui;
 
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
-import com.erikmejia.onamet.MainActivity;
 import com.erikmejia.onamet.R;
 import com.erikmejia.onamet.model.Bulletin;
 import com.erikmejia.onamet.model.BulletinHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-import java.util.List;
 
 /**
  * Created by erik on 9/4/16.
@@ -44,7 +34,7 @@ public class BulletinsFragment extends Fragment {
     RecyclerView bulletinsList;
     private DatabaseReference bulletinsReference;
     private FirebaseRecyclerAdapter firebaseAdapter;
-    private SharedPreferences getPrefs;
+    private TextView default_text;
 
     public BulletinsFragment() {
 //        required empty constructor.
@@ -53,11 +43,8 @@ public class BulletinsFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getPrefs = PreferenceManager
-                .getDefaultSharedPreferences(getActivity());
 
         bulletinsReference = FirebaseDatabase.getInstance().getReference("bulletins");
-        bulletinsReference.addChildEventListener(childEventListener);
     }
 
     @Nullable
@@ -69,6 +56,7 @@ public class BulletinsFragment extends Fragment {
 
         bulletinsList = (RecyclerView)
                 rootView.findViewById(R.id.bulletins_recyler_list);
+        default_text = (TextView) rootView.findViewById(R.id.no_bulletins_text);
 
         bulletinsList.setHasFixedSize(true);
 
@@ -92,74 +80,25 @@ public class BulletinsFragment extends Fragment {
 
         bulletinsList.setAdapter(firebaseAdapter);
 
+        bulletinsReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (firebaseAdapter.getItemCount() == 0) {
+                    default_text.setVisibility(View.VISIBLE);
+                    bulletinsList.setVisibility(View.GONE);
+                } else {
+                    default_text.setVisibility(View.GONE);
+                    bulletinsList.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
         return rootView;
     }
-
-    /*
-    * Fire a notification with the title of the new Bulletin
-    * */
-    public void notifyNewBulletin(String title){
-
-        NotificationCompat.Builder mBuilder =
-                new NotificationCompat.Builder(getActivity())
-                        .setAutoCancel(true)
-                        .setSmallIcon(R.drawable.ic_launcher)
-                        .setContentTitle("Nuevo boletín informativo")
-                        .setContentText(title);
-
-        Intent resultIntent = new Intent(getActivity(), MainActivity.class);
-        TaskStackBuilder stackBuilder = TaskStackBuilder.create(getActivity());
-
-        stackBuilder.addParentStack(MainActivity.class);
-        stackBuilder.addNextIntent(resultIntent);
-
-        PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(
-                0,
-                PendingIntent.FLAG_UPDATE_CURRENT
-        );
-        mBuilder.setContentIntent(resultPendingIntent);
-
-        NotificationManager manager = (NotificationManager)
-                getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
-
-        manager.notify(0, mBuilder.build());
-
-    }
-
-    ChildEventListener childEventListener = new ChildEventListener() {
-        @Override
-        public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-            boolean isFirstTime = getPrefs.getBoolean("isFirstTimeBulletin", true);
-
-            if (isFirstTime) {
-//                Do not notify, its the first time.
-                SharedPreferences.Editor e = getPrefs.edit();
-                e.putBoolean("isFirstTimeBulletin", false);
-                e.apply();
-            } else {
-//                notifyNewBulletin( dataSnapshot.getValue(Bulletin.class).getTitle() );
-            }
-        }
-
-        @Override
-        public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-        }
-
-        @Override
-        public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-        }
-
-        @Override
-        public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-        }
-
-        @Override
-        public void onCancelled(DatabaseError databaseError) {
-
-        }
-    };
 
 }

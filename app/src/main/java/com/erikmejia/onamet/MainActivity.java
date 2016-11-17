@@ -26,6 +26,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.erikmejia.onamet.service.FirebaseBackgroundService;
 import com.erikmejia.onamet.ui.BulletinsFragment;
 import com.erikmejia.onamet.ui.ForecastFragment;
 import com.erikmejia.onamet.ui.SettingsActivity;
@@ -132,10 +133,6 @@ public class MainActivity extends AppCompatActivity{
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
-//        Cache data to local disk ( OFFLINE SUPPORT ).
-//        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
-
-//        azuaReference= FirebaseDatabase.getInstance().getReference("/demo");
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
         viewPager.setPageTransformer(true, new PageTransformer(PageTransformer.TransformType.DEPTH));
@@ -188,6 +185,8 @@ public class MainActivity extends AppCompatActivity{
             incomingBulletin();
         }
 
+//        startService(new Intent(this, FirebaseBackgroundService.class));
+
     }
 
     @Override
@@ -195,6 +194,17 @@ public class MainActivity extends AppCompatActivity{
         super.onStart();
         Log.d(TAG, "onStart: initiated");
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+//        Start the background services that handles notifications
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
     }
 
     @Override

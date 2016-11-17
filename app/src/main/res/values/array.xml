@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string-array name="provinces_array">
         <item>Azua</item>
         <item>Bonao</item>
@@ -9,5 +10,7 @@
         <item>Punta Cana</item>
         <item>Sabana de la Mar</item>
         <item>Monte Plata</item>
+        <item>Duarte</item>
     </string-array>
+
 </resources>

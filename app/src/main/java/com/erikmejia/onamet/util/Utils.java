@@ -298,29 +298,22 @@ public class Utils {
         windowManager.getDefaultDisplay().getMetrics(metrics);
         int density = metrics.densityDpi;
 
-        Log.d(TAG, "setAnimatedIcon: density value " + density);
 
         if (density < DisplayMetrics.DENSITY_MEDIUM) {
-            Log.d(TAG, "whichDensity: low");
             return "low";
         } else if (density >= DisplayMetrics.DENSITY_MEDIUM && density <
                 DisplayMetrics.DENSITY_HIGH) {
-            Log.d(TAG, "whichDensity: medium");
             return "medium";
         } else if (density >= DisplayMetrics.DENSITY_HIGH && density <
                 DisplayMetrics.DENSITY_XHIGH) {
-            Log.d(TAG, "whichDensity: high");
             return "high";
         } else if (density >= DisplayMetrics.DENSITY_XHIGH && density <
                 DisplayMetrics.DENSITY_XXHIGH) {
-            Log.d(TAG, "whichDensity: xhigh");
             return "xhigh";
         } else if (density >= DisplayMetrics.DENSITY_XXHIGH && density <
                 DisplayMetrics.DENSITY_XXXHIGH) {
-            Log.d(TAG, "whichDensity: xxhigh");
             return "xxhigh";
         } else {
-            Log.d(TAG, "whichDensity: xxxhigh");
             return "xxxhigh";
         }
 

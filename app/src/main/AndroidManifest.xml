@@ -70,6 +70,18 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+        <service
+            android:name=".service.FirebaseBackgroundService"
+            android:exported="false"
+            android:process=":remote">
+        </service>
+
+        <receiver
+            android:name=".service.StartFirebaseAtBoot">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
 
     </application>
 

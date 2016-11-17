@@ -1,5 +1,6 @@
 package com.erikmejia.onamet.ui;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -16,6 +17,7 @@ import android.view.animation.OvershootInterpolator;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.erikmejia.onamet.MainActivity;
 import com.erikmejia.onamet.R;
 import com.erikmejia.onamet.model.City;
 import com.erikmejia.onamet.model.FirebaseAdapter;
@@ -43,6 +45,7 @@ import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator;
 
 public class ForecastFragment extends Fragment {
 
+    private Context activity;
     private static String TAG = ForecastFragment.class.getSimpleName();
     private DatabaseReference databaseReference;
     private DatabaseReference mainReference;
@@ -83,7 +86,7 @@ public class ForecastFragment extends Fragment {
         }
 
         SharedPreferences getPrefs = PreferenceManager
-                .getDefaultSharedPreferences(getActivity());
+                .getDefaultSharedPreferences(activity);
         this.PROVINCE_ID = getPrefs.getInt("city", 0);
 
         database = FirebaseDatabase.getInstance();
@@ -159,7 +162,7 @@ public class ForecastFragment extends Fragment {
         mainReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Log.d(TAG, "onDataChange: cached all data?");
+//                Hook up a listener that keeps entire database cached in memory.
             }
 
             @Override
@@ -167,6 +170,12 @@ public class ForecastFragment extends Fragment {
 
             }
         });
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        activity = context;
     }
 
     @Override

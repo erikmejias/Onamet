@@ -13,15 +13,15 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <LinearLayout
             android:id="@+id/bulletin_title_wrapper"
             android:gravity="center_horizontal"
-            android:background="@color/gray"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TextView
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:id="@+id/bulletins_title_text"
                 tools:text="Titulo del boletin"
                 android:layout_marginTop="5dp"
