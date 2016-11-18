@@ -126,7 +126,7 @@ public class ForecastFragment extends Fragment {
         ScaleInAnimationAdapter animationAdapter =
                 new ScaleInAnimationAdapter(firebaseAdapter);
         animationAdapter.setInterpolator(new OvershootInterpolator());
-        animationAdapter.setDuration(1000);
+        animationAdapter.setDuration(700);
 
 //        Setting adapter to RecyclerView
         forecastList.setAdapter(animationAdapter);

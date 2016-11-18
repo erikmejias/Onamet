@@ -136,6 +136,8 @@ public class ForecastDetails extends AppCompatActivity {
     public void showTip(View view) {
         String msg;
 
+        toolTipsManager.clear();
+
         switch (view.getId()) {
             case R.id.forecast_details_max_text:
                 msg = "Temperatura máxima";
