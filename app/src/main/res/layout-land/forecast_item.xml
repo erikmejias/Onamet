@@ -20,8 +20,8 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="@dimen/future_icon_width"
+            android:layout_height="@dimen/future_icon_height"
             android:layout_gravity="center_horizontal"
             app:srcCompat="@drawable/clear_day"
             android:id="@+id/future_weather_icon"/>
@@ -38,7 +38,7 @@
         <TextView
             android:layout_gravity="center_horizontal"
             tools:text="Lun 22"
-            android:textSize="18sp"
+            android:textSize="@dimen/future_text_size_date"
             android:id="@+id/forecast_date_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -55,7 +55,7 @@
         <TextView
             android:layout_gravity="center"
             tools:text="28º"
-            android:textSize="18sp"
+            android:textSize="@dimen/future_text_size_max_temp"
             android:id="@+id/forecast_max_temperature"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -63,7 +63,7 @@
         <TextView
             android:layout_gravity="center"
             tools:text="18º"
-            android:textSize="14sp"
+            android:textSize="@dimen/future_text_size_min_temp"
             android:id="@+id/future_forecast_min_temperature"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -80,7 +80,7 @@
         <TextView
             android:layout_gravity="center_horizontal"
             tools:text="cielo claro"
-            android:textSize="18sp"
+            android:textSize="@dimen/future_text_size_description"
             android:maxLines="1"
             android:id="@+id/forecast_description"
             android:layout_width="wrap_content"

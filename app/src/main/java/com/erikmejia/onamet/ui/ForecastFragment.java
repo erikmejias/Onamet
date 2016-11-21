@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.OvershootInterpolator;
+import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -45,13 +46,19 @@ import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator;
 
 public class ForecastFragment extends Fragment {
 
-    private Context activity;
     private static String TAG = ForecastFragment.class.getSimpleName();
+    private Context activity;
+
     private DatabaseReference databaseReference;
     private DatabaseReference mainReference;
+
     FirebaseDatabase database;
     FirebaseAdapter firebaseAdapter;
+
+    private RecyclerView forecastList;
+
     private static boolean calledAlready = false;
+
     private int PROVINCE_ID;
 
     public ForecastFragment() {
@@ -61,6 +68,21 @@ public class ForecastFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+
+        firebaseAdapter = new FirebaseAdapter(Forecast.class,
+                R.layout.forecast_item,
+                ForecastHolder.class,
+                databaseReference,
+                activity);
+
+        ScaleInAnimationAdapter animationAdapter =
+                new ScaleInAnimationAdapter(firebaseAdapter);
+        animationAdapter.setInterpolator(new OvershootInterpolator());
+        animationAdapter.setDuration(700);
+
+        //        Setting adapter to RecyclerView
+        forecastList.setAdapter(animationAdapter);
+
     }
 
     @Override
@@ -73,11 +95,6 @@ public class ForecastFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        if (savedInstanceState != null) {
-//            this.PROVINCE_ID = savedInstanceState.getInt("city");
-//            Toast.makeText(getActivity(), "picked " + PROVINCE_ID, Toast.LENGTH_SHORT).show();
-        }
 
 
         if (!calledAlready) {
@@ -104,11 +121,7 @@ public class ForecastFragment extends Fragment {
         final View rootView = inflater.inflate(R.layout.forecasts_layout, container, false);
 
 
-        firebaseAdapter = new FirebaseAdapter(Forecast.class,
-                R.layout.forecast_item,
-                ForecastHolder.class,
-                databaseReference,
-                getActivity());
+
         final ProgressBar progressBar = (ProgressBar) rootView.findViewById(R.id.feed_loading);
         progressBar.setVisibility(View.GONE);
         final SpotsDialog progressDialog = new SpotsDialog(getActivity());
@@ -116,20 +129,15 @@ public class ForecastFragment extends Fragment {
         progressDialog.setMessage("cargando...");
 
 
-        final RecyclerView forecastList = (RecyclerView)
+        forecastList = (RecyclerView)
                 rootView.findViewById(R.id.future_forecast_recycler_list);
         forecastList.setHasFixedSize(true);
+
+
         LinearLayoutManager layoutManager =
                 new LinearLayoutManager(getActivity());
         forecastList.setLayoutManager(layoutManager);
 
-        ScaleInAnimationAdapter animationAdapter =
-                new ScaleInAnimationAdapter(firebaseAdapter);
-        animationAdapter.setInterpolator(new OvershootInterpolator());
-        animationAdapter.setDuration(700);
-
-//        Setting adapter to RecyclerView
-        forecastList.setAdapter(animationAdapter);
 
         layoutManager.scrollToPositionWithOffset(0, 20);
 
@@ -150,11 +158,7 @@ public class ForecastFragment extends Fragment {
         return rootView;
     }
 
-    public void runOver() {
-        for (int i = 0; i < 23; i++) {
-            mainReference = database.getReference("forecasts/cities/" + i + "forecasts");
-        }
-    }
+
 
     @Override
     public void onResume() {
@@ -175,7 +179,7 @@ public class ForecastFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        activity = context;
+        this.activity = context;
     }
 
     @Override

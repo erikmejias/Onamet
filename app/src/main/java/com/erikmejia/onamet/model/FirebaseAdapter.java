@@ -31,6 +31,8 @@ public class FirebaseAdapter extends FirebaseRecyclerAdapter<Forecast, ForecastH
 
     private View futureView;
 
+    private AdRequest adRequest;
+
     private Typeface font_thin;
     private Typeface font_reg;
     private Typeface font_bold;
@@ -49,6 +51,11 @@ public class FirebaseAdapter extends FirebaseRecyclerAdapter<Forecast, ForecastH
                 "fonts/Brandon_reg.otf");
         font_bold = Typeface.createFromAsset(context.getAssets(),
                 "fonts/Brandon_bld.otf");
+
+        adRequest = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .addTestDevice("E0451870C934704914ACFF7D2E7F7F7F")
+                .build();
     }
 
     @Override
@@ -148,27 +155,25 @@ public class FirebaseAdapter extends FirebaseRecyclerAdapter<Forecast, ForecastH
             case TODAY:
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.today_forecast_item,
                         parent, false);
-//                view.getBackground().setAlpha(140); // TODO Set alpha
+
+                adView = (NativeExpressAdView) view.findViewById(R.id.today_forecast_ad);
+
+                adView.loadAd(adRequest);
                 return new ForecastHolder(view);
             case FORECAST_TYPE:
                 View future = LayoutInflater.from(parent.getContext()).inflate(R.layout.forecast_item,
                         parent, false);
                 return new ForecastHolder(future);
             case AD_TYPE:
-                float density = parent.getContext().getResources().getDisplayMetrics().density;
-                int height = Math.round(AdSize.BANNER.getHeight() * density);
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.WRAP_CONTENT, height);
-
                 adView = (NativeExpressAdView) LayoutInflater.from(parent.getContext()).inflate(R.layout.ad_item_layout,
                         parent, false);
-                AdRequest request = new AdRequest.Builder()
+                /*AdRequest request = new AdRequest.Builder()
                         .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
                         .addTestDevice("E0451870C934704914ACFF7D2E7F7F7F")
                         .build();
 //                adView.setLayoutParams(params);
 
-                adView.loadAd(request);
+                adView.loadAd(request);*/
 
                 Log.d(TAG, "onCreateViewHolder: returned AD");
                 return new ForecastHolder(adView);

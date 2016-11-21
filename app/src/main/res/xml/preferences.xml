@@ -35,12 +35,12 @@
             android:key="check_box_preference_1"
             android:summary="@string/notification_prefs_summary" />
 
-        <ListPreference
+        <!--<ListPreference
             android:title="Cuál es tu provincia?"
             android:summary="Elige tu provincia para recibir notificaciones locales"
             android:entries="@array/provinces_array"
             android:entryValues="@array/provinces_array"
-            android:key="list_province_key" />
+            android:key="list_province_key" />-->
 
 
     </PreferenceCategory>

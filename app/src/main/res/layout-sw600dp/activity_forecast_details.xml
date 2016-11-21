@@ -8,6 +8,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:ads="http://schemas.android.com/apk/res-auto">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark"
+        android:background="@drawable/background_toolbar_translucent"
+        android:layout_height="?attr/actionBarSize">
+
+    </android.support.v7.widget.Toolbar>
+
     <!-- Upper Section -->
 
     <RelativeLayout
@@ -15,7 +24,7 @@
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:id="@+id/forecast_details_layout"
         android:layout_width="match_parent"
-        android:layout_height="445dp">
+        android:layout_height="@dimen/detail_upper_section_height">
 
         <LinearLayout
             android:layout_marginTop="5dp"
@@ -27,7 +36,7 @@
             <TextView
                 android:id="@+id/forecast_details_date"
                 tools:text="Nov 6"
-                android:textSize="40sp"
+                android:textSize="@dimen/detail_text_size_date"
                 android:textColor="@color/white"
                 android:layout_gravity="center_horizontal"
                 android:layout_width="wrap_content"
@@ -54,7 +63,7 @@
                 <TextView
                     android:id="@+id/forecast_details_max_text"
                     tools:text="23º"
-                    android:textSize="175sp"
+                    android:textSize="@dimen/detail_text_size_max_temp"
                     android:textColor="#fff"
                     android:layout_marginBottom="-30dp"
                     android:layout_width="match_parent"
@@ -63,7 +72,7 @@
                 <TextView
                     android:id="@+id/forecast_details_min_text"
                     tools:text="22º"
-                    android:textSize="80sp"
+                    android:textSize="@dimen/detail_text_size_min_temp"
                     android:textColor="#fff"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
@@ -71,7 +80,7 @@
                 <TextView
                     android:id="@+id/forecast_details_description"
                     tools:text="lluvias dispersas"
-                    android:textSize="40sp"
+                    android:textSize="@dimen/detail_text_size_description"
                     android:textColor="#fff"
                     android:layout_marginTop="5dp"
                     android:layout_width="match_parent"
@@ -141,8 +150,8 @@
 
             <TextView
                 android:id="@+id/forecast_details_wind_text"
-                android:text="4 M/S"
-                android:textSize="30sp"
+                tools:text="4 M/S"
+                android:textSize="@dimen/details_text_compound_descriptors"
                 android:textColor="#fff"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -165,7 +174,7 @@
             <TextView
                 android:id="@+id/forecast_details_degrees_text"
                 tools:text="NE"
-                android:textSize="30sp"
+                android:textSize="@dimen/details_text_compound_descriptors"
                 android:textColor="#fff"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -188,7 +197,7 @@
             <TextView
                 android:id="@+id/forecast_details_humidity_text"
                 tools:text="45%"
-                android:textSize="30sp"
+                android:textSize="@dimen/details_text_compound_descriptors"
                 android:textColor="#fff"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />

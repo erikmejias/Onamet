@@ -28,7 +28,7 @@
             <TextView
                 android:id="@+id/city_name_text"
                 tools:text="La Romana"
-                android:textSize="30sp"
+                android:textSize="@dimen/text_size_city_name"
                 android:textColor="@color/white"
                 android:layout_gravity="center_horizontal"
                 android:layout_width="wrap_content"
@@ -37,7 +37,7 @@
             <TextView
                 android:id="@+id/forecast_date_title"
                 tools:text="hoy"
-                android:textSize="18sp"
+                android:textSize="@dimen/text_size_date"
                 android:textColor="@color/white"
                 android:layout_gravity="center_horizontal"
                 android:layout_width="wrap_content"
@@ -61,7 +61,7 @@
                 <TextView
                     android:id="@+id/forecast_max_temperature"
                     tools:text="26º"
-                    android:textSize="115sp"
+                    android:textSize="@dimen/text_size_max_temp"
                     android:textColor="#fff"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
@@ -69,7 +69,7 @@
                 <TextView
                     android:id="@+id/forecast_description"
                     tools:text="lluvias dispersas"
-                    android:textSize="24sp"
+                    android:textSize="@dimen/text_size_description"
                     android:textColor="#fff"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />

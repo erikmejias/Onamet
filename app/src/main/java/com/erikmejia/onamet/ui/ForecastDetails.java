@@ -33,6 +33,17 @@ public class ForecastDetails extends AppCompatActivity {
     ToolTipsManager toolTipsManager;
     RelativeLayout frame;
 
+    private TextView date;
+    private TextView maxTemperature;
+    private TextView minTemperature;
+    private TextView weatherDescription;
+    private TextView windSpeed;
+    private TextView windDirection;
+    private TextView humidity;
+    private TextView rainPercent;
+
+    private LinearLayout iconWrapper;
+
     NativeExpressAdView adView;
 
     @Override
@@ -45,21 +56,22 @@ public class ForecastDetails extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
+        iconWrapper = (LinearLayout) findViewById(R.id.today_forecast_icon);
+
+        date = (TextView) findViewById(R.id.forecast_details_date);
+        maxTemperature = (TextView) findViewById(R.id.forecast_details_max_text);
+        minTemperature = (TextView) findViewById(R.id.forecast_details_min_text);
+        weatherDescription = (TextView) findViewById(R.id.forecast_details_description);
+        windSpeed = (TextView) findViewById(R.id.forecast_details_wind_text);
+        windDirection = (TextView) findViewById(R.id.forecast_details_degrees_text);
+        humidity = (TextView) findViewById(R.id.forecast_details_humidity_text);
+
         adView = (NativeExpressAdView) findViewById(R.id.forecast_details_ad_content);
         frame = (RelativeLayout) findViewById(R.id.today_forecast_frame);
 
-        adView.loadAd(
-                new AdRequest.Builder()
-                        .addTestDevice(AdRequest.DEVICE_ID_EMULATOR) // All emulators
-                        .addTestDevice("E0451870C934704914ACFF7D2E7F7F7F")
-                        .build()
-        ); // Load ad into the view
-
-        changeTextFonts();
+//        changeTextFonts();
 
         toolTipsManager = new ToolTipsManager();
-
-        dynamicBackground();
 
     }
 
@@ -75,31 +87,9 @@ public class ForecastDetails extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void changeTextFonts() {
+    public void loadReceivedData() {
 
         Bundle extras = getIntent().getExtras();
-        LinearLayout iconWrapper = (LinearLayout) findViewById(R.id.today_forecast_icon);
-
-        TextView date;
-        TextView maxTemperature;
-        TextView minTemperature;
-        TextView weatherDescription;
-        TextView windSpeed;
-        TextView windDirection;
-        TextView humidity;
-        TextView rainPercent;
-
-        date = (TextView) findViewById(R.id.forecast_details_date);
-        maxTemperature = (TextView) findViewById(R.id.forecast_details_max_text);
-        minTemperature = (TextView) findViewById(R.id.forecast_details_min_text);
-        weatherDescription = (TextView) findViewById(R.id.forecast_details_description);
-        windSpeed = (TextView) findViewById(R.id.forecast_details_wind_text);
-        windDirection = (TextView) findViewById(R.id.forecast_details_degrees_text);
-        humidity = (TextView) findViewById(R.id.forecast_details_humidity_text);
-//        rainPercent = (TextView) findViewById(R.id.forecast_details_rain_percent_text);
-
-        Typeface regTypeface = Typeface.createFromAsset(getAssets(), "fonts/Brandon_reg.otf");
-        Typeface boldTypeface = Typeface.createFromAsset(getAssets(), "fonts/Brandon_bld.otf");
 
         date.setText(extras.getString(Utils.ForecastConstants.FORECAST_DATE));
         maxTemperature.setText(extras.getString(Utils.ForecastConstants.MAX_TEMPERATURE));
@@ -115,6 +105,9 @@ public class ForecastDetails extends AppCompatActivity {
                 extras.getInt(Utils.ForecastConstants.ICON_ID),
                 this);
 
+        Typeface regTypeface = Typeface.createFromAsset(getAssets(), "fonts/Brandon_reg.otf");
+        Typeface boldTypeface = Typeface.createFromAsset(getAssets(), "fonts/Brandon_bld.otf");
+
         date.setTypeface(boldTypeface);
         maxTemperature.setTypeface(regTypeface);
         minTemperature.setTypeface(regTypeface);
@@ -124,13 +117,23 @@ public class ForecastDetails extends AppCompatActivity {
         windDirection.setTypeface(regTypeface);
         windSpeed.setTypeface(regTypeface);
         humidity.setTypeface(regTypeface);
-//        rainPercent.setTypeface(regTypeface);
-
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+
+//        changeTextFonts();
+        loadReceivedData();
+
+        adView.loadAd(
+                new AdRequest.Builder()
+                        .addTestDevice(AdRequest.DEVICE_ID_EMULATOR) // All emulators
+                        .addTestDevice("E0451870C934704914ACFF7D2E7F7F7F")
+                        .build()
+        );
+
+        dynamicBackground();
     }
 
     public void showTip(View view) {

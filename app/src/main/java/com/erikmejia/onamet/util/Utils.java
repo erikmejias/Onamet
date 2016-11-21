@@ -81,21 +81,27 @@ public class Utils {
         if (density.equalsIgnoreCase("low")) {
             params.width = 200;
             params.height = 200;
+            Log.d(TAG, "setAnimatedIcon: low density");
         } else if (density.equalsIgnoreCase("medium")) {
+            params.width = 300;
+            params.height = 300;
+            Log.d(TAG, "setAnimatedIcon: medium density");
+        } else if (density.equalsIgnoreCase("high")) {
             params.width = 400;
             params.height = 400;
-        } else if (density.equalsIgnoreCase("high")) {
-            params.width = 600;
-            params.height = 600;
+            Log.d(TAG, "setAnimatedIcon: high density");
         } else if (density.equalsIgnoreCase("xhigh")) {
-            params.width = 800;
-            params.height = 800;
+            params.width = 750;
+            params.height = 750;
+            Log.d(TAG, "setAnimatedIcon: xhigh density");
         } else if (density.equalsIgnoreCase("xxhigh")) {
             params.width = 1000;
             params.height = 1000;
+            Log.d(TAG, "setAnimatedIcon: xxhigh density");
         } else if (density.equalsIgnoreCase("xxxhigh")) {
             params.width = 1200;
             params.height = 1200;
+            Log.d(TAG, "setAnimatedIcon: xxxhigh density");
         }
 
         layout.setClickable(true);
@@ -249,37 +255,37 @@ public class Utils {
     }
 
     public interface ForecastConstants {
-        public static final String FORECAST_DATE = "forecast_date";
-        public static final String MAX_TEMPERATURE = "max_temperature";
-        public static final String MIN_TEMPERATURE = "min_temperature";
-        public static final String DESCRIPTION = "description";
-        public static final String HUMIDITY = "humidity";
-        public static final String WIND_SPEED = "wind_speed";
-        public static final String WIND_DIRECTION = "wind_direction";
-        public static final String CITY_NAME = "city_name";
-        public static final String ICON_ID = "icon_id";
+        String FORECAST_DATE = "forecast_date";
+        String MAX_TEMPERATURE = "max_temperature";
+        String MIN_TEMPERATURE = "min_temperature";
+        String DESCRIPTION = "description";
+        String HUMIDITY = "humidity";
+        String WIND_SPEED = "wind_speed";
+        String WIND_DIRECTION = "wind_direction";
+        String CITY_NAME = "city_name";
+        String ICON_ID = "icon_id";
     }
 
-    public interface WeatherCodes {
-        public static final int CLEAR_SKY = 0;
-        public static final int THUNDERSTORM = 1;
-        public static final int THUNDERSTORM_RAIN = 2;
-        public static final int THUNDERSTORM_HEAVY_RAIN = 3;
-        public static final int DRIZZLE = 4;
-        public static final int DRIZZLE_HEAVY = 5;
-        public static final int RAIN_LIGHT = 6;
-        public static final int RAIN_MODERATE = 7;
-        public static final int RAIN_HEAVY = 8;
-        public static final int CLOUDS_FEW = 9;
-        public static final int CLOUDS_SCATTERED = 10;
-        public static final int CLOUDS_BROKEN = 11;
-        public static final int TROPICAL_STORM = 12;
-        public static final int HURRICANE = 13;
-        public static final int WINDY = 14;
-        public static final int NO_REGISTRY = 15;
+    interface WeatherCodes {
+        int CLEAR_SKY = 0;
+        int THUNDERSTORM = 1;
+        int THUNDERSTORM_RAIN = 2;
+        int THUNDERSTORM_HEAVY_RAIN = 3;
+        int DRIZZLE = 4;
+        int DRIZZLE_HEAVY = 5;
+        int RAIN_LIGHT = 6;
+        int RAIN_MODERATE = 7;
+        int RAIN_HEAVY = 8;
+        int CLOUDS_FEW = 9;
+        int CLOUDS_SCATTERED = 10;
+        int CLOUDS_BROKEN = 11;
+        int TROPICAL_STORM = 12;
+        int HURRICANE = 13;
+        int WINDY = 14;
+        int NO_REGISTRY = 15;
     }
 
-    public static boolean isByDay() {
+    static boolean isByDay() {
         boolean isDay;
         Calendar c = Calendar.getInstance();
         int timeOfDay = c.get(Calendar.HOUR_OF_DAY);
