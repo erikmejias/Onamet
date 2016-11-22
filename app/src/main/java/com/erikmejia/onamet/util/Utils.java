@@ -2,8 +2,10 @@ package com.erikmejia.onamet.util;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.support.v4.content.res.ResourcesCompat;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
@@ -294,6 +296,17 @@ public class Utils {
         isDay = timeOfDay >= 7 && timeOfDay <= 18;
 
         return isDay;
+    }
+
+    public static void dynamicBackground(Context context, View frame) {
+        Calendar c = Calendar.getInstance();
+        int timeOfDay = c.get(Calendar.HOUR_OF_DAY);
+        Log.d(TAG, "dynamicBackground: " + timeOfDay);
+
+        if (timeOfDay >= 7 && timeOfDay <=18)
+            frame.setBackground(ResourcesCompat.getDrawable(context.getResources(), R.mipmap.rt5, null));
+        else
+            frame.setBackground(ResourcesCompat.getDrawable(context.getResources(), R.mipmap.rt1, null));
     }
 
     private static String whichDensity(Context context) {

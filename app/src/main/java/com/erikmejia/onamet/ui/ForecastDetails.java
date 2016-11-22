@@ -133,7 +133,7 @@ public class ForecastDetails extends AppCompatActivity {
                         .build()
         );
 
-        dynamicBackground();
+        Utils.dynamicBackground(this, frame);
     }
 
     public void showTip(View view) {
@@ -169,16 +169,5 @@ public class ForecastDetails extends AppCompatActivity {
         builder.setBackgroundColor(R.color.colorPrimaryDark);
 
         toolTipsManager.show(builder.build());
-    }
-
-    public void dynamicBackground() {
-        Calendar c = Calendar.getInstance();
-        int timeOfDay = c.get(Calendar.HOUR_OF_DAY);
-        Log.d(TAG, "dynamicBackground: " + timeOfDay);
-
-        if (timeOfDay >= 7 && timeOfDay <=18)
-            frame.setBackground(ResourcesCompat.getDrawable(getResources(), R.mipmap.rt5, null));
-        else
-            frame.setBackground(ResourcesCompat.getDrawable(getResources(), R.mipmap.rt1, null));
     }
 }

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:id="@+id/today_forecast_frame"
     android:foreground="?android:selectableItemBackground"
     android:layout_width="match_parent"
     android:layout_height="360dp"
-    android:background="@mipmap/rt1">
+    android:background="@color/authui_colorAccent">
 
     <LinearLayout
         android:id="@+id/today_forecast_layout"
@@ -89,15 +89,21 @@
             android:textColor="@color/white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+        <TextView
+            android:layout_gravity="end"
+            android:id="@+id/forecast_last_sync"
+            android:text="actualizado: Nov 5 - 08:13 AM"
+            android:textSize="@dimen/text_size_sync"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
         <com.google.android.gms.ads.NativeExpressAdView
             android:id="@+id/today_forecast_ad"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             ads:adUnitId="@string/ads_forecast_main_list"
-            ads:adSize="360x70"
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:ads="http://schemas.android.com/apk/res-auto">
+            ads:adSize="360x70">
         </com.google.android.gms.ads.NativeExpressAdView>
 
     </LinearLayout>
