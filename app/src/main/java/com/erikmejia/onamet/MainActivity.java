@@ -159,14 +159,12 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
-                getSupportActionBar().setTitle(R.string.choose_province);
                 invalidateOptionsMenu();
             }
 
             @Override
             public void onDrawerClosed(View drawerView) {
                 super.onDrawerClosed(drawerView);
-                getSupportActionBar().setTitle(R.string.app_name);
                 invalidateOptionsMenu();
             }
         };
@@ -190,7 +188,6 @@ public class MainActivity extends AppCompatActivity{
         }
 
 //        startService(new Intent(this, FirebaseBackgroundService.class));
-
     }
 
     @Override

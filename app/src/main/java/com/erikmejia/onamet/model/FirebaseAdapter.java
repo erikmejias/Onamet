@@ -156,7 +156,7 @@ public class FirebaseAdapter extends FirebaseRecyclerAdapter<Forecast, ForecastH
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.today_forecast_item,
                         parent, false);
 
-                Utils.dynamicBackground(context, view.findViewById(R.id.today_forecast_frame));
+//                Utils.dynamicBackground(context, view.findViewById(R.id.today_forecast_frame));
 
                 adView = (NativeExpressAdView) view.findViewById(R.id.today_forecast_ad);
 

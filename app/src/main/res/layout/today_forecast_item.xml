@@ -5,8 +5,7 @@
     android:id="@+id/today_forecast_frame"
     android:foreground="?android:selectableItemBackground"
     android:layout_width="match_parent"
-    android:layout_height="360dp"
-    android:background="@color/authui_colorAccent">
+    android:layout_height="360dp">
 
     <LinearLayout
         android:id="@+id/today_forecast_layout"
