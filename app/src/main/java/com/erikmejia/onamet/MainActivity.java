@@ -15,6 +15,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -26,6 +28,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.erikmejia.onamet.model.CitiesAdapter;
 import com.erikmejia.onamet.service.FirebaseBackgroundService;
 import com.erikmejia.onamet.ui.BulletinsFragment;
 import com.erikmejia.onamet.ui.ForecastFragment;
@@ -78,7 +81,7 @@ public class MainActivity extends AppCompatActivity{
 
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle drawerToggle;
-    private ListView cityList;
+    private RecyclerView cityList;
     private ViewPagerAdapter viewPagerAdapter;
 
 
@@ -142,13 +145,11 @@ public class MainActivity extends AppCompatActivity{
         tabLayout.setupWithViewPager(viewPager);
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        cityList = (ListView) findViewById(R.id.left_drawer);
-
-        cityList.setAdapter(new ArrayAdapter<String>(
-                this,
-                android.R.layout.simple_list_item_1,
-                city_list
-        ));
+        LinearLayoutManager manager = new LinearLayoutManager(this);
+        cityList = (RecyclerView) findViewById(R.id.left_drawer);
+        cityList.setHasFixedSize(true);
+        cityList.setClickable(true);
+        cityList.setLayoutManager(manager);
 
         drawerToggle = new ActionBarDrawerToggle(
                 this,
@@ -172,14 +173,17 @@ public class MainActivity extends AppCompatActivity{
 
         drawerToggle.setDrawerIndicatorEnabled(true);
         drawerLayout.setDrawerListener(drawerToggle);
+        CitiesAdapter citiesAdapter = new CitiesAdapter(city_list, viewPagerAdapter,
+                drawerLayout, this);
+        cityList.setAdapter(citiesAdapter);
 
-        cityList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        /*cityList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 changeCity(position);
                 drawerLayout.closeDrawer(GravityCompat.START);
             }
-        });
+        });*/
 
         if (getIntent().getBooleanExtra("bulletin", false)) {
             incomingBulletin();
@@ -248,7 +252,7 @@ public class MainActivity extends AppCompatActivity{
         startActivity(intent);
     }
 
-    private void changeCity(int city) {
+    public void changeCity(int city) {
         Bundle extras = new Bundle();
 //        extras.putInt("city", city);
         SharedPreferences sharedPreferences = PreferenceManager
@@ -283,7 +287,7 @@ public class MainActivity extends AppCompatActivity{
         drawerToggle.onConfigurationChanged(newConfig);
     }
 
-    class ViewPagerAdapter extends FragmentPagerAdapter {
+    public class ViewPagerAdapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();
         private final List<String> mFragmentTitleList = new ArrayList<>();
 

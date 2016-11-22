@@ -258,7 +258,7 @@ public class Utils {
 
     public interface ForecastConstants {
         String FORECAST_DATE = "forecast_date";
-        String MAX_TEMPERATURE = "max_temperature";
+        String MAX_TEMPERATURE = "city_name";
         String MIN_TEMPERATURE = "min_temperature";
         String DESCRIPTION = "description";
         String HUMIDITY = "humidity";

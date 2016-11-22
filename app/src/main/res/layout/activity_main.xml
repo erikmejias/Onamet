@@ -51,12 +51,11 @@
                         />
 
 
-                    <ListView
+                    <android.support.v7.widget.RecyclerView
+                        android:focusable="true"
                         android:id="@+id/left_drawer"
-                        android:choiceMode="singleChoice"
-                        android:background="@color/white"
-                        android:layout_gravity="left|start"
-                        android:layout_width="200dp"
+                        android:layout_gravity="start"
+                        android:layout_width="250dp"
                         android:layout_height="match_parent"
                         />
 

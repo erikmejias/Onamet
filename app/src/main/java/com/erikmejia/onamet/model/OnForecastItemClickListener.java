@@ -5,5 +5,5 @@ package com.erikmejia.onamet.model;
  */
 
 public interface OnForecastItemClickListener {
-    void onItemClicked(Forecast forecastItem);
+    void onItemClicked(String forecastItem);
 }
