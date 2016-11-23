@@ -3,6 +3,7 @@ package com.erikmejia.onamet;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
@@ -168,6 +169,7 @@ public class MainActivity extends AppCompatActivity{
                 invalidateOptionsMenu();
             }
         };
+//        drawerLayout.setAlpha(0.7f);
 
         drawerToggle.setDrawerIndicatorEnabled(true);
         drawerLayout.setDrawerListener(drawerToggle);

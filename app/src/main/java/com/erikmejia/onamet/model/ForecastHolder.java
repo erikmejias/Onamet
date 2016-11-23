@@ -21,6 +21,7 @@ public class ForecastHolder extends RecyclerView.ViewHolder {
     private TextView max_temperature;
     private TextView min_temperature;
     private TextView date;
+    private TextView last_sync;
     private TextView forecast_description;
     public ImageView icon;
 
@@ -38,6 +39,7 @@ public class ForecastHolder extends RecyclerView.ViewHolder {
             this.icon_wrapper = (LinearLayout) itemView.findViewById(R.id.today_forecast_icon);
             this.max_temperature = (TextView) itemView.findViewById(R.id.forecast_max_temperature);
             this.date = (TextView) itemView.findViewById(R.id.forecast_date_title);
+            this.last_sync = (TextView) itemView.findViewById(R.id.forecast_last_sync);
             this.forecast_description = (TextView) itemView.findViewById(R.id.forecast_description);
         } else {
 
@@ -84,6 +86,14 @@ public class ForecastHolder extends RecyclerView.ViewHolder {
 
     public TextView getDate() {
         return date;
+    }
+
+    public TextView getLast_sync() {
+        return last_sync;
+    }
+
+    public void setLast_sync(String last_sync) {
+        this.last_sync.setText(last_sync);
     }
 
     public TextView getForecast_description() {

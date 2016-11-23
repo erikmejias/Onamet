@@ -24,7 +24,7 @@
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:id="@+id/forecast_details_layout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/detail_upper_section_height">
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_marginTop="20dp"
@@ -79,14 +79,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
-                <TextView
-                    android:id="@+id/forecast_details_description"
-                    tools:text="lluvias dispersas"
-                    android:textSize="@dimen/detail_text_size_description"
-                    android:textColor="#fff"
-                    android:layout_marginTop="20dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+
+
 
             </LinearLayout>
 
@@ -102,23 +96,37 @@
 
         </LinearLayout>
 
+        <TextView
+            android:layout_below="@id/today_forecast_upper"
+            android:id="@+id/forecast_details_description"
+            tools:text="lluvias dispersas"
+            android:textSize="@dimen/detail_text_size_description"
+            android:textColor="#fff"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
 
     </RelativeLayout>
+
 
 
 
     <LinearLayout
         android:id="@+id/forecast_details_ad"
         android:layout_below="@id/forecast_details_layout"
+        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <com.google.android.gms.ads.NativeExpressAdView
+            android:background="@color/white"
             android:id="@+id/forecast_details_ad_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             ads:adUnitId="@string/ads_forecast_details"
-            ads:adSize="410x80">
+            ads:adSize="400x80">
         </com.google.android.gms.ads.NativeExpressAdView>
 
     </LinearLayout>
@@ -131,11 +139,11 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:baselineAligned="false">
+        android:baselineAligned="true"
+        android:gravity="center_vertical">
 
         <LinearLayout
             android:id="@+id/wind_pressure_wrapper"
@@ -147,17 +155,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ImageView
+            <!--<ImageView
                 android:layout_width="35dp"
                 android:layout_height="wrap_content"
                 app:srcCompat="@drawable/wind_pressure"
-                android:id="@+id/forecast_details_wind_icon"/>
+                android:id="@+id/forecast_details_wind_icon"/>-->
 
             <TextView
+                android:drawableTop="@drawable/wind_pressure"
                 android:id="@+id/forecast_details_wind_text"
                 tools:text="4 M/S"
                 android:textSize="@dimen/details_text_compound_descriptors"
                 android:textColor="#fff"
+                android:gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -173,17 +183,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ImageView
+            <!--<ImageView
                 android:layout_width="35dp"
                 android:layout_height="wrap_content"
                 app:srcCompat="@drawable/wind_direction"
-                android:id="@+id/today_orientation_icon"/>
+                android:id="@+id/today_orientation_icon"/>-->
 
             <TextView
+                android:drawableTop="@drawable/wind_direction"
                 android:id="@+id/forecast_details_degrees_text"
                 tools:text="NE"
                 android:textSize="@dimen/details_text_compound_descriptors"
                 android:textColor="#fff"
+                android:gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -199,17 +211,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ImageView
+            <!--<ImageView
                 android:layout_width="35dp"
                 android:layout_height="wrap_content"
                 app:srcCompat="@drawable/humidity"
-                android:id="@+id/today_sunrise_icon"/>
+                android:id="@+id/today_sunrise_icon"/>-->
 
             <TextView
+                android:drawableTop="@drawable/humidity"
                 android:id="@+id/forecast_details_humidity_text"
                 tools:text="6:35 AM"
                 android:textSize="@dimen/details_text_compound_descriptors"
                 android:textColor="#fff"
+                android:gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 

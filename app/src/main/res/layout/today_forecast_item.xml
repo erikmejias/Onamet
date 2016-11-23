@@ -5,7 +5,8 @@
     android:id="@+id/today_forecast_frame"
     android:foreground="?android:selectableItemBackground"
     android:layout_width="match_parent"
-    android:layout_height="360dp">
+    tools:background="@color/colorAccent"
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:id="@+id/today_forecast_layout"
@@ -98,6 +99,7 @@
             android:layout_height="wrap_content" />
 
         <com.google.android.gms.ads.NativeExpressAdView
+            android:background="@color/white"
             android:id="@+id/today_forecast_ad"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

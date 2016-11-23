@@ -36,6 +36,7 @@ public class FirebaseAdapter extends FirebaseRecyclerAdapter<Forecast, ForecastH
     private Typeface font_thin;
     private Typeface font_reg;
     private Typeface font_bold;
+    private Typeface font_light;
 
     private Context context;
     private int layout;
@@ -51,6 +52,8 @@ public class FirebaseAdapter extends FirebaseRecyclerAdapter<Forecast, ForecastH
                 "fonts/Brandon_reg.otf");
         font_bold = Typeface.createFromAsset(context.getAssets(),
                 "fonts/Brandon_bld.otf");
+        font_light = Typeface.createFromAsset(context.getAssets(),
+                "fonts/Brandon_light.otf");
 
         adRequest = new AdRequest.Builder()
                 .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
@@ -71,6 +74,7 @@ public class FirebaseAdapter extends FirebaseRecyclerAdapter<Forecast, ForecastH
             viewHolder.setDescription(model.getDescription());
 
             viewHolder.getDate().setTypeface(font_reg);
+            viewHolder.getLast_sync().setTypeface(font_light);
             viewHolder.getCity_name().setTypeface(font_bold);
             viewHolder.getMax_temperature().setTypeface(font_bold);
             viewHolder.getForecast_description().setTypeface(font_reg);
