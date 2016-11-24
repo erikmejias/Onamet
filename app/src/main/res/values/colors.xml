@@ -5,7 +5,7 @@
     <color name="colorPrimaryDark">#283593</color>
     <color name="colorAccent">#283593</color>
     <color name="black_alpha_40">#66000000</color>
-    <color name="black_alpha">#28000000</color>
+    <color name="black_alpha">#1e000000</color>
 
     <!-- Colors used for sign in process -->
     <color name="material_green_50">#E8F5E9</color>
@@ -19,5 +19,6 @@
     <color name="black">#2a2a2b</color>
     <color name="gray">#475566</color>
     <color name="grayish">#1976d2</color>
+    <color name="transparent">#00000000</color>
 
 </resources>
