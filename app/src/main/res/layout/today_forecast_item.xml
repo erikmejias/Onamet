@@ -90,7 +90,6 @@
         android:layout_height="wrap_content" />
 
     <com.google.android.gms.ads.NativeExpressAdView
-        android:background="@color/black_alpha"
         android:id="@+id/today_forecast_ad"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
