@@ -303,10 +303,11 @@ public class Utils {
         int timeOfDay = c.get(Calendar.HOUR_OF_DAY);
         Log.d(TAG, "dynamicBackground: " + timeOfDay);
 
-        if (timeOfDay >= 7 && timeOfDay <=18)
-            frame.setBackground(ResourcesCompat.getDrawable(context.getResources(), R.mipmap.rt5, null));
+        if (timeOfDay >= 7 && timeOfDay <18)
+            frame.setBackground(ResourcesCompat.getDrawable(context.getResources(), R.mipmap.rt6, null));
         else
-            frame.setBackground(ResourcesCompat.getDrawable(context.getResources(), R.mipmap.rt1, null));
+            frame.setBackground(ResourcesCompat.getDrawable(context.getResources(), R.mipmap.rt2, null));
+
     }
 
     private static String whichDensity(Context context) {

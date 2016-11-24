@@ -116,7 +116,7 @@ public class SettingsFragment extends PreferenceFragment {
                     editText.requestFocus();
                 } else {
                     editText.setText(number);
-                    title.setText("Es este tu número?");
+                    title.setText(R.string.is_this_your_number);
                 }
 
                 Button save = (Button) getActivity().findViewById(R.id.submit_button);
@@ -218,18 +218,10 @@ public class SettingsFragment extends PreferenceFragment {
             if (resultCode == RESULT_CANCELED){
                 // user is not signed in. Maybe just wait for the user to press
                 // "sign in" again, or show a message
-                Snackbar snackbar = Snackbar.make(
-                        null,
-                        "Se ha cancelado el iniciar sesión",
-                        Snackbar.LENGTH_LONG);
-                snackbar.show();
+                Toast.makeText(getActivity(), "Has cancelado el proceso", Toast.LENGTH_SHORT).show();
             }
             if(resultCode == ResultCodes.RESULT_NO_NETWORK) {
-                Snackbar snackbar = Snackbar.make(
-                        null,
-                        "Necesitas Internet",
-                        Snackbar.LENGTH_LONG);
-                snackbar.show();
+                Toast.makeText(getActivity(), "Intenta de nuevo cuando tengas Internet", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -275,7 +267,7 @@ public class SettingsFragment extends PreferenceFragment {
             signOutPreference.setEnabled(false);
             signInPreference.setTitle(getString(R.string.acc_prefs_sync));
             signInPreference.setSummary(getString(R.string.pref_account_summary));
-            signInPreference.setIcon(getResources().getDrawable(R.drawable.unknown)); // TODO - replace this call
+//            signInPreference.setIcon(getResources().getDrawable(R.drawable.unknown)); // TODO - replace this call
             user = null;
 
         } else {

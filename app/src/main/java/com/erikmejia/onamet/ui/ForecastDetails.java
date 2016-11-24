@@ -1,32 +1,23 @@
 package com.erikmejia.onamet.ui;
 
 import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
-import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.erikmejia.onamet.R;
 import com.erikmejia.onamet.util.Utils;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.NativeExpressAdView;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.firebase.auth.FirebaseAuth;
 import com.tomergoldst.tooltips.ToolTip;
 import com.tomergoldst.tooltips.ToolTipsManager;
 
-import java.util.Calendar;
-import java.util.concurrent.ExecutionException;
 
 public class ForecastDetails extends AppCompatActivity {
     private static final String TAG = ForecastDetails.class.getSimpleName();
@@ -68,8 +59,6 @@ public class ForecastDetails extends AppCompatActivity {
 
         adView = (NativeExpressAdView) findViewById(R.id.forecast_details_ad_content);
         frame = (RelativeLayout) findViewById(R.id.today_forecast_frame);
-
-//        changeTextFonts();
 
         toolTipsManager = new ToolTipsManager();
 
@@ -123,7 +112,6 @@ public class ForecastDetails extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-//        changeTextFonts();
         loadReceivedData();
 
         adView.loadAd(

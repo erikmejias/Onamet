@@ -1,18 +1,19 @@
-<android.support.v4.widget.DrawerLayout
-    android:id="@+id/drawer_layout"
+<android.support.v4.widget.DrawerLayout android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
 
     <FrameLayout
         android:id="@+id/main_content_frame"
-        android:background="@mipmap/rt5"
+        tools:background="@color/colorPrimary"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <android.support.design.widget.CoordinatorLayout
+            android:background="@color/black_alpha_10"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
             android:layout_height="match_parent">

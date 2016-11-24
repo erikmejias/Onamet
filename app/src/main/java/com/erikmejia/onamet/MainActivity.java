@@ -29,6 +29,7 @@ import android.view.animation.BounceInterpolator;
 import android.view.animation.OvershootInterpolator;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -38,6 +39,7 @@ import com.erikmejia.onamet.ui.BulletinsFragment;
 import com.erikmejia.onamet.ui.ForecastFragment;
 import com.erikmejia.onamet.ui.SettingsActivity;
 import com.erikmejia.onamet.util.PageTransformer;
+import com.erikmejia.onamet.util.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -92,6 +94,7 @@ public class MainActivity extends AppCompatActivity{
     private ActionBarDrawerToggle drawerToggle;
     private RecyclerView cityList;
     private ViewPagerAdapter viewPagerAdapter;
+    FrameLayout rootLayout;
 
 
     @Override
@@ -144,6 +147,8 @@ public class MainActivity extends AppCompatActivity{
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
+
+        rootLayout = (FrameLayout) findViewById(R.id.main_content_frame);
 
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
@@ -204,6 +209,8 @@ public class MainActivity extends AppCompatActivity{
     protected void onStart() {
         super.onStart();
         Log.d(TAG, "onStart: initiated");
+
+        Utils.dynamicBackground(this, rootLayout);
 
     }
 

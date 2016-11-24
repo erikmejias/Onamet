@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:layout_width="match_parent"
+<LinearLayout
+    tools:background="@color/colorPrimary"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingTop="15dp"
     android:paddingBottom="15dp"
@@ -22,7 +24,8 @@
             android:layout_height="@dimen/future_icon_height"
             android:layout_gravity="center_horizontal"
             app:srcCompat="@drawable/clear_day"
-            android:id="@+id/future_weather_icon"/>
+            android:id="@+id/future_weather_icon"
+            android:contentDescription="@string/forecast_item_image_description" />
 
     </LinearLayout>
 
