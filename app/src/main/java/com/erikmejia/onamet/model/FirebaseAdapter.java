@@ -1,8 +1,11 @@
 package com.erikmejia.onamet.model;
 
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,13 +42,16 @@ public class FirebaseAdapter extends FirebaseRecyclerAdapter<Forecast, ForecastH
     private Typeface font_light;
 
     private Context context;
+    private Activity activity;
     private int layout;
 
     public FirebaseAdapter(Class<Forecast> modelClass, int layout,
-                           Class<ForecastHolder> viewHolderClass, Query ref, Context context) {
+                           Class<ForecastHolder> viewHolderClass, Query ref,
+                           Context context, Activity activity) {
         super(modelClass, layout, viewHolderClass, ref);
         this.context = context;
         this.layout = layout;
+        this.activity = activity;
         font_thin = Typeface.createFromAsset(context.getAssets(),
                 "fonts/Brandon_thin.otf");
         font_reg = Typeface.createFromAsset(context.getAssets(),
@@ -142,6 +148,7 @@ public class FirebaseAdapter extends FirebaseRecyclerAdapter<Forecast, ForecastH
                         icon_id
                 );
 
+//                Start the new details activity when button pressed.
                 v.getContext().startActivity(intent);
             }
         });

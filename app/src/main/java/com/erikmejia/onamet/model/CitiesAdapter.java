@@ -44,7 +44,7 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.ViewHolder
         this.drawerLayout = drawerLayout;
 
         font_typeface = Typeface.createFromAsset(receivedContext.getAssets(),
-                "fonts/Brandon_reg.otf");
+                "fonts/Brandon_bld.otf");
     }
 
     @Override

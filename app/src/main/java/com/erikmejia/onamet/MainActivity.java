@@ -24,6 +24,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.BounceInterpolator;
+import android.view.animation.OvershootInterpolator;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -38,6 +41,11 @@ import com.erikmejia.onamet.util.PageTransformer;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import jp.wasabeef.recyclerview.adapters.AnimationAdapter;
+import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
+import jp.wasabeef.recyclerview.adapters.SlideInLeftAnimationAdapter;
+import jp.wasabeef.recyclerview.adapters.SlideInRightAnimationAdapter;
 
 import static com.erikmejia.onamet.R.layout.activity_main;
 
@@ -117,7 +125,7 @@ public class MainActivity extends AppCompatActivity{
                     SharedPreferences.Editor e = getPrefs.edit();
 
                     //  Edit preference to make it false because we don't want this to run again
-                    e.putBoolean("firstStart", false);
+                    e.putBoolean("firstStart", true);
 
                     //  Apply changes
                     e.apply();
@@ -175,15 +183,15 @@ public class MainActivity extends AppCompatActivity{
         drawerLayout.setDrawerListener(drawerToggle);
         CitiesAdapter citiesAdapter = new CitiesAdapter(city_list, viewPagerAdapter,
                 drawerLayout, this);
-        cityList.setAdapter(citiesAdapter);
 
-        /*cityList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                changeCity(position);
-                drawerLayout.closeDrawer(GravityCompat.START);
-            }
-        });*/
+        SlideInLeftAnimationAdapter animationAdapter =
+                new SlideInLeftAnimationAdapter(citiesAdapter);
+        animationAdapter.setInterpolator(new OvershootInterpolator());
+        animationAdapter.setDuration(550);
+        animationAdapter.setFirstOnly(false);
+
+        cityList.setAdapter(animationAdapter);
+
 
         if (getIntent().getBooleanExtra("bulletin", false)) {
             incomingBulletin();

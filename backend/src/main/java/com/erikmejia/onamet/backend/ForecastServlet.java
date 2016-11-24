@@ -103,7 +103,7 @@ public class ForecastServlet extends HttpServlet {
     /*
             * Method to push data to the Firebase Database.
             * */
-    public void pushDemoData (Country country) {
+    private void pushDemoData(Country country) {
         DatabaseReference ref = FirebaseDatabase
                 .getInstance()
                 .getReference("forecasts");
@@ -118,7 +118,7 @@ public class ForecastServlet extends HttpServlet {
     * Method that takes all data sources to compile city objects with their respective forecasts
     * assigned.
     * */
-    public void buildForecastData(){
+    private void buildForecastData(){
 
         Country country = new Country();
 
@@ -151,7 +151,7 @@ public class ForecastServlet extends HttpServlet {
     * Method to retrieve forecast data from OWM
     * */
 
-    public List<Forecast> searchWeather(String cityName, long cityCode){
+    private List<Forecast> searchWeather(String cityName, long cityCode){
         List<Forecast> receivedForecasts = new ArrayList<>();
         OpenWeatherMap owm = new OpenWeatherMap(
                 OpenWeatherMap.Units.METRIC,
@@ -181,7 +181,7 @@ public class ForecastServlet extends HttpServlet {
                     getWeatherInstance(0).getWeatherDescription();
             if (dailyForecast.getForecastInstance(index).getWeatherInstance(0)
                     .getWeatherDescription().equalsIgnoreCase("lluvia de gran intensidad")) {
-                description = "muchísima lluvia";
+                description = "lluvias intensas";
             }
 
             Forecast forecast = new Forecast(

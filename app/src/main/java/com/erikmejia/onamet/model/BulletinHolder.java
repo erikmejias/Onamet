@@ -18,7 +18,6 @@ public class BulletinHolder extends RecyclerView.ViewHolder {
 
     public BulletinHolder(View itemView) {
         super(itemView);
-
         title = (TextView) itemView.findViewById(R.id.bulletins_title_text);
         content = (TextView) itemView.findViewById(R.id.bulletins_description_text);
         date = (TextView) itemView.findViewById(R.id.bulletins_date_text);

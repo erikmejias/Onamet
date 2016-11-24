@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -14,13 +13,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.OvershootInterpolator;
-import android.widget.FrameLayout;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
-import com.erikmejia.onamet.MainActivity;
 import com.erikmejia.onamet.R;
-import com.erikmejia.onamet.model.City;
 import com.erikmejia.onamet.model.FirebaseAdapter;
 import com.erikmejia.onamet.model.Forecast;
 import com.erikmejia.onamet.model.ForecastHolder;
@@ -31,11 +26,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import dmax.dialog.SpotsDialog;
-import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter;
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
-import jp.wasabeef.recyclerview.adapters.SlideInBottomAnimationAdapter;
-import jp.wasabeef.recyclerview.adapters.SlideInRightAnimationAdapter;
-import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator;
 
 
 /**
@@ -55,6 +46,9 @@ public class ForecastFragment extends Fragment {
     FirebaseDatabase database;
     FirebaseAdapter firebaseAdapter;
 
+    private ProgressBar progressBar;
+    private SpotsDialog progressDialog;
+
     private RecyclerView forecastList;
 
     private static boolean calledAlready = false;
@@ -68,17 +62,18 @@ public class ForecastFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-
         firebaseAdapter = new FirebaseAdapter(Forecast.class,
                 R.layout.forecast_item,
                 ForecastHolder.class,
                 databaseReference,
-                activity);
+                activity,
+                this.getActivity());
 
         ScaleInAnimationAdapter animationAdapter =
                 new ScaleInAnimationAdapter(firebaseAdapter);
         animationAdapter.setInterpolator(new OvershootInterpolator());
-        animationAdapter.setDuration(700);
+        animationAdapter.setDuration(900);
+        animationAdapter.setFirstOnly(false);
 
         //        Setting adapter to RecyclerView
         forecastList.setAdapter(animationAdapter);
@@ -89,6 +84,28 @@ public class ForecastFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        SharedPreferences getPrefs = PreferenceManager
+                .getDefaultSharedPreferences(activity);
+        this.PROVINCE_ID = getPrefs.getInt("city", 0);
+
+        database = FirebaseDatabase.getInstance();
+        mainReference = database.getReference("forecasts/cities/");
+        databaseReference =
+                mainReference.child(PROVINCE_ID + "/forecasts");
+
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                progressBar.setVisibility(View.GONE);
+                progressDialog.dismiss();
+                forecastList.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
     }
 
@@ -102,16 +119,9 @@ public class ForecastFragment extends Fragment {
             calledAlready = true;
         }
 
-        SharedPreferences getPrefs = PreferenceManager
-                .getDefaultSharedPreferences(activity);
-        this.PROVINCE_ID = getPrefs.getInt("city", 0);
-
-        database = FirebaseDatabase.getInstance();
-        mainReference = database.getReference("forecasts/cities/");
-        databaseReference =
-                mainReference.child(PROVINCE_ID + "/forecasts");
-
     }
+
+
 
     @Nullable
     @Override
@@ -122,9 +132,10 @@ public class ForecastFragment extends Fragment {
 
 
 
-        final ProgressBar progressBar = (ProgressBar) rootView.findViewById(R.id.feed_loading);
+        progressBar = (ProgressBar) rootView.findViewById(R.id.feed_loading);
         progressBar.setVisibility(View.GONE);
-        final SpotsDialog progressDialog = new SpotsDialog(getActivity());
+
+        progressDialog = new SpotsDialog(getActivity());
         progressDialog.show();
         progressDialog.setMessage("cargando...");
 
@@ -141,19 +152,7 @@ public class ForecastFragment extends Fragment {
 
         layoutManager.scrollToPositionWithOffset(0, 20);
 
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                progressBar.setVisibility(View.GONE);
-                progressDialog.dismiss();
-                forecastList.setVisibility(View.VISIBLE);
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
 
         return rootView;
     }
