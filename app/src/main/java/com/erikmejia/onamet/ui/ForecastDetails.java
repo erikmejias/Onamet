@@ -4,9 +4,12 @@ import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.transition.Slide;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -61,6 +64,17 @@ public class ForecastDetails extends AppCompatActivity {
         frame = (RelativeLayout) findViewById(R.id.today_forecast_frame);
 
         toolTipsManager = new ToolTipsManager();
+
+        /*if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            Slide slide = new Slide(Gravity.LEFT);
+            slide.addTarget(R.layout.activity_forecast_details);
+            slide.setInterpolator(
+                    AnimationUtils.loadInterpolator(this,
+                            android.R.interpolator.linear_out_slow_in)
+            );
+            slide.setDuration(1000);
+            getWindow().setEnterTransition(slide);
+        }*/
 
     }
 

@@ -17,7 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".MainActivity">
+        <activity
+            android:theme="@style/AppTheme.Home"
+            android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,7 +31,7 @@
             android:name=".ui.SettingsActivity"
             android:label="@string/settings"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme.Home">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.erikmejia.onamet.MainActivity" />
@@ -46,14 +48,6 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity
-            android:name=".MapsActivity"
-            android:label="@string/title_activity_maps"
-            android:parentActivityName=".MainActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.erikmejia.onamet.MainActivity" />
-        </activity>
 
         <activity
             android:name=".ui.ForecastDetails"

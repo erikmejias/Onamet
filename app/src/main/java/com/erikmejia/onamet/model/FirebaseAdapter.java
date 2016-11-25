@@ -45,6 +45,7 @@ public class FirebaseAdapter extends FirebaseRecyclerAdapter<Forecast, ForecastH
     private Activity activity;
     private int layout;
 
+
     public FirebaseAdapter(Class<Forecast> modelClass, int layout,
                            Class<ForecastHolder> viewHolderClass, Query ref,
                            Context context, Activity activity) {
@@ -149,6 +150,17 @@ public class FirebaseAdapter extends FirebaseRecyclerAdapter<Forecast, ForecastH
                 );
 
 //                Start the new details activity when button pressed.
+                /*if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                    Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(
+                            activity,
+                            parentView,
+                            parentView.getTransitionName()
+                    )
+                            .toBundle();
+                    v.getContext().startActivity(intent, bundle);
+                } else {
+                    v.getContext().startActivity(intent);
+                }*/
                 v.getContext().startActivity(intent);
             }
         });

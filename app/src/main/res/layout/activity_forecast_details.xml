@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout android:id="@+id/today_forecast_frame"
+<RelativeLayout
+    android:id="@+id/today_forecast_frame"
+    android:transitionName="@string/transition_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -11,7 +13,6 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:theme="@style/ThemeOverlay.AppCompat.Dark"
-        android:background="@drawable/background_toolbar_translucent"
         android:layout_height="?attr/actionBarSize">
 
     </android.support.v7.widget.Toolbar>
@@ -137,6 +138,14 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="130dp">
+
+        <TextView
+            android:text="An awesome chart goes here"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
     </LinearLayout>
 

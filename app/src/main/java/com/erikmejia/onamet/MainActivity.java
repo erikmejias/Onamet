@@ -1,5 +1,6 @@
 package com.erikmejia.onamet;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -140,7 +141,7 @@ public class MainActivity extends AppCompatActivity{
         t.start();
 
 
-        setContentView(activity_main);
+        setContentView(R.layout.activity_main);
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -244,9 +245,6 @@ public class MainActivity extends AppCompatActivity{
             case R.id.settings:
                 showSettings();
                 return true;
-            case R.id.map:
-                Toast.makeText(this, "Abriendo mapa", Toast.LENGTH_SHORT).show();
-                showMap();
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -256,13 +254,17 @@ public class MainActivity extends AppCompatActivity{
 //        Start explicit intent
         Intent intent;
         intent = new Intent(this, SettingsActivity.class);
-        startActivity(intent);
-
-    }
-
-    private void showMap(){
-        Intent intent;
-        intent = new Intent(this, MapsActivity.class);
+        /*if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(
+                    this,
+                    rootLayout,
+                    rootLayout.getTransitionName()
+            )
+                    .toBundle();
+            startActivity(intent, bundle);
+        } else {
+            startActivity(intent);
+        }*/
         startActivity(intent);
     }
 

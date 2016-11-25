@@ -2,12 +2,6 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- Initiate Map TODO - Hide it until fully implemented -->
-    <!--<item android:title="@string/maps"
-        android:id="@+id/map"
-        android:icon="@drawable/ic_map"
-        app:showAsAction="always" />-->
-
     <item
         android:title="@string/settings"
         android:icon="@drawable/ic_settings"

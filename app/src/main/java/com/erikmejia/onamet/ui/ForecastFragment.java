@@ -67,7 +67,7 @@ public class ForecastFragment extends Fragment {
                 ForecastHolder.class,
                 databaseReference,
                 activity,
-                this.getActivity());
+                getActivity());
 
         ScaleInAnimationAdapter animationAdapter =
                 new ScaleInAnimationAdapter(firebaseAdapter);
@@ -122,7 +122,6 @@ public class ForecastFragment extends Fragment {
     }
 
 
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable final ViewGroup container,
@@ -130,12 +129,10 @@ public class ForecastFragment extends Fragment {
 
         final View rootView = inflater.inflate(R.layout.forecasts_layout, container, false);
 
-
-
         progressBar = (ProgressBar) rootView.findViewById(R.id.feed_loading);
         progressBar.setVisibility(View.GONE);
 
-        progressDialog = new SpotsDialog(getActivity());
+        progressDialog = new SpotsDialog(getActivity()); // TODO - Modify theme that match UI language.
         progressDialog.show();
         progressDialog.setMessage("cargando...");
 
