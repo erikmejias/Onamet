@@ -30,7 +30,6 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.ViewHolder
 
     private String[] dataset;
     private Typeface font_typeface;
-    private OnForecastItemClickListener listener;
     private Context receivedContext;
     private MainActivity.ViewPagerAdapter viewpagerAdapter;
     private DrawerLayout drawerLayout;

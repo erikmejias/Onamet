@@ -189,19 +189,6 @@ public class FirebaseAdapter extends FirebaseRecyclerAdapter<Forecast, ForecastH
                 View future = LayoutInflater.from(parent.getContext()).inflate(R.layout.forecast_item,
                         parent, false);
                 return new ForecastHolder(future);
-            case AD_TYPE:
-                adView = (NativeExpressAdView) LayoutInflater.from(parent.getContext()).inflate(R.layout.ad_item_layout,
-                        parent, false);
-                /*AdRequest request = new AdRequest.Builder()
-                        .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                        .addTestDevice("E0451870C934704914ACFF7D2E7F7F7F")
-                        .build();
-//                adView.setLayoutParams(params);
-
-                adView.loadAd(request);*/
-
-                Log.d(TAG, "onCreateViewHolder: returned AD");
-                return new ForecastHolder(adView);
             default:
                 return new ForecastHolder(root);
         }
@@ -212,8 +199,6 @@ public class FirebaseAdapter extends FirebaseRecyclerAdapter<Forecast, ForecastH
 
         if (position == 0)
             return TODAY;
-        else if (position == 48) // TODO - Improve logic
-            return AD_TYPE;
         else
             return FORECAST_TYPE;
     }

@@ -6,7 +6,6 @@
 
         <Preference
             android:title="@string/acc_prefs_sync"
-            android:icon="@drawable/unknown"
             android:key="@string/pref_account_key"
             android:summary="@string/pref_account_summary"
             />

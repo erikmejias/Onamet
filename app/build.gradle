@@ -4,7 +4,7 @@ android {
     signingConfigs {
         config {
             keyAlias 'personal'
-            keyPassword '0411I@mr00t../'
+            keyPassword '4754Destiny./'
             storeFile file('/Users/erik/Documents/Android/android_keystore.jks')
             storePassword '4754Destiny./'
         }
@@ -36,16 +36,16 @@ configurations.all {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     /*
-        * Library for animated weather icons.
-        * */
+                * Library for animated weather icons.
+                * */
     compile project(':SkyconsLibrary')
     /*
-        * App Intro library that allows intro views when first started.
-        * */
+                * App Intro library that allows intro views when first started.
+                * */
     compile 'com.github.paolorotolo:appintro:4.1.0'
     /*
-        * Required support libraries for components used within the app.
-        * */
+                * Required support libraries for components used within the app.
+                * */
     compile 'com.android.support:appcompat-v7:24.2.1'
     compile 'com.android.support:recyclerview-v7:24.2.1'
     compile 'com.android.support:design:24.2.1'
@@ -53,49 +53,49 @@ dependencies {
     compile 'com.android.support:support-v4:24.2.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha7'
     /*
-        * Firebase SDK Libraries
-        * --------------
-        * Core, Analytics, Ads, Messaging Database and Auth. (the last two provided by Firebase UI)
-        * */
+                * Firebase SDK Libraries
+                * --------------
+                * Core, Analytics, Ads, Messaging Database and Auth. (the last two provided by Firebase UI)
+                * */
     compile 'com.google.firebase:firebase-core:9.8.0'
     compile 'com.google.firebase:firebase-crash:9.8.0'
     compile 'com.google.firebase:firebase-ads:9.8.0'
     compile 'com.google.firebase:firebase-database:9.8.0'
     compile 'com.google.firebase:firebase-messaging:9.8.0'
     /*
-        * Firebase UI required libraries (each one call the required Firebase SDK
-        * associated component)
-        * */
+                * Firebase UI required libraries (each one call the required Firebase SDK
+                * associated component)
+                * */
     compile 'com.firebaseui:firebase-ui-auth:1.0.0'
     compile 'com.firebaseui:firebase-ui-database:1.0.0'
     /*
-        *   Google Play Services libraries
-        * */
+                *   Google Play Services libraries
+                * */
     //    compile 'com.google.android.gms:play-services:9.8.0'
-//    compile 'com.google.android.gms:play-services-maps:9.8.0'
+    //    compile 'com.google.android.gms:play-services-maps:9.8.0'
     /*
-        * Image loading/caching library
-        * */
+                * Image loading/caching library
+                * */
     compile 'com.github.bumptech.glide:glide:3.7.0'
     /*
-        * SMS Validation
-        * */
+                * SMS Validation
+                * */
     compile 'com.orhanobut:dialogplus:1.11@aar'
     /*
-        * RecyclerView animations
-        * */
+                * RecyclerView animations
+                * */
     compile 'jp.wasabeef:recyclerview-animators:2.2.4'
     /*
-        * Tooltips
-        * */
+                * Tooltips
+                * */
     compile 'com.tomergoldst.android:tooltips:1.0.3'
     /*
-        * Progress Alert Dialog
-        * */
+                * Progress Alert Dialog
+                * */
     compile 'com.github.d-max:spots-dialog:0.7@aar'
     /*
-        * Aeris weather maps SDK. TODO - Implement later without using this library.
-        * */
+                * Aeris weather maps SDK. TODO - Implement later without using this library.
+                * */
     //    compile 'com.hamweather:aeris-maps-library:1.2@aar'
     testCompile 'junit:junit:4.12'
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'

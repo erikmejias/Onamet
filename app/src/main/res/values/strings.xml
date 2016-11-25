@@ -121,7 +121,6 @@ El ultimo cambio que ha sufrido esta Oficina fue con el Decreto número 764-03, 
     </string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="choose_province">Elige una provincia</string>
     <string name="phone_hint">Ingresa tu número de teléfono</string>
     <string name="invalid_phone_number">Número inválido</string>

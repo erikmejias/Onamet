@@ -267,7 +267,6 @@ public class SettingsFragment extends PreferenceFragment {
             signOutPreference.setEnabled(false);
             signInPreference.setTitle(getString(R.string.acc_prefs_sync));
             signInPreference.setSummary(getString(R.string.pref_account_summary));
-//            signInPreference.setIcon(getResources().getDrawable(R.drawable.unknown)); // TODO - replace this call
             user = null;
 
         } else {
