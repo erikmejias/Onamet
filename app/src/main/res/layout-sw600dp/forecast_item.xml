@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:layout_width="match_parent"
+<LinearLayout
+    tools:background="@color/colorPrimary"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingTop="15dp"
     android:paddingBottom="15dp"
-    android:layout_marginLeft="50dp"
-    android:layout_marginRight="50dp"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -24,7 +24,8 @@
             android:layout_height="@dimen/future_icon_height"
             android:layout_gravity="center_horizontal"
             app:srcCompat="@drawable/clear_day"
-            android:id="@+id/future_weather_icon"/>
+            android:id="@+id/future_weather_icon"
+            android:contentDescription="@string/forecast_item_image_description" />
 
     </LinearLayout>
 
@@ -37,6 +38,7 @@
 
         <TextView
             android:layout_gravity="center_horizontal"
+            android:textColor="@color/white"
             tools:text="Lun 22"
             android:textSize="@dimen/future_text_size_date"
             android:id="@+id/forecast_date_title"
@@ -54,6 +56,7 @@
 
         <TextView
             android:layout_gravity="center"
+            android:textColor="@color/white"
             tools:text="28º"
             android:textSize="@dimen/future_text_size_max_temp"
             android:id="@+id/forecast_max_temperature"
@@ -62,6 +65,7 @@
 
         <TextView
             android:layout_gravity="center"
+            android:textColor="@color/white"
             tools:text="18º"
             android:textSize="@dimen/future_text_size_min_temp"
             android:id="@+id/future_forecast_min_temperature"
@@ -79,6 +83,7 @@
 
         <TextView
             android:layout_gravity="center_horizontal"
+            android:textColor="@color/white"
             tools:text="cielo claro"
             android:textSize="@dimen/future_text_size_description"
             android:maxLines="1"
