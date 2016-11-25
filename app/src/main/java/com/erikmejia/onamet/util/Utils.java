@@ -89,8 +89,8 @@ public class Utils {
             params.height = 300;
             Log.d(TAG, "setAnimatedIcon: medium density");
         } else if (density.equalsIgnoreCase("high")) {
-            params.width = 400;
-            params.height = 400;
+            params.width = 350;
+            params.height = 350;
             Log.d(TAG, "setAnimatedIcon: high density");
         } else if (density.equalsIgnoreCase("xhigh")) {
             params.width = 750;
