@@ -7,18 +7,25 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.LinearLayout;
 
 import com.erikmejia.onamet.R;
+import com.erikmejia.onamet.util.Utils;
 
 /**
  * Created by erik on 9/1/16.
  */
 
 public class SettingsActivity extends AppCompatActivity {
+
+    LinearLayout frame;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pref_with_actionbar);
+
+        frame = (LinearLayout) findViewById(R.id.settings_frame);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.settings_toolbar);
         setSupportActionBar(toolbar);
@@ -40,5 +47,11 @@ public class SettingsActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Utils.dynamicBackground(this, frame);
     }
 }

@@ -304,7 +304,7 @@ public class Utils {
         Log.d(TAG, "dynamicBackground: " + timeOfDay);
 
         if (timeOfDay >= 7 && timeOfDay <18)
-            frame.setBackground(ResourcesCompat.getDrawable(context.getResources(), R.mipmap.rt6, null));
+            frame.setBackground(ResourcesCompat.getDrawable(context.getResources(), R.mipmap.rt3, null));
         else
             frame.setBackground(ResourcesCompat.getDrawable(context.getResources(), R.mipmap.rt2, null));
 
