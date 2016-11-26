@@ -85,24 +85,24 @@ public class Utils {
             params.height = 200;
             Log.d(TAG, "setAnimatedIcon: low density");
         } else if (density.equalsIgnoreCase("medium")) {
-            params.width = 300;
-            params.height = 300;
+            params.width = 280;
+            params.height = 280;
             Log.d(TAG, "setAnimatedIcon: medium density");
         } else if (density.equalsIgnoreCase("high")) {
-            params.width = 350;
-            params.height = 350;
+            params.width = 340;
+            params.height = 340;
             Log.d(TAG, "setAnimatedIcon: high density");
         } else if (density.equalsIgnoreCase("xhigh")) {
-            params.width = 750;
-            params.height = 750;
+            params.width = 590;
+            params.height = 590;
             Log.d(TAG, "setAnimatedIcon: xhigh density");
         } else if (density.equalsIgnoreCase("xxhigh")) {
-            params.width = 1000;
-            params.height = 1000;
+            params.width = 800;
+            params.height = 800;
             Log.d(TAG, "setAnimatedIcon: xxhigh density");
         } else if (density.equalsIgnoreCase("xxxhigh")) {
-            params.width = 1200;
-            params.height = 1200;
+            params.width = 900;
+            params.height = 900;
             Log.d(TAG, "setAnimatedIcon: xxxhigh density");
         }
 
@@ -304,9 +304,9 @@ public class Utils {
         Log.d(TAG, "dynamicBackground: " + timeOfDay);
 
         if (timeOfDay >= 7 && timeOfDay <18)
-            frame.setBackground(ResourcesCompat.getDrawable(context.getResources(), R.mipmap.rt3, null));
+            frame.setBackground(ResourcesCompat.getDrawable(context.getResources(), R.mipmap.rt6, null));
         else
-            frame.setBackground(ResourcesCompat.getDrawable(context.getResources(), R.mipmap.rt2, null));
+            frame.setBackground(ResourcesCompat.getDrawable(context.getResources(), R.mipmap.rt1, null));
 
     }
 

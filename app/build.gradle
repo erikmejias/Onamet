@@ -15,7 +15,7 @@ android {
         applicationId "com.erikmejia.onamet"
         minSdkVersion 16
         targetSdkVersion 24
-        versionCode 11
+        versionCode 12
         versionName "1.0"
     }
     buildTypes {
@@ -51,7 +51,6 @@ dependencies {
     compile 'com.android.support:design:24.2.1'
     compile 'com.android.support:cardview-v7:24.2.1'
     compile 'com.android.support:support-v4:24.2.1'
-    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha7'
     /*
                 * Firebase SDK Libraries
                 * --------------
@@ -93,10 +92,7 @@ dependencies {
                 * Progress Alert Dialog
                 * */
     compile 'com.github.d-max:spots-dialog:0.7@aar'
-    /*
-                * Aeris weather maps SDK. TODO - Implement later without using this library.
-                * */
-    //    compile 'com.hamweather:aeris-maps-library:1.2@aar'
+
     testCompile 'junit:junit:4.12'
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
     androidTestCompile 'com.android.support.test:runner:0.5'

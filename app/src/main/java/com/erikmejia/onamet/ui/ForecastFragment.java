@@ -77,7 +77,7 @@ public class ForecastFragment extends Fragment {
 
         //        Setting adapter to RecyclerView
         forecastList.setAdapter(animationAdapter);
-
+        forecastList.scrollToPosition(0);
     }
 
     @Override
@@ -145,10 +145,6 @@ public class ForecastFragment extends Fragment {
         LinearLayoutManager layoutManager =
                 new LinearLayoutManager(getActivity());
         forecastList.setLayoutManager(layoutManager);
-
-
-        layoutManager.scrollToPositionWithOffset(0, 20);
-
 
 
         return rootView;
