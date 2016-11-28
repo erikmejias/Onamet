@@ -31,7 +31,7 @@
             android:name=".ui.SettingsActivity"
             android:label="@string/settings"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.Home">
+            android:theme="@style/Preferences">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.erikmejia.onamet.MainActivity" />

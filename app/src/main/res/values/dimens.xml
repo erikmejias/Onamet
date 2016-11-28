@@ -23,6 +23,7 @@
     <dimen name="detail_upper_section_height_land">245dp</dimen>
     <dimen name="detail_text_size_max_temp">115sp</dimen>
     <dimen name="detail_text_size_description">28sp</dimen>
+    <dimen name="detail_text_size_heat_lvl_title">20sp</dimen>
     <dimen name="detail_text_size_min_temp">50sp</dimen>
     <dimen name="detail_text_size_date">30sp</dimen>
     <dimen name="details_text_compound_descriptors">17sp</dimen>

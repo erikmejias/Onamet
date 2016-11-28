@@ -85,7 +85,7 @@ public class BulletinsServlet extends HttpServlet {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Object document = dataSnapshot.getValue();
-//                Log.info("new value: "+ document); // TODO - checking data FROM Firebase.
+//                Log.info("new value: "+ document);
 
                 String todoText = "Don't forget to...\n\n";
 

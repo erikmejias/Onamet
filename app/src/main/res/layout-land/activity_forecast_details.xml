@@ -152,19 +152,29 @@
             android:paddingEnd="@dimen/text_container_horizontal_margin"
             android:paddingStart="@dimen/text_container_horizontal_margin"
             android:id="@+id/forecast_details_chart_frame"
-            android:background="@color/black_alpha_40"
+            android:background="@color/black_alpha_10"
             android:layout_below="@id/forecast_details_ad"
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="130dp">
+            android:layout_height="wrap_content">
 
             <TextView
-                android:text="An awesome chart goes here"
+                android:text="@string/forecast_details_heat_lvls_title"
+                android:id="@+id/forecast_details_head_lvls_title"
                 android:textColor="@color/white"
                 android:textSize="15sp"
                 android:gravity="center"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="wrap_content" />
+
+            <view
+                android:textColor="@color/colorPrimary"
+                android:layout_gravity="center"
+                android:paddingLeft="0dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                class="im.dacer.androidcharts.BarView"
+                android:id="@+id/barchart" />
 
         </LinearLayout>
 

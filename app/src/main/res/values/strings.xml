@@ -120,7 +120,6 @@ El ultimo cambio que ha sufrido esta Oficina fue con el Decreto número 764-03, 
         aw6sgkgdyyA0bldL8dtW2LRawC9vjyPYhiuKfIWH
     </string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="choose_province">Elige una provincia</string>
     <string name="phone_hint">Ingresa tu número de teléfono</string>
     <string name="invalid_phone_number">Número inválido</string>
@@ -131,5 +130,6 @@ El ultimo cambio que ha sufrido esta Oficina fue con el Decreto número 764-03, 
     <string name="forecast_item_image_description">Imagen del clima</string>
     <string name="last_synced">actualizado nov 26 - 07:13 pm</string>
     <string name="transition_background">background_img</string>
+    <string name="forecast_details_heat_lvls_title">calor durante el día</string>
 
 </resources>

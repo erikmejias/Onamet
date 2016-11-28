@@ -21,6 +21,11 @@ import com.google.android.gms.ads.NativeExpressAdView;
 import com.tomergoldst.tooltips.ToolTip;
 import com.tomergoldst.tooltips.ToolTipsManager;
 
+import java.util.ArrayList;
+
+import im.dacer.androidcharts.BarView;
+import im.dacer.androidcharts.PieView;
+
 
 public class ForecastDetails extends AppCompatActivity {
     private static final String TAG = ForecastDetails.class.getSimpleName();
@@ -34,9 +39,14 @@ public class ForecastDetails extends AppCompatActivity {
     private TextView windSpeed;
     private TextView windDirection;
     private TextView humidity;
+    private TextView heat_lvls_title;
     private TextView rainPercent;
 
     private LinearLayout iconWrapper;
+
+    private BarView chart;
+    private ArrayList<Integer> dataset;
+    private ArrayList<String> texts;
 
     NativeExpressAdView adView;
 
@@ -59,9 +69,20 @@ public class ForecastDetails extends AppCompatActivity {
         windSpeed = (TextView) findViewById(R.id.forecast_details_wind_text);
         windDirection = (TextView) findViewById(R.id.forecast_details_degrees_text);
         humidity = (TextView) findViewById(R.id.forecast_details_humidity_text);
+        heat_lvls_title = (TextView) findViewById(R.id.forecast_details_head_lvls_title);
 
         adView = (NativeExpressAdView) findViewById(R.id.forecast_details_ad_content);
         frame = (RelativeLayout) findViewById(R.id.today_forecast_frame);
+
+        chart = (BarView) findViewById(R.id.barchart);
+        dataset = new ArrayList<>();
+        dataset.add(24);
+        dataset.add(31);
+        dataset.add(20);
+        texts = new ArrayList<>();
+        texts.add("mañana");
+        texts.add("tarde");
+        texts.add("noche");
 
         toolTipsManager = new ToolTipsManager();
 
@@ -103,6 +124,9 @@ public class ForecastDetails extends AppCompatActivity {
         windSpeed.setText(extras.getString(Utils.ForecastConstants.WIND_SPEED));
         windDirection.setText(extras.getString(Utils.ForecastConstants.WIND_DIRECTION));
 
+        chart.setDataList(dataset, 40);
+        chart.setBottomTextList(texts);
+
         Utils.setAnimatedIcon(
                 iconWrapper,
                 extras.getInt(Utils.ForecastConstants.ICON_ID),
@@ -110,11 +134,13 @@ public class ForecastDetails extends AppCompatActivity {
 
         Typeface regTypeface = Typeface.createFromAsset(getAssets(), "fonts/Brandon_reg.otf");
         Typeface boldTypeface = Typeface.createFromAsset(getAssets(), "fonts/Brandon_bld.otf");
+        Typeface lightTypeface = Typeface.createFromAsset(getAssets(), "fonts/Brandon_light.otf");
 
         date.setTypeface(boldTypeface);
         maxTemperature.setTypeface(regTypeface);
         minTemperature.setTypeface(regTypeface);
         weatherDescription.setTypeface(regTypeface);
+        heat_lvls_title.setTypeface(lightTypeface);
 
 
         windDirection.setTypeface(regTypeface);
@@ -136,28 +162,35 @@ public class ForecastDetails extends AppCompatActivity {
         );
 
         Utils.dynamicBackground(this, frame);
+//        chart.show();
     }
 
     public void showTip(View view) {
         String msg;
 
         toolTipsManager.clear();
+        int POSITION;
 
         switch (view.getId()) {
             case R.id.forecast_details_max_text:
                 msg = "Temperatura máxima";
+                POSITION = ToolTip.POSITION_RIGHT_TO;
                 break;
             case R.id.forecast_details_min_text:
                 msg = "Temperatura mínima";
+                POSITION = ToolTip.POSITION_RIGHT_TO;
                 break;
             case R.id.wind_pressure_wrapper:
                 msg = "Presión del viento";
+                POSITION = ToolTip.POSITION_ABOVE;
                 break;
             case R.id.wind_direction_wrapper:
                 msg = "Dirección del viento en grados";
+                POSITION = ToolTip.POSITION_ABOVE;
                 break;
             default:
                 msg = "Nivel de humedad";
+                POSITION = ToolTip.POSITION_ABOVE;
         }
 
         ToolTip.Builder builder = new ToolTip.Builder(
@@ -165,7 +198,7 @@ public class ForecastDetails extends AppCompatActivity {
                 view,
                 frame,
                 msg,
-                ToolTip.POSITION_ABOVE
+                POSITION
         );
 
         builder.setBackgroundColor(R.color.colorPrimaryDark);
