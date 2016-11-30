@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -18,11 +18,8 @@
         <!-- Empty for no default support-->
     </style>
 
-    <style name="Preferences" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:textColor">@color/white</item>
-        <item name="android:textColorSecondary">@color/white</item>
+    <style name="Preferences" parent="Theme.AppCompat.NoActionBar">
         <item name="colorPrimaryDark">@color/black</item>
-        <!-- TODO - Fix disabled state color -->
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
@@ -42,7 +39,7 @@
         <item name="colorControlNormal">@color/colorAccent</item>
         <item name="colorControlActivated">@color/colorAccent</item>
         <item name="colorControlHighlight">@color/colorAccent</item>
-        <item name="android:windowBackground">@mipmap/rt6</item>
+        <item name="android:windowBackground">@color/gray</item>
     </style>
 
     <style name="ProgressDialog" parent="android:Theme.DeviceDefault.Dialog">

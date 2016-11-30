@@ -9,8 +9,10 @@ android {
             storePassword '4754Destiny./'
         }
     }
+
     compileSdkVersion 25
     buildToolsVersion "24.0.2"
+
     defaultConfig {
         applicationId "com.erikmejia.onamet"
         minSdkVersion 16
@@ -18,6 +20,7 @@ android {
         versionCode 12
         versionName "1.0"
     }
+
     buildTypes {
         release {
             minifyEnabled true
@@ -25,6 +28,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.config
         }
+    }
+
+    dexOptions {
+        dexInProcess = true
     }
 }
 
