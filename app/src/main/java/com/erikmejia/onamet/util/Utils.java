@@ -299,7 +299,7 @@ public class Utils {
         Calendar c = Calendar.getInstance();
         int timeOfDay = c.get(Calendar.HOUR_OF_DAY);
 
-        if (timeOfDay >= 7 && timeOfDay < 18)
+        if (timeOfDay >= 7 && timeOfDay <= 2)
             frame.setBackground(ResourcesCompat.getDrawable(context.getResources(), R.mipmap.back_day, null));
         else if (timeOfDay >= 2 && timeOfDay < 19)
             frame.setBackground(ResourcesCompat.getDrawable(context.getResources(), R.mipmap.back_raining, null));

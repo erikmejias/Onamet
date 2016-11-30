@@ -46,10 +46,7 @@ dependencies {
                 * Library for animated weather icons.
                 * */
     compile project(':SkyconsLibrary')
-    /*
-                * App Intro library that allows intro views when first started.
-                * */
-    compile 'com.github.paolorotolo:appintro:4.1.0'
+
     /*
                 * Required support libraries for components used within the app.
                 * */
