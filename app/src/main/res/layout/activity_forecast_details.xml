@@ -123,8 +123,8 @@
             android:id="@+id/forecast_details_ad_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            ads:adUnitId="@string/ads_forecast_details"
-            ads:adSize="400x80">
+            ads:adUnitId="@string/ads_test"
+            ads:adSize="380x100">
         </com.google.android.gms.ads.NativeExpressAdView>
 
     </LinearLayout>
