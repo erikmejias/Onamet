@@ -1,18 +1,15 @@
 package com.erikmejia.onamet.util;
 
 import android.content.Context;
-import android.graphics.Color;
+import android.support.annotation.NonNull;
 import android.support.v4.content.res.ResourcesCompat;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 
 import com.erikmejia.onamet.R;
-import com.thbs.skycons.library.Cloud;
-import com.thbs.skycons.library.CloudFogView;
 import com.thbs.skycons.library.CloudHvRainView;
 import com.thbs.skycons.library.CloudMoonView;
 import com.thbs.skycons.library.CloudRainView;
@@ -298,19 +295,20 @@ public class Utils {
         return isDay;
     }
 
-    public static void dynamicBackground(Context context, View frame) {
+    public static void dynamicBackground(@NonNull Context context, @NonNull View frame) {
         Calendar c = Calendar.getInstance();
         int timeOfDay = c.get(Calendar.HOUR_OF_DAY);
-        Log.d(TAG, "dynamicBackground: " + timeOfDay);
 
-        if (timeOfDay >= 7 && timeOfDay <18)
-            frame.setBackground(ResourcesCompat.getDrawable(context.getResources(), R.mipmap.rt6, null));
+        if (timeOfDay >= 7 && timeOfDay < 18)
+            frame.setBackground(ResourcesCompat.getDrawable(context.getResources(), R.mipmap.back_day, null));
+        else if (timeOfDay >= 2 && timeOfDay < 19)
+            frame.setBackground(ResourcesCompat.getDrawable(context.getResources(), R.mipmap.back_raining, null));
         else
-            frame.setBackground(ResourcesCompat.getDrawable(context.getResources(), R.mipmap.rt1, null));
+            frame.setBackground(ResourcesCompat.getDrawable(context.getResources(), R.mipmap.back_night, null));
 
     }
 
-    private static String whichDensity(Context context) {
+    private static String whichDensity(@NonNull Context context) {
 
         DisplayMetrics metrics = new DisplayMetrics();
         WindowManager windowManager = (WindowManager)

@@ -190,13 +190,13 @@ public class MainActivity extends AppCompatActivity{
         CitiesAdapter citiesAdapter = new CitiesAdapter(city_list, viewPagerAdapter,
                 drawerLayout, this);
 
-        SlideInLeftAnimationAdapter animationAdapter =
+        /*SlideInLeftAnimationAdapter animationAdapter =
                 new SlideInLeftAnimationAdapter(citiesAdapter);
         animationAdapter.setInterpolator(new OvershootInterpolator());
         animationAdapter.setDuration(550);
-        animationAdapter.setFirstOnly(false);
+        animationAdapter.setFirstOnly(false);*/
 
-        cityList.setAdapter(animationAdapter);
+        cityList.setAdapter(citiesAdapter);
 
 
         if (getIntent().getBooleanExtra("bulletin", false)) {

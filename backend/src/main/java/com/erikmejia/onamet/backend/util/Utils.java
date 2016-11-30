@@ -29,7 +29,7 @@ public class Utils {
         public int WINDY = 14;
         public int NO_REGISTRY = 15;
 
-        String[][] cityTest = {
+        String[][] CITY_ENTRIES = {
 
                 /*
                 * Add new provinces with their associated coordinates and codes here. They'll be filled

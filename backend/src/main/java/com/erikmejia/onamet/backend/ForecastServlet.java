@@ -9,6 +9,7 @@ package com.erikmejia.onamet.backend;
 import com.erikmejia.onamet.backend.model.City;
 import com.erikmejia.onamet.backend.model.Country;
 import com.erikmejia.onamet.backend.model.Forecast;
+import com.erikmejia.onamet.backend.model.ForecastLite;
 import com.erikmejia.onamet.backend.util.Utils;
 import com.erikmejia.onamet.backend.util.Utils.Constants;
 import com.google.firebase.FirebaseApp;
@@ -19,6 +20,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import net.aksingh.owmjapis.CurrentWeather;
 import net.aksingh.owmjapis.DailyForecast;
 import net.aksingh.owmjapis.OpenWeatherMap;
 
@@ -35,8 +37,13 @@ import java.util.logging.Logger;
 import javax.servlet.http.*;
 
 public class ForecastServlet extends HttpServlet {
-    String responseData = null;
     static Logger Log = Logger.getLogger("com.erikmejia.onamet.backend.ForecastServlet");
+
+//    Request API Builder for new Forecasts
+    OpenWeatherMap owm = new OpenWeatherMap(
+            OpenWeatherMap.Units.METRIC,
+            "ab935127aec33bcab3d7a12509748c88"
+    );
 
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -75,6 +82,7 @@ public class ForecastServlet extends HttpServlet {
                 .getReference("forecasts");
 
         buildForecastData();
+        buildCurrentWeatherList();
 
         // This fires when the servlet first runs, returning all the existing values
         // only runs once, until the servlet starts up again.
@@ -122,20 +130,20 @@ public class ForecastServlet extends HttpServlet {
 
         Country country = new Country();
 
-        for (int index = 0; index < Utils.Constants.cityTest.length; index++) {
+        for (int index = 0; index < Utils.Constants.CITY_ENTRIES.length; index++) {
             int columnA = 0;
             int columnB = 1;
             int columnC = 2;
             int columnD = 3;
 
-//            Create a new city by fetching data from Utils.Constants.cityTest interface.
+//            Create a new city by fetching data from Utils.Constants.CITY_ENTRIES interface.
             City city = new City(
-                    Utils.Constants.cityTest[index][columnA],    // Name of the city
+                    Utils.Constants.CITY_ENTRIES[index][columnA],    // Name of the city
                     "234,235",                          // Population of the city
-                    Utils.Constants.cityTest[index][columnB],    // Latitude
-                    Constants.cityTest[index][columnC],    // Longitude
+                    Utils.Constants.CITY_ENTRIES[index][columnB],    // Latitude
+                    Constants.CITY_ENTRIES[index][columnC],    // Longitude
                     Long.valueOf(
-                            Constants.cityTest[index][columnD] // City code
+                            Constants.CITY_ENTRIES[index][columnD] // City code
                     ));
 
             city.setForecasts(searchWeather(city.getName(), city.getCityCode()));
@@ -153,10 +161,6 @@ public class ForecastServlet extends HttpServlet {
 
     private List<Forecast> searchWeather(String cityName, long cityCode){
         List<Forecast> receivedForecasts = new ArrayList<>();
-        OpenWeatherMap owm = new OpenWeatherMap(
-                OpenWeatherMap.Units.METRIC,
-                "ab935127aec33bcab3d7a12509748c88"
-                );
 
         byte quantity = 15;
         DateFormat df = new SimpleDateFormat("EEE d", new Locale("es", "DO"));
@@ -214,6 +218,47 @@ public class ForecastServlet extends HttpServlet {
         }
         return receivedForecasts;
 
+    }
+
+    /*
+    * Method to retrieve forecast data from OWM | Used to populate the navigation drawer with a weather icon.
+    * */
+    private void buildCurrentWeatherList() {
+
+        int columnName = 0; // Columns that contains the name
+        int columnId = 3; // Columns that contains the code
+        byte count = 1;
+
+//        Array to store all new forecasts
+        ArrayList<ForecastLite> forecastList = new ArrayList<>();
+
+        for (int index = 0; index < Utils.Constants.CITY_ENTRIES.length; index++) {
+            DailyForecast forecast =
+                    owm.dailyForecastByCityCode(
+                            Long.valueOf(Utils.Constants.CITY_ENTRIES[index][columnId]),
+                            count);
+
+            ForecastLite currentForecast = new ForecastLite(
+                    Constants.CITY_ENTRIES[index][columnName],
+                    forecast.getForecastInstance(0).getWeatherInstance(0).getWeatherCode() // TODO - Check why this is failing
+            );
+//            Save newly found forecast in a single object
+            forecastList.add(currentForecast);
+        }
+
+//            Add all these forecasts to Firebase
+        pushCurrentForecast(forecastList);
+    }
+
+    /*
+    * Method that pushes current forecasts list to Firebase
+    * */
+    private void pushCurrentForecast(ArrayList<ForecastLite> currentForecastList) {
+        DatabaseReference ref = FirebaseDatabase
+                .getInstance()
+                .getReference("forecasts_list");
+
+        ref.setValue(currentForecastList);
     }
 
 }
