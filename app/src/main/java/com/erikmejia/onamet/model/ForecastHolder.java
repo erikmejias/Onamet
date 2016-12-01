@@ -73,7 +73,7 @@ public class ForecastHolder extends RecyclerView.ViewHolder {
     }
 
     public void setIcon(int iconId) {
-        icon.setImageResource(Utils.bulletinIcon(iconId));
+        icon.setImageResource(Utils.setIcon(iconId));
     }
 
     public TextView getMax_temperature() {

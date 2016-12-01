@@ -19,8 +19,6 @@ import com.erikmejia.onamet.MainActivity;
 import com.erikmejia.onamet.R;
 import com.erikmejia.onamet.util.Utils;
 
-import java.util.List;
-
 /**
  * Created by erik on 11/22/16.
  */
@@ -62,7 +60,7 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.ViewHolder
     public void onBindViewHolder(ViewHolder holder, int position) {
 
         holder.city_name.setText(dataset[position]);
-        holder.icon.setImageResource(Utils.bulletinIcon(position));
+        holder.icon.setImageResource(Utils.setIcon(position));
 
         holder.city_name.setTypeface(font_typeface);
 

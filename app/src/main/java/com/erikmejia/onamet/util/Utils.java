@@ -29,12 +29,12 @@ import java.util.Calendar;
 public class Utils {
     private static final String TAG = Utils.class.getSimpleName();
 
-    public static int bulletinIcon(int codeId) {
+    public static int setIcon(int codeId) {
         switch (codeId){
             case WeatherCodes.CLEAR_SKY:
                 return R.drawable.clear_day;
             case WeatherCodes.THUNDERSTORM:
-                return R.drawable.thunder_weather;
+                return R.drawable.showcase;
             case WeatherCodes.THUNDERSTORM_RAIN:
                 return R.drawable.thunder_day;
             case WeatherCodes.THUNDERSTORM_HEAVY_RAIN:
@@ -56,7 +56,7 @@ public class Utils {
             case WeatherCodes.CLOUDS_BROKEN:
                 return R.drawable.partly_cloudy;
             case WeatherCodes.TROPICAL_STORM:
-                return R.drawable.storm_weather;
+                return R.drawable.storm_weather_day;
             case WeatherCodes.HURRICANE:
                 return R.drawable.storm_weather;
             case WeatherCodes.WINDY:
@@ -263,6 +263,9 @@ public class Utils {
         String WIND_DIRECTION = "wind_direction";
         String CITY_NAME = "city_name";
         String ICON_ID = "icon_id";
+        String MORNING_TEMPERATURE = "morning_temp";
+        String NOON_TEMPERATURE = "noon_temp";
+        String NIGHT_TEMPERATURE = "night_temp";
     }
 
     interface WeatherCodes {
@@ -299,9 +302,9 @@ public class Utils {
         Calendar c = Calendar.getInstance();
         int timeOfDay = c.get(Calendar.HOUR_OF_DAY);
 
-        if (timeOfDay >= 7 && timeOfDay <= 2)
+        if (timeOfDay >= 7 && timeOfDay <= 14)
             frame.setBackground(ResourcesCompat.getDrawable(context.getResources(), R.mipmap.back_day, null));
-        else if (timeOfDay >= 2 && timeOfDay < 19)
+        else if (timeOfDay >= 14 && timeOfDay < 19)
             frame.setBackground(ResourcesCompat.getDrawable(context.getResources(), R.mipmap.back_raining, null));
         else
             frame.setBackground(ResourcesCompat.getDrawable(context.getResources(), R.mipmap.back_night, null));

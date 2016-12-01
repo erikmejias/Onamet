@@ -181,7 +181,7 @@ public class ForecastDetails extends AppCompatActivity {
                 POSITION = ToolTip.POSITION_RIGHT_TO;
                 break;
             case R.id.wind_pressure_wrapper:
-                msg = "Presión del viento";
+                msg = "Velocidad del viento";
                 POSITION = ToolTip.POSITION_ABOVE;
                 break;
             case R.id.wind_direction_wrapper:
