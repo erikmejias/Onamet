@@ -53,8 +53,6 @@
             android:name=".ui.ForecastDetails"
             android:parentActivityName=".MainActivity" />
 
-        <activity android:name=".IntroActivity" />
-
         <!--
             ATTENTION: This was auto-generated to add Google Play services to your project for
             App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
