@@ -1,6 +1,8 @@
 package com.erikmejia.onamet.model;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -14,93 +16,76 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.erikmejia.onamet.MainActivity;
 import com.erikmejia.onamet.R;
+import com.erikmejia.onamet.ui.ForecastDetails;
 import com.erikmejia.onamet.util.Utils;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.database.Query;
 
 /**
  * Created by erik on 11/22/16.
  */
 
-public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.ViewHolder>{
+public class CitiesAdapter extends FirebaseRecyclerAdapter<ForecastLite, CitiesHolder> {
     private String TAG = CitiesAdapter.class.getSimpleName();
 
-    private String[] dataset;
-    private Typeface font_typeface;
-    private Context receivedContext;
-    private MainActivity.ViewPagerAdapter viewpagerAdapter;
-    private DrawerLayout drawerLayout;
+
+    private Typeface font_bold;
+
+    private Context context;
+    private MainActivity.ViewPagerAdapter content_adapter;
+    private DrawerLayout nav_drawer;
 
 
-    public CitiesAdapter(String[] receivedData, MainActivity.ViewPagerAdapter viewpager,
-                         DrawerLayout drawerLayout, Context context){
-        this.dataset = receivedData;
-        this.receivedContext = context;
-        this.viewpagerAdapter = viewpager;
-        this.drawerLayout = drawerLayout;
+    public CitiesAdapter(Class<ForecastLite> modelClass, int layout,
+                         Class<CitiesHolder> viewHolderClass, Query ref,
+                         Context context, MainActivity.ViewPagerAdapter adapter,
+                         DrawerLayout drawer_layout) {
 
-        font_typeface = Typeface.createFromAsset(receivedContext.getAssets(),
+        super(modelClass, layout, viewHolderClass, ref);
+        this.content_adapter = adapter;
+        this.nav_drawer = drawer_layout;
+        this.context = context;
+        font_bold = Typeface.createFromAsset(this.context.getAssets(),
                 "fonts/Brandon_bld.otf");
+
     }
 
     @Override
-    public CitiesAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public void populateViewHolder(final CitiesHolder viewHolder, final ForecastLite model, final int position) {
 
-        ViewHolder holder;
+        viewHolder.setCity_name(model.getName());
+        viewHolder.setCity_status(model.getIconId());
 
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.city_list_item,
+        viewHolder.getCity_name().setTypeface(font_bold);
+        Log.d(TAG, "populateViewHolder: " + model.getIconId());
+
+        viewHolder.getRootView().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                nav_drawer.closeDrawer(GravityCompat.START);
+                SharedPreferences sharedPreferences = PreferenceManager
+                        .getDefaultSharedPreferences(context);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putInt("city", position);
+                editor.apply();
+                content_adapter.getItem(0).onCreate(new Bundle());
+                content_adapter.notifyDataSetChanged();
+            }
+        });
+
+    }
+
+    @Override
+    public CitiesHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
+        View root = LayoutInflater.from(parent.getContext()).inflate(R.layout.city_list_item,
                 parent, false);
-        holder = new ViewHolder(view);
 
-        return holder;
-    }
-
-    @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-
-        holder.city_name.setText(dataset[position]);
-        holder.icon.setImageResource(Utils.setIcon(position));
-
-        holder.city_name.setTypeface(font_typeface);
-
-        holder.bind(dataset[position], position);
-
-    }
-
-    @Override
-    public int getItemCount() {
-        return dataset.length;
-    }
-
-    class ViewHolder extends RecyclerView.ViewHolder {
-        TextView city_name;
-        public ImageView icon;
-
-        ViewHolder(View itemView) {
-            super(itemView);
-            city_name = (TextView) itemView.findViewById(R.id.city_name_text);
-            icon = (ImageView) itemView.findViewById(R.id.city_item_icon);
-
-            itemView.setClickable(true);
-        }
-
-        void bind(final String cityItem, final int position) {
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Log.d(TAG, "onClick: " + cityItem + " position: " + position);
-                    Bundle extras = new Bundle();
-                    SharedPreferences sharedPreferences = PreferenceManager
-                            .getDefaultSharedPreferences(receivedContext);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putInt("city", position);
-                    editor.apply();
-                    viewpagerAdapter.getItem(0).onCreate(extras);
-                    viewpagerAdapter.notifyDataSetChanged();
-                    drawerLayout.closeDrawer(GravityCompat.START);
-                }
-            });
+        return new CitiesHolder(root);
         }
     }
-}
+

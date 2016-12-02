@@ -233,14 +233,17 @@ public class ForecastServlet extends HttpServlet {
         ArrayList<ForecastLite> forecastList = new ArrayList<>();
 
         for (int index = 0; index < Utils.Constants.CITY_ENTRIES.length; index++) {
-            DailyForecast forecast =
+            /*DailyForecast forecast =
                     owm.dailyForecastByCityCode(
                             Long.valueOf(Utils.Constants.CITY_ENTRIES[index][columnId]),
-                            count);
+                            count);*/
+            CurrentWeather weather = owm.currentWeatherByCityCode(
+                    Long.valueOf(Utils.Constants.CITY_ENTRIES[index][columnId])
+            );
 
             ForecastLite currentForecast = new ForecastLite(
                     Constants.CITY_ENTRIES[index][columnName],
-                    forecast.getForecastInstance(0).getWeatherInstance(0).getWeatherCode() // TODO - Check why this is failing
+                    Utils.getWeatherCode(weather.getWeatherInstance(0).getWeatherCode())
             );
 //            Save newly found forecast in a single object
             forecastList.add(currentForecast);

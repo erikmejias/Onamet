@@ -1,10 +1,8 @@
 package com.erikmejia.onamet;
 
-import android.app.ActivityOptions;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
@@ -12,7 +10,6 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -25,83 +22,48 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.BounceInterpolator;
-import android.view.animation.OvershootInterpolator;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
-import android.widget.ListView;
-import android.widget.Toast;
 
 import com.erikmejia.onamet.model.CitiesAdapter;
-import com.erikmejia.onamet.service.FirebaseBackgroundService;
+import com.erikmejia.onamet.model.CitiesHolder;
+import com.erikmejia.onamet.model.ForecastLite;
 import com.erikmejia.onamet.ui.BulletinsFragment;
 import com.erikmejia.onamet.ui.ForecastFragment;
 import com.erikmejia.onamet.ui.SettingsActivity;
 import com.erikmejia.onamet.util.PageTransformer;
 import com.erikmejia.onamet.util.Utils;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import jp.wasabeef.recyclerview.adapters.AnimationAdapter;
-import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
-import jp.wasabeef.recyclerview.adapters.SlideInLeftAnimationAdapter;
-import jp.wasabeef.recyclerview.adapters.SlideInRightAnimationAdapter;
-
-import static com.erikmejia.onamet.R.layout.activity_main;
 
 
 public class MainActivity extends AppCompatActivity{
 
     private static final String TAG = MainActivity.class.getSimpleName();
-    String[] city_list = {
-            "Santo Domingo",
-            "Santiago",
-            "Moca",
-            "La Romana",
-            "Higuey",
-            "Punta Cana",
-            "San Pedro de Macorís",
-            "Hato Mayor del Rey",
-            "El Seibo",
-            "Sabana de la Mar",
-            "Miches",
-            "Monte Plata",
-            "Puerto Plata",
-            "La Vega",
-            "San Francisco",
-            "Mao",
-            "Jarabacoa",
-            "Bonao",
-            "Nagua",
-            "Samaná",
-            "Azua",
-            "Baní",
-            "Dajabón",
-            "Duarte",
-            "Hermanas Mirabal",
-            "Independencia",
-            "Monte Cristi",
-            "Pedernales",
-            "Sánchez Ramírez",
-            "San Cristobal",
-            "San José de Ocoa",
-            "San Juan"
-    };
-
+    private boolean calledAlready = false;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle drawerToggle;
     private RecyclerView cityList;
     private ViewPagerAdapter viewPagerAdapter;
+
     FrameLayout rootLayout;
+    private DatabaseReference cities_reference;
+    private CitiesAdapter citiesAdapter;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        MobileAds.initialize(getApplicationContext(), "ca-app-pub-6005843157698202~1566560378");
+
+        if (!calledAlready) {
+            FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+            calledAlready = true;
+        }
+
 
         setContentView(R.layout.activity_main);
 
@@ -148,8 +110,18 @@ public class MainActivity extends AppCompatActivity{
 
         drawerToggle.setDrawerIndicatorEnabled(true);
         drawerLayout.setDrawerListener(drawerToggle);
-        CitiesAdapter citiesAdapter = new CitiesAdapter(city_list, viewPagerAdapter,
-                drawerLayout, this);
+        cities_reference = FirebaseDatabase.getInstance().getReference("forecasts_list");
+        /*CitiesAdapter citiesAdapter = new CitiesAdapter(city_list, viewPagerAdapter,
+                drawerLayout, this);*/
+        citiesAdapter = new CitiesAdapter(
+                ForecastLite.class,
+                R.layout.city_list_item,
+                CitiesHolder.class,
+                cities_reference,
+                this,
+                viewPagerAdapter,
+                drawerLayout
+        );
 
         /*SlideInLeftAnimationAdapter animationAdapter =
                 new SlideInLeftAnimationAdapter(citiesAdapter);

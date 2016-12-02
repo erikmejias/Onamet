@@ -49,6 +49,7 @@ public class FirebaseAdapter extends FirebaseRecyclerAdapter<Forecast, ForecastH
     public FirebaseAdapter(Class<Forecast> modelClass, int layout,
                            Class<ForecastHolder> viewHolderClass, Query ref,
                            Context context, Activity activity) {
+
         super(modelClass, layout, viewHolderClass, ref);
         this.context = context;
         this.layout = layout;

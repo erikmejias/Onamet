@@ -51,8 +51,6 @@ public class ForecastFragment extends Fragment {
 
     private RecyclerView forecastList;
 
-    private static boolean calledAlready = false;
-
     private int PROVINCE_ID;
 
     public ForecastFragment() {
@@ -112,12 +110,6 @@ public class ForecastFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
-        if (!calledAlready) {
-            FirebaseDatabase.getInstance().setPersistenceEnabled(true);
-            calledAlready = true;
-        }
 
     }
 
