@@ -83,7 +83,7 @@ public class SettingsFragment extends PreferenceFragment {
 //        Load the preference from an XML resource.
         addPreferencesFromResource(R.xml.preferences);
 
-        provincePreference = (ListPreference)
+        /*provincePreference = (ListPreference)
                 findPreference(getString(R.string.list_province_key));
         provincePreference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
@@ -91,7 +91,7 @@ public class SettingsFragment extends PreferenceFragment {
                 provincePreference.setSummary(provincePreference.getEntry());
                 return false;
             }
-        });
+        });*/
 
         smsPreference = findPreference(getString(R.string.pref_account_sms_key));
         smsPreference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
@@ -174,7 +174,7 @@ public class SettingsFragment extends PreferenceFragment {
     @Override
     public void onResume() {
         super.onResume();
-        provincePreference.setSummary(provincePreference.getEntry());
+//        provincePreference.setSummary(provincePreference.getEntry());
     }
 
     @Override

@@ -191,8 +191,8 @@ public class ForecastDetails extends AppCompatActivity {
                 POSITION
         );
 
-        builder.setBackgroundColor(R.color.black_alpha_40);
-        builder.setTextColor(R.color.white);
+        builder.setBackgroundColor(R.color.white);
+//        builder.setTextColor(R.color.white);
 
         toolTipsManager.show(builder.build());
     }
