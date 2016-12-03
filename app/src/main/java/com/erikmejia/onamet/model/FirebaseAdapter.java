@@ -114,6 +114,9 @@ public class FirebaseAdapter extends FirebaseRecyclerAdapter<Forecast, ForecastH
                 String humidity = model.getHumidity();
                 String wind_speed = model.getSpeed();
                 String wind_direction = model.getDeg();
+                String morning_temp = model.getMorning_temp();
+                String noon_temp = model.getNoon_temp();
+                String night_temp = model.getNight_temp();
                 int icon_id = model.getIconId();
 
 //                Attach this data to the new Activity
@@ -148,6 +151,18 @@ public class FirebaseAdapter extends FirebaseRecyclerAdapter<Forecast, ForecastH
                 intent.putExtra(
                         Utils.ForecastConstants.ICON_ID,
                         icon_id
+                );
+                intent.putExtra(
+                        Utils.ForecastConstants.MORNING_TEMPERATURE,
+                        morning_temp
+                );
+                intent.putExtra(
+                        Utils.ForecastConstants.NOON_TEMPERATURE,
+                        noon_temp
+                );
+                intent.putExtra(
+                        Utils.ForecastConstants.NIGHT_TEMPERATURE,
+                        night_temp
                 );
 
 //                Start the new details activity when button pressed.

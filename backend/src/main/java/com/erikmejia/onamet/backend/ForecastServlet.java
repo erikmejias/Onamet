@@ -197,6 +197,15 @@ public class ForecastServlet extends HttpServlet {
                             Math.round(dailyForecast.getForecastInstance(index).getTemperatureInstance().getMinimumTemperature())
                                     + "º"),
                     String.valueOf(
+                            Math.round(dailyForecast.getForecastInstance(index).getTemperatureInstance().getMorningTemperature())
+                                    ),
+                    String.valueOf(
+                            Math.round(dailyForecast.getForecastInstance(index).getTemperatureInstance().getEveningTemperature())
+                                    ),
+                    String.valueOf(
+                            Math.round(dailyForecast.getForecastInstance(index).getTemperatureInstance().getNightTemperature())
+                                    ),
+                    String.valueOf(
                             Math.round(dailyForecast.getForecastInstance(index).getWindSpeed())
                     + " km/h"),
                     String.valueOf(Math.round(dailyForecast.getForecastInstance(index).getHumidity())

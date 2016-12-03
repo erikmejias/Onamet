@@ -10,6 +10,9 @@ public class Forecast {
     private String city_name;
     private String max;         // Max temperature
     private String min;         // Min temperature
+    private String morning_temp; // Morning temperature
+    private String noon_temp; // Noon temperature
+    private String night_temp; // Night temperature
     private String speed;       // Wind Speed
     private String humidity;
     private String sunrise_time;
@@ -23,12 +26,16 @@ public class Forecast {
 //        Empty constructor
     }
 
-    public Forecast(String city_name, String max, String min, String speed, String humidity, String sunrise_time,
+    public Forecast(String city_name, String max, String min, String morning_temp, String noon_temp,
+                    String night_temp, String speed, String humidity, String sunrise_time,
                     String sunset_time, String description, String deg, String date, int iconId) {
 
         this.city_name = city_name;
         this.max = max;
         this.min = min;
+        this.morning_temp = morning_temp;
+        this.noon_temp = noon_temp;
+        this.night_temp = night_temp;
         this.speed = speed;
         this.humidity = humidity;
         this.sunrise_time = sunrise_time;
@@ -41,9 +48,33 @@ public class Forecast {
 
     @Override
     public String toString() {
-        return "Forecast: " + this.getMax() + " " + this.getMin() + " "  + this.getDate() + " "
+        return "Forecast: " + this.getCity_name() + this.getMax() + " " + this.getMin() + " "  + this.getDate() + " "
                 + this.getDescription() + " "  + this.getDeg() + " "  + this.getHumidity() + " "
                 + this.getSunrise_time() + " "  + this.getSunset_time();
+    }
+
+    public String getMorning_temp() {
+        return morning_temp;
+    }
+
+    public void setMorning_temp(String morning_temp) {
+        this.morning_temp = morning_temp;
+    }
+
+    public String getNoon_temp() {
+        return noon_temp;
+    }
+
+    public void setNoon_temp(String noon_temp) {
+        this.noon_temp = noon_temp;
+    }
+
+    public String getNight_temp() {
+        return night_temp;
+    }
+
+    public void setNight_temp(String night_temp) {
+        this.night_temp = night_temp;
     }
 
     public String getCity_name() {
@@ -133,4 +164,5 @@ public class Forecast {
     public void setIconId(int iconId) {
         this.iconId = iconId;
     }
+
 }

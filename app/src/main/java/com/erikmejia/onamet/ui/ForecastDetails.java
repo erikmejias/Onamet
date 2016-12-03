@@ -76,10 +76,8 @@ public class ForecastDetails extends AppCompatActivity {
 
         chart = (BarView) findViewById(R.id.barchart);
         dataset = new ArrayList<>();
-        dataset.add(24);
-        dataset.add(31);
-        dataset.add(20);
         texts = new ArrayList<>();
+
         texts.add("mañana");
         texts.add("tarde");
         texts.add("noche");
@@ -124,7 +122,11 @@ public class ForecastDetails extends AppCompatActivity {
         windSpeed.setText(extras.getString(Utils.ForecastConstants.WIND_SPEED));
         windDirection.setText(extras.getString(Utils.ForecastConstants.WIND_DIRECTION));
 
-        chart.setDataList(dataset, 40);
+        dataset.add(Integer.valueOf(extras.getString(Utils.ForecastConstants.MORNING_TEMPERATURE)));
+        dataset.add(Integer.valueOf(extras.getString(Utils.ForecastConstants.NOON_TEMPERATURE)));
+        dataset.add(Integer.valueOf(extras.getString(Utils.ForecastConstants.NIGHT_TEMPERATURE)));
+
+        chart.setDataList(dataset, 43);
         chart.setBottomTextList(texts);
 
         Utils.setAnimatedIcon(
