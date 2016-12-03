@@ -84,17 +84,6 @@ public class ForecastDetails extends AppCompatActivity {
 
         toolTipsManager = new ToolTipsManager();
 
-        /*if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-            Slide slide = new Slide(Gravity.LEFT);
-            slide.addTarget(R.layout.activity_forecast_details);
-            slide.setInterpolator(
-                    AnimationUtils.loadInterpolator(this,
-                            android.R.interpolator.linear_out_slow_in)
-            );
-            slide.setDuration(1000);
-            getWindow().setEnterTransition(slide);
-        }*/
-
     }
 
     @Override
@@ -164,7 +153,6 @@ public class ForecastDetails extends AppCompatActivity {
         );
 
         Utils.dynamicBackground(this, frame);
-//        chart.show();
     }
 
     public void showTip(View view) {
@@ -203,7 +191,8 @@ public class ForecastDetails extends AppCompatActivity {
                 POSITION
         );
 
-        builder.setBackgroundColor(R.color.colorPrimaryDark);
+        builder.setBackgroundColor(R.color.black_alpha_40);
+        builder.setTextColor(R.color.white);
 
         toolTipsManager.show(builder.build());
     }

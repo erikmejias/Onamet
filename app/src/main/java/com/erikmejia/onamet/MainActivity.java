@@ -27,12 +27,12 @@ import android.widget.FrameLayout;
 import com.erikmejia.onamet.model.CitiesAdapter;
 import com.erikmejia.onamet.model.CitiesHolder;
 import com.erikmejia.onamet.model.ForecastLite;
+import com.erikmejia.onamet.service.FirebaseBackgroundService;
 import com.erikmejia.onamet.ui.BulletinsFragment;
 import com.erikmejia.onamet.ui.ForecastFragment;
 import com.erikmejia.onamet.ui.SettingsActivity;
 import com.erikmejia.onamet.util.PageTransformer;
 import com.erikmejia.onamet.util.Utils;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -40,16 +40,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
+    FrameLayout rootLayout;
     private boolean calledAlready = false;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle drawerToggle;
     private RecyclerView cityList;
     private ViewPagerAdapter viewPagerAdapter;
-
-    FrameLayout rootLayout;
     private DatabaseReference cities_reference;
     private CitiesAdapter citiesAdapter;
 
@@ -59,6 +58,7 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
 //        MobileAds.initialize(getApplicationContext(), "ca-app-pub-6005843157698202~1566560378");
 
+//        Check that this method is called only once so it doesn't crash the app
         if (!calledAlready) {
             FirebaseDatabase.getInstance().setPersistenceEnabled(true);
             calledAlready = true;
@@ -66,6 +66,7 @@ public class MainActivity extends AppCompatActivity{
 
 
         setContentView(R.layout.activity_main);
+        getWindow().setBackgroundDrawable(null);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -106,13 +107,13 @@ public class MainActivity extends AppCompatActivity{
                 invalidateOptionsMenu();
             }
         };
-//        drawerLayout.setAlpha(0.7f);
 
         drawerToggle.setDrawerIndicatorEnabled(true);
         drawerLayout.setDrawerListener(drawerToggle);
+
+//        Getting the database reference of cities list
         cities_reference = FirebaseDatabase.getInstance().getReference("forecasts_list");
-        /*CitiesAdapter citiesAdapter = new CitiesAdapter(city_list, viewPagerAdapter,
-                drawerLayout, this);*/
+
         citiesAdapter = new CitiesAdapter(
                 ForecastLite.class,
                 R.layout.city_list_item,
@@ -123,12 +124,6 @@ public class MainActivity extends AppCompatActivity{
                 drawerLayout
         );
 
-        /*SlideInLeftAnimationAdapter animationAdapter =
-                new SlideInLeftAnimationAdapter(citiesAdapter);
-        animationAdapter.setInterpolator(new OvershootInterpolator());
-        animationAdapter.setDuration(550);
-        animationAdapter.setFirstOnly(false);*/
-
         cityList.setAdapter(citiesAdapter);
 
 
@@ -136,7 +131,6 @@ public class MainActivity extends AppCompatActivity{
             incomingBulletin();
         }
 
-//        startService(new Intent(this, FirebaseBackgroundService.class));
     }
 
     @Override
@@ -183,36 +177,19 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
+    /*
+    * Custom method to show settings UI
+    * */
     private void showSettings() {
 //        Start explicit intent
         Intent intent;
         intent = new Intent(this, SettingsActivity.class);
-        /*if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-            Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(
-                    this,
-                    rootLayout,
-                    rootLayout.getTransitionName()
-            )
-                    .toBundle();
-            startActivity(intent, bundle);
-        } else {
-            startActivity(intent);
-        }*/
         startActivity(intent);
     }
 
-    public void changeCity(int city) {
-        Bundle extras = new Bundle();
-//        extras.putInt("city", city);
-        SharedPreferences sharedPreferences = PreferenceManager
-                .getDefaultSharedPreferences(getBaseContext());
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putInt("city", city);
-        editor.apply();
-        viewPagerAdapter.getItem(0).onCreate(extras);
-        viewPagerAdapter.notifyDataSetChanged();
-    }
-
+    /*
+    * Custom method that initialize the custom viewpager with the fragments.
+    * */
     private void setViewPager(ViewPager viewPager) {
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPagerAdapter.addFragment(new ForecastFragment(), "Pronosticos");
@@ -236,6 +213,10 @@ public class MainActivity extends AppCompatActivity{
         drawerToggle.onConfigurationChanged(newConfig);
     }
 
+    /*
+    * ViewPagerAdapter inner class that handles fragments objects that gets displayed in
+    * the main content view as Forecasts & Bulletins list
+    * */
     public class ViewPagerAdapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();
         private final List<String> mFragmentTitleList = new ArrayList<>();
@@ -270,5 +251,10 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+//        Release all listeners.
+        citiesAdapter.cleanup();
+    }
 }

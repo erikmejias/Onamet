@@ -10,6 +10,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.preference.EditTextPreference;
+import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
@@ -66,10 +67,10 @@ public class SettingsFragment extends PreferenceFragment {
 
     private FirebaseAuth mAuth;
     private FirebaseUser user;
-    SimpleTarget target;
     Preference smsPreference;
     Preference signOutPreference;
     Preference signInPreference;
+    ListPreference provincePreference;
     private String number;
 
     private static final String TAG = SettingsFragment.class.getSimpleName();
@@ -77,21 +78,20 @@ public class SettingsFragment extends PreferenceFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
-        target = new SimpleTarget<Bitmap>() {
-            @Override
-            public void onResourceReady(Bitmap bitmap, GlideAnimation glideAnimation) {
-                // do something with the bitmap
-                // for demonstration purposes, let's just set it to an ImageView
-//                imageView1.setImageBitmap( bitmap );
-                Drawable d = new BitmapDrawable(getResources(), bitmap);
-                signInPreference.setIcon(d);
-            }
-        };
-
         super.onCreate(savedInstanceState);
 
 //        Load the preference from an XML resource.
         addPreferencesFromResource(R.xml.preferences);
+
+        provincePreference = (ListPreference)
+                findPreference(getString(R.string.list_province_key));
+        provincePreference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                provincePreference.setSummary(provincePreference.getEntry());
+                return false;
+            }
+        });
 
         smsPreference = findPreference(getString(R.string.pref_account_sms_key));
         smsPreference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
@@ -169,6 +169,12 @@ public class SettingsFragment extends PreferenceFragment {
     public void onStart() {
         super.onStart();
 //        mAuth.addAuthStateListener(authStateListener);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        provincePreference.setSummary(provincePreference.getEntry());
     }
 
     @Override
@@ -267,6 +273,7 @@ public class SettingsFragment extends PreferenceFragment {
             signOutPreference.setEnabled(false);
             signInPreference.setTitle(getString(R.string.acc_prefs_sync));
             signInPreference.setSummary(getString(R.string.pref_account_summary));
+            signInPreference.setIcon(null); // TODO - validate this approach is safe.
             user = null;
 
         } else {

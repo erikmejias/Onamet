@@ -51,8 +51,6 @@ public class ForecastFragment extends Fragment {
 
     private RecyclerView forecastList;
 
-    private int PROVINCE_ID;
-
     public ForecastFragment() {
 //        required empty constructor.
     }
@@ -60,20 +58,23 @@ public class ForecastFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+
+//        Initializing the custom Firebase adapter
         firebaseAdapter = new FirebaseAdapter(Forecast.class,
                 R.layout.forecast_item,
                 ForecastHolder.class,
                 databaseReference,
-                activity,
-                getActivity());
+                activity
+        );
 
+//        Setting up animation properties for the main recycler view using a library
         ScaleInAnimationAdapter animationAdapter =
                 new ScaleInAnimationAdapter(firebaseAdapter);
         animationAdapter.setInterpolator(new OvershootInterpolator());
         animationAdapter.setDuration(900);
         animationAdapter.setFirstOnly(false);
 
-        //        Setting adapter to RecyclerView
+//        Setting adapter to RecyclerView and moving to the 1st position
         forecastList.setAdapter(animationAdapter);
         forecastList.scrollToPosition(0);
     }
@@ -82,12 +83,15 @@ public class ForecastFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+//        Reading the city property to know which city id to load
         SharedPreferences getPrefs = PreferenceManager
                 .getDefaultSharedPreferences(activity);
-        this.PROVINCE_ID = getPrefs.getInt("city", 0);
+        int PROVINCE_ID = getPrefs.getInt("city", 0);
 
+//        Keep an overall reference to Forecast database (that way it keeps loaded in memory)
         database = FirebaseDatabase.getInstance();
         mainReference = database.getReference("forecasts/cities/");
+//        Getting a reference for the selected city the user wants
         databaseReference =
                 mainReference.child(PROVINCE_ID + "/forecasts");
 
@@ -150,7 +154,7 @@ public class ForecastFragment extends Fragment {
         mainReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-//                Hook up a listener that keeps entire database cached in memory.
+//                Hooked up a listener that keeps entire database cached in memory.
             }
 
             @Override
@@ -163,12 +167,14 @@ public class ForecastFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+
         this.activity = context;
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+
 //        Stop listening for changes in the Firebase DB.
         firebaseAdapter.cleanup();
     }

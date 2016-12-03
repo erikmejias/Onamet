@@ -115,5 +115,6 @@
     <string name="last_synced">actualizado nov 26 – 07:13 pm</string>
     <string name="transition_background">background_img</string>
     <string name="forecast_details_heat_lvls_title">calor durante el día</string>
+    <string name="list_province_key">list_province_key</string>
 
 </resources>

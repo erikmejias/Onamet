@@ -1,38 +1,32 @@
 package com.erikmejia.onamet.model;
 
-import android.app.Activity;
-import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import com.erikmejia.onamet.R;
 import com.erikmejia.onamet.ui.ForecastDetails;
 import com.erikmejia.onamet.util.Utils;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.NativeExpressAdView;
 import com.google.firebase.database.Query;
 
 /**
  * Created by erik on 11/5/16.
+ * Custom Adapter that handles and displays Forecast Objects from the
+ * Firebase Database and logic for displaying ads in Forecasts content list.
  */
 
 public class FirebaseAdapter extends FirebaseRecyclerAdapter<Forecast, ForecastHolder> {
+
     private static final String TAG = FirebaseAdapter.class.getSimpleName();
 
     private static final int TODAY = 0;
-    private static final int FORECAST_TYPE = 1;
-    private static final int AD_TYPE = 2;
-
-    private View futureView;
+    private static final int FUTURE = 1;
 
     private AdRequest adRequest;
 
@@ -42,18 +36,14 @@ public class FirebaseAdapter extends FirebaseRecyclerAdapter<Forecast, ForecastH
     private Typeface font_light;
 
     private Context context;
-    private Activity activity;
-    private int layout;
 
 
     public FirebaseAdapter(Class<Forecast> modelClass, int layout,
                            Class<ForecastHolder> viewHolderClass, Query ref,
-                           Context context, Activity activity) {
+                           Context context) {
 
         super(modelClass, layout, viewHolderClass, ref);
         this.context = context;
-        this.layout = layout;
-        this.activity = activity;
         font_thin = Typeface.createFromAsset(context.getAssets(),
                 "fonts/Brandon_thin.otf");
         font_reg = Typeface.createFromAsset(context.getAssets(),
@@ -88,7 +78,7 @@ public class FirebaseAdapter extends FirebaseRecyclerAdapter<Forecast, ForecastH
             viewHolder.getForecast_description().setTypeface(font_reg);
 
 
-        } else if (getItemViewType(position) == FORECAST_TYPE) {
+        } else if (getItemViewType(position) == FUTURE) {
             viewHolder.setIcon(model.getIconId());
             viewHolder.setMinTemperature(model.getMin());
 
@@ -102,6 +92,8 @@ public class FirebaseAdapter extends FirebaseRecyclerAdapter<Forecast, ForecastH
             viewHolder.getForecast_description().setTypeface(font_reg);
         }
 
+
+//        Listener for click touches on each Forecast items (including TODAY)
         viewHolder.getRootView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -119,7 +111,7 @@ public class FirebaseAdapter extends FirebaseRecyclerAdapter<Forecast, ForecastH
                 String night_temp = model.getNight_temp();
                 int icon_id = model.getIconId();
 
-//                Attach this data to the new Activity
+//                Attach this forecast data to the new Activity
                 intent.putExtra(
                         Utils.ForecastConstants.FORECAST_DATE,
                         date
@@ -165,18 +157,6 @@ public class FirebaseAdapter extends FirebaseRecyclerAdapter<Forecast, ForecastH
                         night_temp
                 );
 
-//                Start the new details activity when button pressed.
-                /*if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-                    Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(
-                            activity,
-                            parentView,
-                            parentView.getTransitionName()
-                    )
-                            .toBundle();
-                    v.getContext().startActivity(intent, bundle);
-                } else {
-                    v.getContext().startActivity(intent);
-                }*/
                 v.getContext().startActivity(intent);
             }
         });
@@ -186,37 +166,38 @@ public class FirebaseAdapter extends FirebaseRecyclerAdapter<Forecast, ForecastH
     @Override
     public ForecastHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        NativeExpressAdView adView;
-        View root = LayoutInflater.from(parent.getContext()).inflate(R.layout.forecast_item,
-                parent, false);
-
         switch (viewType){
+//            In today load the corresponding layout and set the AD into it.
             case TODAY:
+
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.today_forecast_item,
                         parent, false);
-
-//                Utils.dynamicBackground(context, view.findViewById(R.id.today_forecast_frame));
+                NativeExpressAdView adView;
 
                 adView = (NativeExpressAdView) view.findViewById(R.id.today_forecast_ad);
 
                 adView.loadAd(adRequest);
                 return new ForecastHolder(view);
-            case FORECAST_TYPE:
+//            In future load the corresponding layout.
+            case FUTURE:
+
                 View future = LayoutInflater.from(parent.getContext()).inflate(R.layout.forecast_item,
                         parent, false);
+
                 return new ForecastHolder(future);
             default:
-                return new ForecastHolder(root);
+                return null;
         }
     }
 
     @Override
     public int getItemViewType(int position) {
 
+//        In the first position load the TODAY layout, in others load FUTURE layout
         if (position == 0)
             return TODAY;
         else
-            return FORECAST_TYPE;
+            return FUTURE;
     }
 
 }
