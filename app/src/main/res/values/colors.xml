@@ -4,11 +4,12 @@
 
     <color name="colorPrimary">#1976d2</color>
     <color name="colorPrimaryDark">#283593</color>
+    <!--FF5252-->
     <color name="colorAccent">#FF5252</color>
     <color name="black_alpha_40">#8c000000</color>
     <color name="black_alpha">#1e000000</color>
     <color name="black_alpha_10">#69000000</color>
-    <color name="black_alpha_drawer">#d2000000</color>
+    <color name="black_alpha_drawer">#dc000000</color>
 
     <!-- Colors used for sign in process -->
     <color name="material_green_50">#E8F5E9</color>

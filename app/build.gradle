@@ -17,7 +17,7 @@ android {
         applicationId "com.erikmejia.onamet"
         minSdkVersion 16
         targetSdkVersion 25
-        versionCode 15
+        versionCode 16
         versionName "1.0"
     }
 
@@ -60,18 +60,18 @@ dependencies {
                 * --------------
                 * Core, Analytics, Ads, Messaging Database and Auth. (the last two provided by Firebase UI)
                 * */
-    compile 'com.google.firebase:firebase-core:9.8.0'
-    compile 'com.google.firebase:firebase-crash:9.8.0'
-    compile 'com.google.firebase:firebase-ads:9.8.0'
-    compile 'com.google.firebase:firebase-database:9.8.0'
-    compile 'com.google.firebase:firebase-messaging:9.8.0'
-    compile 'com.google.firebase:firebase-auth:9.8.0'
+    compile 'com.google.firebase:firebase-core:10.0.0'
+    compile 'com.google.firebase:firebase-crash:10.0.0'
+    compile 'com.google.firebase:firebase-ads:10.0.0'
+    compile 'com.google.firebase:firebase-database:10.0.0'
+    compile 'com.google.firebase:firebase-messaging:10.0.0'
+    compile 'com.google.firebase:firebase-auth:10.0.0'
     /*
                 * Firebase UI required libraries (each one call the required Firebase SDK
                 * associated component)
                 * */
-    compile 'com.firebaseui:firebase-ui-auth:1.0.0'
-    compile 'com.firebaseui:firebase-ui-database:1.0.0'
+    compile 'com.firebaseui:firebase-ui-auth:1.0.1'
+    compile 'com.firebaseui:firebase-ui-database:1.0.1'
     /*
                 *   Google Play Services libraries
                 * */

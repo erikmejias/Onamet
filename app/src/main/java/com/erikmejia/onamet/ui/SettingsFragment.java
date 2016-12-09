@@ -57,7 +57,6 @@ import java.util.concurrent.ExecutionException;
 
 import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
-import static com.firebase.ui.auth.ui.AcquireEmailHelper.RC_SIGN_IN;
 
 /**
  * Created by erik on 9/1/16.
@@ -65,6 +64,7 @@ import static com.firebase.ui.auth.ui.AcquireEmailHelper.RC_SIGN_IN;
 
 public class SettingsFragment extends PreferenceFragment {
 
+    private static final int RC_SIGN_IN = 123;
     private FirebaseAuth mAuth;
     private FirebaseUser user;
     Preference smsPreference;

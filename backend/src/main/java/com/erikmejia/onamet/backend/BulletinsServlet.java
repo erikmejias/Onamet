@@ -27,6 +27,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.logging.Logger;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -43,11 +44,15 @@ public class BulletinsServlet extends HttpServlet {
     public void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws IOException {
         Log.info("Refreshing Firebase Database");
+        String name = req.getParameter("name");
+        if (name == null) {
+            resp.getWriter().println("Please enter a name");
+        } else {
+            resp.getWriter().println("Added message" + name);
+        }
 
         String outString;
         outString = "<p>Sending message from App Engine to Firebase";
-
-        resp.getWriter().println("outstring" + outString);
 
         // Note: Ensure that the Onamet-035fa87b100b.json has read
         // permissions set.
@@ -70,7 +75,7 @@ public class BulletinsServlet extends HttpServlet {
             Log.info("already exists...");
         }
 
-        buildDemoData();
+//        buildDemoData();
 
         // As an admin, the app has access to read and write all data, regardless of Security Rules
         DatabaseReference ref = FirebaseDatabase
@@ -102,9 +107,44 @@ public class BulletinsServlet extends HttpServlet {
         });
     }
 
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        // Note: Ensure that the Onamet-035fa87b100b.json has read
+        // permissions set.
+        FirebaseOptions options = new FirebaseOptions.Builder()
+                .setServiceAccount(getServletContext().getResourceAsStream("/WEB-INF/Onamet-035fa87b100b.json"))
+                .setDatabaseUrl("https://project-7000350159161293832.firebaseio.com/")
+                .build();
+
+        try {
+            FirebaseApp.getInstance();
+        }
+        catch (Exception error){
+            Log.info("doesn't exist...");
+        }
+
+        try {
+            FirebaseApp.initializeApp(options);
+        }
+        catch(Exception error){
+            Log.info("already exists...");
+        }
+
+        String title = req.getParameter("text_message_title");
+        String body = req.getParameter("text_message_body");
+
+        resp.setContentType("text/plain");
+        if (title == null && body == null) {
+            resp.getWriter().println("Please enter data");
+        }
+        resp.getWriter().println("Enviado el boletín titulado " + title);
+        buildDemoData(title, body);
+    }
+
     /*
-     * Method to push data to the Firebase Database.
-     * */
+         * Method to push data to the Firebase Database.
+         * */
     public void pushDemoData (Bulletin bulletin) {
         DatabaseReference ref = FirebaseDatabase
                 .getInstance()
@@ -114,20 +154,12 @@ public class BulletinsServlet extends HttpServlet {
         ref.push().setValue(bulletin);
     }
 
-    public void buildDemoData() {
+    public void buildDemoData(String title, String msg) {
         DateFormat df = new SimpleDateFormat("d MMM - h:mm aaa", new Locale("es", "DO"));
-        String description = "Los boletines emitidos por la ONAMET los podrás ver acá. La aplicación está en constante " +
-                "actualización sin consumir batería, si encuentras algún problema con la app te animamos a escribirnos con el " +
-                "asunto para darle solución lo mas pronto posible.\n" +
-                "\n" +
-                "La información del clima se actualiza de manera frecuente, por lo que te animamos a revisarla " +
-                "constantemente para que estés enterado de como sera el día. \n" +
-                "\n" +
-                "Nuestro trabajo es informarte, gracias por permitírnoslo.";
 
         Bulletin bulletin = new Bulletin(
-                "Bienvenido a Onamet",
-                description,
+                title,
+                msg,
                 df.format(new Date().getTime())
         );
 

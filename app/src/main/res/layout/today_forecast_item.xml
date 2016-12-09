@@ -93,7 +93,7 @@
         android:id="@+id/today_forecast_ad"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        ads:adUnitId="@string/ads_test"
+        ads:adUnitId="@string/ads_forecast_main_list"
         ads:adSize="360x100">
     </com.google.android.gms.ads.NativeExpressAdView>
 

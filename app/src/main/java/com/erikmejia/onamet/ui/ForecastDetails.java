@@ -172,7 +172,7 @@ public class ForecastDetails extends AppCompatActivity {
                 break;
             case R.id.wind_pressure_wrapper:
                 msg = "Velocidad del viento";
-                POSITION = ToolTip.POSITION_ABOVE;
+                POSITION = ToolTip.POSITION_RIGHT_TO;
                 break;
             case R.id.wind_direction_wrapper:
                 msg = "Dirección del viento en grados";
@@ -180,7 +180,7 @@ public class ForecastDetails extends AppCompatActivity {
                 break;
             default:
                 msg = "Nivel de humedad";
-                POSITION = ToolTip.POSITION_ABOVE;
+                POSITION = ToolTip.POSITION_LEFT_TO;
         }
 
         ToolTip.Builder builder = new ToolTip.Builder(
