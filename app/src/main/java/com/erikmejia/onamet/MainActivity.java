@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
     FrameLayout rootLayout;
-    private boolean calledAlready = false;
+    private static boolean calledAlready = false;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle drawerToggle;
     private RecyclerView cityList;
@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
 //        Check that this method is called only once so it doesn't crash the app
         if (!calledAlready) {
             FirebaseDatabase.getInstance().setPersistenceEnabled(true);
-            this.calledAlready = true;
+            calledAlready = true;
 //            SharedPreferences.Editor editor = sharedPreferences.edit();
 //            editor.putBoolean("calledAlready", false);
 
@@ -119,6 +119,7 @@ public class MainActivity extends AppCompatActivity {
 
         drawerToggle.setDrawerIndicatorEnabled(true);
         drawerLayout.setDrawerListener(drawerToggle);
+        drawerLayout.setScrimColor(getResources().getColor(R.color.black_alpha_drawer));
 
 //        Getting the database reference of cities list
         cities_reference = FirebaseDatabase.getInstance().getReference("forecasts_list");

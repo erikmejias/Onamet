@@ -116,16 +116,17 @@ public class BulletinsServlet extends HttpServlet {
 
     public void buildDemoData() {
         DateFormat df = new SimpleDateFormat("d MMM - h:mm aaa", new Locale("es", "DO"));
-        String description = "Este monton de texto no significada nada importante, sólo estoy" +
-                " probando que todo funcione bien con el sistema que envía boletines de emergencia" +
-                " a la app." +
-                "\n\n" +
-                "Si me quieres ayudar, me gustaria saber a que hora te llego esta notificacion" +
-                " para afinar cualquier problema que pueda ocurrir con al momento de enviar estos " +
-                "mensajes. Gracias por participar en este programa de prueba :)";
+        String description = "Los boletines emitidos por la ONAMET los podrás ver acá. La aplicación está en constante " +
+                "actualización sin consumir batería, si encuentras algún problema con la app te animamos a escribirnos con el " +
+                "asunto para darle solución lo mas pronto posible.\n" +
+                "\n" +
+                "La información del clima se actualiza de manera frecuente, por lo que te animamos a revisarla " +
+                "constantemente para que estés enterado de como sera el día. \n" +
+                "\n" +
+                "Nuestro trabajo es informarte, gracias por permitírnoslo.";
 
         Bulletin bulletin = new Bulletin(
-                "Boletín de Prueba",
+                "Bienvenido a Onamet",
                 description,
                 df.format(new Date().getTime())
         );

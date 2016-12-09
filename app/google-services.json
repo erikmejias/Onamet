@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "79446877511-rmrqtem9hh8nir5ud3qhad6h5kb8snbs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.erikmejia.onamet",
+            "certificate_hash": "322F4AEDEB000EEAABCC20F0B0D43B0CF2853E65"
+          }
+        },
+        {
           "client_id": "79446877511-irl5qdogbuuadl3s9s7kq1r9come5d19.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
