@@ -48,7 +48,7 @@ public class ForecastDetails extends AppCompatActivity {
     private ArrayList<Integer> dataset;
     private ArrayList<String> texts;
 
-    NativeExpressAdView adView;
+//    NativeExpressAdView adView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +71,7 @@ public class ForecastDetails extends AppCompatActivity {
         humidity = (TextView) findViewById(R.id.forecast_details_humidity_text);
         heat_lvls_title = (TextView) findViewById(R.id.forecast_details_head_lvls_title);
 
-        adView = (NativeExpressAdView) findViewById(R.id.forecast_details_ad_content);
+//        adView = (NativeExpressAdView) findViewById(R.id.forecast_details_ad_content);
         frame = (RelativeLayout) findViewById(R.id.today_forecast_frame);
 
         chart = (BarView) findViewById(R.id.barchart);
@@ -145,12 +145,12 @@ public class ForecastDetails extends AppCompatActivity {
 
         loadReceivedData();
 
-        adView.loadAd(
+        /*adView.loadAd(
                 new AdRequest.Builder()
                         .addTestDevice(AdRequest.DEVICE_ID_EMULATOR) // All emulators
                         .addTestDevice("E0451870C934704914ACFF7D2E7F7F7F")
                         .build()
-        );
+        );*/
 
         Utils.dynamicBackground(this, frame);
     }

@@ -246,13 +246,14 @@ public class ForecastServlet extends HttpServlet {
                     owm.dailyForecastByCityCode(
                             Long.valueOf(Utils.Constants.CITY_ENTRIES[index][columnId]),
                             count);*/
-            CurrentWeather weather = owm.currentWeatherByCityCode(
-                    Long.valueOf(Utils.Constants.CITY_ENTRIES[index][columnId])
+            DailyForecast weather = owm.dailyForecastByCityCode(
+                    Long.valueOf(Utils.Constants.CITY_ENTRIES[index][columnId]),
+                    count
             );
 
             ForecastLite currentForecast = new ForecastLite(
                     Constants.CITY_ENTRIES[index][columnName],
-                    Utils.getWeatherCode(weather.getWeatherInstance(0).getWeatherCode())
+                    Utils.getWeatherCode(weather.getForecastInstance(0).getWeatherInstance(0).getWeatherCode())
             );
 //            Save newly found forecast in a single object
             forecastList.add(currentForecast);

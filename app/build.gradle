@@ -17,14 +17,14 @@ android {
         applicationId "com.erikmejia.onamet"
         minSdkVersion 16
         targetSdkVersion 25
-        versionCode 12
+        versionCode 15
         versionName "1.0"
     }
 
     buildTypes {
         release {
             minifyEnabled true
-            shrinkResources true
+            shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.config
         }
@@ -65,6 +65,7 @@ dependencies {
     compile 'com.google.firebase:firebase-ads:9.8.0'
     compile 'com.google.firebase:firebase-database:9.8.0'
     compile 'com.google.firebase:firebase-messaging:9.8.0'
+    compile 'com.google.firebase:firebase-auth:9.8.0'
     /*
                 * Firebase UI required libraries (each one call the required Firebase SDK
                 * associated component)

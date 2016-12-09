@@ -111,7 +111,7 @@
     </RelativeLayout>
 
 
-    <LinearLayout
+    <!--<LinearLayout
         android:id="@+id/forecast_details_ad"
         android:background="@color/black_alpha_10"
         android:layout_below="@id/forecast_details_layout"
@@ -127,17 +127,17 @@
             ads:adSize="380x80">
         </com.google.android.gms.ads.NativeExpressAdView>
 
-    </LinearLayout>
+    </LinearLayout>-->
 
     <!-- Chart Section-->
 
     <LinearLayout
         android:id="@+id/forecast_details_chart_frame"
         android:background="@color/black_alpha_10"
-        android:layout_below="@id/forecast_details_ad"
+        android:layout_below="@id/forecast_details_layout"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="150dp">
+        android:layout_height="250dp">
 
         <TextView
             android:text="@string/forecast_details_heat_lvls_title"

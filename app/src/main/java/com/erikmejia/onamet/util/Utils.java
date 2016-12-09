@@ -32,35 +32,80 @@ public class Utils {
     public static int setIcon(int codeId) {
         switch (codeId){
             case WeatherCodes.CLEAR_SKY:
-                return R.drawable.clear_day;
+                if (isByDay())
+                    return R.drawable.clear_day;
+                else
+                    return R.drawable.clear_night;
             case WeatherCodes.THUNDERSTORM:
-                return R.drawable.showcase;
+                if (isByDay())
+                    return R.drawable.thunder_day;
+                else
+                    return R.drawable.thunder_night;
             case WeatherCodes.THUNDERSTORM_RAIN:
-                return R.drawable.thunder_day;
+                if (isByDay())
+                    return R.drawable.thunder_day;
+                else
+                    return R.drawable.thunder_night;
             case WeatherCodes.THUNDERSTORM_HEAVY_RAIN:
-                return R.drawable.thunder_weather;
+                if (isByDay())
+                    return R.drawable.storm_weather_day;
+                else
+                    return R.drawable.storm_weather_night;
             case WeatherCodes.DRIZZLE:
-                return R.drawable.rainy_weather;
+                if (isByDay())
+                    return R.drawable.rainy_day;
+                else
+                    return R.drawable.rainy_night;
             case WeatherCodes.DRIZZLE_HEAVY:
-                return R.drawable.rainy_day;
+                if (isByDay())
+                    return R.drawable.rainy_day;
+                else
+                    return R.drawable.rainy_night;
             case WeatherCodes.RAIN_LIGHT:
-                return R.drawable.rainy_day;
+                if (isByDay())
+                    return R.drawable.rainy_day;
+                else
+                    return R.drawable.rainy_night;
             case WeatherCodes.RAIN_MODERATE:
-                return R.drawable.rainy_day;
+                if (isByDay())
+                    return R.drawable.rainy_day;
+                else
+                    return R.drawable.rainy_night;
             case WeatherCodes.RAIN_HEAVY:
-                return R.drawable.rainy_weather;
+                if (isByDay())
+                    return R.drawable.rainy_day;
+                else
+                    return R.drawable.rainy_night;
             case WeatherCodes.CLOUDS_FEW:
-                return R.drawable.cloudy_weather;
+                if (isByDay())
+                    return R.drawable.partly_cloudy;
+                else
+                    return R.drawable.partly_cloudy_night;
             case WeatherCodes.CLOUDS_SCATTERED:
-                return R.drawable.mostly_cloudy;
+                if (isByDay())
+                    return R.drawable.mostly_cloudy;
+                else
+                    return R.drawable.mostly_cloudy_night;
             case WeatherCodes.CLOUDS_BROKEN:
-                return R.drawable.partly_cloudy;
+                if (isByDay())
+                    return R.drawable.mostly_cloudy;
+                else
+                    return R.drawable.mostly_cloudy_night;
             case WeatherCodes.TROPICAL_STORM:
-                return R.drawable.storm_weather_day;
+                if (isByDay())
+                    return R.drawable.storm_weather_day;
+                else
+                    return R.drawable.storm_weather_night;
             case WeatherCodes.HURRICANE:
-                return R.drawable.storm_weather;
+                if (isByDay())
+                    return R.drawable.storm_weather_day;
+                else
+                    return R.drawable.storm_weather_night;
             case WeatherCodes.WINDY:
-                return R.drawable.windy_day;
+                if (isByDay())
+                    return R.drawable.windy_day;
+                else
+                    return R.drawable.windy_night;
             default:
                 return R.drawable.unknown;
         }
@@ -293,7 +338,7 @@ public class Utils {
         int timeOfDay = c.get(Calendar.HOUR_OF_DAY);
 
 //        Check if its by day.
-        isDay = timeOfDay >= 7 && timeOfDay <= 18;
+        isDay = timeOfDay >= 6 && timeOfDay <= 18;
 
         return isDay;
     }

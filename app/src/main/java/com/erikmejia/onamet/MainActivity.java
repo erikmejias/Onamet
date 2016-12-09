@@ -58,15 +58,24 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 //        MobileAds.initialize(getApplicationContext(), "ca-app-pub-6005843157698202~1566560378");
 
+//        SharedPreferences sharedPreferences = PreferenceManager
+//                .getDefaultSharedPreferences(this);
+
+//        calledAlready = sharedPreferences.getBoolean("calledAlready", false);
+
 //        Check that this method is called only once so it doesn't crash the app
         if (!calledAlready) {
             FirebaseDatabase.getInstance().setPersistenceEnabled(true);
-            calledAlready = true;
+            this.calledAlready = true;
+//            SharedPreferences.Editor editor = sharedPreferences.edit();
+//            editor.putBoolean("calledAlready", false);
+
+//            editor.apply();
         }
 
 
         setContentView(R.layout.activity_main);
-        getWindow().setBackgroundDrawable(null);
+//        getWindow().setBackgroundDrawable(null);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -132,6 +141,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
+
 
     @Override
     protected void onStart() {

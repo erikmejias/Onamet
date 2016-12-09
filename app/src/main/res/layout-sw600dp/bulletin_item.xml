@@ -22,6 +22,8 @@
         <LinearLayout
             android:id="@+id/bulletin_title_wrapper"
             android:gravity="center_horizontal"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -29,6 +31,7 @@
                 android:textColor="@color/white"
                 android:id="@+id/bulletins_title_text"
                 tools:text="Titulo del boletin"
+                android:gravity="center"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
                 android:textStyle="bold"

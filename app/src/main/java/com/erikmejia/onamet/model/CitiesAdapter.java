@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,7 +35,6 @@ public class CitiesAdapter extends FirebaseRecyclerAdapter<ForecastLite, CitiesH
 
 
     private Typeface font_bold;
-
     private Context context;
     private MainActivity.ViewPagerAdapter content_adapter;
     private DrawerLayout nav_drawer;
@@ -52,6 +52,7 @@ public class CitiesAdapter extends FirebaseRecyclerAdapter<ForecastLite, CitiesH
         font_bold = Typeface.createFromAsset(this.context.getAssets(),
                 "fonts/Brandon_bld.otf");
 
+        Log.d(TAG, "CitiesAdapter: constructor called");
     }
 
     @Override
