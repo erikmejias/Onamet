@@ -20,6 +20,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 /**
  * Created by erik on 11/17/16.
@@ -28,6 +29,8 @@ import com.google.firebase.database.FirebaseDatabase;
 public class FirebaseBackgroundService extends Service {
 
     private SharedPreferences getPrefs;
+    private DatabaseReference reference;
+    private ValueEventListener handler;
 
 
     @Nullable
@@ -36,27 +39,42 @@ public class FirebaseBackgroundService extends Service {
         return null;
     }
 
-    @Override
+    /*@Override
     public void onCreate() {
         super.onCreate();
 
         getPrefs = PreferenceManager
                 .getDefaultSharedPreferences(getApplicationContext());
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("bulletins");
+        reference = FirebaseDatabase.getInstance().getReference("bulletins");
 
-        reference.addChildEventListener(new ChildEventListener() {
+        handler = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot arg0) {
+                notifyNewBulletin( arg0.getValue(Bulletin.class).getTitle() );
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        };
+
+        reference.addValueEventListener(handler);
+
+        *//*reference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 boolean isFirstTime = getPrefs.getBoolean("isFirstTimeBulletin", true);
 
-                if (isFirstTime) {
+                *//**//*if (isFirstTime) {
 //                Do not notify, its the first time.
                     SharedPreferences.Editor e = getPrefs.edit();
                     e.putBoolean("isFirstTimeBulletin", false);
                     e.apply();
                 } else {
                     notifyNewBulletin( dataSnapshot.getValue(Bulletin.class).getTitle() );
-                }
+                }*//**//*
+                notifyNewBulletin( dataSnapshot.getValue(Bulletin.class).getTitle() );
             }
 
             @Override
@@ -78,12 +96,38 @@ public class FirebaseBackgroundService extends Service {
             public void onCancelled(DatabaseError databaseError) {
 
             }
-        });
+        });*//*
+    }*/
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+
+
+
+        getPrefs = PreferenceManager
+                .getDefaultSharedPreferences(getApplicationContext());
+        reference = FirebaseDatabase.getInstance().getReference("bulletins");
+
+        handler = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot arg0) {
+                notifyNewBulletin( arg0.getValue(Bulletin.class).getTitle() );
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        };
+
+        reference.addValueEventListener(handler);
+
+        return START_STICKY;
     }
 
     /*
-    * Fire a notification with the title of the new Bulletin
-    * */
+        * Fire a notification with the title of the new Bulletin
+        * */
     public void notifyNewBulletin(String title){
         Context context = getApplicationContext();
 
@@ -110,6 +154,5 @@ public class FirebaseBackgroundService extends Service {
                 this.getSystemService(Context.NOTIFICATION_SERVICE);
 
         manager.notify(0, mBuilder.build());
-
     }
 }

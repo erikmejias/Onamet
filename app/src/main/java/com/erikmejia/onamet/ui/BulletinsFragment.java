@@ -41,24 +41,20 @@ public class BulletinsFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
 
         bulletinsReference = FirebaseDatabase.getInstance().getReference("bulletins");
     }
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 
-        View rootView = inflater.inflate(R.layout.bulletins_layout, container, false);
-
-        bulletinsList = (RecyclerView)
-                rootView.findViewById(R.id.bulletins_recyler_list);
-        default_text = (TextView) rootView.findViewById(R.id.no_bulletins_text);
-
-        bulletinsList.setHasFixedSize(true);
+    @Override
+    public void onStart() {
+        super.onStart();
 
         firebaseAdapter = new FirebaseRecyclerAdapter<Bulletin, BulletinHolder>(
                 Bulletin.class,
@@ -73,12 +69,6 @@ public class BulletinsFragment extends Fragment {
                 viewHolder.setDate(model.getDate());
             }
         };
-
-        if (container != null) {
-            bulletinsList.setLayoutManager(new LinearLayoutManager(container.getContext()));
-        }
-
-        bulletinsList.setAdapter(firebaseAdapter);
 
         bulletinsReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -97,6 +87,25 @@ public class BulletinsFragment extends Fragment {
 
             }
         });
+        bulletinsList.setAdapter(firebaseAdapter);
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+
+        View rootView = inflater.inflate(R.layout.bulletins_layout, container, false);
+
+        bulletinsList = (RecyclerView)
+                rootView.findViewById(R.id.bulletins_recyler_list);
+        default_text = (TextView) rootView.findViewById(R.id.no_bulletins_text);
+
+        bulletinsList.setHasFixedSize(true);
+
+        if (container != null) {
+            bulletinsList.setLayoutManager(new LinearLayoutManager(container.getContext()));
+        }
 
         return rootView;
     }

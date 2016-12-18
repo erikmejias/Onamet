@@ -96,45 +96,7 @@ public class SettingsFragment extends PreferenceFragment {
         smsPreference = findPreference(getString(R.string.pref_account_sms_key));
         smsPreference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             public boolean onPreferenceClick(Preference preference) {
-                final DialogPlus dialogPlus =
-                        DialogPlus.newDialog(getActivity())
-                        .setContentHolder(new ViewHolder(R.layout.activity_smsvalidation))
-                        .setGravity(Gravity.BOTTOM)
-                        .setCancelable(true)
-                        .setExpanded(true, 900)
-                        .create();
-                dialogPlus.show();
-
-                TextView title = (TextView) getActivity().findViewById(R.id.sms_verification_title);
-                Typeface typeface = Typeface.createFromAsset(getActivity().getAssets(),
-                        "fonts/Brandon_light.otf");
-                title.setTypeface(typeface);
-
-                final EditText editText = (EditText) getActivity().findViewById(R.id.sms_phone_number);
-
-                if (number == null) {
-                    editText.requestFocus();
-                } else {
-                    editText.setText(number);
-                    title.setText(R.string.is_this_your_number);
-                }
-
-                Button save = (Button) getActivity().findViewById(R.id.submit_button);
-                save.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialogPlus.dismiss();
-
-                        InputMethodManager imm = (InputMethodManager)getActivity()
-                                .getSystemService(Context.INPUT_METHOD_SERVICE);
-                        imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-
-                        Toast.makeText(getActivity(), editText.getText() + " guardado", Toast.LENGTH_SHORT).show();
-                        smsPreference.setSummary("En emergencias recibirás los boletines" +
-                                " al " + editText.getText() + " por si no tienes Internet");
-                        addToFirebase(editText.getText().toString());
-                    }
-                });
+                showSMSDialog();
 
                 return false;
             }
@@ -163,6 +125,48 @@ public class SettingsFragment extends PreferenceFragment {
 
         checkIfSignedIn();
         isVerified();
+    }
+
+    private void showSMSDialog() {
+        final DialogPlus dialogPlus =
+                DialogPlus.newDialog(getActivity())
+                .setContentHolder(new ViewHolder(R.layout.activity_smsvalidation))
+                .setGravity(Gravity.BOTTOM)
+                .setCancelable(true)
+                .setExpanded(true, 900)
+                .create();
+        dialogPlus.show();
+
+        TextView title = (TextView) getActivity().findViewById(R.id.sms_verification_title);
+        Typeface typeface = Typeface.createFromAsset(getActivity().getAssets(),
+                "fonts/Brandon_light.otf");
+        title.setTypeface(typeface);
+
+        final EditText editText = (EditText) getActivity().findViewById(R.id.sms_phone_number);
+
+        if (number == null) {
+            editText.requestFocus();
+        } else {
+            editText.setText(number);
+            title.setText(R.string.is_this_your_number);
+        }
+
+        Button save = (Button) getActivity().findViewById(R.id.submit_button);
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogPlus.dismiss();
+
+                InputMethodManager imm = (InputMethodManager)getActivity()
+                        .getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+
+                Toast.makeText(getActivity(), editText.getText() + " guardado", Toast.LENGTH_SHORT).show();
+                smsPreference.setSummary("En emergencias recibirás los boletines" +
+                        " al " + editText.getText() + " por si no tienes Internet");
+                addToFirebase(editText.getText().toString());
+            }
+        });
     }
 
     @Override
@@ -220,6 +224,7 @@ public class SettingsFragment extends PreferenceFragment {
                 Toast.makeText(getActivity(), "Bienvenido "
                         + mAuth.getCurrentUser().getDisplayName(), Toast.LENGTH_SHORT).show();
 //                getActivity().finish();
+                showSMSDialog();
             }
             if (resultCode == RESULT_CANCELED){
                 // user is not signed in. Maybe just wait for the user to press
@@ -239,7 +244,6 @@ public class SettingsFragment extends PreferenceFragment {
                     + user.getDisplayName(), Toast.LENGTH_SHORT).show();
         } else {
             // Not signed in... yet :)
-
             startActivityForResult(
                     AuthUI.getInstance()
                             .createSignInIntentBuilder()

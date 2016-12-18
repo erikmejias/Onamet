@@ -89,12 +89,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <com.google.android.gms.ads.NativeExpressAdView
+    <!--<com.google.android.gms.ads.NativeExpressAdView
         android:id="@+id/today_forecast_ad"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         ads:adUnitId="@string/ads_forecast_main_list"
         ads:adSize="360x80">
-    </com.google.android.gms.ads.NativeExpressAdView>
+    </com.google.android.gms.ads.NativeExpressAdView>-->
 
 </LinearLayout>

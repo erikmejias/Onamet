@@ -141,6 +141,8 @@ public class MainActivity extends AppCompatActivity {
             incomingBulletin();
         }
 
+//        startService(new Intent(this, FirebaseBackgroundService.class));
+
     }
 
 

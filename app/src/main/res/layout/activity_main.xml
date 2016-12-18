@@ -7,7 +7,6 @@
 
 
     <FrameLayout
-        android:transitionName="@string/transition_background"
         android:id="@+id/main_content_frame"
         tools:background="@color/colorPrimary"
         android:layout_width="match_parent"

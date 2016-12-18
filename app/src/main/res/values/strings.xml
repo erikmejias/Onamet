@@ -1,6 +1,6 @@
 <resources>
 
-    <string name="app_name">ONAMET</string>
+    <string name="app_name">Onamet</string>
     <string name="notification_prefs_title">Notificaciones</string>
     <string name="notification_prefs_summary">Habilitar notificaciones instantáneas para los boletines</string>
     <string name="acc_prefs_sync">Configurar cuenta</string>
@@ -24,7 +24,7 @@
 
 
     <string name="about_onamet_title">Acerca de Onamet</string>
-    <string name="pref_notifications_title">NOTIFICACIONES</string>
+    <string name="pref_notifications_title">GENERAL</string>
     <string name="signout">Cerrar sesión</string>
     <string name="pref_account_signout_key">pref_account_signout_key</string>
     <string name="pref_account_key">pref_account_key</string>
@@ -117,5 +117,8 @@
     <string name="transition_background">background_img</string>
     <string name="forecast_details_heat_lvls_title">calor durante el día</string>
     <string name="list_province_key">list_province_key</string>
+    <string name="pref_general_offline_title">Sin Conexión</string>
+    <string name="pref_general_offline_summary">Guardar información de pronósticos para uso sin conexión</string>
+    <string name="offline_enabled_key">offline_enabled</string>
 
 </resources>

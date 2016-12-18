@@ -348,11 +348,11 @@ public class Utils {
         int timeOfDay = c.get(Calendar.HOUR_OF_DAY);
 
         if (timeOfDay >= 7 && timeOfDay <= 14)
-            frame.setBackground(ResourcesCompat.getDrawable(context.getResources(), R.mipmap.back_day, null));
+            frame.setBackground(ResourcesCompat.getDrawable(context.getResources(), R.mipmap.t1, null));
         else if (timeOfDay >= 14 && timeOfDay < 19)
-            frame.setBackground(ResourcesCompat.getDrawable(context.getResources(), R.mipmap.back_raining, null));
+            frame.setBackground(ResourcesCompat.getDrawable(context.getResources(), R.mipmap.t2, null));
         else
-            frame.setBackground(ResourcesCompat.getDrawable(context.getResources(), R.mipmap.back_night, null));
+            frame.setBackground(ResourcesCompat.getDrawable(context.getResources(), R.mipmap.backt2, null));
 
     }
 

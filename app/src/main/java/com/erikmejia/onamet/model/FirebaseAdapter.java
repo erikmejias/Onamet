@@ -53,10 +53,10 @@ public class FirebaseAdapter extends FirebaseRecyclerAdapter<Forecast, ForecastH
         font_light = Typeface.createFromAsset(context.getAssets(),
                 "fonts/Brandon_light.otf");
 
-        adRequest = new AdRequest.Builder()
-                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                .addTestDevice("E0451870C934704914ACFF7D2E7F7F7F")
-                .build();
+//        adRequest = new AdRequest.Builder()
+//                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+//                .addTestDevice("E0451870C934704914ACFF7D2E7F7F7F")
+//                .build();
     }
 
     @Override
@@ -172,11 +172,11 @@ public class FirebaseAdapter extends FirebaseRecyclerAdapter<Forecast, ForecastH
 
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.today_forecast_item,
                         parent, false);
-                NativeExpressAdView adView;
+                /*NativeExpressAdView adView;
 
                 adView = (NativeExpressAdView) view.findViewById(R.id.today_forecast_ad);
 
-                adView.loadAd(adRequest);
+                adView.loadAd(adRequest);*/
                 return new ForecastHolder(view);
 //            In future load the corresponding layout.
             case FUTURE:
