@@ -14,7 +14,7 @@
 
     <dimen name="future_icon_width">40dp</dimen>
     <dimen name="future_icon_height">40dp</dimen>
-    <dimen name="future_text_size_max_temp">18sp</dimen>
+    <dimen name="future_text_size_max_temp">20sp</dimen>
     <dimen name="future_text_size_description">18sp</dimen>
     <dimen name="future_text_size_min_temp">14sp</dimen>
     <dimen name="future_text_size_date">18sp</dimen>

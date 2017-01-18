@@ -1,14 +1,23 @@
 package com.erikmejia.onamet.util;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v4.content.res.ResourcesCompat;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.erikmejia.onamet.R;
 import com.thbs.skycons.library.CloudHvRainView;
 import com.thbs.skycons.library.CloudMoonView;
@@ -343,16 +352,50 @@ public class Utils {
         return isDay;
     }
 
-    public static void dynamicBackground(@NonNull Context context, @NonNull View frame) {
+    public static void dynamicBackground(@NonNull final Context context, @NonNull final View frame,
+                                         int position) {
         Calendar c = Calendar.getInstance();
         int timeOfDay = c.get(Calendar.HOUR_OF_DAY);
 
-        if (timeOfDay >= 7 && timeOfDay <= 14)
-            frame.setBackground(ResourcesCompat.getDrawable(context.getResources(), R.mipmap.t1, null));
-        else if (timeOfDay >= 14 && timeOfDay < 19)
-            frame.setBackground(ResourcesCompat.getDrawable(context.getResources(), R.mipmap.t2, null));
-        else
-            frame.setBackground(ResourcesCompat.getDrawable(context.getResources(), R.mipmap.backt2, null));
+
+        int PROVINCE_ID = position;
+        Log.d(TAG, "dynamicBackground: " + PROVINCE_ID);
+        String link;
+
+//        if (timeOfDay >= 7 && timeOfDay <= 14)
+//            frame.setBackground(ResourcesCompat.getDrawable(context.getResources(), R.mipmap.backt2, null));
+//        else if (timeOfDay >= 14 && timeOfDay < 19)
+//            frame.setBackground(ResourcesCompat.getDrawable(context.getResources(), R.mipmap.t1, null));
+//        else
+//            frame.setBackground(ResourcesCompat.getDrawable(context.getResources(), R.mipmap.backt2, null));
+        switch (PROVINCE_ID) {
+            case 0:
+//                frame.setBackground(ResourcesCompat.getDrawable(context.getResources(), R.mipmap.backt2, null));
+                link = "https://firebasestorage.googleapis.com/v0/b/project-7000350159161293832.appspot.com/o/backt2.jpeg?alt=media&token=5b5767b7-be10-4b04-a977-254318741e86";
+                break;
+            case 1:
+//                frame.setBackground(ResourcesCompat.getDrawable(context.getResources(), R.mipmap.t1, null));
+                link = "https://firebasestorage.googleapis.com/v0/b/project-7000350159161293832.appspot.com/o/t1.jpeg?alt=media&token=f3c63021-5005-4ee4-beec-b267cd1f2a18";
+                break;
+            default:
+                frame.setBackground(ResourcesCompat.getDrawable(context.getResources(), R.mipmap.t2, null));
+                link = "https://firebasestorage.googleapis.com/v0/b/project-7000350159161293832.appspot.com/o/t2.jpeg?alt=media&token=0220ba56-fa64-4b76-80d8-2aa89529eed2";
+                break;
+        }
+
+        Glide.with(context)
+                .load(link)
+                .asBitmap()
+                .centerCrop()
+                .placeholder(R.color.colorAccent)
+                .into(new SimpleTarget<Bitmap>() {
+                    @Override
+                    public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+
+
+                        frame.setBackground(new BitmapDrawable(context.getResources(), resource));
+                    }
+                });
 
     }
 

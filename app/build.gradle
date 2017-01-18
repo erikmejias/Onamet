@@ -17,7 +17,7 @@ android {
         applicationId "com.erikmejia.onamet"
         minSdkVersion 16
         targetSdkVersion 25
-        versionCode 17
+        versionCode 18
         versionName "1.0"
     }
 
@@ -50,11 +50,11 @@ dependencies {
     /*
                 * Required support libraries for components used within the app.
                 * */
-    compile 'com.android.support:appcompat-v7:25.0.1'
-    compile 'com.android.support:recyclerview-v7:25.0.1'
-    compile 'com.android.support:design:25.0.1'
-    compile 'com.android.support:cardview-v7:25.0.1'
-    compile 'com.android.support:support-v4:25.0.1'
+    compile 'com.android.support:appcompat-v7:25.1.0'
+    compile 'com.android.support:recyclerview-v7:25.1.0'
+    compile 'com.android.support:design:25.1.0'
+    compile 'com.android.support:cardview-v7:25.1.0'
+    compile 'com.android.support:support-v4:25.1.0'
     /*
                 * Firebase SDK Libraries
                 * --------------
@@ -103,7 +103,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
     androidTestCompile 'com.android.support.test:runner:0.5'
-    androidTestCompile 'com.android.support:support-annotations:25.0.1'
+    androidTestCompile 'com.android.support:support-annotations:25.1.0'
 }
 
 

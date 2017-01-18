@@ -48,6 +48,7 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_weight="1"
+            android:layout_marginLeft="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -76,6 +77,7 @@
     <TextView
         android:id="@+id/forecast_description"
         tools:text="lluvias dispersas"
+        android:layout_marginLeft="5dp"
         android:textSize="@dimen/text_size_description"
         android:textColor="@color/white"
         android:layout_width="wrap_content"

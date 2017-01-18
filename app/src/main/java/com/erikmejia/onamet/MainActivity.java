@@ -131,7 +131,8 @@ public class MainActivity extends AppCompatActivity {
                 cities_reference,
                 this,
                 viewPagerAdapter,
-                drawerLayout
+                drawerLayout,
+                rootLayout
         );
 
         cityList.setAdapter(citiesAdapter);
@@ -151,9 +152,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         Log.d(TAG, "onStart: initiated");
+        SharedPreferences getPrefs = PreferenceManager
+                .getDefaultSharedPreferences(this);
+        int PROVINCE_ID = getPrefs.getInt("city", 0);
 
-        Utils.dynamicBackground(this, rootLayout);
-
+        Utils.dynamicBackground(this, rootLayout, PROVINCE_ID);
     }
 
     @Override

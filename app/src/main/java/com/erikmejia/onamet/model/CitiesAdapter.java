@@ -38,17 +38,19 @@ public class CitiesAdapter extends FirebaseRecyclerAdapter<ForecastLite, CitiesH
     private Context context;
     private MainActivity.ViewPagerAdapter content_adapter;
     private DrawerLayout nav_drawer;
+    private FrameLayout root;
 
 
     public CitiesAdapter(Class<ForecastLite> modelClass, int layout,
                          Class<CitiesHolder> viewHolderClass, Query ref,
                          Context context, MainActivity.ViewPagerAdapter adapter,
-                         DrawerLayout drawer_layout) {
+                         DrawerLayout drawer_layout, FrameLayout root) {
 
         super(modelClass, layout, viewHolderClass, ref);
         this.content_adapter = adapter;
         this.nav_drawer = drawer_layout;
         this.context = context;
+        this.root = root;
         font_bold = Typeface.createFromAsset(this.context.getAssets(),
                 "fonts/Brandon_bld.otf");
 
@@ -75,6 +77,7 @@ public class CitiesAdapter extends FirebaseRecyclerAdapter<ForecastLite, CitiesH
                 editor.apply();
                 content_adapter.getItem(0).onCreate(new Bundle());
                 content_adapter.notifyDataSetChanged();
+                Utils.dynamicBackground(context, root, position);
             }
         });
 

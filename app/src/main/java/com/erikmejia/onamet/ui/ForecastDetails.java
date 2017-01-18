@@ -1,6 +1,8 @@
 package com.erikmejia.onamet.ui;
 
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -152,7 +154,11 @@ public class ForecastDetails extends AppCompatActivity {
                         .build()
         );*/
 
-        Utils.dynamicBackground(this, frame);
+        SharedPreferences getPrefs = PreferenceManager
+                .getDefaultSharedPreferences(this);
+        int PROVINCE_ID = getPrefs.getInt("city", 0);
+
+        Utils.dynamicBackground(this, frame, PROVINCE_ID);
     }
 
     public void showTip(View view) {

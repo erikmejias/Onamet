@@ -1,8 +1,10 @@
 package com.erikmejia.onamet.ui;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -52,6 +54,11 @@ public class SettingsActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        Utils.dynamicBackground(this, frame);
+
+        SharedPreferences getPrefs = PreferenceManager
+                .getDefaultSharedPreferences(this);
+        int PROVINCE_ID = getPrefs.getInt("city", 0);
+
+        Utils.dynamicBackground(this, frame, PROVINCE_ID);
     }
 }
