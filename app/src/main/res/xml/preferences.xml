@@ -41,12 +41,12 @@
             android:key="@string/offline_enabled_key"
             android:summary="@string/pref_general_offline_summary" />
 
-        <ListPreference
+        <!--<ListPreference
             android:title="Sistema de medida"
             android:summary="Elige el sistema en que quieres la información"
             android:entries="@array/meaurement_systems_array"
             android:entryValues="@array/meaurement_systems_array"
-            android:key="@string/list_province_key" />
+            android:key="@string/list_province_key" />-->
 
 
     </PreferenceCategory>

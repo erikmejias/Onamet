@@ -2,7 +2,7 @@
 
     <string name="app_name">Onamet</string>
     <string name="notification_prefs_title">Notificaciones</string>
-    <string name="notification_prefs_summary">Habilitar notificaciones instantáneas para los boletines</string>
+    <string name="notification_prefs_summary">Habilitar notificaciones instantáneas para boletines diarios</string>
     <string name="acc_prefs_sync">Configurar cuenta</string>
     <string name="about_prefs_title">Acerca de Onamet</string>
     <string name="about_dev_prefs_title">Acerca del desarrollador</string>

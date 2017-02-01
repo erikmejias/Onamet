@@ -341,7 +341,24 @@ public class Utils {
         int NO_REGISTRY = 15;
     }
 
-    static boolean isByDay() {
+    interface CityBackground {
+        String LA_ROMANA = "https://firebasestorage.googleapis.com/v0/b/project-7000350159161293832.appspot.com/o/la_romana.jpg?alt=media&token=c389ef39-f4e3-485c-840a-40b961f806f6";
+        String SANTO_DOMINGO = "https://firebasestorage.googleapis.com/v0/b/project-7000350159161293832.appspot.com/o/santo_domingo.jpg?alt=media&token=e7274a6e-5441-4095-8f07-f611928ddfeb";
+        String SANTIAGO = "https://firebasestorage.googleapis.com/v0/b/project-7000350159161293832.appspot.com/o/santiago.JPG?alt=media&token=f4d06bfe-9a3a-4faf-b978-724950555e75";
+        String HIGUEY = "https://firebasestorage.googleapis.com/v0/b/project-7000350159161293832.appspot.com/o/higuey.jpg?alt=media&token=ea26574d-cdb6-4886-b9e3-c62b70c393e2";
+        String BANI = "https://firebasestorage.googleapis.com/v0/b/project-7000350159161293832.appspot.com/o/bani.jpg?alt=media&token=96e85ba3-5c7a-47d2-a127-59faf610ede5";
+        String MOCA = "https://firebasestorage.googleapis.com/v0/b/project-7000350159161293832.appspot.com/o/moca.jpg?alt=media&token=571d5172-fe96-4884-a053-a19e5f8f6d67";
+        String PUERTO_PLATA = "https://firebasestorage.googleapis.com/v0/b/project-7000350159161293832.appspot.com/o/puerto_plata.jpg?alt=media&token=27624d80-50e7-45d4-8e37-a045edb6a837";
+        String SABANA_DE_LA_MAR = "https://firebasestorage.googleapis.com/v0/b/project-7000350159161293832.appspot.com/o/sabana_dela_mar.jpg?alt=media&token=0d76a718-7174-48f4-8dd8-e38367cbd971";
+        String SAN_PEDRO = "https://firebasestorage.googleapis.com/v0/b/project-7000350159161293832.appspot.com/o/san_pedro_1.jpg?alt=media&token=3f6c32f3-1963-4a7a-9b40-9321c5d6b741";
+        String SEIBO = "https://firebasestorage.googleapis.com/v0/b/project-7000350159161293832.appspot.com/o/seibo.jpg?alt=media&token=9a74b4a9-87ba-4db4-a1bf-b579abbcda48";
+        String PUNTA_CANA = "https://firebasestorage.googleapis.com/v0/b/project-7000350159161293832.appspot.com/o/backt2.jpeg?alt=media&token=5b5767b7-be10-4b04-a977-254318741e86";
+
+
+        String DEFAULT = "https://firebasestorage.googleapis.com/v0/b/project-7000350159161293832.appspot.com/o/default.jpg?alt=media&token=cfbcaa6d-033a-4e6f-b04b-2d6644ac0630";
+    }
+
+    private static boolean isByDay() {
         boolean isDay;
         Calendar c = Calendar.getInstance();
         int timeOfDay = c.get(Calendar.HOUR_OF_DAY);
@@ -370,24 +387,49 @@ public class Utils {
 //            frame.setBackground(ResourcesCompat.getDrawable(context.getResources(), R.mipmap.backt2, null));
         switch (PROVINCE_ID) {
             case 0:
-//                frame.setBackground(ResourcesCompat.getDrawable(context.getResources(), R.mipmap.backt2, null));
-                link = "https://firebasestorage.googleapis.com/v0/b/project-7000350159161293832.appspot.com/o/backt2.jpeg?alt=media&token=5b5767b7-be10-4b04-a977-254318741e86";
+                link = CityBackground.SANTO_DOMINGO;
                 break;
             case 1:
-//                frame.setBackground(ResourcesCompat.getDrawable(context.getResources(), R.mipmap.t1, null));
-                link = "https://firebasestorage.googleapis.com/v0/b/project-7000350159161293832.appspot.com/o/t1.jpeg?alt=media&token=f3c63021-5005-4ee4-beec-b267cd1f2a18";
+                link = CityBackground.SANTIAGO;
+                break;
+            case 2:
+                link = CityBackground.MOCA;
+                break;
+            case 3:
+                link = CityBackground.LA_ROMANA;
+                break;
+            case 4:
+                link = CityBackground.HIGUEY;
+                break;
+            case 5:
+                link = CityBackground.PUNTA_CANA;
+                break;
+            case 6:
+                link = CityBackground.SAN_PEDRO;
+                break;
+            case 8:
+                link = CityBackground.SEIBO;
+                break;
+            case 9:
+                link = CityBackground.SABANA_DE_LA_MAR;
+                break;
+            case 12:
+                link = CityBackground.PUERTO_PLATA;
+                break;
+            case 21:
+                link = CityBackground.BANI;
                 break;
             default:
-                frame.setBackground(ResourcesCompat.getDrawable(context.getResources(), R.mipmap.t2, null));
-                link = "https://firebasestorage.googleapis.com/v0/b/project-7000350159161293832.appspot.com/o/t2.jpeg?alt=media&token=0220ba56-fa64-4b76-80d8-2aa89529eed2";
+                link = CityBackground.DEFAULT;
                 break;
         }
 
         Glide.with(context)
                 .load(link)
                 .asBitmap()
-                .centerCrop()
+                .fitCenter()
                 .placeholder(R.color.colorAccent)
+                .animate(R.anim.abc_fade_in)
                 .into(new SimpleTarget<Bitmap>() {
                     @Override
                     public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
