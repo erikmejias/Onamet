@@ -3,6 +3,6 @@
     <cron>
         <url>/sync-data</url>
         <description>Download new forecast and push it to Firebase Database.</description>
-        <schedule>every 6 hours</schedule>
+        <schedule>every 12 hours</schedule>
     </cron>
 </cronentries>

@@ -70,6 +70,7 @@ public class FirebaseAdapter extends FirebaseRecyclerAdapter<Forecast, ForecastH
             viewHolder.setDate(model.getDate());
             viewHolder.setMaxTemperature(model.getMax());
             viewHolder.setDescription(model.getDescription());
+            viewHolder.setLast_sync(model.getSync_time());
 
             viewHolder.getDate().setTypeface(font_reg);
             viewHolder.getLast_sync().setTypeface(font_light);

@@ -20,6 +20,7 @@ public class Forecast {
     private String description;
     private String deg;         // Wind direction
     private String date;        // Forecast date
+    private String sync_time;
     private int iconId;
 
     public Forecast() {
@@ -28,7 +29,8 @@ public class Forecast {
 
     public Forecast(String city_name, String max, String min, String morning_temp, String noon_temp,
                     String night_temp, String speed, String humidity, String sunrise_time,
-                    String sunset_time, String description, String deg, String date, int iconId) {
+                    String sunset_time, String description, String deg, String date, String sync_time,
+                    int iconId) {
 
         this.city_name = city_name;
         this.max = max;
@@ -43,6 +45,7 @@ public class Forecast {
         this.description = description;
         this.deg = deg;
         this.date = date;
+        this.sync_time = sync_time;
         this.iconId = iconId;
     }
 
@@ -155,6 +158,14 @@ public class Forecast {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public String getSync_time() {
+        return sync_time;
+    }
+
+    public void setSync_time(String sync_time) {
+        this.sync_time = sync_time;
     }
 
     public int getIconId() {

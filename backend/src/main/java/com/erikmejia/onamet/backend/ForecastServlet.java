@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -163,22 +164,34 @@ public class ForecastServlet extends HttpServlet {
         List<Forecast> receivedForecasts = new ArrayList<>();
 
         byte quantity = 15;
-        DateFormat df = new SimpleDateFormat("EEE d", new Locale("es", "DO"));
+        DateFormat dateFormatToday = new SimpleDateFormat("EEEE d", new Locale("es", "DO"));
 
         DailyForecast dailyForecast = owm.dailyForecastByCityCode(cityCode, quantity);
         for (int index = 0; index < 15; index++) {
 
             String date;
+            String thisDate;
 
             switch (index) {
                 case 0:
-                    date = "hoy";
+//                    formatting the date before saving to be like this: Hoy, Miércoles 3
+                    thisDate =
+                            dateFormatToday.format(dailyForecast.getForecastInstance(index).getDateTime())
+                            .substring(0, 1).toUpperCase() +
+                                    dateFormatToday.format(dailyForecast.getForecastInstance(index).getDateTime())
+                            .substring(1).toLowerCase();
+                    date = "Hoy, " + thisDate;
                     break;
                 case 1:
-                    date = "mañana";
+                    date = "Mañana";
                     break;
                 default:
-                    date = df.format(dailyForecast.getForecastInstance(index).getDateTime());
+                    thisDate =
+                            dateFormatToday.format(dailyForecast.getForecastInstance(index).getDateTime())
+                                    .substring(0, 1).toUpperCase() +
+                                    dateFormatToday.format(dailyForecast.getForecastInstance(index).getDateTime())
+                                            .substring(1).toLowerCase();
+                    date = thisDate;
             }
 
             String description = dailyForecast.getForecastInstance(index).
@@ -187,6 +200,10 @@ public class ForecastServlet extends HttpServlet {
                     .getWeatherDescription().equalsIgnoreCase("lluvia de gran intensidad")) {
                 description = "lluvias intensas";
             }
+
+//            Getting current time of the server for last sync message
+            DateFormat df = new SimpleDateFormat("h:m a", new Locale("es", "DO"));
+            Calendar calobj = Calendar.getInstance();
 
             Forecast forecast = new Forecast(
                     cityName,
@@ -216,6 +233,7 @@ public class ForecastServlet extends HttpServlet {
                     String.valueOf(Math.round(dailyForecast.getForecastInstance(index).getWindDegree())
                     + "º"),
                     date,
+                    "última actualización a las " + df.format(calobj.getTime()),
                     Utils.getWeatherCode(
                             dailyForecast.getForecastInstance(index).getWeatherInstance(0)
                                     .getWeatherCode())
