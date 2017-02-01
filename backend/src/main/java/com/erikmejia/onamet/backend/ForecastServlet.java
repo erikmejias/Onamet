@@ -33,6 +33,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.TimeZone;
 import java.util.logging.Logger;
 
 import javax.servlet.http.*;
@@ -203,6 +204,7 @@ public class ForecastServlet extends HttpServlet {
 
 //            Getting current time of the server for last sync message
             DateFormat df = new SimpleDateFormat("h:m a", new Locale("es", "DO"));
+            df.setTimeZone(TimeZone.getTimeZone("GMT-04:00"));
             Calendar calobj = Calendar.getInstance();
 
             Forecast forecast = new Forecast(
