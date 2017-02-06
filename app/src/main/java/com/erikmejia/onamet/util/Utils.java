@@ -1,19 +1,23 @@
 package com.erikmejia.onamet.util;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
+import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
@@ -468,5 +472,21 @@ public class Utils {
             return "xxxhigh";
         }
 
+    }
+
+    public static void applyFontForToolbarTitle(Activity context){
+        Toolbar toolbar = (Toolbar) context.findViewById(R.id.toolbar);
+        for(int i = 0; i < toolbar.getChildCount(); i++){
+            View view = toolbar.getChildAt(i);
+            if(view instanceof TextView){
+                TextView tv = (TextView) view;
+                Typeface titleFont = Typeface.
+                        createFromAsset(context.getAssets(), "fonts/Brandon_reg.otf");
+                if(tv.getText().equals(toolbar.getTitle())){
+                    tv.setTypeface(titleFont);
+                    break;
+                }
+            }
+        }
     }
 }

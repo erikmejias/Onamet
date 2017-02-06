@@ -203,7 +203,7 @@ public class ForecastServlet extends HttpServlet {
             }
 
 //            Getting current time of the server for last sync message
-            DateFormat df = new SimpleDateFormat("h:m a", new Locale("es", "DO"));
+            DateFormat df = new SimpleDateFormat("h:mm a", new Locale("es", "DO"));
             df.setTimeZone(TimeZone.getTimeZone("GMT-04:00"));
             Calendar calobj = Calendar.getInstance();
 
