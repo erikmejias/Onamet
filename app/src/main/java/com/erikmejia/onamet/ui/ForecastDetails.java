@@ -56,6 +56,8 @@ public class ForecastDetails extends AppCompatActivity {
     private LineChartView lineChartView;
     private LineSet lineSet;
 
+    private Bundle extras;
+
 //    NativeExpressAdView adView;
 
     @Override
@@ -82,6 +84,13 @@ public class ForecastDetails extends AppCompatActivity {
 //        adView = (NativeExpressAdView) findViewById(R.id.forecast_details_ad_content);
         frame = (RelativeLayout) findViewById(R.id.today_forecast_frame);
 
+        extras = getIntent().getExtras();
+
+        lineSet = new LineSet();
+        lineSet.addPoint(new Point("MAÑANA", Integer.valueOf(extras.getString(Utils.ForecastConstants.MORNING_TEMPERATURE))));
+        lineSet.addPoint(new Point("TARDE", Integer.valueOf(extras.getString(Utils.ForecastConstants.NOON_TEMPERATURE))));
+        lineSet.addPoint(new Point("NOCHE", Integer.valueOf(extras.getString(Utils.ForecastConstants.NIGHT_TEMPERATURE))));
+
         lineChartView = (LineChartView) findViewById(R.id.linechart);
 
 
@@ -103,8 +112,6 @@ public class ForecastDetails extends AppCompatActivity {
 
     public void loadReceivedData() {
 
-        Bundle extras = getIntent().getExtras();
-
         date.setText(extras.getString(Utils.ForecastConstants.FORECAST_DATE));
         maxTemperature.setText(extras.getString(Utils.ForecastConstants.MAX_TEMPERATURE));
         minTemperature.setText(extras.getString(Utils.ForecastConstants.MIN_TEMPERATURE));
@@ -122,10 +129,6 @@ public class ForecastDetails extends AppCompatActivity {
 //        dataset.add(Integer.valueOf(extras.getString(Utils.ForecastConstants.NOON_TEMPERATURE)));
 //        dataset.add(Integer.valueOf(extras.getString(Utils.ForecastConstants.NIGHT_TEMPERATURE)));
 
-        lineSet = new LineSet();
-        lineSet.addPoint(new Point("MAÑANA", Integer.valueOf(extras.getString(Utils.ForecastConstants.MORNING_TEMPERATURE))));
-        lineSet.addPoint(new Point("TARDE", Integer.valueOf(extras.getString(Utils.ForecastConstants.NOON_TEMPERATURE))));
-        lineSet.addPoint(new Point("NOCHE", Integer.valueOf(extras.getString(Utils.ForecastConstants.NIGHT_TEMPERATURE))));
 
         lineSet.setColor(getResources().getColor(R.color.white));
         lineSet.setDotsColor(getResources().getColor(R.color.colorAccent));

@@ -11,12 +11,12 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:minHeight="?attr/actionBarSize"
-        android:background="@color/black_alpha_10"
+        android:background="@color/black_alpha_drawer"
         app:theme="@style/ToolBarStyle"/>
 
     <FrameLayout
         android:id="@+id/content_settings_frame"
-        android:background="@color/black_alpha_10"
+        android:background="@color/black_alpha_drawer"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

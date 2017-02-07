@@ -133,7 +133,6 @@ public class SettingsFragment extends PreferenceFragment {
                 .setContentHolder(new ViewHolder(R.layout.activity_smsvalidation))
                 .setGravity(Gravity.BOTTOM)
                 .setCancelable(true)
-                .setExpanded(true, 900)
                 .create();
         dialogPlus.show();
 
