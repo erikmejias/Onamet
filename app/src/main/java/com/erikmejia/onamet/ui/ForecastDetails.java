@@ -1,6 +1,7 @@
 package com.erikmejia.onamet.ui;
 
 import android.content.SharedPreferences;
+import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +17,14 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.db.chart.model.Bar;
+import com.db.chart.model.BarSet;
+import com.db.chart.model.LineSet;
+import com.db.chart.model.Point;
+import com.db.chart.renderer.AxisRenderer;
+import com.db.chart.view.BarChartView;
+import com.db.chart.view.LineChartView;
+import com.db.chart.view.StackBarChartView;
 import com.erikmejia.onamet.R;
 import com.erikmejia.onamet.util.Utils;
 import com.google.android.gms.ads.AdRequest;
@@ -25,8 +34,6 @@ import com.tomergoldst.tooltips.ToolTipsManager;
 
 import java.util.ArrayList;
 
-import im.dacer.androidcharts.BarView;
-import im.dacer.androidcharts.PieView;
 
 
 public class ForecastDetails extends AppCompatActivity {
@@ -46,9 +53,8 @@ public class ForecastDetails extends AppCompatActivity {
 
     private LinearLayout iconWrapper;
 
-    private BarView chart;
-    private ArrayList<Integer> dataset;
-    private ArrayList<String> texts;
+    private LineChartView lineChartView;
+    private LineSet lineSet;
 
 //    NativeExpressAdView adView;
 
@@ -76,13 +82,8 @@ public class ForecastDetails extends AppCompatActivity {
 //        adView = (NativeExpressAdView) findViewById(R.id.forecast_details_ad_content);
         frame = (RelativeLayout) findViewById(R.id.today_forecast_frame);
 
-        chart = (BarView) findViewById(R.id.barchart);
-        dataset = new ArrayList<>();
-        texts = new ArrayList<>();
+        lineChartView = (LineChartView) findViewById(R.id.linechart);
 
-        texts.add("mañana");
-        texts.add("tarde");
-        texts.add("noche");
 
         toolTipsManager = new ToolTipsManager();
 
@@ -113,21 +114,42 @@ public class ForecastDetails extends AppCompatActivity {
         windSpeed.setText(extras.getString(Utils.ForecastConstants.WIND_SPEED));
         windDirection.setText(extras.getString(Utils.ForecastConstants.WIND_DIRECTION));
 
-        dataset.add(Integer.valueOf(extras.getString(Utils.ForecastConstants.MORNING_TEMPERATURE)));
-        dataset.add(Integer.valueOf(extras.getString(Utils.ForecastConstants.NOON_TEMPERATURE)));
-        dataset.add(Integer.valueOf(extras.getString(Utils.ForecastConstants.NIGHT_TEMPERATURE)));
+        Typeface regTypeface = Typeface.createFromAsset(getAssets(), "fonts/Brandon_reg.otf");
+        Typeface boldTypeface = Typeface.createFromAsset(getAssets(), "fonts/Brandon_bld.otf");
+        Typeface lightTypeface = Typeface.createFromAsset(getAssets(), "fonts/Brandon_light.otf");
 
-        chart.setDataList(dataset, 43);
-        chart.setBottomTextList(texts);
+//        dataset.add(Integer.valueOf(extras.getString(Utils.ForecastConstants.MORNING_TEMPERATURE)));
+//        dataset.add(Integer.valueOf(extras.getString(Utils.ForecastConstants.NOON_TEMPERATURE)));
+//        dataset.add(Integer.valueOf(extras.getString(Utils.ForecastConstants.NIGHT_TEMPERATURE)));
+
+        lineSet = new LineSet();
+        lineSet.addPoint(new Point("MAÑANA", Integer.valueOf(extras.getString(Utils.ForecastConstants.MORNING_TEMPERATURE))));
+        lineSet.addPoint(new Point("TARDE", Integer.valueOf(extras.getString(Utils.ForecastConstants.NOON_TEMPERATURE))));
+        lineSet.addPoint(new Point("NOCHE", Integer.valueOf(extras.getString(Utils.ForecastConstants.NIGHT_TEMPERATURE))));
+
+        lineSet.setColor(getResources().getColor(R.color.white));
+        lineSet.setDotsColor(getResources().getColor(R.color.colorAccent));
+        lineSet.setFill(getResources().getColor(R.color.transparent));
+        lineSet.setThickness(1f);
+
+        lineChartView.setAxisColor(getResources().getColor(R.color.white));
+        lineChartView.setLabelsColor(getResources().getColor(R.color.white));
+        lineChartView.setYAxis(false);
+        lineChartView.setYLabels(AxisRenderer.LabelPosition.NONE);
+        lineChartView.setTypeface(regTypeface);
+//        Paint paint = new Paint();
+//        paint.setColor(getResources().getColor(R.color.white));
+//        lineChartView.setGrid(4, 4, paint);
+
+        lineChartView.addData(lineSet);
+        lineChartView.show();
+
 
         Utils.setAnimatedIcon(
                 iconWrapper,
                 extras.getInt(Utils.ForecastConstants.ICON_ID),
                 this);
 
-        Typeface regTypeface = Typeface.createFromAsset(getAssets(), "fonts/Brandon_reg.otf");
-        Typeface boldTypeface = Typeface.createFromAsset(getAssets(), "fonts/Brandon_bld.otf");
-        Typeface lightTypeface = Typeface.createFromAsset(getAssets(), "fonts/Brandon_light.otf");
 
         date.setTypeface(boldTypeface);
         maxTemperature.setTypeface(regTypeface);
@@ -170,15 +192,15 @@ public class ForecastDetails extends AppCompatActivity {
         switch (view.getId()) {
             case R.id.forecast_details_max_text:
                 msg = "Temperatura máxima";
-                POSITION = ToolTip.POSITION_RIGHT_TO;
+                POSITION = ToolTip.POSITION_ABOVE;
                 break;
             case R.id.forecast_details_min_text:
                 msg = "Temperatura mínima";
-                POSITION = ToolTip.POSITION_RIGHT_TO;
+                POSITION = ToolTip.POSITION_BELOW;
                 break;
             case R.id.wind_pressure_wrapper:
                 msg = "Velocidad del viento";
-                POSITION = ToolTip.POSITION_RIGHT_TO;
+                POSITION = ToolTip.POSITION_ABOVE;
                 break;
             case R.id.wind_direction_wrapper:
                 msg = "Dirección del viento en grados";
@@ -186,7 +208,7 @@ public class ForecastDetails extends AppCompatActivity {
                 break;
             default:
                 msg = "Nivel de humedad";
-                POSITION = ToolTip.POSITION_LEFT_TO;
+                POSITION = ToolTip.POSITION_ABOVE;
         }
 
         ToolTip.Builder builder = new ToolTip.Builder(
@@ -197,7 +219,7 @@ public class ForecastDetails extends AppCompatActivity {
                 POSITION
         );
 
-        builder.setBackgroundColor(R.color.white);
+        builder.setBackgroundColor(getResources().getColor(R.color.black_alpha_40));
 //        builder.setTextColor(R.color.white);
 
         toolTipsManager.show(builder.build());

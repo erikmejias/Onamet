@@ -53,13 +53,36 @@
 
     </FrameLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:focusable="true"
-        android:id="@+id/left_drawer"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_gravity="start"
         android:layout_width="250dp"
-        android:layout_height="match_parent"
-        />
+        android:layout_height="match_parent">
+
+        <EditText
+            android:id="@+id/inputSearch"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_margin="10dp"
+            android:hint="búsqueda..."
+            android:background="@drawable/rounded_edittext_search"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:padding="10dp"
+            android:layout_marginTop="25dp"
+            android:inputType="text" >
+        </EditText>
+
+        <android.support.v7.widget.RecyclerView
+            android:focusable="true"
+            android:id="@+id/left_drawer"
+            android:layout_gravity="start"
+            android:layout_width="250dp"
+            android:layout_height="match_parent"
+            />
+
+    </LinearLayout>
+
 
 
 </android.support.v4.widget.DrawerLayout>

@@ -98,7 +98,7 @@ dependencies {
                 * */
     compile 'com.github.d-max:spots-dialog:0.7@aar'
 
-    compile 'im.dacer:AndroidCharts:1.0.2'
+    compile 'com.diogobernardino:williamchart:2.4.0'
 
     testCompile 'junit:junit:4.12'
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'

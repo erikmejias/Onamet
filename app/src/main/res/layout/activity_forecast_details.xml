@@ -11,7 +11,8 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark"
+        android:theme="@style/ThemeOverlay.AppCompat"
+        android:background="@color/black_alpha_10"
         android:layout_height="?attr/actionBarSize">
 
     </android.support.v7.widget.Toolbar>
@@ -19,6 +20,7 @@
     <!-- Upper Section -->
 
     <RelativeLayout
+        android:layout_below="@id/toolbar"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:background="@color/black_alpha_10"
@@ -132,7 +134,7 @@
 
     <LinearLayout
         android:id="@+id/forecast_details_chart_frame"
-        android:background="@color/black_alpha_10"
+        android:background="@color/black_alpha_40"
         android:layout_below="@id/forecast_details_layout"
         android:orientation="vertical"
         android:gravity="center"
@@ -148,13 +150,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <view
-            android:textColor="@color/colorPrimary"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            class="im.dacer.androidcharts.BarView"
-            android:id="@+id/barchart" />
+
+        <com.db.chart.view.LineChartView
+            xmlns:chart="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/linechart"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"/>
 
     </LinearLayout>
 
@@ -163,7 +166,7 @@
     <LinearLayout
         android:layout_below="@id/forecast_details_chart_frame"
         android:id="@+id/today_forecast_bottom"
-        android:background="@color/black_alpha_10"
+        android:background="@color/black_alpha_40"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

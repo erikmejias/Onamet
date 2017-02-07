@@ -26,6 +26,8 @@ import com.erikmejia.onamet.util.Utils;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.Query;
 
+import java.util.List;
+
 /**
  * Created by erik on 11/22/16.
  */
@@ -91,5 +93,6 @@ public class CitiesAdapter extends FirebaseRecyclerAdapter<ForecastLite, CitiesH
 
         return new CitiesHolder(root);
         }
-    }
+
+}
 

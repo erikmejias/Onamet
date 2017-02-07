@@ -481,7 +481,7 @@ public class Utils {
             if(view instanceof TextView){
                 TextView tv = (TextView) view;
                 Typeface titleFont = Typeface.
-                        createFromAsset(context.getAssets(), "fonts/Brandon_reg.otf");
+                        createFromAsset(context.getAssets(), "fonts/Brandon_bld.otf");
                 if(tv.getText().equals(toolbar.getTitle())){
                     tv.setTypeface(titleFont);
                     break;
