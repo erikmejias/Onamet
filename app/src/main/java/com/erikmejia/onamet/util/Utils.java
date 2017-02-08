@@ -428,20 +428,57 @@ public class Utils {
                 break;
         }
 
-        Glide.with(context)
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+//        Default size values
+        params.width = 400;
+        params.height = 400;
+
+        String density = whichDensity(context);
+
+        if (density.equalsIgnoreCase("low")) {
+            params.width = 200;
+            params.height = 200;
+            Log.d(TAG, "background image: low density");
+        } else if (density.equalsIgnoreCase("medium")) {
+            params.width = 280;
+            params.height = 280;
+            Log.d(TAG, "background image: medium density");
+        } else if (density.equalsIgnoreCase("high")) {
+            params.width = 340;
+            params.height = 340;
+            Log.d(TAG, "background image: high density");
+        } else if (density.equalsIgnoreCase("xhigh")) {
+            params.width = 590;
+            params.height = 590;
+            Log.d(TAG, "background image: xhigh density");
+        } else if (density.equalsIgnoreCase("xxhigh")) {
+            params.width = 800;
+            params.height = 800;
+            Log.d(TAG, "background image: xxhigh density");
+        } else if (density.equalsIgnoreCase("xxxhigh")) {
+            params.width = 900;
+            params.height = 900;
+            Log.d(TAG, "background image: xxxhigh density");
+        }
+
+        SimpleTarget target = new SimpleTarget<Bitmap>(params.width, params.height) {
+            @Override
+            public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+
+
+                frame.setBackground(new BitmapDrawable(context.getResources(), resource));
+            }
+        };
+
+        Glide.with(context.getApplicationContext())
                 .load(link)
                 .asBitmap()
-                .fitCenter()
                 .placeholder(R.color.colorAccent)
                 .animate(R.anim.abc_fade_in)
-                .into(new SimpleTarget<Bitmap>() {
-                    @Override
-                    public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
-
-
-                        frame.setBackground(new BitmapDrawable(context.getResources(), resource));
-                    }
-                });
+                .centerCrop()
+                .into(target);
 
     }
 

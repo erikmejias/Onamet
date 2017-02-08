@@ -168,6 +168,8 @@ public class ForecastServlet extends HttpServlet {
         DateFormat dateFormatToday = new SimpleDateFormat("EEEE d", new Locale("es", "DO"));
 
         DailyForecast dailyForecast = owm.dailyForecastByCityCode(cityCode, quantity);
+//        TODO - Put a checking here (if ?) that verifies the array isn't ZERO/empty
+
         for (int index = 0; index < 15; index++) {
 
             String date;
