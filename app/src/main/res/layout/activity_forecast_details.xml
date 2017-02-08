@@ -134,7 +134,7 @@
 
     <LinearLayout
         android:id="@+id/forecast_details_chart_frame"
-        android:background="@color/black_alpha_40"
+        android:background="@color/black_alpha_60"
         android:layout_below="@id/forecast_details_layout"
         android:orientation="vertical"
         android:gravity="center"
@@ -166,7 +166,7 @@
     <LinearLayout
         android:layout_below="@id/forecast_details_chart_frame"
         android:id="@+id/today_forecast_bottom"
-        android:background="@color/black_alpha_40"
+        android:background="@color/black_alpha_60"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

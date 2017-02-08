@@ -7,6 +7,7 @@
     <!--FF5252-->
     <color name="colorAccent">#FF5252</color>
     <color name="black_alpha_40">#8c000000</color>
+    <color name="black_alpha_60">#b4000000</color>
     <color name="black_alpha">#1e000000</color>
     <color name="black_alpha_10">#69000000</color>
     <color name="black_alpha_drawer">#dc000000</color>

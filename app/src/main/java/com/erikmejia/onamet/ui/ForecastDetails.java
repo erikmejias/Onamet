@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.db.chart.animation.Animation;
 import com.db.chart.model.Bar;
 import com.db.chart.model.BarSet;
 import com.db.chart.model.LineSet;
@@ -125,15 +126,11 @@ public class ForecastDetails extends AppCompatActivity {
         Typeface boldTypeface = Typeface.createFromAsset(getAssets(), "fonts/Brandon_bld.otf");
         Typeface lightTypeface = Typeface.createFromAsset(getAssets(), "fonts/Brandon_light.otf");
 
-//        dataset.add(Integer.valueOf(extras.getString(Utils.ForecastConstants.MORNING_TEMPERATURE)));
-//        dataset.add(Integer.valueOf(extras.getString(Utils.ForecastConstants.NOON_TEMPERATURE)));
-//        dataset.add(Integer.valueOf(extras.getString(Utils.ForecastConstants.NIGHT_TEMPERATURE)));
-
 
         lineSet.setColor(getResources().getColor(R.color.white));
-        lineSet.setDotsColor(getResources().getColor(R.color.colorAccent));
-        lineSet.setFill(getResources().getColor(R.color.transparent));
-        lineSet.setThickness(1f);
+        lineSet.setDotsColor(getResources().getColor(R.color.white));
+        lineSet.setFill(getResources().getColor(R.color.colorAccent));
+        lineSet.setThickness(2f);
 
         lineChartView.setAxisColor(getResources().getColor(R.color.white));
         lineChartView.setLabelsColor(getResources().getColor(R.color.white));
@@ -145,7 +142,7 @@ public class ForecastDetails extends AppCompatActivity {
 //        lineChartView.setGrid(4, 4, paint);
 
         lineChartView.addData(lineSet);
-        lineChartView.show();
+        lineChartView.show(new Animation(2800));
 
 
         Utils.setAnimatedIcon(
