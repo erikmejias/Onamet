@@ -39,8 +39,8 @@ import java.util.ArrayList;
 
 public class ForecastDetails extends AppCompatActivity {
     private static final String TAG = ForecastDetails.class.getSimpleName();
-    ToolTipsManager toolTipsManager;
-    RelativeLayout frame;
+    private ToolTipsManager toolTipsManager;
+    private RelativeLayout frame;
 
     private TextView date;
     private TextView maxTemperature;
