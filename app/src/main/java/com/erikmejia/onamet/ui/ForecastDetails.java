@@ -131,11 +131,13 @@ public class ForecastDetails extends AppCompatActivity {
         lineSet.setDotsColor(getResources().getColor(R.color.white));
         lineSet.setFill(getResources().getColor(R.color.colorAccent));
         lineSet.setThickness(2f);
+        lineSet.setSmooth(true);
 
         lineChartView.setAxisColor(getResources().getColor(R.color.white));
         lineChartView.setLabelsColor(getResources().getColor(R.color.white));
         lineChartView.setYAxis(false);
         lineChartView.setYLabels(AxisRenderer.LabelPosition.NONE);
+        lineChartView.setAxisBorderValues(0, 40, 1); // It sets the maximum capacity, allowing for individuality each one.
         lineChartView.setTypeface(regTypeface);
 //        Paint paint = new Paint();
 //        paint.setColor(getResources().getColor(R.color.white));
@@ -199,15 +201,15 @@ public class ForecastDetails extends AppCompatActivity {
                 POSITION = ToolTip.POSITION_BELOW;
                 break;
             case R.id.wind_pressure_wrapper:
-                msg = "Velocidad del viento";
+                msg = "Velocidad viento";
                 POSITION = ToolTip.POSITION_ABOVE;
                 break;
             case R.id.wind_direction_wrapper:
-                msg = "Dirección del viento en grados";
+                msg = "Dirección viento";
                 POSITION = ToolTip.POSITION_ABOVE;
                 break;
             default:
-                msg = "Nivel de humedad";
+                msg = "Humedad";
                 POSITION = ToolTip.POSITION_ABOVE;
         }
 
