@@ -35,7 +35,7 @@ public class Utils {
                 * Add new provinces with their associated coordinates and codes here. They'll be filled
                 * with weather forecast data and eventually propagated into the Firebase Database.
                 *
-                * City Name, Latitude, Longitude, City Code
+                * City Name, Latitude, Longitude, City Code, City ID (Must be UNIQUE)
                 * */
 
                 {"Azua", "12.345", "-19.234", "3512208"},

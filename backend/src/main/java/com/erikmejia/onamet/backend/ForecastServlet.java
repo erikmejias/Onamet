@@ -274,6 +274,7 @@ public class ForecastServlet extends HttpServlet {
             );
 
             ForecastLite currentForecast = new ForecastLite(
+                    index,
                     Constants.CITY_ENTRIES[index][columnName],
                     Utils.getWeatherCode(weather.getForecastInstance(0).getWeatherInstance(0).getWeatherCode())
             );

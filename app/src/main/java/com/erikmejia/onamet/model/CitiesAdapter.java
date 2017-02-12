@@ -74,7 +74,7 @@ public class CitiesAdapter extends FirebaseRecyclerAdapter<ForecastLite, CitiesH
                 SharedPreferences sharedPreferences = PreferenceManager
                         .getDefaultSharedPreferences(context);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putInt("city", position);
+                editor.putInt("city", model.getId());
                 editor.apply();
                 content_adapter.getItem(0).onCreate(new Bundle());
                 content_adapter.notifyDataSetChanged();
