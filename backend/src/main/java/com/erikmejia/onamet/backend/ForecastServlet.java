@@ -137,6 +137,7 @@ public class ForecastServlet extends HttpServlet {
             int columnB = 1;
             int columnC = 2;
             int columnD = 3;
+            int comlumnE = 4;
 
 //            Create a new city by fetching data from Utils.Constants.CITY_ENTRIES interface.
             City city = new City(
@@ -258,6 +259,7 @@ public class ForecastServlet extends HttpServlet {
 
         int columnName = 0; // Columns that contains the name
         int columnId = 3; // Columns that contains the code
+        int columnLink = 4; // Columns that contains background image url
         byte count = 1;
 
 //        Array to store all new forecasts
@@ -276,7 +278,8 @@ public class ForecastServlet extends HttpServlet {
             ForecastLite currentForecast = new ForecastLite(
                     index,
                     Constants.CITY_ENTRIES[index][columnName],
-                    Utils.getWeatherCode(weather.getForecastInstance(0).getWeatherInstance(0).getWeatherCode())
+                    Utils.getWeatherCode(weather.getForecastInstance(0).getWeatherInstance(0).getWeatherCode()),
+                    Constants.CITY_ENTRIES[index][columnLink]
             );
 //            Save newly found forecast in a single object
             forecastList.add(currentForecast);

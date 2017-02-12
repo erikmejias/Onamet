@@ -180,7 +180,8 @@ public class ForecastDetails extends AppCompatActivity {
 
         SharedPreferences getPrefs = PreferenceManager
                 .getDefaultSharedPreferences(this);
-        int PROVINCE_ID = getPrefs.getInt("city", 0);
+        String defaultBackg = "https://firebasestorage.googleapis.com/v0/b/project-7000350159161293832.appspot.com/o/default.jpg?alt=media&token=cfbcaa6d-033a-4e6f-b04b-2d6644ac0630";
+        String PROVINCE_ID = getPrefs.getString("background", defaultBackg); // TODO - Must pass a default value to ensure works on startup
 
         Utils.dynamicBackground(this, frame, PROVINCE_ID);
     }

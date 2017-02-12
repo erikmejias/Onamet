@@ -5,11 +5,51 @@ package com.erikmejia.onamet.backend.util;
  */
 
 public class Utils {
-    String[][] provinces = {
-            {"", ""},
-            {"", ""},
-            {"", ""}
-    };
+
+    private interface CITIES_BACKGROUND {
+
+        String deflt = "https://firebasestorage.googleapis.com/v0/b/project-7000350159161293832.appspot.com/o/default.jpg?alt=media&token=cfbcaa6d-033a-4e6f-b04b-2d6644ac0630";
+
+        String AZUA = deflt;
+        String BONAO = deflt;
+        String BANI = "https://firebasestorage.googleapis.com/v0/b/project-7000350159161293832.appspot.com/o/bani.jpg?alt=media&token=96e85ba3-5c7a-47d2-a127-59faf610ede5";
+        String BAHORUCO = deflt;
+        String BARAHONA = deflt;
+        String DAJABON = deflt;
+        String DUARTE = deflt;
+        String EL_SEIBO = "https://firebasestorage.googleapis.com/v0/b/project-7000350159161293832.appspot.com/o/seibo.jpg?alt=media&token=9a74b4a9-87ba-4db4-a1bf-b579abbcda48";
+        String ELIAS_PINA = deflt;
+        String HIGUEY = "https://firebasestorage.googleapis.com/v0/b/project-7000350159161293832.appspot.com/o/higuey.jpg?alt=media&token=ea26574d-cdb6-4886-b9e3-c62b70c393e2";
+        String HATO_MAYOR = deflt;
+        String HERMANAS_MIRABAL = deflt;
+        String INDEPENDENCIA = deflt;
+        String JARABACOA = deflt;
+        String LA_ROMANA = deflt;
+        String LA_VEGA = deflt;
+        String MAO = deflt;
+        String MICHES = deflt;
+        String MONTE_PLATA = deflt;
+        String MOCA = "https://firebasestorage.googleapis.com/v0/b/project-7000350159161293832.appspot.com/o/moca.jpg?alt=media&token=571d5172-fe96-4884-a053-a19e5f8f6d67";
+        String MONSENOR_NOUEL = deflt;
+        String MONTE_CRISTI = deflt;
+        String NAGUA = deflt;
+        String PEDERNALES = deflt;
+        String PERAVIA = deflt;
+        String PUNTA_CANA = deflt;
+        String PUERTO_PLATA = "https://firebasestorage.googleapis.com/v0/b/project-7000350159161293832.appspot.com/o/puerto_plata.jpg?alt=media&token=27624d80-50e7-45d4-8e37-a045edb6a837";
+        String SANTO_DOMINGO = deflt;
+        String SANTIAGO = "https://firebasestorage.googleapis.com/v0/b/project-7000350159161293832.appspot.com/o/santiago.JPG?alt=media&token=f4d06bfe-9a3a-4faf-b978-724950555e75";
+        String SAN_PEDRO_MACORIS = "https://firebasestorage.googleapis.com/v0/b/project-7000350159161293832.appspot.com/o/san_pedro_1.jpg?alt=media&token=3f6c32f3-1963-4a7a-9b40-9321c5d6b741";
+        String SABANA_DE_LA_MAR = "https://firebasestorage.googleapis.com/v0/b/project-7000350159161293832.appspot.com/o/sabana_dela_mar.jpg?alt=media&token=0d76a718-7174-48f4-8dd8-e38367cbd971";
+        String SAMANA = deflt;
+        String SANCHEZ_RAMIREZ = deflt;
+        String SAN_CRISTOBAL = deflt;
+        String SAN_JOSE_OCOA = deflt;
+        String SAN_JUAN = deflt;
+        String SANTIAGO_RODRIGUEZ = deflt;
+        String SAN_FRANCISCO = deflt;
+        String VALVERDE = deflt;
+    }
 
     public interface Constants {
         public int CLEAR_SKY = 0;
@@ -38,48 +78,49 @@ public class Utils {
                 * City Name, Latitude, Longitude, City Code, City ID (Must be UNIQUE)
                 * */
 
-                {"Azua", "12.345", "-19.234", "3512208"},
-                {"Bonao", "12.345", "-19.234", "3511233"},
-                {"Bani", "12.345", "-19.234", "3512064"},
-                {"Bahoruco", "12.18.481380", "-71.419647", "3495857"},
-                {"Barahona", "18.16667", "-71.25", "3512042"},
-                {"Dajabón", "12.345", "-19.234", "3508951"},
-                {"Duarte", "12.345", "-19.234", "3508718"},
-                {"El Seibo", "12.345", "-19.234", "3492984"},
-                {"Elías Piña", "18.88", "-71.7", "3509386"},
-                {"Higuey", "12.345", "-19.234", "3493240"},
-                {"Hato Mayor del Rey", "12.345", "-19.234", "3504765"},
-                {"Hermanas Mirabal", "12.345", "-19.234", "3493282"},
-                {"Independencia", "12.345", "-19.234", "3504326"},
-                {"Jarabacoa", "12.345", "-19.234", "3504158"},
-                {"La Romana", "12.345", "-19.234", "3500957"},
-                {"La Vega", "12.345", "-19.234", "3509382"},
-                {"Mao", "12.345", "-19.234", "3496831"},
-                {"Miches", "12.345", "-19.234", "3496396"},
-                {"Monte Plata", "12.345", "-19.234", "3496132"},
-                {"Moca", "12.345", "-19.234", "3496331"},
-                {"Monseñor Nouel", "18.91667", "-70.416672", "3496274"},
-                {"Monte Cristi", "12.345", "-19.234", "3493174"},
-                {"Nagua", "12.345", "-19.234", "3496021"},
-                {"Pedernales", "12.345", "-19.234", "3495137"},
-                {"Peravia", "18.33333", "-70.366669", "3495015"},
-                {"Punta Cana", "12.345", "-19.234", "3494242"},
-                {"Puerto Plata", "12.345", "-19.234", "3493175"},
-                {"Santo Domingo", "12.345", "-19.234", "3492908"},
-                {"Santiago", "12.345", "-19.234", "3492914"},
-                {"San Pedro de Macorís", "12.345", "-19.234", "3493031"},
-                {"Sabana de la Mar", "12.345", "-19.234", "3493568"},
-                {"Samaná", "12.345", "-19.234", "3492997"},
-                {"Sánchez Ramírez", "12.345", "-19.234", "3493198"},
-                {"San Cristobal", "12.345", "-19.234", "3511540"},
-                {"San José de Ocoa", "12.345", "-19.234", "3493100"},
-                {"Sánchez Ramírez", "19.2281", "-69.613701", "3493198"},
-                {"San Juan", "12.345", "-19.234", "3493091"},
-                {"Santiago Rodríguez", "19.41667", "-71.333328", "3492912"},
-                {"San Francisco", "12.345", "-19.234", "3493146"},
-                {"Valverde", "19.616671", "-71", "3492112"}
+                {"Azua", "12.345", "-19.234", "3512208", CITIES_BACKGROUND.AZUA},
+                {"Bonao", "12.345", "-19.234", "3511233", CITIES_BACKGROUND.BONAO},
+                {"Bani", "12.345", "-19.234", "3512064", CITIES_BACKGROUND.BANI},
+                {"Bahoruco", "12.18.481380", "-71.419647", "3495857", CITIES_BACKGROUND.BAHORUCO},
+                {"Barahona", "18.16667", "-71.25", "3512042", CITIES_BACKGROUND.BARAHONA},
+                {"Dajabón", "12.345", "-19.234", "3508951", CITIES_BACKGROUND.DAJABON},
+                {"Duarte", "12.345", "-19.234", "3508718", CITIES_BACKGROUND.DUARTE},
+                {"El Seibo", "12.345", "-19.234", "3492984", CITIES_BACKGROUND.EL_SEIBO},
+                {"Elías Piña", "18.88", "-71.7", "3509386", CITIES_BACKGROUND.ELIAS_PINA},
+                {"Higuey", "12.345", "-19.234", "3493240", CITIES_BACKGROUND.HIGUEY},
+                {"Hato Mayor del Rey", "12.345", "-19.234", "3504765", CITIES_BACKGROUND.HATO_MAYOR},
+                {"Hermanas Mirabal", "12.345", "-19.234", "3493282", CITIES_BACKGROUND.HERMANAS_MIRABAL},
+                {"Independencia", "12.345", "-19.234", "3504326", CITIES_BACKGROUND.INDEPENDENCIA},
+                {"Jarabacoa", "12.345", "-19.234", "3504158", CITIES_BACKGROUND.JARABACOA},
+                {"La Romana", "12.345", "-19.234", "3500957", CITIES_BACKGROUND.LA_ROMANA},
+                {"La Vega", "12.345", "-19.234", "3509382", CITIES_BACKGROUND.LA_VEGA},
+                {"Mao", "12.345", "-19.234", "3496831", CITIES_BACKGROUND.MAO},
+                {"Miches", "12.345", "-19.234", "3496396", CITIES_BACKGROUND.MICHES},
+                {"Monte Plata", "12.345", "-19.234", "3496132", CITIES_BACKGROUND.MONTE_PLATA},
+                {"Moca", "12.345", "-19.234", "3496331", CITIES_BACKGROUND.MOCA},
+                {"Monseñor Nouel", "18.91667", "-70.416672", "3496274", CITIES_BACKGROUND.MONSENOR_NOUEL},
+                {"Monte Cristi", "12.345", "-19.234", "3493174", CITIES_BACKGROUND.MONTE_CRISTI},
+                {"Nagua", "12.345", "-19.234", "3496021", CITIES_BACKGROUND.NAGUA},
+                {"Pedernales", "12.345", "-19.234", "3495137", CITIES_BACKGROUND.PEDERNALES},
+                {"Peravia", "18.33333", "-70.366669", "3495015", CITIES_BACKGROUND.PERAVIA},
+                {"Punta Cana", "12.345", "-19.234", "3494242", CITIES_BACKGROUND.PUNTA_CANA},
+                {"Puerto Plata", "12.345", "-19.234", "3493175", CITIES_BACKGROUND.PUERTO_PLATA},
+                {"Santo Domingo", "12.345", "-19.234", "3492908", CITIES_BACKGROUND.SANTO_DOMINGO},
+                {"Santiago", "12.345", "-19.234", "3492914", CITIES_BACKGROUND.SANTIAGO},
+                {"San Pedro de Macorís", "12.345", "-19.234", "3493031", CITIES_BACKGROUND.SAN_PEDRO_MACORIS},
+                {"Sabana de la Mar", "12.345", "-19.234", "3493568", CITIES_BACKGROUND.SABANA_DE_LA_MAR},
+                {"Samaná", "12.345", "-19.234", "3492997", CITIES_BACKGROUND.SAMANA},
+                {"San Cristobal", "12.345", "-19.234", "3511540", CITIES_BACKGROUND.SAN_CRISTOBAL},
+                {"San José de Ocoa", "12.345", "-19.234", "3493100", CITIES_BACKGROUND.SAN_JOSE_OCOA},
+                {"Sánchez Ramírez", "19.2281", "-69.613701", "3493198", CITIES_BACKGROUND.SANCHEZ_RAMIREZ},
+                {"San Juan", "12.345", "-19.234", "3493091", CITIES_BACKGROUND.SAN_JUAN},
+                {"Santiago Rodríguez", "19.41667", "-71.333328", "3492912", CITIES_BACKGROUND.SANTIAGO_RODRIGUEZ},
+                {"San Francisco", "12.345", "-19.234", "3493146", CITIES_BACKGROUND.SAN_FRANCISCO},
+                {"Valverde", "19.616671", "-71", "3492112", CITIES_BACKGROUND.VALVERDE}
         };
     }
+
+
 
     public static int getWeatherCode(int code) {
 

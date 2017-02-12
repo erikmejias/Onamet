@@ -75,10 +75,11 @@ public class CitiesAdapter extends FirebaseRecyclerAdapter<ForecastLite, CitiesH
                         .getDefaultSharedPreferences(context);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putInt("city", model.getId());
+                editor.putString("background", model.getBackgroundLink());
                 editor.apply();
                 content_adapter.getItem(0).onCreate(new Bundle());
                 content_adapter.notifyDataSetChanged();
-                Utils.dynamicBackground(context, root, position);
+                Utils.dynamicBackground(context, root, model.getBackgroundLink());
             }
         });
 

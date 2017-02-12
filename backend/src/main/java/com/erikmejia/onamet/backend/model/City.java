@@ -62,10 +62,6 @@ public class City {
         return lon;
     }
 
-    public void setLon(String lon) {
-        this.lon = lon;
-    }
-
     public long getCityCode() {
         return cityCode;
     }

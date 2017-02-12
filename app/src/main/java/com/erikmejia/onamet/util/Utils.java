@@ -374,12 +374,12 @@ public class Utils {
     }
 
     public static void dynamicBackground(@NonNull final Context context, @NonNull final View frame,
-                                         int position) {
+                                         String imgUrl) {
         Calendar c = Calendar.getInstance();
         int timeOfDay = c.get(Calendar.HOUR_OF_DAY);
 
 
-        int PROVINCE_ID = position;
+        /*int PROVINCE_ID = position;
         Log.d(TAG, "dynamicBackground: " + PROVINCE_ID);
         String link;
 
@@ -426,7 +426,7 @@ public class Utils {
             default:
                 link = CityBackground.DEFAULT;
                 break;
-        }
+        }*/
 
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -473,7 +473,7 @@ public class Utils {
         };
 
         Glide.with(context.getApplicationContext())
-                .load(link)
+                .load(imgUrl)
                 .asBitmap()
                 .placeholder(R.color.colorAccent)
                 .animate(R.anim.abc_fade_in)

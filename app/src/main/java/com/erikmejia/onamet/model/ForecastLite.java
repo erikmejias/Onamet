@@ -9,13 +9,15 @@ public class ForecastLite {
     private int id;
     private String name;
     private int iconId;
+    private String backgroundLink;
 
     public ForecastLite() {}
 
-    public ForecastLite(int id, String name, int iconId) {
+    public ForecastLite(int id, String name, int iconId, String backgroundLink) {
         this.id = id;
         this.name = name;
         this.iconId = iconId;
+        this.backgroundLink = backgroundLink;
     }
 
     public int getId() {
@@ -40,5 +42,13 @@ public class ForecastLite {
 
     public void setIconId(int iconId) {
         this.iconId = iconId;
+    }
+
+    public String getBackgroundLink() {
+        return backgroundLink;
+    }
+
+    public void setBackgroundLink(String backgroundLink) {
+        this.backgroundLink = backgroundLink;
     }
 }
