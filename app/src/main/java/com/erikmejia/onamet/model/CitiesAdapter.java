@@ -67,7 +67,6 @@ public class CitiesAdapter extends FirebaseRecyclerAdapter<ForecastLite, CitiesH
 
         viewHolder.getCity_name().setTypeface(font_bold);
         Log.d(TAG, "populateViewHolder: " + model.getIconId());
-
         viewHolder.getRootView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -55,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference cities_reference;
     private CitiesAdapter citiesAdapter;
 
+    private String mInput;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -148,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
 
 //        startService(new Intent(this, FirebaseBackgroundService.class));
 
-        /* Handling searchbar actions */
+        /* Handling SearchBar actions */
         final EditText inputSearch = (EditText) findViewById(R.id.inputSearch);
 
         inputSearch.addTextChangedListener(new TextWatcher() {
@@ -164,6 +166,45 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
+//                Getting the introduced text as lowercase
+                mInput = inputSearch.getText().toString();
+
+//                  Clean up the old adapter (It removes previous entries an clean the list)
+//                  if (citiesAdapter != null) citiesAdapter.cleanup();
+
+//                  Call all entries if there is no introduced text.
+                if (mInput.equals("")) {
+
+                    citiesAdapter = new CitiesAdapter(
+                            ForecastLite.class,
+                            R.layout.city_list_item,
+                            CitiesHolder.class,
+                            cities_reference,
+                            MainActivity.this,
+                            viewPagerAdapter,
+                            drawerLayout,
+                            rootLayout
+                    );
+
+                    cityList.setAdapter(citiesAdapter);
+                } else {
+
+                    mInput = inputSearch.getText().toString().substring(0, 1).toUpperCase() +
+                            inputSearch.getText().toString().substring(1).toLowerCase();
+
+                    citiesAdapter = new CitiesAdapter(
+                            ForecastLite.class,
+                            R.layout.city_list_item,
+                            CitiesHolder.class,
+                            cities_reference.orderByChild("name").startAt(mInput).limitToFirst(5),
+                            MainActivity.this,
+                            viewPagerAdapter,
+                            drawerLayout,
+                            rootLayout
+                    );
+
+                    cityList.setAdapter(citiesAdapter);
+                }
 
             }
         });
