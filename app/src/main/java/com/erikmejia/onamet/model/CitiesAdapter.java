@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -80,6 +81,10 @@ public class CitiesAdapter extends FirebaseRecyclerAdapter<ForecastLite, CitiesH
                 content_adapter.getItem(0).onCreate(new Bundle());
                 content_adapter.notifyDataSetChanged();
                 Utils.dynamicBackground(context, root, model.getBackgroundLink());
+
+                InputMethodManager imm = (InputMethodManager)context
+                        .getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
             }
         });
 

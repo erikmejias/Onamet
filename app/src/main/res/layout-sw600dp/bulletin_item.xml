@@ -15,7 +15,7 @@
 
     <LinearLayout
         android:orientation="vertical"
-        android:background="@color/black_alpha_10"
+        android:background="@color/black_alpha_60"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -72,10 +72,11 @@
                 android:textSize="12sp"
                 tools:text="Ago 23"
                 android:textColor="@color/white"
+                android:textStyle="bold"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
                 android:layout_marginBottom="10dp"
-                android:gravity="start"
+                android:gravity="end"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp" />

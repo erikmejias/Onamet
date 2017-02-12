@@ -14,7 +14,7 @@
     <string name="pref_help_title">Ayuda</string>
     <string name="pref_help_summary">Preguntas frecuentes sobre la información brindada</string>
     <string name="pref_dev_summary">Información de contacto del desarrollador</string>
-    <string name="pref_account_summary">Iniciar sesión para configurar servicio de SMS</string>
+    <string name="pref_account_summary">Inicia sesión para configurar servicio de SMS</string>
     <string name="pref_sms_summary">Verificar SMS para recibir alertas en caso que no tengas acceso a internet</string>
     <string name="pref_other_title">OTRO</string>
     <string name="pref_account_title">CUENTA</string>

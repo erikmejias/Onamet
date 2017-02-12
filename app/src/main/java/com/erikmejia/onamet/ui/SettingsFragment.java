@@ -161,8 +161,8 @@ public class SettingsFragment extends PreferenceFragment {
                 imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
 
                 Toast.makeText(getActivity(), editText.getText() + " guardado", Toast.LENGTH_SHORT).show();
-                smsPreference.setSummary("En emergencias recibirás los boletines" +
-                        " al " + editText.getText() + " por si no tienes Internet");
+                smsPreference.setTitle("Verificado: " + editText.getText());
+                smsPreference.setSummary("En emergencias recibirás los boletines por mensajes de texto");
                 addToFirebase(editText.getText().toString());
             }
         });
@@ -197,8 +197,8 @@ public class SettingsFragment extends PreferenceFragment {
                 smsPreference.setEnabled(true);
                 signOutPreference.setEnabled(true);
                 if (user.getEmail() != null) {
-                    signInPreference.setTitle(user.getEmail());
-                    signInPreference.setSummary("Has iniciado sesión como " + user.getDisplayName());
+                    signInPreference.setTitle(user.getDisplayName());
+                    signInPreference.setSummary("Has iniciado sesión con " + user.getEmail());
                 } else {
                     signInPreference.setTitle(user.getDisplayName());
                     signInPreference.setSummary("Has iniciado sesión correctamente");
@@ -272,6 +272,7 @@ public class SettingsFragment extends PreferenceFragment {
                         }
                     });
             smsPreference.setEnabled(false);
+            smsPreference.setTitle(R.string.sms_auth_prefs_title);
             smsPreference.setSummary(R.string.pref_sms_summary);
             signOutPreference.setEnabled(false);
             signInPreference.setTitle(getString(R.string.acc_prefs_sync));
@@ -292,8 +293,8 @@ public class SettingsFragment extends PreferenceFragment {
             user = FirebaseAuth.getInstance().getCurrentUser();
             smsPreference.setEnabled(true);
             signOutPreference.setEnabled(true);
-            signInPreference.setTitle(user.getEmail());
-            signInPreference.setSummary("Has iniciado sesión como " + user.getDisplayName());
+            signInPreference.setTitle(user.getDisplayName());
+            signInPreference.setSummary("Has iniciado sesión");
 
             Glide.with(getActivity())
                     .load(user.getPhotoUrl())
@@ -348,8 +349,8 @@ public class SettingsFragment extends PreferenceFragment {
                         User user = dataSnapshot.getValue(User.class);
                         if (user != null) {
                             if (user.isVerified()) {
-                                smsPreference.setSummary("En emergencias recibirás los boletines " +
-                                        "al " + user.getPhone_number() + " por si no tienes Internet");
+                                smsPreference.setTitle("Verificado: " + user.getPhone_number());
+                                smsPreference.setSummary("En emergencias recibirás los boletines por mensajes de texto");
                                 number = user.getPhone_number();
                             }
                         }
