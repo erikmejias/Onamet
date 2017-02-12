@@ -67,6 +67,7 @@ public class SettingsFragment extends PreferenceFragment {
     private static final int RC_SIGN_IN = 123;
     private FirebaseAuth mAuth;
     private FirebaseUser user;
+    private Context activity;
     Preference smsPreference;
     Preference signOutPreference;
     Preference signInPreference;
@@ -296,7 +297,7 @@ public class SettingsFragment extends PreferenceFragment {
             signInPreference.setTitle(user.getDisplayName());
             signInPreference.setSummary("Has iniciado sesión");
 
-            Glide.with(getActivity())
+            Glide.with(activity)
                     .load(user.getPhotoUrl())
                     .asBitmap()
                     .centerCrop()
@@ -304,7 +305,7 @@ public class SettingsFragment extends PreferenceFragment {
                         @Override
                         public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
                             RoundedBitmapDrawable circularIcon =
-                                    RoundedBitmapDrawableFactory.create(getResources(), resource);
+                                    RoundedBitmapDrawableFactory.create(activity.getResources(), resource);
                             circularIcon.setCircular(true);
 
                             signInPreference.setIcon(circularIcon);
@@ -364,5 +365,12 @@ public class SettingsFragment extends PreferenceFragment {
             }
         }
         return true;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        this.activity = context;
     }
 }
