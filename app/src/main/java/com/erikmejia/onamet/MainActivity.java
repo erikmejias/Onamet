@@ -233,8 +233,8 @@ public class MainActivity extends AppCompatActivity {
     * */
     private void setViewPager(ViewPager viewPager) {
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-        viewPagerAdapter.addFragment(new ForecastFragment(), "Pronosticos");
-        viewPagerAdapter.addFragment(new BulletinsFragment(), "Boletines");
+        viewPagerAdapter.addFragment(new ForecastFragment(), "Pronósticos");
+        viewPagerAdapter.addFragment(new BulletinsFragment(), "Boletínes");
         viewPager.setAdapter(viewPagerAdapter);
     }
 
