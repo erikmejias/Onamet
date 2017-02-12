@@ -167,6 +167,7 @@ public class ForecastServlet extends HttpServlet {
 
         byte quantity = 15;
         DateFormat dateFormatToday = new SimpleDateFormat("EEEE d", new Locale("es", "DO"));
+        DateFormat monthFormat = new SimpleDateFormat("MMMM", new Locale("es", "DO"));
 
         DailyForecast dailyForecast = owm.dailyForecastByCityCode(cityCode, quantity);
 //        TODO - Put a checking here (if ?) that verifies the array isn't ZERO/empty
@@ -178,13 +179,15 @@ public class ForecastServlet extends HttpServlet {
 
             switch (index) {
                 case 0:
-//                    formatting the date before saving to be like this: Hoy, Miércoles 3
+//                    formatting the date before saving to be like this: Miércoles 3 de Febrero
                     thisDate =
                             dateFormatToday.format(dailyForecast.getForecastInstance(index).getDateTime())
                             .substring(0, 1).toUpperCase() +
                                     dateFormatToday.format(dailyForecast.getForecastInstance(index).getDateTime())
-                            .substring(1).toLowerCase();
-                    date = "Hoy, " + thisDate;
+                            .substring(1).toLowerCase() + " de " +
+                                    monthFormat.format(dailyForecast.getForecastInstance(index).getDateTime()).substring(0, 1).toUpperCase() +
+                                    monthFormat.format(dailyForecast.getForecastInstance(index).getDateTime()).substring(1).toLowerCase();
+                    date = thisDate;
                     break;
                 case 1:
                     date = "Mañana";
@@ -238,7 +241,7 @@ public class ForecastServlet extends HttpServlet {
                     String.valueOf(Math.round(dailyForecast.getForecastInstance(index).getWindDegree())
                     + "º"),
                     date,
-                    "última actualización a las " + df.format(calobj.getTime()),
+                    "actualizado a las" + df.format(calobj.getTime()),
                     Utils.getWeatherCode(
                             dailyForecast.getForecastInstance(index).getWeatherInstance(0)
                                     .getWeatherCode())

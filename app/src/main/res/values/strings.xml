@@ -120,5 +120,6 @@
     <string name="pref_general_offline_title">Sin Conexión</string>
     <string name="pref_general_offline_summary">Guardar información de pronósticos para uso sin conexión</string>
     <string name="offline_enabled_key">offline_enabled</string>
+    <string name="search_text">Búsqueda</string>
 
 </resources>
