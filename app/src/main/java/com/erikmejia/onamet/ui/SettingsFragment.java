@@ -2,6 +2,7 @@ package com.erikmejia.onamet.ui;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
@@ -13,6 +14,7 @@ import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
+import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
@@ -71,7 +73,7 @@ public class SettingsFragment extends PreferenceFragment {
     Preference smsPreference;
     Preference signOutPreference;
     Preference signInPreference;
-    ListPreference provincePreference;
+    private ListPreference provincePreference;
     private String number;
 
     private static final String TAG = SettingsFragment.class.getSimpleName();
@@ -122,6 +124,23 @@ public class SettingsFragment extends PreferenceFragment {
             }
         });
 
+        provincePreference = (ListPreference) findPreference(getString(R.string.list_province_key));
+        provincePreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object o) {
+
+                SharedPreferences sharedPreferences = PreferenceManager
+                        .getDefaultSharedPreferences(activity);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("province", o.toString());
+                editor.apply();
+
+                provincePreference.setTitle("Mi Provincia: " + o.toString());
+
+                return true;
+            }
+        });
+
         mAuth = FirebaseAuth.getInstance();
 
         checkIfSignedIn();
@@ -161,7 +180,7 @@ public class SettingsFragment extends PreferenceFragment {
                         .getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
 
-                Toast.makeText(getActivity(), editText.getText() + " guardado", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), editText.getText() + " guardado", Toast.LENGTH_SHORT).show();
                 smsPreference.setTitle("Verificado: " + editText.getText());
                 smsPreference.setSummary("En emergencias recibirás los boletines por mensajes de texto");
                 addToFirebase(editText.getText().toString());
@@ -197,6 +216,7 @@ public class SettingsFragment extends PreferenceFragment {
                 user = FirebaseAuth.getInstance().getCurrentUser();
                 smsPreference.setEnabled(true);
                 signOutPreference.setEnabled(true);
+                provincePreference.setEnabled(true);
                 if (user.getEmail() != null) {
                     signInPreference.setTitle(user.getDisplayName());
                     signInPreference.setSummary("Has iniciado sesión con " + user.getEmail());
@@ -278,7 +298,8 @@ public class SettingsFragment extends PreferenceFragment {
             signOutPreference.setEnabled(false);
             signInPreference.setTitle(getString(R.string.acc_prefs_sync));
             signInPreference.setSummary(getString(R.string.pref_account_summary));
-            signInPreference.setIcon(null); // TODO - validate this approach is safe.
+            signInPreference.setIcon(null);
+            provincePreference.setEnabled(false);
             user = null;
 
         } else {
@@ -294,6 +315,7 @@ public class SettingsFragment extends PreferenceFragment {
             user = FirebaseAuth.getInstance().getCurrentUser();
             smsPreference.setEnabled(true);
             signOutPreference.setEnabled(true);
+            provincePreference.setEnabled(true);
             signInPreference.setTitle(user.getDisplayName());
             signInPreference.setSummary("Has iniciado sesión");
 
@@ -353,6 +375,13 @@ public class SettingsFragment extends PreferenceFragment {
                                 smsPreference.setTitle("Verificado: " + user.getPhone_number());
                                 smsPreference.setSummary("En emergencias recibirás los boletines por mensajes de texto");
                                 number = user.getPhone_number();
+                                SharedPreferences getPrefs = PreferenceManager
+                                        .getDefaultSharedPreferences(activity);
+                                String province = getPrefs.getString("province", null);
+
+                                if (province != null) {
+                                    provincePreference.setTitle("Mi Provincia: " + province);
+                                }
                             }
                         }
                     }

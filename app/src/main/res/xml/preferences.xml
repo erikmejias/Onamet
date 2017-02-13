@@ -42,6 +42,7 @@
             android:summary="@string/pref_general_offline_summary" />-->
 
         <ListPreference
+            android:enabled="false"
             android:title="Mi Provincia"
             android:summary="Recibe informes relevantes en tu localidad"
             android:entries="@array/provinces"

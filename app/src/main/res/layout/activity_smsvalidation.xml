@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:gravity="center_horizontal"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_smsvalidation"
     android:layout_width="match_parent"
-    android:background="@color/colorPrimary"
-    android:layout_height="300dp">
+    android:background="@color/colorPrimaryDark"
+    android:layout_height="250dp">
 
     <TextView
         android:id="@+id/sms_verification_title"
@@ -14,17 +15,27 @@
         android:layout_marginTop="20dp"
         android:textColor="@color/white"
         android:textSize="30sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/sms_check_message"
+        android:text="@string/sms_check_message"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textStyle="italic"
+        android:textSize="10sp"
         android:layout_marginBottom="40dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <EditText
         android:gravity="center"
-        android:background="@color/authui_colorPrimaryDark"
-        android:layout_below="@id/sms_verification_title"
+        android:background="@drawable/rounded_edittext_phone"
         android:id="@+id/sms_phone_number"
         android:textColor="@color/white"
         android:textSize="25sp"
+        android:padding="15dp"
         android:inputType="phone"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
@@ -34,17 +45,16 @@
 
 
     <Button
-        android:text="Guardar"
+        android:text="@string/save"
         android:gravity="center"
         android:id="@+id/submit_button"
         android:textSize="15sp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:layout_marginLeft="80dp"
         android:layout_marginRight="80dp"
         style="?android:attr/borderlessButtonStyle"
         android:textColor="@color/white"
-        android:layout_below="@id/sms_phone_number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-</RelativeLayout>
+</LinearLayout>
