@@ -241,7 +241,7 @@ public class ForecastServlet extends HttpServlet {
                     String.valueOf(Math.round(dailyForecast.getForecastInstance(index).getWindDegree())
                     + "º"),
                     date,
-                    "actualizado a las" + df.format(calobj.getTime()),
+                    "actualizado a las " + df.format(calobj.getTime()),
                     Utils.getWeatherCode(
                             dailyForecast.getForecastInstance(index).getWeatherInstance(0)
                                     .getWeatherCode())

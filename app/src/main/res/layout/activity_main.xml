@@ -56,12 +56,13 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_gravity="start"
+        android:gravity="center_horizontal"
         android:layout_width="250dp"
         android:layout_height="match_parent">
 
         <RelativeLayout
             android:orientation="horizontal"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -73,6 +74,7 @@
                 android:drawableStart="@drawable/ic_action_search"
                 android:background="@drawable/rounded_edittext_search"
                 android:textColor="@color/white"
+                android:textSize="25sp"
                 android:padding="10dp"
                 android:textColorHint="@color/white"
                 android:inputType="text" >
@@ -82,15 +84,16 @@
             <ImageButton
                 android:id="@+id/clean_search"
                 android:visibility="invisible"
-                android:layout_alignTop="@id/inputSearch"
                 android:layout_alignRight="@id/inputSearch"
+                android:layout_alignTop="@id/inputSearch"
                 android:layout_alignEnd="@id/inputSearch"
-                android:layout_margin="10dp"
+                android:layout_margin="14dp"
                 android:onClick="clearSearch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:src="@drawable/ic_action_cancel"
                 android:background="?android:selectableItemBackground"
-                android:src="@drawable/ic_action_cancel"/>
+                />
 
         </RelativeLayout>
 

@@ -11,12 +11,14 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -45,7 +47,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
+import uk.co.deanwild.materialshowcaseview.MaterialShowcaseSequence;
 import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView;
+import uk.co.deanwild.materialshowcaseview.ShowcaseConfig;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -62,6 +66,8 @@ public class MainActivity extends AppCompatActivity {
     private CitiesAdapter citiesAdapter;
     private EditText inputSearch;
     private ImageButton clearSearch;
+
+    private Menu _menu;
 
     private String mInput;
 
@@ -189,6 +195,7 @@ public class MainActivity extends AppCompatActivity {
 //                  Call all entries if there is no introduced text.
                 if (mInput.equals("")) {
 
+//                    Remove "clear search" ImageButton, there is no text to clear.
                     clearSearch.setVisibility(View.INVISIBLE);
 
                     citiesAdapter = new CitiesAdapter(
@@ -205,6 +212,7 @@ public class MainActivity extends AppCompatActivity {
                     cityList.setAdapter(citiesAdapter);
                 } else {
 
+//                    Make the "clear search" button visible
                     clearSearch.setVisibility(View.VISIBLE);
 
                     mInput = inputSearch.getText().toString().substring(0, 1).toUpperCase() +
@@ -243,13 +251,14 @@ public class MainActivity extends AppCompatActivity {
         Utils.dynamicBackground(this, rootLayout, PROVINCE_ID);
 
 //        Launch - just once - showcase of the navigation drawer
-        new MaterialShowcaseView.Builder(this)
+        /*new MaterialShowcaseView.Builder(this)
                 .setTarget(toolbar.getChildAt(1)) // Point at nav drawer icon
                 .setDismissText("ENTIENDO")
                 .setContentText("Presiona aquí para ver pronósticos de otras provincias y pueblos")
                 .setDelay(1000) // optional but starting animations immediately in onCreate can make them choppy
                 .singleUse("main_showcase") // provide a unique ID used to ensure it is only shown once
-                .show();
+                .show();*/
+
     }
 
     @Override
@@ -267,7 +276,32 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main, menu);
+
         return true;
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+
+        ShowcaseConfig config = new ShowcaseConfig();
+        config.setDelay(500); // half second between each showcase view
+
+        MaterialShowcaseSequence sequence = new MaterialShowcaseSequence(this, "m");
+        sequence.setConfig(config);
+
+        sequence.addSequenceItem(toolbar.getChildAt(1),
+                "Presiona aquí para ver pronósticos de otras provincias y pueblos",
+                "ENTENDÍ");
+
+//        TODO - Add SEQUENCE for options menu
+        /*sequence.addSequenceItem(menu.findItem(R.id.settings).getActionView(),
+                "Acá podrás iniciar sesión para poner tu teléfono y provincia, de esta forma recibirás mensajes de texto" +
+                        " en caso en una emergencia nacional",
+                "BIEN");*/
+
+        sequence.start();
+
+        return super.onPrepareOptionsMenu(menu);
     }
 
     @Override
