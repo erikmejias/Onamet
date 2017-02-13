@@ -1,5 +1,6 @@
 package com.erikmejia.onamet;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -24,6 +25,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
@@ -123,6 +125,11 @@ public class MainActivity extends AppCompatActivity {
             public void onDrawerClosed(View drawerView) {
                 super.onDrawerClosed(drawerView);
                 invalidateOptionsMenu();
+
+//                Close the keyboard if present
+                InputMethodManager imm = (InputMethodManager)MainActivity.this
+                        .getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(drawerView.getWindowToken(), 0);
             }
         };
 
@@ -178,6 +185,8 @@ public class MainActivity extends AppCompatActivity {
 
 //                  Call all entries if there is no introduced text.
                 if (mInput.equals("")) {
+
+                    clearSearch.setVisibility(View.INVISIBLE);
 
                     citiesAdapter = new CitiesAdapter(
                             ForecastLite.class,
