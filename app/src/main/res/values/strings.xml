@@ -1,6 +1,7 @@
 <resources>
 
-    <string name="app_name">ONAMET</string>
+    <string name="app_name">Onamet</string>
+    <string name="app_name_activity">ONAMET</string>
     <string name="notification_prefs_title">Notificaciones</string>
     <string name="notification_prefs_summary">Habilitar notificaciones instantáneas para boletines diarios</string>
     <string name="acc_prefs_sync">Configurar cuenta</string>

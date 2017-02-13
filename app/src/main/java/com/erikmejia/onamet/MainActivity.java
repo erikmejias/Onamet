@@ -99,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Utils.applyFontForToolbarTitle(this);
+        getSupportActionBar().setTitle(R.string.app_name_activity);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 

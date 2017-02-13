@@ -12,7 +12,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:theme="@style/ThemeOverlay.AppCompat"
-        android:background="@color/black_alpha_10"
+        android:background="@color/black_alpha_40"
         android:layout_height="?attr/actionBarSize">
 
     </android.support.v7.widget.Toolbar>
@@ -23,7 +23,7 @@
         android:layout_below="@id/toolbar"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
-        android:background="@color/black_alpha_10"
+        android:background="@color/black_alpha_40"
         android:id="@+id/forecast_details_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
