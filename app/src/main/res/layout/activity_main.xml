@@ -65,6 +65,7 @@
             android:layout_height="40dp"
             android:layout_margin="10dp"
             android:drawableLeft="@drawable/ic_action_search"
+            android:drawableStart="@drawable/ic_action_search"
             android:hint="@string/search_text"
             android:background="@drawable/rounded_edittext_search"
             android:textColor="@color/white"

@@ -85,13 +85,6 @@ public class ForecastDetails extends AppCompatActivity {
 //        adView = (NativeExpressAdView) findViewById(R.id.forecast_details_ad_content);
         frame = (RelativeLayout) findViewById(R.id.today_forecast_frame);
 
-        extras = getIntent().getExtras();
-
-        lineSet = new LineSet();
-        lineSet.addPoint(new Point("MAÑANA", Integer.valueOf(extras.getString(Utils.ForecastConstants.MORNING_TEMPERATURE))));
-        lineSet.addPoint(new Point("TARDE", Integer.valueOf(extras.getString(Utils.ForecastConstants.NOON_TEMPERATURE))));
-        lineSet.addPoint(new Point("NOCHE", Integer.valueOf(extras.getString(Utils.ForecastConstants.NIGHT_TEMPERATURE))));
-
         lineChartView = (LineChartView) findViewById(R.id.linechart);
 
 
@@ -126,6 +119,19 @@ public class ForecastDetails extends AppCompatActivity {
         Typeface boldTypeface = Typeface.createFromAsset(getAssets(), "fonts/Brandon_bld.otf");
         Typeface lightTypeface = Typeface.createFromAsset(getAssets(), "fonts/Brandon_light.otf");
 
+        String[] labels = {"MAÑANA", "TARDE", "NOCHE"};
+        float[] values = {
+                Integer.valueOf(extras.getString(Utils.ForecastConstants.MORNING_TEMPERATURE)),
+                Integer.valueOf(extras.getString(Utils.ForecastConstants.NOON_TEMPERATURE)),
+                Integer.valueOf(extras.getString(Utils.ForecastConstants.NIGHT_TEMPERATURE))
+        };
+
+        lineSet = new LineSet(labels, values);
+
+//        lineSet.addPoint(new Point("MAÑANA", Integer.valueOf(extras.getString(Utils.ForecastConstants.MORNING_TEMPERATURE))));
+//        lineSet.addPoint(new Point("TARDE", Integer.valueOf(extras.getString(Utils.ForecastConstants.NOON_TEMPERATURE))));
+//        lineSet.addPoint(new Point("NOCHE", Integer.valueOf(extras.getString(Utils.ForecastConstants.NIGHT_TEMPERATURE))));
+
 
         lineSet.setColor(getResources().getColor(R.color.white));
         lineSet.setDotsColor(getResources().getColor(R.color.white));
@@ -145,6 +151,7 @@ public class ForecastDetails extends AppCompatActivity {
 
         lineChartView.addData(lineSet);
         lineChartView.show(new Animation(2800));
+//        lineChartView.show();
 
 
         Utils.setAnimatedIcon(
@@ -169,6 +176,7 @@ public class ForecastDetails extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
+        extras = getIntent().getExtras();
         loadReceivedData();
 
         /*adView.loadAd(

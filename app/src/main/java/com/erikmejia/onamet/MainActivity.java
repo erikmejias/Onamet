@@ -196,7 +196,7 @@ public class MainActivity extends AppCompatActivity {
                             ForecastLite.class,
                             R.layout.city_list_item,
                             CitiesHolder.class,
-                            cities_reference.orderByChild("name").startAt(mInput).limitToFirst(5),
+                            cities_reference.orderByChild("name").startAt(mInput).endAt(mInput + "~"),
                             MainActivity.this,
                             viewPagerAdapter,
                             drawerLayout,
