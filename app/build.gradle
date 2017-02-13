@@ -100,6 +100,8 @@ dependencies {
 
     compile 'com.diogobernardino:williamchart:2.4.0'
 
+    compile 'com.github.deano2390:MaterialShowcaseView:1.1.0'
+
     testCompile 'junit:junit:4.12'
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
     androidTestCompile 'com.android.support.test:runner:0.5'

@@ -35,6 +35,7 @@ import com.tomergoldst.tooltips.ToolTipsManager;
 
 import java.util.ArrayList;
 
+import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView;
 
 
 public class ForecastDetails extends AppCompatActivity {
@@ -189,9 +190,17 @@ public class ForecastDetails extends AppCompatActivity {
         SharedPreferences getPrefs = PreferenceManager
                 .getDefaultSharedPreferences(this);
         String defaultBackg = "https://firebasestorage.googleapis.com/v0/b/project-7000350159161293832.appspot.com/o/default.jpg?alt=media&token=cfbcaa6d-033a-4e6f-b04b-2d6644ac0630";
-        String PROVINCE_ID = getPrefs.getString("background", defaultBackg); // TODO - Must pass a default value to ensure works on startup
+        String PROVINCE_ID = getPrefs.getString("background", defaultBackg);
 
         Utils.dynamicBackground(this, frame, PROVINCE_ID);
+
+        new MaterialShowcaseView.Builder(this)
+                .setTarget(windSpeed) // Point at nav drawer icon
+                .setDismissText("ENTIENDO")
+                .setContentText("Aquí puedes ver información avanzada. Algunos elementos los puedes tocar para ver una descripción")
+                .setDelay(1000) // optional but starting animations immediately in onCreate can make them choppy
+                .singleUse("detail_showcase") // provide a unique ID used to ensure it is only shown once
+                .show();
     }
 
     public void showTip(View view) {

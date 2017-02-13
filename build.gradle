@@ -19,6 +19,7 @@ allprojects {
         jcenter()
 //        Required configuration since Firebase UI 1.0 for AUTH component
         maven { url 'https://maven.fabric.io/public' }
+        maven { url "https://jitpack.io" }
     }
 }
 

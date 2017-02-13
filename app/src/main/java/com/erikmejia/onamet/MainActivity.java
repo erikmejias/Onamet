@@ -45,6 +45,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
+import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -53,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
     private static boolean calledAlready = false;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle drawerToggle;
+    private Toolbar toolbar;
     private RecyclerView cityList;
     private ViewPagerAdapter viewPagerAdapter;
     private DatabaseReference cities_reference;
@@ -87,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 //        getWindow().setBackgroundDrawable(null);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Utils.applyFontForToolbarTitle(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -238,6 +241,15 @@ public class MainActivity extends AppCompatActivity {
         String PROVINCE_ID = getPrefs.getString("background", defaultBackg); // TODO - Must pass a default value to ensure works on startup
 
         Utils.dynamicBackground(this, rootLayout, PROVINCE_ID);
+
+//        Launch - just once - showcase of the navigation drawer
+        new MaterialShowcaseView.Builder(this)
+                .setTarget(toolbar.getChildAt(1)) // Point at nav drawer icon
+                .setDismissText("ENTIENDO")
+                .setContentText("Presiona aquí para ver pronósticos de otras provincias y pueblos")
+                .setDelay(1000) // optional but starting animations immediately in onCreate can make them choppy
+                .singleUse("main_showcase") // provide a unique ID used to ensure it is only shown once
+                .show();
     }
 
     @Override
