@@ -142,16 +142,18 @@ public class ForecastDetails extends AppCompatActivity {
 
         lineChartView.setAxisColor(getResources().getColor(R.color.white));
         lineChartView.setLabelsColor(getResources().getColor(R.color.white));
-        lineChartView.setYAxis(false);
-        lineChartView.setYLabels(AxisRenderer.LabelPosition.NONE);
-        lineChartView.setAxisBorderValues(0, 40, 1); // It sets the maximum capacity, allowing for individuality each one.
+//        lineChartView.setYAxis(false);
+        lineChartView.setYLabels(AxisRenderer.LabelPosition.OUTSIDE);
+        lineChartView.setAxisBorderValues(0, 45); // It sets the maximum capacity, allowing for individuality each one.
         lineChartView.setTypeface(regTypeface);
 //        Paint paint = new Paint();
 //        paint.setColor(getResources().getColor(R.color.white));
 //        lineChartView.setGrid(4, 4, paint);
 
+        lineChartView.reset();
+
         lineChartView.addData(lineSet);
-        lineChartView.show(new Animation(2800));
+        lineChartView.show(new Animation(2000));
 //        lineChartView.show();
 
 
