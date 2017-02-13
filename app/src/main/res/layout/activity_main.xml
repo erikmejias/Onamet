@@ -59,21 +59,40 @@
         android:layout_width="250dp"
         android:layout_height="match_parent">
 
-        <EditText
-            android:id="@+id/inputSearch"
+        <RelativeLayout
+            android:orientation="horizontal"
+            android:layout_marginTop="15dp"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_margin="10dp"
-            android:drawableLeft="@drawable/ic_action_search"
-            android:drawableStart="@drawable/ic_action_search"
-            android:hint="@string/search_text"
-            android:background="@drawable/rounded_edittext_search"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            android:padding="10dp"
-            android:layout_marginTop="25dp"
-            android:inputType="text" >
-        </EditText>
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/inputSearch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_action_search"
+                android:drawableStart="@drawable/ic_action_search"
+                android:background="@drawable/rounded_edittext_search"
+                android:textColor="@color/white"
+                android:padding="10dp"
+                android:textColorHint="@color/white"
+                android:inputType="text" >
+
+            </EditText>
+
+            <ImageButton
+                android:id="@+id/clean_search"
+                android:visibility="invisible"
+                android:layout_alignTop="@id/inputSearch"
+                android:layout_alignRight="@id/inputSearch"
+                android:layout_alignEnd="@id/inputSearch"
+                android:layout_margin="10dp"
+                android:onClick="clearSearch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?android:selectableItemBackground"
+                android:src="@drawable/ic_action_cancel"/>
+
+        </RelativeLayout>
 
         <android.support.v7.widget.RecyclerView
             android:focusable="true"

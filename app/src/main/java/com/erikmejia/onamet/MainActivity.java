@@ -26,6 +26,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 
 import com.erikmejia.onamet.model.CitiesAdapter;
 import com.erikmejia.onamet.model.CitiesHolder;
@@ -54,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
     private ViewPagerAdapter viewPagerAdapter;
     private DatabaseReference cities_reference;
     private CitiesAdapter citiesAdapter;
+    private EditText inputSearch;
+    private ImageButton clearSearch;
 
     private String mInput;
 
@@ -151,7 +154,8 @@ public class MainActivity extends AppCompatActivity {
 //        startService(new Intent(this, FirebaseBackgroundService.class));
 
         /* Handling SearchBar actions */
-        final EditText inputSearch = (EditText) findViewById(R.id.inputSearch);
+        inputSearch = (EditText) findViewById(R.id.inputSearch);
+        clearSearch = (ImageButton) findViewById(R.id.clean_search);
 
         inputSearch.addTextChangedListener(new TextWatcher() {
             @Override
@@ -188,6 +192,8 @@ public class MainActivity extends AppCompatActivity {
 
                     cityList.setAdapter(citiesAdapter);
                 } else {
+
+                    clearSearch.setVisibility(View.VISIBLE);
 
                     mInput = inputSearch.getText().toString().substring(0, 1).toUpperCase() +
                             inputSearch.getText().toString().substring(1).toLowerCase();
@@ -294,6 +300,11 @@ public class MainActivity extends AppCompatActivity {
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         drawerToggle.onConfigurationChanged(newConfig);
+    }
+
+    public void clearSearch(View view) {
+        inputSearch.setText("");
+        clearSearch.setVisibility(View.INVISIBLE);
     }
 
     /*
