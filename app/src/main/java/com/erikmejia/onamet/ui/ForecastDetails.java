@@ -67,10 +67,14 @@ public class ForecastDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forecast_details);
 
+        extras = getIntent().getExtras();
+
+        String cityName = extras.getString(Utils.ForecastConstants.CITY_NAME);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Pronóstico para " + cityName);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         iconWrapper = (LinearLayout) findViewById(R.id.today_forecast_icon);
 
@@ -179,7 +183,6 @@ public class ForecastDetails extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        extras = getIntent().getExtras();
         loadReceivedData();
 
         /*adView.loadAd(

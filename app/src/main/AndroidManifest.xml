@@ -3,13 +3,13 @@
     package="com.erikmejia.onamet">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
          location permissions for the 'MyLocation' functionality.
     -->
-    <!--<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />-->
-
+    <!-- <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> -->
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -17,27 +17,30 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <!-- Set custom default icon. This is used when no icon is set for incoming notification messages.
-                See README(https://goo.gl/l4GJaQ) for more. -->
+        <!--
+             Set custom default icon. This is used when no icon is set for incoming notification messages.
+                See README(https://goo.gl/l4GJaQ) for more.
+        -->
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/ic_stat_onamet_logo" />
-        <!-- Set color used with incoming notification messages. This is used when no color is set for the incoming
-             notification message. See README(https://goo.gl/6BKBk7) for more. -->
+        <!--
+             Set color used with incoming notification messages. This is used when no color is set for the incoming
+             notification message. See README(https://goo.gl/6BKBk7) for more.
+        -->
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorPrimary" />
 
         <activity
-            android:theme="@style/AppTheme.Home"
-            android:name=".MainActivity">
+            android:name=".MainActivity"
+            android:theme="@style/AppTheme.Home">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".ui.SettingsActivity"
             android:label="@string/settings"
@@ -59,10 +62,20 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-
         <activity
+            android:theme="@style/AppTheme.Home"
+            android:label="@string/details_activity_title"
             android:name=".ui.ForecastDetails"
             android:parentActivityName=".MainActivity" />
+
+        <activity
+            android:name=".ui.NationalBulletin"
+            android:label="@string/national_bulletins_title"
+            android:theme="@style/AppTheme"
+            android:parentActivityName=".MainActivity"
+            >
+
+        </activity>
 
         <!--
             ATTENTION: This was auto-generated to add Google Play services to your project for
@@ -76,12 +89,9 @@
         <service
             android:name=".service.FirebaseBackgroundService"
             android:exported="false"
-            android:process=":remote">
+            android:process=":remote"></service>
 
-        </service>
-
-        <receiver
-            android:name=".service.StartFirebaseAtBoot">
+        <receiver android:name=".service.StartFirebaseAtBoot">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>

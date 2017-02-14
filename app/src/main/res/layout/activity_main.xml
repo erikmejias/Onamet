@@ -65,6 +65,7 @@
             android:id="@+id/provinces"
             android:textSize="15sp"
             android:textStyle="bold"
+            android:onClick="showNationalBulletins"
             style="?android:attr/borderlessButtonStyle"
             android:textColor="@color/white"
             android:background="@color/colorAccent"

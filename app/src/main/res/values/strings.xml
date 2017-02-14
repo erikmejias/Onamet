@@ -2,6 +2,8 @@
 
     <string name="app_name">Onamet</string>
     <string name="app_name_activity">ONAMET</string>
+    <string name="national_bulletins_title">Boletínes Nacionales</string>
+    <string name="details_activity_title">Detalles del Pronóstico</string>
     <string name="notification_prefs_title">Notificaciones</string>
     <string name="notification_prefs_summary">Habilitar notificaciones instantáneas para boletines diarios</string>
     <string name="acc_prefs_sync">Configurar cuenta</string>
@@ -21,7 +23,6 @@
     <string name="pref_account_title">CUENTA</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
-
 
 
     <string name="about_onamet_title">Acerca de Onamet</string>

@@ -110,9 +110,14 @@ public class FirebaseAdapter extends FirebaseRecyclerAdapter<Forecast, ForecastH
                 String morning_temp = model.getMorning_temp();
                 String noon_temp = model.getNoon_temp();
                 String night_temp = model.getNight_temp();
+                String province_name = model.getCity_name();
                 int icon_id = model.getIconId();
 
 //                Attach this forecast data to the new Activity
+                intent.putExtra(
+                        Utils.ForecastConstants.CITY_NAME,
+                        province_name
+                );
                 intent.putExtra(
                         Utils.ForecastConstants.FORECAST_DATE,
                         date

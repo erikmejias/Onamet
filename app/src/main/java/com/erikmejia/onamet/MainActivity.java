@@ -38,6 +38,7 @@ import com.erikmejia.onamet.model.ForecastLite;
 import com.erikmejia.onamet.service.FirebaseBackgroundService;
 import com.erikmejia.onamet.ui.BulletinsFragment;
 import com.erikmejia.onamet.ui.ForecastFragment;
+import com.erikmejia.onamet.ui.NationalBulletin;
 import com.erikmejia.onamet.ui.SettingsActivity;
 import com.erikmejia.onamet.util.PageTransformer;
 import com.erikmejia.onamet.util.Utils;
@@ -98,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        Utils.applyFontForToolbarTitle(this);
+        Utils.applyFontForToolbarTitle(this, R.id.toolbar);
         getSupportActionBar().setTitle(R.string.app_name_activity);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -361,6 +362,14 @@ public class MainActivity extends AppCompatActivity {
     public void clearSearch(View view) {
         inputSearch.setText("");
         clearSearch.setVisibility(View.INVISIBLE);
+    }
+
+//    Show NationalBulletins UI when pressed this button.
+    public void showNationalBulletins(View view) {
+        Intent intent;
+        intent = new Intent(this, NationalBulletin.class);
+
+        startActivity(intent);
     }
 
     /*

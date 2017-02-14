@@ -313,7 +313,7 @@ public class Utils {
 
     public interface ForecastConstants {
         String FORECAST_DATE = "forecast_date";
-        String MAX_TEMPERATURE = "city_name";
+        String MAX_TEMPERATURE = "max_temperature";
         String MIN_TEMPERATURE = "min_temperature";
         String DESCRIPTION = "description";
         String HUMIDITY = "humidity";
@@ -511,8 +511,8 @@ public class Utils {
 
     }
 
-    public static void applyFontForToolbarTitle(Activity context){
-        Toolbar toolbar = (Toolbar) context.findViewById(R.id.toolbar);
+    public static void applyFontForToolbarTitle(Activity context, int toolbarID){
+        Toolbar toolbar = (Toolbar) context.findViewById(toolbarID);
         for(int i = 0; i < toolbar.getChildCount(); i++){
             View view = toolbar.getChildAt(i);
             if(view instanceof TextView){
