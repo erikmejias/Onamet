@@ -124,5 +124,6 @@
     <string name="search_text">Búsqueda</string>
     <string name="sms_check_message">Es importante que lo escribas correctamente, sin guiones</string>
     <string name="save">GUARDAR</string>
+    <string name="general_bulletins">Boletínes Generales</string>
 
 </resources>
