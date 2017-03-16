@@ -148,16 +148,16 @@ public class Utils {
             params.height = 340;
             Log.d(TAG, "setAnimatedIcon: high density");
         } else if (density.equalsIgnoreCase("xhigh")) {
-            params.width = 590;
-            params.height = 590;
+            params.width = 500;
+            params.height = 500;
             Log.d(TAG, "setAnimatedIcon: xhigh density");
         } else if (density.equalsIgnoreCase("xxhigh")) {
-            params.width = 800;
-            params.height = 800;
+            params.width = 750;
+            params.height = 750;
             Log.d(TAG, "setAnimatedIcon: xxhigh density");
         } else if (density.equalsIgnoreCase("xxxhigh")) {
-            params.width = 900;
-            params.height = 900;
+            params.width = 880;
+            params.height = 880;
             Log.d(TAG, "setAnimatedIcon: xxxhigh density");
         }
 
@@ -490,8 +490,31 @@ public class Utils {
         windowManager.getDefaultDisplay().getMetrics(metrics);
         int density = metrics.densityDpi;
 
+        String response;
 
-        if (density < DisplayMetrics.DENSITY_MEDIUM) {
+        switch (density){
+            case DisplayMetrics.DENSITY_LOW:
+                response = "low";
+                break;
+            case DisplayMetrics.DENSITY_MEDIUM:
+                response = "medium";
+                break;
+            case DisplayMetrics.DENSITY_HIGH:
+                response = "high";
+                break;
+            case DisplayMetrics.DENSITY_XHIGH:
+                response = "xhigh";
+                break;
+            case DisplayMetrics.DENSITY_XXHIGH:
+                response = "xxhigh";
+                break;
+            default:
+                response = "xxxhigh";
+                break;
+
+        }
+
+        /*if (density < DisplayMetrics.DENSITY_MEDIUM) {
             return "low";
         } else if (density >= DisplayMetrics.DENSITY_MEDIUM && density <
                 DisplayMetrics.DENSITY_HIGH) {
@@ -507,7 +530,9 @@ public class Utils {
             return "xxhigh";
         } else {
             return "xxxhigh";
-        }
+        }*/
+
+        return response;
 
     }
 

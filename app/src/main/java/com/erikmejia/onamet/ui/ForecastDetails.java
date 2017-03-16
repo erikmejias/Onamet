@@ -73,7 +73,7 @@ public class ForecastDetails extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Pronóstico para " + cityName);
+        getSupportActionBar().setTitle(cityName);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         iconWrapper = (LinearLayout) findViewById(R.id.today_forecast_icon);

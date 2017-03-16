@@ -1,0 +1,28 @@
+<resources>
+<dimen name="details_text_compound_descriptors">15sp</dimen>
+<dimen name="detail_text_size_date">20sp</dimen>
+<dimen name="detail_text_size_min_temp">30sp</dimen>
+<dimen name="detail_text_size_heat_lvl_title">30.0sp</dimen>
+<dimen name="detail_text_size_description">20sp</dimen>
+<dimen name="detail_text_size_max_temp">80sp</dimen>
+<dimen name="detail_upper_section_height_land">294.0dp</dimen>
+<dimen name="detail_land_left_side_width">280dp</dimen>
+<dimen name="detail_upper_section_height">480dp</dimen>
+
+<dimen name="future_text_size_date">21.6sp</dimen>
+<dimen name="future_text_size_min_temp">16.8sp</dimen>
+<dimen name="future_text_size_description">21.6sp</dimen>
+<dimen name="future_text_size_max_temp">24.0sp</dimen>
+<dimen name="future_icon_height">48.0dp</dimen>
+<dimen name="future_icon_width">48.0dp</dimen>
+
+<dimen name="text_container_horizontal_margin">48.0dp</dimen>
+<dimen name="text_size_sync">15.6sp</dimen>
+<dimen name="text_size_date">21.6sp</dimen>
+<dimen name="text_size_description">28.8sp</dimen>
+<dimen name="text_size_max_temp">80.0sp</dimen>
+<dimen name="activity_vertical_margin">19.2dp</dimen>
+<dimen name="activity_horizontal_margin">19.2dp</dimen>
+<dimen name="text_size_city_name">36.0sp</dimen>
+
+</resources>

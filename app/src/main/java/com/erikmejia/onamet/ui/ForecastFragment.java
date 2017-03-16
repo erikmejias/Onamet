@@ -27,6 +27,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import dmax.dialog.SpotsDialog;
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
+import uk.co.deanwild.materialshowcaseview.MaterialShowcaseSequence;
+import uk.co.deanwild.materialshowcaseview.ShowcaseConfig;
 
 
 /**
@@ -101,6 +103,7 @@ public class ForecastFragment extends Fragment {
                 progressBar.setVisibility(View.GONE);
                 progressDialog.dismiss();
                 forecastList.setVisibility(View.VISIBLE);
+
             }
 
             @Override
@@ -128,7 +131,7 @@ public class ForecastFragment extends Fragment {
         progressBar = (ProgressBar) rootView.findViewById(R.id.feed_loading);
         progressBar.setVisibility(View.GONE);
 
-        progressDialog = new SpotsDialog(getActivity()); // TODO - Modify theme that match UI language.
+        progressDialog = new SpotsDialog(getActivity(), R.style.ProgressDialog); // TODO - Modify theme that match UI language.
         progressDialog.show();
         progressDialog.setMessage("cargando...");
 

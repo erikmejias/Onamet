@@ -288,12 +288,12 @@ public class MainActivity extends AppCompatActivity {
         ShowcaseConfig config = new ShowcaseConfig();
         config.setDelay(500); // half second between each showcase view
 
-        MaterialShowcaseSequence sequence = new MaterialShowcaseSequence(this, "m");
+        MaterialShowcaseSequence sequence = new MaterialShowcaseSequence(this, "ma");
         sequence.setConfig(config);
 
         sequence.addSequenceItem(toolbar.getChildAt(1),
                 "Presiona aquí para ver pronósticos de otras provincias y pueblos",
-                "ENTENDÍ");
+                "OK");
 
 //        TODO - Add SEQUENCE for options menu
         /*sequence.addSequenceItem(menu.findItem(R.id.settings).getActionView(),
@@ -339,7 +339,7 @@ public class MainActivity extends AppCompatActivity {
     private void setViewPager(ViewPager viewPager) {
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPagerAdapter.addFragment(new ForecastFragment(), "Pronósticos");
-        viewPagerAdapter.addFragment(new BulletinsFragment(), "Boletínes");
+        viewPagerAdapter.addFragment(new BulletinsFragment(), "Boletínes Nacionales");
         viewPager.setAdapter(viewPagerAdapter);
     }
 
@@ -408,11 +408,13 @@ public class MainActivity extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             return mFragmentTitleList.get(position);
         }
+        
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+
 //        Release all listeners.
         citiesAdapter.cleanup();
     }

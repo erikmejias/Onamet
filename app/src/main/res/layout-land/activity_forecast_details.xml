@@ -39,7 +39,7 @@
                     android:paddingRight="@dimen/activity_horizontal_margin"
                     android:background="@color/black_alpha_40"
                     android:id="@+id/forecast_details_layout"
-                    android:layout_width="400dp"
+                    android:layout_width="@dimen/detail_land_left_side_width"
                     android:layout_height="match_parent">
 
                     <LinearLayout

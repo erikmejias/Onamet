@@ -42,9 +42,10 @@
         <item name="android:windowBackground">@color/gray</item>
     </style>
 
-    <style name="ProgressDialog" parent="android:Theme.DeviceDefault.Dialog">
+    <style name="ProgressDialog">
         <item name="DialogSpotColor">@color/white</item>
         <item name="DialogSpotCount">5</item>
+        <item name="android:background">@color/transparent</item>
     </style>
 
 </resources>
