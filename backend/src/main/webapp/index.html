@@ -14,13 +14,10 @@
 <div class="jumbotron">
   <div class="row">
       <div class="col-lg-12">
-          <h1 style="text-align: center;">Cliente Administrativo</h1>
+          <h1 style="text-align: center;">Cliente de Boletines</h1>
           <p style="text-align: center;">Introduce el cuerpo y título del mensaje y da clic en ENVIAR.</p>
 
           <form action="/add-bulletin" method="POST">
-              <textarea type="text" class="form-control input-lg" rows="6" placeholder="Mensaje"
-                        name="text_message_body"></textarea>
-              <br>
               <div class="input-group">
                   <input type="text" class="form-control input-lg" placeholder="Titulo"
                          name="text_message_title"/>
@@ -29,6 +26,9 @@
                                type="submit" id="helloButton">ENVIAR</button>
                     </span>
               </div>
+              <br>
+              <textarea type="text" class="form-control input-lg" rows="6" placeholder="Mensaje"
+                        name="text_message_body"></textarea>
           </form>
       </div>
   </div>
